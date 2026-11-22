@@ -102,7 +102,7 @@ export function Explorer() {
       <ul className="tray-list">
         {hats.filter((hat) => hat.dims).slice(0, 8).map((hat) => (
           <li key={hat.id}>
-            <Link to={`/parts/${hat.id}`}>{tx(hat.name, lab.lang)}</Link>
+            <Link to={`/parts/${hat.id}`}>{tx(hat.name, lab.lang).replaceAll("-", "\u2011")}</Link>
             <button type="button" onClick={() => fitPart(hat)}>{t.fit}</button>
           </li>
         ))}
