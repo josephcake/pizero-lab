@@ -136,7 +136,7 @@ button.underside-link { min-height: 0; min-width: 0; padding: 0; border: 0; back
 .pad-list, .print-list, .pin-nets { margin: 0 0 10px; padding: 0; }
 .pad-list { list-style: none; }
 .pad-list li { display: grid; grid-template-columns: 3.2em 3.6em 1fr; gap: 8px; align-items: baseline; font: var(--t-small); padding: 3px 0; border-bottom: 1px solid var(--line); }
-.pin-nets { padding-left: 1.2em; }
+.pin-nets { list-style: none; padding-left: 0; }
 .pin-nets li, .print-list li { font: var(--t-small); padding: 2px 0; }
 .underside .est { margin-left: 4px; }
 .height-badge { bottom: 32px; background: var(--bg-1); border: 1px solid var(--line-ui); border-radius: var(--r-pill); padding: 2px 8px; }
