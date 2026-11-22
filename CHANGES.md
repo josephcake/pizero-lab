@@ -72,4 +72,14 @@ The 3D camera can look at the back of the board. `zero-w.flux.json` and `pinout.
 | Bottom button | `141ce90` | Bottom uses the same fit as the other views, from underneath, with X mirrored. zh-CN uses 底. |
 | Underside | `141ce90` | The PCB bottom is the same colour, with the four mounting holes. Bare shows the plated holes. Soldered adds a low-poly joint on each pin and the 2.54 mm tail. Hammered has no solder; a short stub is marked est. and no tail length is claimed. |
 | Test pads | `141ce90` | A pad is drawn only when a subpart has x, y, and side bottom. Zero W has no such coordinates, so Bottom says “Test pad positions for the Zero W aren't published.” |
-| Hammer wording | `111088e` | 12.0 mm is the overall height of Adafruit 3662, not the height above the PCB, because part of each pin presses into the board. The mesh is unchanged. | |
+| Hammer wording | `111088e` | 12.0 mm is the overall height of Adafruit 3662, not the height above the PCB, because part of each pin presses into the board. The mesh is unchanged. |
+
+## Run 12
+
+The Top view is lit again, and the underside is a list. `zero-w.flux.json` and `pinout.flux.json` were not edited. The 3D chunk is `board3d-CaDLlz3v.js`, 136.90 KB gzip. The main bundle is `index-IGzDIfkx.js`, 177.28 KB gzip.
+
+| Fix | Commit | What changed |
+| --- | --- | --- |
+| Lights | `02fdbcc` | The key light is in the board group, so the Y-up rotation carries the old Z-up aim. A weaker fill shines from below. On the Top view, bare pads read (172, 145, 63) and grey faces read (104, 110, 117). |
+| Test-pad picking | `92325c4` | A bottom disc that has coordinates is pushed to pickables as well as tagged. The click handler is unchanged. |
+| Underside record | `2883487` | Test pads are on the bottom, and every position is still null, so nothing new is drawn. Bottom opens an Underside inspector: PP1 5V, PP5 GND, PP6 GND, PP8 3V3, PP9 1V8, no bottom parts, the derived J5 footprint, and the printed marks. |
