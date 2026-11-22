@@ -66,7 +66,7 @@ export function OhmWidget() {
 
   return (
     <form className="widget" onSubmit={run}>
-      <h3>{t.calc}</h3>
+      <h2>{t.calc}</h2>
       <label>{t.vf}<input value={vf} onChange={(e) => setVf(e.target.value)} inputMode="decimal" />{fields.vf && <em className="warn">{t.fieldBad}</em>}</label>
       <label>{t.ma}<input value={ma} onChange={(e) => setMa(e.target.value)} inputMode="decimal" />{fields.ma && <em className="warn">{t.fieldBad}</em>}</label>
       <p className="note">{lang === "zh-CN" ? "入门目标：每颗 5–10 mA。" : "Beginner target: 5–10 mA per LED."}</p>
