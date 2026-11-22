@@ -106,6 +106,7 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
       <svg
         ref={svgRef}
         className="pz-board"
+        data-zoom={px < 6 ? "far" : "near"}
         viewBox={view ? `${view.x} ${view.y} ${view.w} ${view.h}` : `0 0 ${W} ${H}`}
         onPointerDown={(event) => {
           drag.current = { x: event.clientX, y: event.clientY, ox: event.clientX, oy: event.clientY, view, id: event.pointerId, captured: false };
@@ -244,11 +245,11 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
         )}
         {layers.pins && showPads && board.header.pins.map((pin) => {
           const record = pinout?.pins?.find((row) => row.physical === pin.physical) || pin;
-          return <circle key={`ring-${pin.physical}`} className="pz-overlay pin-ring" cx={pin.x} cy={pin.y} r={1.05} stroke={pinInk(record)} />;
+          return <circle key={`ring-${pin.physical}`} className="pz-overlay pin-ring" cx={pin.x} cy={pin.y} r={board.header.padD / 2 + 0.12} stroke={pinInk(record)} />;
         })}
         {selected?.kind === "pin" && board.header.pins.filter((pin) => pin.physical === selected.physical).map((pin) => (
           <g key="sel" className="pz-overlay">
-            <circle cx={pin.x} cy={pin.y} r={1.05} stroke="var(--ov-select)" />
+            <circle cx={pin.x} cy={pin.y} r={board.header.padD / 2 + 0.12} stroke="var(--ov-select)" />
           </g>
         ))}
         {showNumbers && board.header.pins.map((pin) => (
