@@ -59,7 +59,7 @@ function BoardPicker() {
           const live = Boolean(catalog.boards.models[model.id]);
           return (
             <option key={model.id} value={model.id} disabled={!live}>
-              {txName(model, lang)}{live ? "" : ` · ${t.coming}`}
+              {txName(model)}{live ? "" : ` · ${t.coming}`}
             </option>
           );
         })}
@@ -68,8 +68,17 @@ function BoardPicker() {
   );
 }
 
-function txName(model, lang) {
-  return model.name?.[lang] || model.name?.en || model.id;
+const SHORT_BOARD = {
+  "zero-v1.2": "Zero v1.2",
+  "zero-v1.3": "Zero v1.3",
+  "zero-w": "Zero W",
+  "zero-wh": "Zero WH",
+  "zero-2-w": "Zero 2 W",
+  "zero-2-wh": "Zero 2 WH",
+};
+
+function txName(model) {
+  return SHORT_BOARD[model.id] || model.name?.en || model.id;
 }
 
 function Shell() {

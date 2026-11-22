@@ -83,7 +83,8 @@ export function Explorer() {
         <select aria-label={t.picker} value={lab.catalog.modelId} onChange={(event) => lab.pickBoard(event.target.value)}>
           {lab.catalog.boards.base.models.map((model) => {
             const live = Boolean(lab.catalog.boards.models[model.id]);
-            return <option key={model.id} value={model.id} disabled={!live}>{model.name?.[lab.lang] || model.name?.en || model.id}{live ? "" : ` · ${t.coming}`}</option>;
+            const short = { "zero-v1.2": "Zero v1.2", "zero-v1.3": "Zero v1.3", "zero-w": "Zero W", "zero-wh": "Zero WH", "zero-2-w": "Zero 2 W", "zero-2-wh": "Zero 2 WH" }[model.id] || model.id;
+            return <option key={model.id} value={model.id} disabled={!live}>{short}{live ? "" : ` · ${t.coming}`}</option>;
           })}
         </select>
       </label>

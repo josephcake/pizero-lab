@@ -79,7 +79,7 @@ h1, h2, h3 { font-family: var(--f-display); font-weight: 650; margin: 0 0 8px; }
 .search { margin-left: auto; width: min(240px, 22vw); position: relative; }
 .more-link { display: none; }
 .brand { display: flex; flex-direction: column; gap: 2px; }
-.brand .board-picker select { width: 148px; }
+.brand .board-picker select { width: auto; max-width: 11rem; }
 .search-toggle, .lang-one, .sheet-picker { display: none; }
 .search ul { position: absolute; z-index: 5; background: var(--bg-2); border: 1px solid var(--line); list-style: none; margin: 4px 0 0; padding: 6px; width: 100%; }
 .lang { display: flex; gap: 6px; align-items: center; }
