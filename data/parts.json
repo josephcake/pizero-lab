@@ -203,43 +203,6 @@
       ]
     },
     {
-      "id": "inky-phat",
-      "name": {
-        "en": "Inky pHAT",
-        "es": "Inky pHAT"
-      },
-      "maker": "Pimoroni",
-      "category": "display",
-      "summary": {
-        "en": "E-paper pHAT. The getting-started article was reachable. Pin map, current and outline were not transcribed, so they are null and the board is not drawn.",
-        "es": "pHAT de papel electr\u00f3nico. El art\u00edculo de inicio respondi\u00f3. El mapa de pines, la corriente y el contorno no se transcribieron, as\u00ed que quedan nulos y no se dibuja."
-      },
-      "zero_w": "unverified",
-      "zero_w_note": {
-        "en": "The shop and guide exist. This file does not store a sentence that names Zero W, so compatibility stays unverified.",
-        "es": "La tienda y la gu\u00eda existen. Este archivo no guarda una frase que nombre el Zero W, as\u00ed que la compatibilidad queda sin verificar."
-      },
-      "dims": null,
-      "dims_note": {
-        "en": "Not measured from a Pimoroni drawing in this run.",
-        "es": "No se midi\u00f3 un plano de Pimoroni en esta pasada."
-      },
-      "anchors": null,
-      "pins": null,
-      "power_ma": null,
-      "requires_header": true,
-      "needs_zero_camera_cable": false,
-      "price_usd": null,
-      "price_src": null,
-      "price_date": null,
-      "retailer": null,
-      "product_url": "https://shop.pimoroni.com/products/inky-phat",
-      "source": "inky-shop",
-      "boards": [
-        "zero-w"
-      ]
-    },
-    {
       "id": "led",
       "name": {
         "en": "LED",

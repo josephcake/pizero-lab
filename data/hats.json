@@ -53,7 +53,7 @@
         "spi0"
       ],
       "zero_w": "works",
-      "compat_note": "Page: \"Features 2.13\" EPD display (250x122 pixels) Inky pHAT pinout Compatible with all 40-pin header Raspberry Pi models Python library Comes fully assembled Multi-colour EPD displays, like the ones on Inky pHAT, use ingenious electrophoresis to pull coloured partic\" Original Zero W ships without GPIO header: needs Zero WH, a soldered header, a hammer header or pogo pins.",
+      "compat_note": "Works with any 40-pin Pi including Zero W. 65×30×8.5 mm. Needs a soldered or hammered header.",
       "price_usd": 20,
       "price_src": "https://shop.pimoroni.com/en-us/products/inky-phat",
       "price_date": "2026-11-21",
