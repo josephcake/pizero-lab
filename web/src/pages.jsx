@@ -199,7 +199,7 @@ export function LessonPage() {
   return (
     <article className="page lesson">
       <div className="progress-bar" aria-hidden="true">
-        {lesson.sections.map((_, index) => <i key={index} className={index < section ? "done" : index === section ? "now" : ""} />)}
+        {lesson.sections.map((_, index) => <i key={index} className={index < section || (index === section && section === lesson.sections.length - 1) ? "done" : index === section ? "now" : ""} />)}
       </div>
       <aside className="outline">
         <p className="overline">{trackName}</p>
@@ -217,14 +217,12 @@ export function LessonPage() {
         <h1>{tx(lesson.title, lab.lang)}</h1>
         {wrongBoard && <SwitchBoard ids={wrongBoard} />}
         {lesson.sections.map((sectionRow, index) => (
-          sectionRow.id === "board" ? null : (
             <section key={index} onFocus={() => setSection(index)} className={section === index ? "section on" : "section"}>
               {lab.lang === "zh-CN" && sectionRow.kind === "md" && !sectionRow.text?.["zh-CN"] && (
                 <p className="note">本课正文暂为英文</p>
               )}
               {sectionRow.kind === "md" ? <Markdown text={tx(sectionRow.text, lab.lang)} /> : <Widget id={sectionRow.id} />}
             </section>
-          )
         ))}
         <form className="quiz" onSubmit={mark}>
           {lesson.quiz.map((q, qi) => (
@@ -246,6 +244,7 @@ export function LessonPage() {
           <div className="lesson-actions">
             <button type="submit">{t.quiz}</button>
             <button type="button" className="ghost" disabled={section === 0} onClick={() => setSection((n) => Math.max(0, n - 1))}>{t.back}</button>
+            <button type="button" className="ghost" disabled={section >= lesson.sections.length - 1} onClick={() => setSection((n) => Math.min(lesson.sections.length - 1, n + 1))}>{t.next}</button>
             <Link to="/settings">{t.askStep}</Link>
           </div>
           {marked?.need && <p className="warn">{t.quizNeed}</p>}
