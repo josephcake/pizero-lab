@@ -33,7 +33,7 @@ function roundRect(x, y, w, h, r) {
   return `M ${x + rr} ${y} H ${x + w - rr} A ${rr} ${rr} 0 0 1 ${x + w} ${y + rr} V ${y + h - rr} A ${rr} ${rr} 0 0 1 ${x + w - rr} ${y + h} H ${x + rr} A ${rr} ${rr} 0 0 1 ${x} ${y + h - rr} V ${y + rr} A ${rr} ${rr} 0 0 1 ${x + rr} ${y} Z`;
 }
 
-export function BoardMap({ board, pinout, header, mounts, parts, layers, selected, onSelect, onView, onOpenLayers, mode = "explore", onMode, onMeasure, viewToggle = null }) {
+export function BoardMap({ board, pinout, header, mounts, parts, layers, selected, onSelect, onView, onOpenLayers, mode = "explore", onMode, onMeasure, viewToggle = null, chrome = true }) {
   const t = strings(useLab().lang);
   const svgRef = useRef(null);
   const [view, setView] = useState(null);
@@ -332,7 +332,7 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
       {layers.measurements && view && (
         <span className="callout dim" style={{ left: "50%", top: "auto", bottom: 36 }}>{`${W.toFixed(2)} mm`}</span>
       )}
-      <div className="map-tools">
+      {chrome && <div className="map-tools">
         {viewToggle}
         {onOpenLayers && <button type="button" className="layers-toggle" onClick={onOpenLayers}>{t.layers}</button>}
         <button type="button" className={mode === "explore" ? "on" : ""} onClick={() => onMode?.("explore")}>{t.explore}</button>
@@ -343,11 +343,11 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
         <button type="button" onClick={fit}>{t.fit}</button>
         <button type="button" disabled>{t.oneToOne}</button>
         <button type="button" className={layers.measurements ? "on" : ""} onClick={onMeasure}>{t.measure}</button>
-      </div>
-      <div className="zoom-dock">
+      </div>}
+      {chrome && <div className="zoom-dock">
         <button type="button" aria-label={t.zoomIn} onClick={() => zoomAt(1.25, centerOf(svgRef).x, centerOf(svgRef).y)}>+</button>
         <button type="button" aria-label={t.zoomOut} onClick={() => zoomAt(1 / 1.25, centerOf(svgRef).x, centerOf(svgRef).y)}>−</button>
-      </div>
+      </div>}
     </div>
   );
 }

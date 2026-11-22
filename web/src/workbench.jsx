@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { fitsBoard } from "../../shared/boards.mjs";
 import { deriveBom, formatBom, formatPrice } from "../../shared/bench.mjs";
+import { BoardMap } from "./boardmap.jsx";
 import { tx, useLab } from "./state.jsx";
 import { strings } from "./i18n.js";
 
@@ -140,12 +141,27 @@ export function Workbench({ state, onDispatch, compact = false }) {
   return (
     <div className={compact ? "bench compact" : "bench"}>
       <div className={fading ? "bench-stage is-fading" : "bench-stage"}>
-        <div className="zoom-tools">
+        {!compact && <div className="zoom-tools">
           <button type="button" onClick={() => zoomAt(1 / 1.25, center(svgRef).x, center(svgRef).y)}>{t.zoomOut}</button>
           <button type="button" onClick={() => zoomAt(1.25, center(svgRef).x, center(svgRef).y)}>{t.zoomIn}</button>
           <button type="button" onClick={fit}>{t.fit}</button>
           <span className="pxmm">{px.toFixed(1)} px/mm</span>
-        </div>
+        </div>}
+        {compact ? (
+          <div className="compact-board">
+            <BoardMap
+              board={catalog.board}
+              pinout={catalog.pinout}
+              header={state.header}
+              mounts={state.mounts || []}
+              parts={catalog.parts}
+              layers={{ components: true, pads: true, silk: true, pins: true, measurements: false }}
+              selected={selection}
+              onSelect={setSelection}
+              chrome={false}
+            />
+          </div>
+        ) : (
         <svg
           ref={svgRef}
           className="board-svg"
@@ -172,13 +188,14 @@ export function Workbench({ state, onDispatch, compact = false }) {
             );
           })}
         </svg>
-        {showEdgeLabel && <span className="edge-label across">{boardW} mm</span>}
-        {showEdgeLabel && <span className="edge-label down">{boardH} mm</span>}
-        {showCornerLabel && <span className="edge-label corner">r {boardR} mm · M2.5</span>}
-        <div className="scalebar" aria-label={t.scale}>
+        )}
+        {!compact && showEdgeLabel && <span className="edge-label across">{boardW} mm</span>}
+        {!compact && showEdgeLabel && <span className="edge-label down">{boardH} mm</span>}
+        {!compact && showCornerLabel && <span className="edge-label corner">r {boardR} mm · M2.5</span>}
+        {!compact && <div className="scalebar" aria-label={t.scale}>
           <i style={{ width: `${bar * px}px` }} />
           <span>{bar} mm</span>
-        </div>
+        </div>}
       </div>
       {!compact && (
         <aside className="bench-side">
