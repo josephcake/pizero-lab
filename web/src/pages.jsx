@@ -462,7 +462,7 @@ export function InstrumentsPage() {
           <div>
             <p>{power.total_ma} mA / {power.psu_ma} mA · {power.supply_v} V</p>
             <p>{power.over ? t.overSupply : `${power.headroom_ma} ${t.headroom}`}</p>
-            <ul>{power.rows.map((row) => <li key={row.id}>{row.unsourced ? `${row.note}: ${t.currentUnsourced}` : `${row.note || row.id}: ${row.ma} mA`}</li>)}</ul>
+            <ul>{power.rows.map((row) => <li key={row.id}>{row.unsourced ? `${row.note}: ${t.currentUnsourced}` : `${row.id === "camera" ? t.camera : row.id}: ${row.ma} mA — ${row.note}`}</li>)}</ul>
             {power.excludes && <p className="note">{t.totalExcludes}</p>}
             {!power.undervoltage_detect && <p className="note">{t.noUv}</p>}
           </div>
