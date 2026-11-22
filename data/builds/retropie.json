@@ -45,7 +45,7 @@
         "es": "Decide el header"
       },
       "text": {
-        "en": "Leave the pads bare if you only need power, HDMI and the card. Mark the header soldered if a later control board needs the pins. The pin body is not drawn, because its outline is not in the mechanical file.",
+        "en": "Leave the pads bare if you only need power, HDMI and the card. Mark the header soldered if a later control board needs the pins. The header outline is measured (x 7.11, y 24.0, 50.8 × 5.0 mm). Only the body height is unpublished.",
         "es": "Deja las almohadillas desnudas si solo necesitas alimentaci\u00f3n, HDMI y la tarjeta. Marca el header como soldado si una placa de mandos posterior necesita los pines. El cuerpo del header no se dibuja, porque su contorno no est\u00e1 en el plano."
       },
       "action": {
