@@ -13,11 +13,7 @@
     "zh-CN": "低，如果安装程序还能跑"
   },
   "zero_w": "works",
-  "zero_w_note": {
-    "en": "The docs list an armv6 pihole-FTL build and a 512 MB minimum. https://docs.pi-hole.net/main/prerequisites/",
-    "zh-CN": "文档列出了 armv6 的 pihole-FTL 构建，最低内存 512 MB。"
-  },
-  "source": "pi-hole",
+  "source": "pi-hole-prereq",
   "also": [
     "pi-hole-docs",
     "install-docs",

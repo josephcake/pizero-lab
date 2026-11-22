@@ -105,6 +105,12 @@
       "publisher": "Pi-hole",
       "accessed": "2026-11-22"
     },
+    "pi-hole-prereq": {
+      "title": "Pi-hole prerequisites",
+      "url": "https://docs.pi-hole.net/main/prerequisites/",
+      "publisher": "Pi-hole",
+      "accessed": "2026-11-22"
+    },
     "retropie-zero": {
       "title": "RetroPie — Pi Zero",
       "url": "https://retropie.org.uk/docs/Pi-Zero/",

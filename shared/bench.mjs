@@ -239,6 +239,7 @@ export function formatPrice(row) {
 }
 
 export function formatBom(bom) {
+  if (!(bom.priced_usd > 0) && bom.unpriced_count > 0) return `${bom.unpriced_count} items, unpriced`;
   const money = `$${bom.priced_usd.toFixed(2)}`;
   if (bom.unpriced_count > 0) return `${money} + ${bom.unpriced_count} items unpriced`;
   return money;
