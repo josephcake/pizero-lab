@@ -35,27 +35,33 @@ export function getCatalog() {
   };
 }
 
+function localized(value) {
+  if (value == null) return "";
+  if (typeof value === "string") return value;
+  return [value.en, value["zh-CN"]].filter(Boolean).join(" ");
+}
+
 export function searchCatalog(catalog, q, boardId) {
   const query = q.trim().toLowerCase();
   if (!query) return [];
   const hits = [];
-  const blob = (value) => JSON.stringify(value).toLowerCase();
+  const matches = (...values) => values.some((value) => localized(value).toLowerCase().includes(query));
   const onBoard = (item) => Array.isArray(item.boards) && item.boards.includes(boardId);
   for (const lesson of catalog.lessons) {
     if (!onBoard(lesson)) continue;
-    if (blob(lesson.title).includes(query) || blob(lesson.summary).includes(query)) {
+    if (matches(lesson.title, lesson.summary)) {
       hits.push({ kind: "lesson", id: lesson.id, title: lesson.title, href: `/lessons/${lesson.id}` });
     }
   }
   for (const build of catalog.builds) {
     if (!onBoard(build)) continue;
-    if (blob(build.title).includes(query) || blob(build.summary).includes(query)) {
+    if (matches(build.title, build.summary)) {
       hits.push({ kind: "build", id: build.id, title: build.title, href: `/builds/${build.id}` });
     }
   }
   for (const part of catalog.parts) {
     if (!onBoard(part)) continue;
-    if (blob(part.name).includes(query)) {
+    if (matches(part.name, part.summary)) {
       hits.push({ kind: "part", id: part.id, title: part.name, href: `/parts/${part.id}` });
     }
   }

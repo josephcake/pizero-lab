@@ -37,7 +37,7 @@ function SearchBox() {
           {hits.length === 0 && <li>{t.nohits}</li>}
           {hits.map((hit) => (
             <li key={`${hit.kind}-${hit.id}`}>
-              <Link to={hit.href} onClick={() => setQ("")}>{hit.kind} · {typeof hit.title === "string" ? hit.title : hit.title[lang] || hit.title.en}</Link>
+              <Link to={hit.href} onClick={() => setQ("")}>{t[hit.kind] || hit.kind} · {typeof hit.title === "string" ? hit.title : hit.title[lang] || hit.title.en}</Link>
             </li>
           ))}
         </ul>
