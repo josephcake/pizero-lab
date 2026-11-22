@@ -70,9 +70,15 @@ function power(body) {
   const rows = [{ id: "board", ma: base, note: limits.zero_w_typical_active_ma.note }];
   if (body.hdmi) { total += limits.hdmi_typical_ma.value; rows.push({ id: "hdmi", ma: limits.hdmi_typical_ma.value, note: limits.hdmi_typical_ma.note }); }
   if (body.camera) { total += limits.camera_typical_ma.value; rows.push({ id: "camera", ma: limits.camera_typical_ma.value, note: limits.camera_typical_ma.note }); }
-  const usb = Number(body.usb_ma || 0);
+  const fields = {};
+  const usbParsed = parseLoose(body.usb_ma ?? 0);
+  const hatParsed = parseLoose(body.hat_ma ?? 0);
+  if (usbParsed == null || Number.isNaN(usbParsed) || usbParsed < 0) fields.usb = "bad";
+  if (hatParsed == null || Number.isNaN(hatParsed) || hatParsed < 0) fields.hat = "bad";
+  if (Object.keys(fields).length) return { ok: false, fields };
+  const usb = usbParsed;
   if (usb) { total += usb; rows.push({ id: "usb", ma: usb, note: "Typed by the user." }); }
-  const hat = Number(body.hat_ma || 0);
+  const hat = hatParsed;
   if (hat) { total += hat; rows.push({ id: "hat", ma: hat, note: "User-entered." }); }
   const psu = limits.zero_w_psu_a.value * 1000;
   return { rows, total_ma: total, psu_ma: psu, supply_v: limits.supply_v.value, headroom_ma: psu - total, over: total > psu, undervoltage_detect: limits.zero_has_undervoltage_detect.value };

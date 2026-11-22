@@ -421,10 +421,18 @@ export function InstrumentsPage() {
   const [owned, setOwned] = useState([]);
   const [recs, setRecs] = useState(null);
   const [clash, setClash] = useState(null);
+  const [powerFields, setPowerFields] = useState({});
 
   async function runPower(event) {
     event.preventDefault();
-    setPower(labCall("power", { hdmi, camera, usb_ma: Number(usb), hat_ma: Number(hat), board: catalog.board.id }, catalog));
+    const next = labCall("power", { hdmi, camera, usb_ma: usb, hat_ma: hat, board: catalog.board.id }, catalog);
+    if (next?.ok === false) {
+      setPower(null);
+      setPowerFields(next.fields || {});
+      return;
+    }
+    setPowerFields({});
+    setPower(next);
   }
 
   function toggle(id) {
@@ -444,8 +452,8 @@ export function InstrumentsPage() {
         <h2>{t.power}</h2>
         <label><input type="checkbox" checked={hdmi} onChange={(e) => setHdmi(e.target.checked)} /> HDMI</label>
         <label><input type="checkbox" checked={camera} onChange={(e) => setCamera(e.target.checked)} /> Camera</label>
-        <label>USB mA <input value={usb} onChange={(e) => setUsb(e.target.value)} /></label>
-        <label>{t.hatMa} <input value={hat} onChange={(e) => setHat(e.target.value)} inputMode="numeric" /></label>
+        <label>USB mA <input value={usb} onChange={(e) => setUsb(e.target.value)} />{powerFields.usb && <em className="warn">{t.fieldBad}</em>}</label>
+        <label>{t.hatMa} <input value={hat} onChange={(e) => setHat(e.target.value)} inputMode="decimal" />{powerFields.hat && <em className="warn">{t.fieldBad}</em>}</label>
         <button type="submit">{t.run}</button>
         {power && !power.error && (
           <div>
