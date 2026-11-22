@@ -195,48 +195,68 @@ export function LessonPage() {
   }
 
   const trackName = tx(lab.catalog.tracks.find((tr) => tr.id === lesson.track)?.name, lab.lang);
+  const siblings = lab.catalog.lessons.filter((item) => item.track === lesson.track && fitsBoard(item, lab.catalog.board.id)).sort((a, b) => (a.order || 0) - (b.order || 0));
   return (
     <article className="page lesson">
-      <header className="step-head">
-        <p className="meta">{trackName} · {t.step} {section + 1} / {lesson.sections.length}</p>
-        <span className="time-pill">{lesson.est_min} {t.minutes}</span>
-      </header>
-      <div className="seg">
-        <button type="button" disabled={section === 0} onClick={() => setSection((n) => Math.max(0, n - 1))}>{t.back}</button>
-        <button type="button" disabled={section >= lesson.sections.length - 1} onClick={() => setSection((n) => Math.min(lesson.sections.length - 1, n + 1))}>{t.next}</button>
+      <div className="progress-bar" aria-hidden="true">
+        {lesson.sections.map((_, index) => <i key={index} className={index < section ? "done" : index === section ? "now" : ""} />)}
       </div>
-      <h1>{tx(lesson.title, lab.lang)}</h1>
-      {wrongBoard && <SwitchBoard ids={wrongBoard} />}
-      {lesson.sections.map((sectionRow, index) => (
-        <section key={index} onFocus={() => setSection(index)} className={section === index ? "section on" : "section"}>
-          {lab.lang === "zh-CN" && sectionRow.kind === "md" && !sectionRow.text?.["zh-CN"] && (
-            <p className="note">本课正文暂为英文</p>
-          )}
-          {sectionRow.kind === "md" ? <Markdown text={tx(sectionRow.text, lab.lang)} /> : <Widget id={sectionRow.id} />}
-        </section>
-      ))}
-      <form className="quiz" onSubmit={mark}>
-        {lesson.quiz.map((q, qi) => (
-          <fieldset key={q.id}>
-            <legend>{qi + 1}. {tx(q.prompt, lab.lang)}</legend>
-            {q.choices.map((choice, ci) => (
-              <label key={ci}>
-                <input type="radio" name={q.id} checked={Number(answers[q.id]) === ci} onChange={() => setAnswers({ ...answers, [q.id]: ci })} />
-                {tx(choice, lab.lang)}
-              </label>
-            ))}
-            {marked && !marked.need && (
-              <p className={marked.rows.find((r) => r.id === q.id)?.right ? "ok" : "warn"}>
-                {marked.rows.find((r) => r.id === q.id)?.explain}
-              </p>
-            )}
-          </fieldset>
+      <aside className="outline">
+        <p className="overline">{trackName}</p>
+        {siblings.map((item) => (
+          <Link key={item.id} to={`/lessons/${item.id}`} className={item.id === lesson.id ? "on" : lab.progress.passed?.[item.id] ? "done" : ""}>
+            {lab.progress.passed?.[item.id] ? "✓ " : ""}{tx(item.title, lab.lang)}
+          </Link>
         ))}
-        <button type="submit">{t.quiz}</button>
-        {marked?.need && <p className="warn">{t.quizNeed}</p>}
-        {marked && !marked.need && <p className={marked.ok ? "ok" : "warn"}>{marked.ok ? t.quizPass : t.quizFail}</p>}
-      </form>
-      <SourceList ids={lesson.sources} />
+      </aside>
+      <div className="step-col">
+        <header className="step-head">
+          <p className="meta">{trackName} · {t.step} {section + 1} / {lesson.sections.length}</p>
+          <span className="time-pill">{lesson.est_min} {t.minutes}</span>
+        </header>
+        <h1>{tx(lesson.title, lab.lang)}</h1>
+        {wrongBoard && <SwitchBoard ids={wrongBoard} />}
+        {lesson.sections.map((sectionRow, index) => (
+          sectionRow.id === "board" ? null : (
+            <section key={index} onFocus={() => setSection(index)} className={section === index ? "section on" : "section"}>
+              {lab.lang === "zh-CN" && sectionRow.kind === "md" && !sectionRow.text?.["zh-CN"] && (
+                <p className="note">本课正文暂为英文</p>
+              )}
+              {sectionRow.kind === "md" ? <Markdown text={tx(sectionRow.text, lab.lang)} /> : <Widget id={sectionRow.id} />}
+            </section>
+          )
+        ))}
+        <form className="quiz" onSubmit={mark}>
+          {lesson.quiz.map((q, qi) => (
+            <fieldset key={q.id}>
+              <legend>{qi + 1}. {tx(q.prompt, lab.lang)}</legend>
+              {q.choices.map((choice, ci) => (
+                <label key={ci} className={marked && !marked.need ? (Number(answers[q.id]) === ci && ci === q.answer ? "right" : Number(answers[q.id]) === ci ? "wrong" : "") : ""}>
+                  <input type="radio" name={q.id} checked={Number(answers[q.id]) === ci} onChange={() => setAnswers({ ...answers, [q.id]: ci })} />
+                  {tx(choice, lab.lang)}
+                </label>
+              ))}
+              {marked && !marked.need && (
+                <p className={marked.rows.find((r) => r.id === q.id)?.right ? "ok" : "warn"}>
+                  {marked.rows.find((r) => r.id === q.id)?.explain}
+                </p>
+              )}
+            </fieldset>
+          ))}
+          <div className="lesson-actions">
+            <button type="submit">{t.quiz}</button>
+            <button type="button" className="ghost" disabled={section === 0} onClick={() => setSection((n) => Math.max(0, n - 1))}>{t.back}</button>
+            <Link to="/settings">{t.askStep}</Link>
+          </div>
+          {marked?.need && <p className="warn">{t.quizNeed}</p>}
+          {marked && !marked.need && <p className={marked.ok ? "ok" : "warn"}>{marked.ok ? t.quizPass : t.quizFail}</p>}
+        </form>
+        <SourceList ids={lesson.sources} />
+      </div>
+      <aside className="live-bench">
+        <p className="overline">{t.liveBench}</p>
+        <Widget id="board" />
+      </aside>
     </article>
   );
 }
