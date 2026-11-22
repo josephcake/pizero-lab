@@ -2,6 +2,7 @@ import { useState } from "react";
 import { tx, useLab } from "./state.jsx";
 import { strings } from "./i18n.js";
 import { Workbench } from "./workbench.jsx";
+import { labCall } from "./lab.js";
 
 export function Widget({ id }) {
   if (id === "board") return <BoardWidget />;
@@ -17,17 +18,10 @@ function BoardWidget() {
 }
 
 async function postLab(tool, body) {
-  const response = await fetch(`/api/lab/${tool}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
-  const data = await response.json();
-  if (!response.ok) throw new Error(data.error || "lab");
-  return data;
+  return labCall(tool, body);
 }
 
-function OhmWidget() {
+export function OhmWidget() {
   const { catalog, lang } = useLab();
   const t = strings(lang);
   const high = catalog.electrical.limits.gpio_high_v.value;

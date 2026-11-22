@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-import { canMount, deriveBom, formatBom } from "../../shared/bench.mjs";
+import { Link } from "react-router-dom";
+import { canMount } from "../../shared/bench.mjs";
 import { fitsBoard } from "../../shared/boards.mjs";
 import { strings } from "./i18n.js";
+import { labCall } from "./lab.js";
 import { tx, useLab } from "./state.jsx";
 import { BoardMap, Minimap } from "./boardmap.jsx";
 import { BomList } from "./workbench.jsx";
@@ -30,14 +32,11 @@ export function Explorer() {
       setConflicts({ conflicts: [] });
       return;
     }
-    fetch("/api/lab/conflicts", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ part_ids: mountedIds, board: board.id }),
-    })
-      .then((r) => r.json())
-      .then(setConflicts)
-      .catch(() => setConflicts(null));
+    try {
+      setConflicts(labCall("conflicts", { part_ids: mountedIds, board: board.id }, lab.catalog));
+    } catch {
+      setConflicts(null);
+    }
   }, [mountedIds.join("|"), board.id]);
 
   function toggleLayer(id) {
@@ -54,13 +53,7 @@ export function Explorer() {
     if (!check.ok) {
       if (check.code === "occupied" || check.code === "needs-header") {
         const ids = [...new Set([...lab.bench.jobPartIds, part.id])];
-        const response = await fetch("/api/lab/conflicts", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ part_ids: ids, board: board.id }),
-        });
-        const data = await response.json();
-        setConflicts(data);
+        setConflicts(labCall("conflicts", { part_ids: ids, board: board.id }, lab.catalog));
       }
       setMountNote(check.code === "needs-header"
         ? (lab.lang === "zh-CN" ? "需要先焊接或压接排针。" : "Needs a soldered or hammer header.")
@@ -109,7 +102,8 @@ export function Explorer() {
         <ul className="tray-list">
           {hats.filter((hat) => hat.dims).slice(0, 8).map((hat) => (
             <li key={hat.id}>
-              <button type="button" onClick={() => fitPart(hat)}>{tx(hat.name, lab.lang)}</button>
+              <Link to={`/parts/${hat.id}`}>{tx(hat.name, lab.lang)} <em>provisional</em></Link>
+              <button type="button" onClick={() => fitPart(hat)}>{t.fit}</button>
             </li>
           ))}
         </ul>
@@ -135,7 +129,6 @@ export function Explorer() {
         <div className="map-foot">
           <div>
             <span className="scale-foot"><i />10 mm</span>
-            <p className="bill-line">{t.bom} {formatBom(deriveBom(lab.bench, lab.catalog))}</p>
             <BomList catalog={lab.catalog} state={lab.bench} lang={lab.lang} t={t} />
           </div>
           <Minimap board={board} view={view} />
@@ -161,7 +154,8 @@ function countLegend(pins) {
     ["5V", "5V power", "var(--ov-5v)", (p) => p.name === "5V"],
     ["3V3", "3V3 power", "var(--ov-3v3)", (p) => p.name === "3V3"],
     ["GND", "Ground", "var(--ov-gnd)", (p) => p.name === "GND"],
-    ["GPIO", "GPIO", "var(--ov-gpio)", (p) => p.type === "gpio" || p.kind === "gpio"],
+    ["GPIO", "GPIO", "var(--ov-gpio)", (p) => (p.type === "gpio" || p.kind === "gpio") && p.physical !== 27 && p.physical !== 28],
+    ["ID", "ID EEPROM", "var(--ov-id)", (p) => p.physical === 27 || p.physical === 28],
   ];
   return rows.map(([id, label, ink, test]) => ({ id, label, ink, count: pins.filter(test).length }));
 }

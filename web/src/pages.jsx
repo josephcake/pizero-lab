@@ -3,11 +3,12 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { replaySteps } from "../../shared/bench.mjs";
 import { fitsBoard, mismatch } from "../../shared/boards.mjs";
 import { strings } from "./i18n.js";
+import { labCall } from "./lab.js";
 import { defaultModel, forgetCredentials, notifyKeyChange, readCredentials, writeCredentials } from "./help.jsx";
 import { tx, useLab } from "./state.jsx";
 import { Workbench, BomList } from "./workbench.jsx";
 import { Explorer } from "./explorer.jsx";
-import { Markdown, PinFacts, Widget } from "./widgets.jsx";
+import { Markdown, OhmWidget, PinFacts, Widget } from "./widgets.jsx";
 
 export function BoardPage() {
   const { id } = useParams();
@@ -196,6 +197,9 @@ export function LessonPage() {
       {wrongBoard && <SwitchBoard ids={wrongBoard} />}
       {lesson.sections.map((sectionRow, index) => (
         <section key={index} onFocus={() => setSection(index)} className={section === index ? "section on" : "section"}>
+          {lab.lang === "zh-CN" && sectionRow.kind === "md" && !sectionRow.text?.["zh-CN"] && (
+            <p className="note">本课正文暂为英文</p>
+          )}
           {sectionRow.kind === "md" ? <Markdown text={tx(sectionRow.text, lab.lang)} /> : <Widget id={sectionRow.id} />}
         </section>
       ))}
@@ -225,10 +229,38 @@ export function LessonPage() {
   );
 }
 
+export function RoadmapPage() {
+  const { lang } = useLab();
+  const zh = lang === "zh-CN";
+  const waves = [
+    [zh ? "第二波" : "Wave 2", zh ? "闪存系统、无头 Wi-Fi / SSH、排针（焊接、压接、不焊）。" : "Flash the OS, headless Wi-Fi and SSH, and headers: solder, hammer, or leave the pads bare."],
+    [zh ? "第三波" : "Wave 3", zh ? "按钮、I2C 传感器、摄像头丝带、PWM 舵机。" : "Buttons, an I2C sensor, the camera ribbon, and a PWM servo."],
+    [zh ? "第四波" : "Wave 4", zh ? "UART 和蓝牙。引脚冲突与功耗预算。" : "UART and Bluetooth, then pin conflicts and the power budget."],
+    [zh ? "第五波" : "Wave 5", zh ? "把课程接到真实作品上：Pi-hole、掌机、相机、墨水屏。" : "Tie the lessons to real builds: Pi-hole, a handheld, a camera, an e-paper board."],
+  ];
+  return (
+    <article className="page">
+      <h1>{zh ? "路线图" : "Roadmap"}</h1>
+      <p>{zh ? "这一版只交付 Zero W 和三节入门课。下面是后面才会来的内容，现在还没有可运行的数据。" : "This release is the Zero W and three beginner lessons. The items below are planned. They are not live data yet."}</p>
+      <h2>{zh ? "课程" : "Lessons"}</h2>
+      <ul>{waves.map(([title, text]) => <li key={title}><b>{title}.</b> {text}</li>)}</ul>
+      <h2>{zh ? "作品" : "Builds"}</h2>
+      <p>{zh ? "Pi-hole、掌机、相机、墨水屏、气象站、USB 小工具、音乐播放、GPS/4G、智能镜。来源核对完才会进作品页。" : "Pi-hole, a handheld, a camera, e-paper, a weather station, a USB gadget, a music player, GPS/4G, and a smart mirror. They join Builds only after a source is checked."}</p>
+      <h2>{zh ? "扩展板" : "HATs"}</h2>
+      <p>{zh ? "零件盘里带 provisional 的条目来自调研，还不是最终 hats.json。更多厂家的板会在合并后出现。" : "Tray rows marked provisional come from research and are not the final hats.json. More makers land after that merge."}</p>
+      <h2>{zh ? "工具" : "Tools"}</h2>
+      <p>{zh ? "单独的引脚冲突检查页。装上第二块板时，板面上的冲突提示保持不变。" : "A standalone pin-conflict checker page. The conflict flag shown when a second part is mounted stays on the board."}</p>
+      <h2>{zh ? "其他 Zero" : "Other Zero boards"}</h2>
+      <p>{zh ? "Zero v1.2、v1.3、WH、Zero 2 W、Zero 2 WH 在选择器里是 coming soon。不会借用 Zero W 的尺寸。" : "Zero v1.2, v1.3, WH, Zero 2 W, and Zero 2 WH stay on coming soon. Their geometry is not copied from the Zero W."}</p>
+    </article>
+  );
+}
+
 export function BuildsPage() {
   const { catalog, lang } = useLab();
   return (
     <div className="page">
+      <p><Link to="/roadmap">{lang === "zh-CN" ? "更多作品在路线图上。" : "Further builds are listed on the Roadmap."}</Link></p>
       <div className="cards">
         {catalog.builds.filter((build) => fitsBoard(build, catalog.board.id)).map((build) => (
           <article key={build.id} className="card">
@@ -345,12 +377,7 @@ export function InstrumentsPage() {
 
   async function runPower(event) {
     event.preventDefault();
-    const response = await fetch("/api/lab/power", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ hdmi, camera, usb_ma: Number(usb), board: catalog.board.id }),
-    });
-    setPower(await response.json());
+    setPower(labCall("power", { hdmi, camera, usb_ma: Number(usb), board: catalog.board.id }, catalog));
   }
 
   function toggle(id) {
@@ -359,22 +386,13 @@ export function InstrumentsPage() {
 
   async function runOwned(event) {
     event.preventDefault();
-    const response = await fetch("/api/lab/recommend", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ owned, board: catalog.board.id }),
-    });
-    setRecs(await response.json());
-    const clashRes = await fetch("/api/lab/conflicts", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ part_ids: owned, board: catalog.board.id }),
-    });
-    setClash(await clashRes.json());
+    setRecs(labCall("recommend", { owned, board: catalog.board.id }, catalog));
+    setClash(labCall("conflicts", { part_ids: owned, board: catalog.board.id }, catalog));
   }
 
   return (
     <div className="page instruments">
+      <OhmWidget />
       <form onSubmit={runPower} className="widget">
         <h2>{t.power}</h2>
         <label><input type="checkbox" checked={hdmi} onChange={(e) => setHdmi(e.target.checked)} /> HDMI</label>

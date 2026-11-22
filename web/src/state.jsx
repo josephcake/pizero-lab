@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { deriveBom, emptyState, reducer } from "../../shared/bench.mjs";
 import { initialHeader, sourcedModels } from "../../shared/boards.mjs";
+import { getCatalog } from "./staticCatalog.js";
 
 const Ctx = createContext(null);
 export function useLab() {
@@ -35,13 +36,11 @@ export function LabProvider({ children }) {
   const [step, setStep] = useState(null);
 
   useEffect(() => {
-    fetch("/api/catalog")
-      .then((r) => {
-        if (!r.ok) throw new Error(String(r.status));
-        return r.json();
-      })
-      .then(setCatalog)
-      .catch(() => setError("catalog"));
+    try {
+      setCatalog(getCatalog());
+    } catch {
+      setError("catalog");
+    }
   }, []);
 
   useEffect(() => {

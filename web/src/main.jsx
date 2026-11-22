@@ -1,9 +1,10 @@
 import { StrictMode, useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Link, NavLink, Route, Routes, useLocation } from "react-router-dom";
+import { HashRouter, Link, NavLink, Route, Routes, useLocation } from "react-router-dom";
 import { strings } from "./i18n.js";
+import { searchCatalog } from "./staticCatalog.js";
 import { HelpDock } from "./help.jsx";
-import { BoardPage, BuildPage, BuildsPage, InstrumentsPage, LessonPage, LessonsPage, PartPage, PinPage, SettingsPage } from "./pages.jsx";
+import { BoardPage, BuildPage, BuildsPage, InstrumentsPage, LessonPage, LessonsPage, PartPage, PinPage, RoadmapPage, SettingsPage } from "./pages.jsx";
 import { LabProvider, useLab } from "./state.jsx";
 import "./styles.css";
 
@@ -20,10 +21,7 @@ function SearchBox() {
       return;
     }
     const handle = setTimeout(() => {
-      fetch(`/api/search?q=${encodeURIComponent(q)}&board=${encodeURIComponent(boardId)}`)
-        .then((r) => r.json())
-        .then((data) => setHits(data.hits || []))
-        .catch(() => setHits([]));
+      setHits(catalog ? searchCatalog(catalog, q, boardId) : []);
     }, 150);
     return () => clearTimeout(handle);
   }, [q, boardId]);
@@ -53,9 +51,14 @@ function BoardPicker() {
     <label className="board-picker">
       {t.picker}
       <select aria-label={t.picker} value={catalog.modelId} onChange={(event) => pickBoard(event.target.value)}>
-        {catalog.liveModels.map((model) => (
-          <option key={model.id} value={model.id}>{txName(model, lang)}</option>
-        ))}
+        {catalog.boards.base.models.map((model) => {
+          const live = Boolean(catalog.boards.models[model.id]);
+          return (
+            <option key={model.id} value={model.id} disabled={!live}>
+              {txName(model, lang)}{live ? "" : lang === "zh-CN" ? " · 即将推出" : " · coming soon"}
+            </option>
+          );
+        })}
       </select>
     </label>
   );
@@ -82,7 +85,6 @@ function Shell() {
     <div className="sheet">
       <header className="mast">
         <div>
-          <p className="eyebrow">65 × 30</p>
           <Link to="/" className="wordmark">pizero<i>/</i>lab</Link>
           <p className="tag">{t.tag}</p>
         </div>
@@ -109,6 +111,7 @@ function Shell() {
             <Route path="/lessons" element={<LessonsPage />} />
             <Route path="/lessons/:id" element={<LessonPage />} />
             <Route path="/builds" element={<BuildsPage />} />
+            <Route path="/roadmap" element={<RoadmapPage />} />
             <Route path="/builds/:id" element={<BuildPage />} />
             <Route path="/instruments" element={<InstrumentsPage />} />
             <Route path="/settings" element={<SettingsPage />} />
@@ -123,7 +126,7 @@ function Shell() {
         <NavLink to="/lessons">Learn</NavLink>
         <NavLink to="/builds">Builds</NavLink>
         <NavLink to="/settings">Help</NavLink>
-        <NavLink to="/instruments">More</NavLink>
+        <NavLink to="/roadmap">More</NavLink>
       </nav>
     </div>
   );
@@ -140,11 +143,11 @@ function ThemeButton() {
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <LabProvider>
         <Shell />
       </LabProvider>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

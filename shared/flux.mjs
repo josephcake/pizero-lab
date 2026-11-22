@@ -58,7 +58,7 @@ export function adaptFluxBoard(flux, pinRows) {
   }
   const draw = [];
   for (const component of flux.components || []) {
-    if (component.id === "pcb-antenna" || component.id === "radio-antenna" || component.id === "gpio-header") continue;
+    if (["pcb-antenna", "radio-antenna", "radio", "act-led", "regulator", "crystal", "gpio-header"].includes(component.id)) continue;
     const geom = box(component.x_mm, component.y_mm, component.w_mm, component.h_mm, H);
     if (!geom) continue;
     draw.push({

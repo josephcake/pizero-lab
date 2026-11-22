@@ -9,7 +9,7 @@
     "corner_radius_mm": 3.0,
     "thickness_mm": null,
     "thickness_note": "Official product literature often quotes an overall height of 5 mm including connectors, but bare-PCB thickness is not dimensioned on RP-008367-DS.",
-    "origin": "bottom-left, top view (component side). GPIO along the top edge; mini-HDMI, CSI and micro-USB along the bottom edge; left = mini-HDMI end; right = microSD/antenna end.",
+    "origin": "bottom-left, top view (component side). GPIO along the top edge (y ≈ 30); mini-HDMI and the two micro-USB ports along the bottom edge (y ≈ 0); left short edge (x = 0) is the microSD + mini-HDMI end; right short edge (x = 65) is the CSI camera-connector end.",
     "src": [
       {
         "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
@@ -101,10 +101,10 @@
       }
     ],
     "csi": {
-      "x": null,
-      "y": null,
-      "rot_deg": 270,
-      "note": "22-pin 0.5 mm-pitch right-angle FPC (Molex 54548-2271 per RP-008368-DS). Visible on RP-008367-DS on the bottom edge between mini-HDMI and USB OTG, opening facing −Y (out the bottom). The drawing does not dimension the connector centre, so x and y are null rather than guessed. Mating-face rotation 270 = opening toward −Y.",
+      "x": 65.0,
+      "y": 15.0,
+      "rot_deg": 0,
+      "note": "CSI connector is on the right short edge (x = 65), opening facing +X (rot_deg 0). The official 15 mm dimension on RP-008367-DS is the connector's vertical centre-line from the bottom edge (and the board mid-line). X is the board-edge mating face. Housing measured on the drawing: x = 61.60–65.00, y = 6.94–23.04 (16.10 mm long, centre y = 14.99). Official Zero documentation describes this as a mini 22-pin, 0.5 mm-pitch, 11.5 mm-wide CSI port (11.5 mm is the FPC/cable width, not the housing length). Schematic J12 is Molex 54548-2271 (datasheet body length 16.2 mm; drawing measures 16.10 mm).",
       "src": [
         {
           "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
@@ -117,6 +117,10 @@
           "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
           "doc": "RP-008368-DS",
           "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+        },
+        {
+          "url": "https://www.raspberrypi.com/documentation/computers/zero.html",
+          "section": "Raspberry Pi Zero ports: mini 22-pin, 0.5 mm-pitch, 11.5 mm-wide CSI port (since Zero v1.3, including Zero W)"
         }
       ]
     },
@@ -193,10 +197,10 @@
       ]
     },
     "microsd": {
-      "x": 65.0,
-      "y": null,
-      "rot_deg": 0,
-      "note": "microSD push/slot opens on the right short edge (x=65), visible on RP-008367-DS; schematic J5, part 68710814522, 8 contacts. Vertical centre is not dimensioned on the drawing, so y is null. rot_deg 0 = opening toward +X.",
+      "x": 7.39,
+      "y": 16.9,
+      "rot_deg": 180,
+      "note": "microSD slot is on the left short edge (x = 0), opening facing −X (rot_deg 180). The official 16.9 mm dimension on RP-008367-DS is the slot's horizontal centre-line from the bottom edge (matches the centre of the drawn rectangle at y = (10.90+22.88)/2 = 16.89 mm). X is the centre of that same assembly-drawing rectangle (x = 1.66 + 11.45/2 = 7.39). A microSD card inserted in the slot overhangs the left edge (visible in photographs). The drawn rectangle (11.45 × 11.98 mm, inset from the left edge) is smaller than a standard 15 mm-wide microSD card, so it is treated as the official-drawing footprint / inner outline, not necessarily the full metal-cage envelope, which is not separately dimensioned.",
       "src": [
         {
           "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
@@ -220,7 +224,26 @@
         "doc": "RP-008367-DS",
         "section": "Raspberry Pi Zero W mechanical drawing (top assembly)"
       }
-    ]
+    ],
+    "act_led": {
+      "x": null,
+      "y": null,
+      "note": "ACT / STATUS_LED is schematic D2, green, package 1611, but RP-008367-DS does not label D2 or dimension its centre. The assembly drawing contains several similarly sized small footprints, and available board photographs do not uniquely identify which of them is the LED, so the anchor stays null.",
+      "src": [
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+          "doc": "RP-008368-DS",
+          "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+        },
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008367-DS-1-raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "doc": "RP-008367-DS",
+          "section": "Raspberry Pi Zero W mechanical drawing (top assembly)"
+        }
+      ]
+    }
   },
   "header": {
     "pitch_mm": 2.54,
@@ -245,7 +268,7 @@
     },
     "hole_d_mm": null,
     "pad_d_mm": null,
-    "note": "Zero W ships with unpopulated through-holes; Zero WH has a pre-soldered 2×20, 2.54 mm pin header. Pad and drill diameters are not dimensioned on RP-008367-DS or the official GPIO documentation, so they are null. Pin 1 (3V3, physical pin 1) is the inner row, left end. Even pins (2, 4, …, 40) are the outer row, closer to the top board edge.",
+    "note": "Zero W ships with unpopulated through-holes (header_state_default: bare-pads); Zero WH has a pre-soldered 2×20, 2.54 mm pin header. Pad and drill diameters are not dimensioned on RP-008367-DS or the official GPIO documentation, so they are null. Pin 1 (3V3, physical pin 1) is the inner row, left end. Even pins (2, 4, …, 40) are the outer row, closer to the top board edge.",
     "src": [
       {
         "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
@@ -269,7 +292,8 @@
         "url": "https://github.com/raspberrypi/hats/blob/master/uhat-board-mechanical.pdf",
         "section": "Raspberry Pi Micro-HAT (uHAT) board mechanical specification (2018): 65x30 or 65x30.5 mm; holes drilled 2.75 mm ± 0.05 mm; land min. 6.2 mm; 3 mm corner radius"
       }
-    ]
+    ],
+    "header_state_default": "bare-pads"
   },
   "components": [
     {
@@ -429,21 +453,31 @@
       "id": "pcb-antenna",
       "name": "2.4 GHz PCB antenna",
       "side": "top",
-      "x_mm": 55.36,
+      "x_mm": null,
       "y_mm": null,
-      "w_mm": 9.64,
+      "w_mm": null,
       "h_mm": null,
       "origin": "bottom-left, top view",
       "function": "Printed 2.4 GHz antenna shared by Wi-Fi and Bluetooth.",
       "specs": {
-        "region_from_right_edge_mm": 9.64,
-        "x_span": "55.36–65.00 (official 9.64 mm dimension on RP-008367-DS, measured from the right edge)"
+        "type": "Proant Niche resonant PCB-cavity antenna (official MagPi description)",
+        "location_described": "Between the mini-HDMI port and the USB OTG port, along the bottom board edge",
+        "gap_between_port_footprints_mm": {
+          "x_start": 17.82,
+          "x_end": 37.65,
+          "note": "Right edge of the measured mini-HDMI footprint (6.97+10.85) to left edge of the measured USB OTG footprint (37.65). This is the gap in which the cavity is described to sit; it is not a measured antenna outline."
+        },
+        "unrelated_9_64_dimension": "RP-008367-DS has a 9.64 mm dimension line above the board from the right edge (x=65) to x=55.36. That line is not labelled as the antenna, and the assembly drawing shows no antenna outline in the x=55.36–65 region (that region is the CSI end). It is not used as the antenna bounding box."
       },
       "subparts": [],
-      "gotchas": "Keep metal and dense ground pours out of this region. Height/vertical extent is not dimensioned, so h_mm and y_mm are null.",
-      "confidence": "confirmed",
-      "confidence_method": "9.64 mm dimension line on RP-008367-DS runs from the right board edge (x=65) to x=55.36 along the top of the board.",
+      "gotchas": "The Proant Niche antenna is a copper-cleared resonant cavity in the PCB, not a chip antenna and not a board-outline cutout. RP-008367-DS (top assembly) draws a straight bottom edge between mini-HDMI and USB OTG and does not outline the cavity, so x/y/w/h stay null. Do not treat the unlabeled 9.64 mm dimension at the top-right of the drawing as the antenna.",
+      "confidence": "suspect",
+      "confidence_method": "Location is described in the official MagPi antenna-design article (Proant Niche cavity between mini-HDMI and USB OTG). The cavity itself is not drawn or dimensioned on RP-008367-DS, so no bounding box is recorded. A previous draft that placed the antenna at x=55.36–65 (the 9.64 mm callout) was incorrect: that dimension is an unlabeled line above the board, and that x-range conflicts with the CSI connector on the right short edge.",
       "src": [
+        {
+          "url": "https://magazine.raspberrypi.com/articles/pi-zero-w-wireless-antenna-design",
+          "section": "Official MagPi article: Zero W uses a Proant Niche resonant PCB-cavity antenna in the trapezoidal region between the mini-HDMI and micro-USB OTG ports (Roger Thornton / Gordon Hollingworth)"
+        },
         {
           "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
           "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008367-DS-1-raspberry-pi-zero-w-mechanical-drawing.pdf",
@@ -845,10 +879,10 @@
       "id": "csi",
       "name": "CSI camera connector (22-pin Zero type)",
       "side": "top",
-      "x_mm": null,
-      "y_mm": null,
-      "w_mm": null,
-      "h_mm": null,
+      "x_mm": 61.6,
+      "y_mm": 6.94,
+      "w_mm": 3.4,
+      "h_mm": 16.1,
       "origin": "bottom-left, top view",
       "function": "MIPI CSI-2 camera interface, 22-pin 0.5 mm-pitch right-angle FPC, bottom contact.",
       "specs": {
@@ -857,7 +891,10 @@
         "pins": 22,
         "pitch_mm": 0.5,
         "style": "right-angle SMT ZIF, bottom contact, 1.20 mm height (Molex datasheet)",
-        "body_length_mm": 16.2
+        "body_length_mm": 16.2,
+        "housing_length_mm_measured": 16.1,
+        "official_centreline_y_mm": 15.0,
+        "fpc_width_mm_official": 11.5
       },
       "subparts": [
         {
@@ -991,9 +1028,9 @@
           ]
         }
       ],
-      "gotchas": "This is not the 15-pin 1.0 mm CSI connector used on A/B-style boards. Official Camera Modules use a 15-pin cable and need a 15-to-22-pin Raspberry Pi Zero camera cable. Standard Pi 4/5 camera cables will not seat. Centre x/y is not dimensioned on RP-008367-DS (the connector sits on the bottom edge between mini-HDMI and USB OTG).",
+      "gotchas": "This is not the 15-pin 1.0 mm CSI connector used on A/B-style boards. Official Camera Modules use a 15-pin cable and need a 15-to-22-pin Raspberry Pi Zero camera cable. Standard Pi 4/5 camera cables will not seat. The connector is on the right short edge, flush with x = 65 in the assembly drawing; the FPC exits to the right (+X). Official documentation's 11.5 mm width is the fine-pitch cable/port width, not the 16.1 mm housing length measured on the drawing.",
       "confidence": "confirmed",
-      "confidence_method": "Part number, pin count and camera nets from RP-008368-DS J12 (Molex 54548-2271). Location (between HDMI and USB OTG, bottom edge) is visible on RP-008367-DS but not dimensioned, so the bounding box is null.",
+      "confidence_method": "Housing outline measured from RP-008367-DS vector geometry: x = 61.60–65.00, y = 6.94–23.04 (length 16.10 mm). The official 15 mm dimension on that drawing is the vertical centre-line (measured centre y = 14.99). Part number, pin count and camera nets from RP-008368-DS J12 (Molex 54548-2271, datasheet body 16.2 mm). Right-edge location confirmed by the official drawing and by photographs (white 22-pin ZIF opposite the microSD / mini-HDMI end).",
       "src": [
         {
           "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
@@ -1010,17 +1047,22 @@
         {
           "url": "https://www.molex.com/en-us/products/part-detail/545482271",
           "section": "Molex 54548-2271: 0.50 mm pitch, 22 circuits, 1.20 mm height, right-angle SMT, bottom contact, product length 16.2 mm"
+        },
+        {
+          "url": "https://www.raspberrypi.com/documentation/computers/zero.html",
+          "section": "Raspberry Pi Zero ports: mini 22-pin, 0.5 mm-pitch, 11.5 mm-wide CSI port (since Zero v1.3, including Zero W)"
         }
-      ]
+      ],
+      "rot_deg": 0
     },
     {
       "id": "microsd",
       "name": "microSD slot",
       "side": "top",
-      "x_mm": null,
-      "y_mm": null,
-      "w_mm": null,
-      "h_mm": null,
+      "x_mm": 1.66,
+      "y_mm": 10.9,
+      "w_mm": 11.45,
+      "h_mm": 11.98,
       "origin": "bottom-left, top view",
       "function": "Primary boot and storage (microSD card).",
       "specs": {
@@ -1108,9 +1150,9 @@
           ]
         }
       ],
-      "gotchas": "The official Raspberry Pi Imager must write a 32-bit (ARMv6) Raspberry Pi OS image; 64-bit images will not boot on the original Zero W. Slot opens on the right short edge; exact footprint is not dimensioned on RP-008367-DS.",
+      "gotchas": "The official Raspberry Pi Imager must write a 32-bit (ARMv6) Raspberry Pi OS image; 64-bit images will not boot on the original Zero W. The slot opens on the left short edge (card overhangs left). RP-008368-DS labels J5 as 68710814522; that commercial order code is a Würth 8-pin FPC ZIF connector, which does not match the physical microSD cage visible on the board. The physical cage manufacturer part number is not identified on the reduced schematic or the mechanical drawing. The x/y/w/h box is the rectangle drawn on RP-008367-DS (centred on the official 16.9 mm centre-line). That rectangle is smaller than a 15 mm-wide microSD card, so it may be a simplified footprint or inner opening rather than the full metal-cage envelope.",
       "confidence": "confirmed",
-      "confidence_method": "Refdes and part from RP-008368-DS J5; right-edge opening visible on RP-008367-DS. Bounding box not dimensioned, so x/y/w/h are null.",
+      "confidence_method": "Left-edge location and 16.9 mm vertical centre-line are official dimensions / features on RP-008367-DS; the 11.45 × 11.98 mm rectangle at (1.66, 10.90) was measured from the drawing's vector outline. Opening direction confirmed by the official drawing and by photographs (card overhangs the left short edge, same end as mini-HDMI). J5 / 8 contacts from RP-008368-DS; the printed 68710814522 order code is recorded but flagged as not matching a microSD cage.",
       "src": [
         {
           "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
@@ -1128,7 +1170,8 @@
           "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
           "section": "Raspberry Pi Zero W product specification"
         }
-      ]
+      ],
+      "rot_deg": 180
     },
     {
       "id": "gpio-header",
@@ -1186,15 +1229,21 @@
         "package": "1611 (from RP-008368-DS)"
       },
       "subparts": [],
-      "gotchas": "The exact board location is not dimensioned on RP-008367-DS. On BCM2835-era boards the ACT LED is typically driven as an active-low status indicator (STATUS_LED net).",
+      "gotchas": "The exact board location is not dimensioned or labelled (no D2 reference) on RP-008367-DS. The 1611 package is 1.6 × 1.1 mm; the assembly drawing has several similarly sized footprints, and available photographs do not uniquely identify the LED, so coordinates stay null. On BCM2835-era boards the ACT LED is typically driven as an active-low status indicator (STATUS_LED net).",
       "confidence": "confirmed",
-      "confidence_method": "Identity, colour and package from RP-008368-DS (D2 GREEN 1611, STATUS_LED / ACT). Board coordinates not labelled, so x/y are null.",
+      "confidence_method": "Identity, colour and package from RP-008368-DS (D2 GREEN 1611, STATUS_LED / ACT). Board coordinates are not labelled on RP-008367-DS and were not uniquely identifiable on the official drawing or photographs, so x/y/w/h are null.",
       "src": [
         {
           "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
           "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
           "doc": "RP-008368-DS",
           "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+        },
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008367-DS-1-raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "doc": "RP-008367-DS",
+          "section": "Raspberry Pi Zero W mechanical drawing (top assembly)"
         }
       ]
     },
@@ -1578,8 +1627,13 @@
   ],
   "notes": [
     "This dataset is for the original Raspberry Pi Zero W (BCM2835, 2017), not Raspberry Pi Zero 2 W (RP3A0).",
-    "All board coordinates use millimetres, origin at the bottom-left corner of the PCB, top view of the component side.",
+    "All board coordinates use millimetres, origin at the bottom-left corner of the PCB, top view of the component side. Left = microSD + mini-HDMI; right = CSI; GPIO at the top; HDMI/USB at the bottom.",
+    "header_state_default is bare-pads: Zero W ships with an unpopulated 40-pin header footprint.",
+    "microSD is on the left short edge (official 16.9 mm y-centre-line; drawn footprint measured on RP-008367-DS). CSI is on the right short edge (official 15 mm y-centre-line; housing measured on RP-008367-DS).",
+    "The 2.4 GHz antenna is described officially as a Proant Niche PCB cavity between mini-HDMI and USB OTG, but it is not outlined on the RP-008367-DS assembly drawing, so its bounding box is null (suspect / not drawn). The unlabeled 9.64 mm dimension is not the antenna.",
+    "ACT LED identity is confirmed from the schematic (D2 green 1611); its coordinates are null because they are not labelled on the mechanical drawing and were not uniquely identified on photographs.",
     "Where RP-008367-DS does not dimension a part, x/y/w/h are null with a note. Values are never invented.",
     "Footprint boxes for mini-HDMI and the two micro-USB connectors include the small overhang past the board edge (negative y)."
-  ]
+  ],
+  "header_state_default": "bare-pads"
 }

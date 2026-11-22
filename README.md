@@ -6,13 +6,19 @@ Where Raspberry Pi's own pages disagree, the Zero W file keeps every claim and l
 
 ## Run
 
+The site is static. From `web/`:
+
 ```bash
-npm start
+npm install
+npx vite build
+python3 -m http.server 4765 --directory dist
 ```
 
-Then open http://127.0.0.1:4743
+Open http://127.0.0.1:4765/#/
 
-That command installs the web and catalog dependencies if they are missing, and starts three processes:
+`npm start` still boots the older dev servers (Vite on 4743, catalog on 4742, lab tools on 4741). The pages you ship do not call them. See `PUBLISH.md` for GitHub Pages.
+
+That older command installs the web and catalog dependencies if they are missing, and starts three processes:
 
 | Process | Role | Port |
 | --- | --- | --- |

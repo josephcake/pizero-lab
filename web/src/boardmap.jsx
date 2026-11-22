@@ -184,17 +184,20 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
         ))}
         {layers.components && board.draw.map((part) => (
           <g key={part.id} className="pz-part" filter={part.kind === "soc" ? null : "url(#pz-lift)"} onClick={(event) => { event.stopPropagation(); onSelect({ kind: "component", id: part.id }); }}>
+            {part.kind === "microsd" && (
+              <rect x={part.x - 6} y={part.y + 1.5} width={6} height={part.h - 3} fill="#5c6572" />
+            )}
             <rect
               x={part.x}
               y={part.y}
               width={part.w}
               height={part.h}
               rx={part.kind === "soc" ? 0.3 : 0.4}
-              fill={part.kind === "soc" ? "url(#pz-epoxy)" : "url(#pz-steel)"}
+              fill={part.kind === "soc" ? "url(#pz-epoxy)" : part.kind === "csi" ? "#ece6d6" : "url(#pz-steel)"}
             />
             {layers.silk && px >= 6 && (
               <text x={part.x + part.w / 2} y={part.y + part.h / 2} textAnchor="middle" className="silk-label">
-                {part.kind === "soc" ? "BCM2835" : part.kind === "mini-hdmi" ? "HDMI" : part.kind === "usb-otg" ? "USB" : part.kind === "usb-pwr" ? "PWR" : ""}
+                {part.kind === "soc" ? "BCM2835" : part.kind === "mini-hdmi" ? "HDMI" : part.kind === "usb-otg" ? "USB" : part.kind === "usb-pwr" ? "PWR" : part.kind === "microsd" ? "SD" : part.kind === "csi" ? "CSI" : ""}
               </text>
             )}
           </g>
@@ -271,7 +274,7 @@ export function Minimap({ board, view }) {
   return (
     <svg className="minimap" viewBox={`-4 -4 ${W + 8} ${H + 8}`}>
       <rect x="0" y="0" width={W} height={H} rx="3" />
-      {view && <rect className="pz-overlay" x={view.x} y={view.y} width={view.w} height={view.h} />}
+      {view && <rect className="pz-overlay" fill="none" x={view.x} y={view.y} width={view.w} height={view.h} />}
     </svg>
   );
 }
