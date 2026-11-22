@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { canMount } from "../../shared/bench.mjs";
 import { fitsBoard } from "../../shared/boards.mjs";
@@ -6,6 +6,8 @@ import { strings } from "./i18n.js";
 import { labCall } from "./lab.js";
 import { tx, useLab } from "./state.jsx";
 import { BoardMap, Minimap } from "./boardmap.jsx";
+
+const Board3D = lazy(() => import("./board3d.jsx"));
 
 const LAYERS = [
   ["components", "layerComponents", "var(--ov-gpio)"],
@@ -159,10 +161,20 @@ export function Explorer() {
           </p>
         )}
         {is3d ? (
-          <div className="map-wrap board-3d-stage">
-            {viewToggle}
-            <p className="estimate-note">{t.heightsNote}</p>
-          </div>
+          <Suspense fallback={<div className="map-wrap board-3d-stage"><p className="estimate-note">{t.loading}</p></div>}>
+            <Board3D
+              board={board}
+              pinout={lab.catalog.pinout}
+              header={lab.bench.header}
+              mounts={lab.bench.mounts}
+              parts={lab.catalog.parts}
+              selected={lab.selection}
+              onSelect={lab.setSelection}
+              labels={t}
+              viewToggle={viewToggle}
+              onOpenLayers={() => setSheet(true)}
+            />
+          </Suspense>
         ) : (
           <BoardMap
             board={board}
