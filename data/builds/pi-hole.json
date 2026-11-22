@@ -5,17 +5,17 @@
     "es": "Pi-hole"
   },
   "summary": {
-    "en": "A DNS sinkhole for the whole network. The project is real. This file does not claim the current installer still supports ARMv6.",
-    "es": "Un sumidero DNS para toda la red. El proyecto es real. Este archivo no afirma que el instalador actual siga soportando ARMv6."
+    "en": "A DNS sinkhole for the whole network. The docs list an armv6 pihole-FTL build and a 512 MB minimum.",
+    "zh-CN": "整网的 DNS 黑洞。文档列出了 armv6 的 pihole-FTL 构建，最低内存 512 MB。"
   },
   "difficulty": {
     "en": "Low, if the installer still runs",
     "es": "Baja, si el instalador a\u00fan corre"
   },
-  "zero_w": "unverified",
+  "zero_w": "works",
   "zero_w_note": {
-    "en": "Pi-hole's site and docs answered on 2026-11-22. A line that promises Zero W support was not stored.",
-    "es": "El sitio y la documentaci\u00f3n de Pi-hole respondieron el 2026-11-22. No se guard\u00f3 una frase que prometa soporte del Zero W."
+    "en": "The docs list an armv6 pihole-FTL build and a 512 MB minimum. https://docs.pi-hole.net/main/prerequisites/",
+    "zh-CN": "文档列出了 armv6 的 pihole-FTL 构建，最低内存 512 MB。https://docs.pi-hole.net/main/prerequisites/"
   },
   "source": "pi-hole",
   "also": [
