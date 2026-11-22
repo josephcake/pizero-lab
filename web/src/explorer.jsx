@@ -314,7 +314,7 @@ function UndersideInspector({ board, lang }) {
           const src = row.src?.[0];
           return (
             <li key={row.id}>
-              <b>{row.id}</b>
+              <b>{row.name}</b>
               <span>{row.net}</span>
               {src && <a href={src.url}>{src.doc || src.section}</a>}
             </li>
@@ -327,11 +327,11 @@ function UndersideInspector({ board, lang }) {
         {textOf(lang, t.undersideJ5, doc.footprint?.text)}{" "}
         <span className="est">{t.derived}</span>
       </p>
-      <ol className="pin-nets">
+      <ul className="pin-nets">
         {(doc.footprint?.pins || []).map((pin) => (
-          <li key={pin.pin}><b>{pin.pin}</b> {pin.net}</li>
+          <li key={pin.pin}>{pin.pin} {pin.net}</li>
         ))}
-      </ol>
+      </ul>
       <SourceList sources={doc.footprint?.src} />
       <p className="overline">{t.undersidePrint}</p>
       <ul className="print-list">
