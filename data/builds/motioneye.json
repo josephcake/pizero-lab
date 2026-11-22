@@ -5,17 +5,17 @@
     "es": "C\u00e1mara motionEye"
   },
   "summary": {
-    "en": "motionEye is a web front end for the motion daemon. The repository is real. Whether the current release is happy on 512 MB and ARMv6 was not established here.",
-    "es": "motionEye es un frontal web para el demonio motion. El repositorio es real. Si la versi\u00f3n actual va bien con 512 MB y ARMv6 no se comprob\u00f3 aqu\u00ed."
+    "en": "motionEye is a web front end for the motion daemon. ARMv6 and ARMv7 32-bit are install targets and need extra build dependencies. Heavy on one core is an opinion.",
+    "zh-CN": "motionEye 是 motion 守护进程的网页前端。ARMv6 和 ARMv7 32 位可以安装，但需要额外的编译依赖。说它吃满一个核是看法，不是规格。"
   },
   "difficulty": {
     "en": "Medium",
     "es": "Media"
   },
-  "zero_w": "unverified",
+  "zero_w": "caveat",
   "zero_w_note": {
-    "en": "The README describes motionEye as a front end for motion. It does not, in the excerpt read here, certify the Zero W.",
-    "es": "El README describe motionEye como frontal de motion. En el extracto le\u00eddo aqu\u00ed no certifica el Zero W."
+    "en": "The README lists ARMv6/ARMv7 32-bit as an install target that needs extra build deps (python3-dev, gcc, libjpeg, libcurl, libssl, libffi). https://github.com/motioneye-project/motioneye . Heavy on one core [Opinion].",
+    "zh-CN": "README 把 ARMv6/ARMv7 32 位列为安装目标，需要额外的编译依赖（python3-dev、gcc、libjpeg、libcurl、libssl、libffi）。https://github.com/motioneye-project/motioneye 。吃满一个核 [看法]。"
   },
   "source": "motioneye",
   "also": [
