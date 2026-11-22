@@ -131,9 +131,16 @@ function button(body) {
   const code = String(body.code || "");
   if (!/Button\s*\(/.test(code)) return { ok: false, error: "no Button() call found" };
   const kwargs = {};
-  const bounce = code.match(/bounce_time\s*=\s*([0-9.]+)/);
+  const bounce = code.match(/bounce_time\s*=\s*([+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?)/);
   const pull = code.match(/pull_up\s*=\s*(True|False)/);
-  if (bounce) kwargs.bounce_time = Number(bounce[1]);
+  if (bounce) {
+    const seconds = Number(bounce[1]);
+    const ms = Math.round(seconds * 1000);
+    const clamped = Math.max(0, Math.min(80, ms));
+    kwargs.bounce_time = clamped / 1000;
+    kwargs.bounce_ms = clamped;
+    kwargs.bounce_clamped = clamped !== ms;
+  }
   if (pull) kwargs.pull_up = pull[1] === "True";
   return { ok: true, kwargs, source: "gpiozero-button" };
 }

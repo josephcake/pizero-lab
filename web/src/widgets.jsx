@@ -223,11 +223,15 @@ function GpioWidget() {
     }
     const kw = parsed.kwargs || {};
     if (typeof kw.pull_up === "boolean") setPull(kw.pull_up ? "up" : "down");
-    if (typeof kw.bounce_time === "number") setDebounce(Math.round(kw.bounce_time * 1000));
-    setNote(lang === "zh-CN" ? "已读出调用。gpiozero 的 bounce_time 填进模型的 debounce。" : "Call read. gpiozero bounce_time feeds the model debounce.");
+    const shown = typeof kw.bounce_ms === "number" ? kw.bounce_ms : debounce;
+    if (typeof kw.bounce_ms === "number") setDebounce(shown);
+    const clampNote = kw.bounce_clamped
+      ? (lang === "zh-CN" ? `已按模型上限记为 ${shown} ms。` : `Clamped to ${shown} ms.`)
+      : "";
+    setNote(`${lang === "zh-CN" ? "已读出调用。gpiozero 的 bounce_time 填进模型的 debounce。" : "Call read. gpiozero bounce_time feeds the model debounce."} ${clampNote}`.trim());
     await run({
       pull: kw.pull_up === false ? "down" : "up",
-      debounce_ms: typeof kw.bounce_time === "number" ? Math.round(kw.bounce_time * 1000) : debounce,
+      debounce_ms: shown,
     });
   }
 
