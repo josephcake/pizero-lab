@@ -105,18 +105,21 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
   const showPads = px >= 4;
   const showNumbers = px >= 10 && layers.pins;
   const authoredY = (svgY) => H - svgY;
-  let focusChip = null;
-  if (kbd && view && svgRef.current) {
-    const pin = board.header.pins.find((row) => row.physical === focusPin);
+  function chipAt(pin) {
+    if (!view || !svgRef.current || !pin) return null;
     const rect = svgRef.current.getBoundingClientRect();
     const host = svgRef.current.parentElement.getBoundingClientRect();
-    if (pin && rect.width) {
-      focusChip = {
-        left: rect.left - host.left + ((pin.x - view.x) / view.w) * rect.width,
-        top: rect.top - host.top + ((pin.y - view.y) / view.h) * rect.height,
-      };
-    }
+    if (!rect.width) return null;
+    return {
+      left: rect.left - host.left + ((pin.x - view.x) / view.w) * rect.width,
+      top: rect.top - host.top + ((pin.y - view.y) / view.h) * rect.height,
+    };
   }
+  const focusChip = kbd ? chipAt(board.header.pins.find((row) => row.physical === focusPin)) : null;
+  const selectedPad = selected?.kind === "pin" ? board.header.pins.find((row) => row.physical === selected.physical) : null;
+  const selectedRecord = selectedPad ? pinout?.pins?.find((row) => row.physical === selectedPad.physical) : null;
+  const calloutAt = chipAt(selectedPad);
+  const calloutAlt = selectedRecord ? Object.values(selectedRecord.alt_matrix || {})[0] : "";
 
   return (
     <div className="map-wrap">
@@ -127,7 +130,7 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
         tabIndex={0}
         role="application"
         aria-label={t.boardKeys}
-        data-zoom={px < 6 ? "far" : "near"}
+        data-zoom={px < 6 ? "far" : px > 16 ? "close" : "near"}
         viewBox={view ? `${view.x} ${view.y} ${view.w} ${view.h}` : `0 0 ${W} ${H}`}
         onFocus={() => setKbd(true)}
         onBlur={() => setKbd(false)}
@@ -245,7 +248,7 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
             />
             {layers.silk && px >= 6 && (
               <text x={part.x + part.w / 2} y={part.y + part.h / 2} textAnchor="middle" className="silk-label">
-                {part.kind === "soc" ? "BCM2835" : part.kind === "mini-hdmi" ? "HDMI" : part.kind === "usb-otg" ? "USB" : part.kind === "usb-pwr" ? "PWR" : part.kind === "microsd" ? "SD" : part.kind === "csi" ? "CSI" : ""}
+                {part.kind === "soc" ? "BCM2835" : part.kind === "mini-hdmi" ? "mini-HDMI" : part.kind === "usb-otg" ? "USB OTG" : part.kind === "usb-pwr" ? "USB PWR" : part.kind === "microsd" ? "SD" : part.kind === "csi" ? "CSI" : ""}
               </text>
             )}
           </g>
@@ -298,7 +301,7 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
         })}
         {selected?.kind === "pin" && board.header.pins.filter((pin) => pin.physical === selected.physical).map((pin) => (
           <g key="sel" className="pz-overlay">
-            <circle cx={pin.x} cy={pin.y} r={board.header.padD / 2 + 0.12} stroke="var(--ov-select)" />
+            <circle className="pin-select" cx={pin.x} cy={pin.y} r={board.header.padD / 2 + 0.12} stroke="var(--ov-select)" />
           </g>
         ))}
         {kbd && board.header.pins.filter((pin) => pin.physical === focusPin).map((pin) => (
@@ -306,11 +309,28 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
             <circle cx={pin.x} cy={pin.y} r={board.header.padD / 2 + 0.28} stroke="var(--focus)" />
           </g>
         ))}
-        {showNumbers && board.header.pins.map((pin) => (
+        {layers.measurements && (
+          <g className="pz-overlay dims">
+            <line x1="0" y1={H + 1.4} x2={W} y2={H + 1.4} />
+            <line x1={W + 1.4} y1="0" x2={W + 1.4} y2={H} />
+          </g>
+        )}
+        {showNumbers && board.header.pins.filter((pin) => {
+          const focus = selected?.kind === "pin" ? selected.physical : (kbd ? focusPin : 0);
+          return focus && Math.abs(pin.physical - focus) <= 2;
+        }).map((pin) => (
           <text key={`n-${pin.physical}`} x={pin.x} y={pin.y - 1.15} textAnchor="middle" className="pin-num">{pin.physical}</text>
         ))}
       </svg>
-      {focusChip && <span className="focus-chip" style={{ left: focusChip.left, top: focusChip.top }}>{t.focused}</span>}
+      {focusChip && <span className="focus-chip" style={{ left: focusChip.left, top: focusChip.top }}>{board.header.pins.find((row) => row.physical === focusPin)?.name}</span>}
+      {calloutAt && selectedPad && (
+        <span className="callout" style={{ left: calloutAt.left, top: calloutAt.top }}>
+          {`Pin ${selectedPad.physical} · ${selectedPad.name}${calloutAlt ? ` · ${calloutAlt}` : ""}`}
+        </span>
+      )}
+      {layers.measurements && view && (
+        <span className="callout dim" style={{ left: "50%", top: "auto", bottom: 36 }}>{`${W.toFixed(2)} mm`}</span>
+      )}
       <div className="map-tools">
         {onOpenLayers && <button type="button" className="layers-toggle" onClick={onOpenLayers}>{t.layers}</button>}
         <button type="button" className={mode === "explore" ? "on" : ""} onClick={() => onMode?.("explore")}>{t.explore}</button>
