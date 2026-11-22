@@ -18,7 +18,7 @@ function nextE12(ohms) {
 export function labCall(tool, body, catalog) {
   if (tool === "resistor") return resistor(body);
   if (tool === "conflicts") return pinConflicts(body, catalog);
-  if (tool === "power") return power(body);
+  if (tool === "power") return power(body, catalog);
   if (tool === "recommend") return recommend(body, catalog);
   if (tool === "gpio") return gpio(body);
   if (tool === "button") return button(body);
@@ -64,7 +64,7 @@ function resistor(body) {
   return { ok: true, ohms: Math.round(ohms * 100) / 100, e12_ohms: e12, e12_ma: Math.round(e12Ma * 100) / 100, warnings, sag, per_led, formula: "(Vgpio - Vf) / I" };
 }
 
-function power(body) {
+function power(body, catalog) {
   const base = limits.zero_w_typical_active_ma.value;
   let total = base;
   const rows = [{ id: "board", ma: base, note: limits.zero_w_typical_active_ma.note }];
@@ -80,8 +80,20 @@ function power(body) {
   if (usb) { total += usb; rows.push({ id: "usb", ma: usb, note: "Typed by the user." }); }
   const hat = hatParsed;
   if (hat) { total += hat; rows.push({ id: "hat", ma: hat, note: "User-entered." }); }
+  let excludes = false;
+  for (const id of body.mounted || []) {
+    const part = (catalog?.parts || []).find((item) => item.id === id);
+    if (!part?.requires_header) continue;
+    if (typeof part.power_ma === "number") {
+      total += part.power_ma;
+      rows.push({ id, ma: part.power_ma, note: part.name?.en || id });
+    } else {
+      excludes = true;
+      rows.push({ id, unsourced: true, note: part.name?.en || id });
+    }
+  }
   const psu = limits.zero_w_psu_a.value * 1000;
-  return { rows, total_ma: total, psu_ma: psu, supply_v: limits.supply_v.value, headroom_ma: psu - total, over: total > psu, undervoltage_detect: limits.zero_has_undervoltage_detect.value };
+  return { rows, total_ma: total, psu_ma: psu, supply_v: limits.supply_v.value, headroom_ma: psu - total, over: total > psu, undervoltage_detect: limits.zero_has_undervoltage_detect.value, excludes };
 }
 
 function recommend(body, catalog) {

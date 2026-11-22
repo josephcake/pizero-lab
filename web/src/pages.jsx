@@ -414,7 +414,7 @@ export function PinPage() {
 }
 
 export function InstrumentsPage() {
-  const { catalog, lang } = useLab();
+  const { catalog, lang, bench } = useLab();
   const t = strings(lang);
   const [power, setPower] = useState(null);
   const [hdmi, setHdmi] = useState(false);
@@ -428,7 +428,8 @@ export function InstrumentsPage() {
 
   async function runPower(event) {
     event.preventDefault();
-    const next = labCall("power", { hdmi, camera, usb_ma: usb, hat_ma: hat, board: catalog.board.id }, catalog);
+    const mounted = (bench?.mounts || []).map((mount) => mount.partId);
+    const next = labCall("power", { hdmi, camera, usb_ma: usb, hat_ma: hat, mounted, board: catalog.board.id }, catalog);
     if (next?.ok === false) {
       setPower(null);
       setPowerFields(next.fields || {});
@@ -462,7 +463,8 @@ export function InstrumentsPage() {
           <div>
             <p>{power.total_ma} mA / {power.psu_ma} mA · {power.supply_v} V</p>
             <p>{power.over ? t.overSupply : `${power.headroom_ma} ${t.headroom}`}</p>
-            <ul>{power.rows.map((row) => <li key={row.id}>{row.id}: {row.ma} mA — {row.note}</li>)}</ul>
+            <ul>{power.rows.map((row) => <li key={row.id}>{row.unsourced ? `${row.note}: ${t.currentUnsourced}` : `${row.note || row.id}: ${row.ma} mA`}</li>)}</ul>
+            {power.excludes && <p className="note">{t.totalExcludes}</p>}
             {!power.undervoltage_detect && <p className="note">{t.noUv}</p>}
           </div>
         )}
