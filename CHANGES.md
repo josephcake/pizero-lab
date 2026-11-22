@@ -32,3 +32,23 @@ Checked live after run 6. Three contrast and layout fixes. `data/*.flux.json` is
 | Active toolbar text | `ac4feca` | Explore uses the signal fill and the on-signal ink in both themes, on the explorer and the lesson bench. Contrast is 9.96:1 in the dark theme and 5.85:1 in the light theme. |
 | Minimap | `1463a53` | The box draws the board outline, the parts, and the viewport rectangle. |
 | Board picker | `2901f0b` | The closed label is Zero W, so the select no longer cuts the name. |
+
+## Run 8
+
+A low-poly 3D view on the Board page. `data/boards/zero-w.flux.json` and `data/pinout.flux.json` were not edited. Heights are estimates in `data/boards/zero-w.3d.json`.
+
+Bundle sizes from the production build: main `index-B7UlxkJ6.js` 175.54 KB gzip, 3D chunk `board3d-BBi2BH4M.js` 134.13 KB gzip.
+
+| Step | Commit | What changed |
+| --- | --- | --- |
+| Heights file | `3c78993` | Every z value is `{value_mm, status: "estimate", source: "pending Flux"}`. |
+| 2D/3D toggle | `0d2fc61` | 2D stays the default. 3D is `#/?view=3d`, with the same segmented control as the toolbar. EN and zh-CN strings included. |
+| Lazy three.js view | `bc5331e` | Separate chunk: three core plus OrbitControls only. Rounded PCB, four mounting holes, header holes, and low-poly parts from the flux footprints. |
+| Header states | `bc5331e` | Bare is plated holes. Soldered adds a black body and long pins. Hammered is shorter pins and no body. |
+| Orbit | `bc5331e` | Drag orbits, wheel or pinch zooms, right-drag or two-finger drag pans. Reset, Top, Front, and Side. Zoom is clamped. |
+| Picking | `bc5331e` | A click or tap on a pin raycasts into the existing selection. A move past 4 px is not a click. Hover and selection highlight the pin. |
+| Mounted pHAT | `bc5331e` | A mounted part with dimensions is a thin board at the estimate standoff. |
+| Theme and idle | `bc5331e` | Both themes colour the bench. Flat shading, pixel ratio capped at 2, render only when something changes, dispose on unmount. |
+| Keyboard | `bc5331e` | The canvas has an aria-label. Pins can be chosen from the pin list or by switching back to 2D. The inspector does not show the estimate heights. The view says “Heights are estimates.” |
+
+Steps 3–10 share `bc5331e` because they are one viewer module. Shipping them separately would have left a blank canvas on main. |
