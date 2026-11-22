@@ -1,11 +1,15 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   AmbientLight,
+  Box3,
   BoxGeometry,
   Color,
   CylinderGeometry,
   DirectionalLight,
+  EdgesGeometry,
   ExtrudeGeometry,
+  LineBasicMaterial,
+  LineSegments,
   Mesh,
   MeshLambertMaterial,
   MOUSE,
@@ -16,6 +20,7 @@ import {
   Shape,
   TOUCH,
   Vector2,
+  Vector3,
   WebGLRenderer,
 } from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
@@ -65,9 +70,12 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
   const selectedRef = useRef(selected);
   const onSelectRef = useRef(onSelect);
   const propsRef = useRef({});
+  const labelsRef = useRef(labels);
+  const [chip, setChip] = useState("");
   selectedRef.current = selected;
   onSelectRef.current = onSelect;
   propsRef.current = { board, header, mounts, parts };
+  labelsRef.current = labels;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -75,6 +83,9 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
     let contentGeoms = [];
     let contentMats = [];
     const pickables = [];
+    const tagged = [];
+    const viewDir = new Vector3(0.62, -0.78, 0.55);
+    const viewUp = new Vector3(0, 0, 1);
     const thickness = mm(heights.pcb_thickness_mm);
     let hoverPhysical = null;
     const signal = new Color(token("--signal", "#62c6ff"));
@@ -119,8 +130,9 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
     }
 
     function clearContent() {
-      for (const mesh of [...pickables]) scene.remove(mesh);
+      for (const mesh of [...pickables, ...tagged]) scene.remove(mesh);
       pickables.length = 0;
+      tagged.length = 0;
       scene.children.filter((child) => child.userData.built).forEach((child) => scene.remove(child));
       for (const geometry of contentGeoms) geometry.dispose();
       for (const material of contentMats) material.dispose();
@@ -141,7 +153,24 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
       const headerMat = mat(0x17181c);
       const pinMat = mat(0xe2bf55);
       const hatMat = mat(0x143526);
+      const edgeMat = new LineBasicMaterial({ color: 0x9aa5b4 });
+      contentMats.push(edgeMat);
       const partMat = { soc: socMat, "mini-hdmi": steelMat, "usb-otg": steelMat, "usb-pwr": steelMat, microsd: sdMat, csi: csiMat };
+      const estimated = new Set(["soc", "microsd", "mini-hdmi", "usb-otg", "usb-pwr"]);
+      function outline(mesh) {
+        const edges = new EdgesGeometry(mesh.geometry, 20);
+        const line = new LineSegments(edges, edgeMat);
+        line.position.copy(mesh.position);
+        line.rotation.copy(mesh.rotation);
+        line.userData.built = true;
+        contentGeoms.push(edges);
+        scene.add(line);
+      }
+      function tag(mesh, badge) {
+        mesh.userData.badge = badge;
+        tagged.push(mesh);
+        if (badge === "est") outline(mesh);
+      }
       const shape = roundedBoard(W, H, liveBoard.outline.corner_radius_mm.value || 3);
     for (const hole of liveBoard.holes || []) {
       const fy = H - hole.y;
@@ -156,28 +185,39 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
     const pcbGeom = new ExtrudeGeometry(shape, { depth: thickness, bevelEnabled: false, curveSegments: 4 });
     const pcb = track(pcbGeom, pcbMat);
     pcb.userData.built = true;
+    tag(pcb, "est");
     scene.add(pcb);
 
     for (const part of liveBoard.draw || []) {
+      const record = heights.parts[part.kind];
+      const height = record?.value_mm || 1;
       const flux = partFlux(part, H);
-      const height = heights.parts[part.kind]?.value_mm || 1;
       const center = toBoard(flux.x + flux.w / 2, flux.y + flux.h / 2, W, H);
       const mesh = track(new BoxGeometry(flux.w, flux.h, height), partMat[part.kind] || steelMat);
       mesh.position.set(center.x, center.y, thickness + height / 2);
       mesh.userData.built = true;
+      if (estimated.has(part.kind)) tag(mesh, "est");
       scene.add(mesh);
     }
 
-    const pinLen = liveHeader === "hammer" ? mm(heights.hammer_pin_length_mm) : mm(heights.header_pin_length_mm);
     const pinRadius = liveHeader === "hammer" ? 0.22 : 0.32;
+    let pinLen = 0;
+    let pinCenter = thickness;
     if (liveHeader === "solder") {
       const body = partFlux(liveBoard.header, H);
       const center = toBoard(body.x + body.w / 2, body.y + body.h / 2, W, H);
-      const bodyH = mm(heights.header_body_mm);
+      const bodyH = heights.header_body_mm.value_mm;
+      const above = heights.header_pin_above_body_mm.value_mm;
+      const below = heights.header_pin_below_board_mm.value_mm;
       const shroud = track(new BoxGeometry(body.w, body.h, bodyH), headerMat);
       shroud.position.set(center.x, center.y, thickness + bodyH / 2);
       shroud.userData.built = true;
       scene.add(shroud);
+      pinLen = above + bodyH + below;
+      pinCenter = thickness - below + pinLen / 2;
+    } else if (liveHeader === "hammer") {
+      pinLen = heights.hammer_header_mm.value_mm;
+      pinCenter = thickness + pinLen / 2;
     }
     if (liveHeader === "bare") {
       const padGeom = new CylinderGeometry(0.55, 0.55, 0.16, 8);
@@ -203,7 +243,7 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
         const material = pinMat.clone();
         contentMats.push(material);
         const mesh = new Mesh(pinGeom, material);
-        mesh.position.set(p.x, p.y, thickness + pinLen / 2);
+        mesh.position.set(p.x, p.y, pinCenter);
         mesh.userData.physical = pin.physical;
         mesh.userData.built = true;
         pickables.push(mesh);
@@ -211,8 +251,8 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
       }
     }
 
-    const standoff = mm(heights.phat_standoff_mm);
-    const hatT = mm(heights.phat_thickness_mm);
+    const standoff = heights.phat_gap_mm.value_mm;
+    const hatT = heights.phat_thickness_mm.value_mm;
     for (const mount of liveMounts || []) {
       const part = liveParts.find((item) => item.id === mount.partId);
       if (!part?.dims) continue;
@@ -223,9 +263,11 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
       const mesh = track(new BoxGeometry(w, h, hatT), hatMat);
       mesh.position.set(center.x, center.y, thickness + standoff + hatT / 2);
       mesh.userData.built = true;
+      tag(mesh, "gap");
       scene.add(mesh);
     }
       paint();
+      api.current.refit?.();
     }
 
     function paint() {
@@ -248,7 +290,7 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
       );
       const raycaster = new Raycaster();
       raycaster.setFromCamera(ndc, camera);
-      return raycaster.intersectObjects(pickables, false)[0] || null;
+      return raycaster.intersectObjects([...pickables, ...tagged], false)[0] || null;
     }
 
     let start = null;
@@ -262,37 +304,81 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
       start = null;
       if (moved > 4) return;
       const hit = pick(event);
-      if (hit) onSelectRef.current({ kind: "pin", physical: hit.object.userData.physical });
+      if (hit?.object.userData.physical) onSelectRef.current({ kind: "pin", physical: hit.object.userData.physical });
+      showBadge(hit?.object);
     };
     const onMove = (event) => {
       if (event.buttons) return;
       const hit = pick(event);
-      const next = hit ? hit.object.userData.physical : null;
-      if (next === hoverPhysical) return;
-      hoverPhysical = next;
-      canvas.style.cursor = next ? "pointer" : "grab";
-      paint();
+      const next = hit?.object.userData.physical ?? null;
+      if (next !== hoverPhysical) {
+        hoverPhysical = next;
+        canvas.style.cursor = next ? "pointer" : "grab";
+        paint();
+      }
+      showBadge(hit?.object);
     };
+    function showBadge(object) {
+      const kind = object?.userData.badge;
+      const text = kind === "gap" ? labelsRef.current.gapBadge : kind === "est" ? labelsRef.current.estHeight : "";
+      setChip(text);
+    }
     canvas.addEventListener("pointerdown", onDown);
     canvas.addEventListener("pointerup", onUp);
     canvas.addEventListener("pointermove", onMove);
 
-    function frameCamera(x, y, z) {
-      camera.position.set(x, y, z);
-      controls.target.set(0, 0, thickness / 2);
+    function fit(dir, up) {
+      viewDir.copy(dir).normalize();
+      viewUp.copy(up);
+      const box = new Box3();
+      let any = false;
+      scene.traverse((obj) => {
+        if (obj.isMesh && obj.userData.built) {
+          box.expandByObject(obj);
+          any = true;
+        }
+      });
+      if (!any || !camera.aspect) return;
+      const center = box.getCenter(new Vector3());
+      const size = box.getSize(new Vector3());
+      const z = viewDir.clone();
+      const xAxis = new Vector3().crossVectors(viewUp, z);
+      if (xAxis.lengthSq() < 1e-8) xAxis.set(1, 0, 0);
+      xAxis.normalize();
+      const yAxis = new Vector3().crossVectors(z, xAxis).normalize();
+      const vFov = (camera.fov * Math.PI) / 180;
+      const hFov = 2 * Math.atan(Math.tan(vFov / 2) * camera.aspect);
+      const tanV = Math.tan(vFov / 2) * 0.92;
+      const tanH = Math.tan(hFov / 2) * 0.92;
+      let dist = 8;
+      for (const sx of [0, 1]) {
+        for (const sy of [0, 1]) {
+          for (const sz of [0, 1]) {
+            const rel = new Vector3(box.min.x + size.x * sx, box.min.y + size.y * sy, box.min.z + size.z * sz).sub(center);
+            const cx = rel.dot(xAxis);
+            const cy = rel.dot(yAxis);
+            const cz = rel.dot(z);
+            dist = Math.max(dist, cz + Math.abs(cx) / tanH, cz + Math.abs(cy) / tanV);
+          }
+        }
+      }
+      camera.position.copy(center).addScaledVector(z, dist);
+      controls.target.copy(center);
+      controls.maxDistance = Math.max(dist * 4, 80);
       controls.update();
       requestRender();
     }
+    const upZ = new Vector3(0, 0, 1);
     api.current = {
-      reset: () => frameCamera(52, -40, 46),
-      top: () => frameCamera(0, 0.01, 150),
-      front: () => frameCamera(0, -100, 36),
-      side: () => frameCamera(120, 0, 36),
+      reset: () => fit(new Vector3(0.62, -0.78, 0.55), upZ),
+      top: () => fit(new Vector3(0, 0.001, 1), new Vector3(0, 1, 0)),
+      front: () => fit(new Vector3(0, -1, 0.22), upZ),
+      side: () => fit(new Vector3(1, 0, 0.22), upZ),
       paint,
       rebuild,
+      refit: () => fit(viewDir, viewUp),
     };
     rebuild();
-    frameCamera(52, -40, 46);
 
     function resize() {
       const width = canvas.clientWidth;
@@ -302,7 +388,7 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
       renderer.setSize(width, height, false);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
-      requestRender();
+      api.current.refit?.();
     }
     const observer = new ResizeObserver(resize);
     observer.observe(canvas.parentElement || canvas);
@@ -371,7 +457,8 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
           ))}
         </select>
       </label>
-      <p className="estimate-note">{labels.heightsNote}</p>
+      {chip && <p className="height-badge">{chip}</p>}
+      <p className="estimate-note">{labels.heightLegend}</p>
     </div>
   );
 }
