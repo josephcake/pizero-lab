@@ -324,7 +324,7 @@ export function BuildPage() {
     lab.setStep({ kind: "build", buildId: id, stepIndex: index });
   }, [id, index]);
 
-  if (!build) return null;
+  if (!build) return <NotFound />;
   const played = replaySteps(build, index, lab.catalog);
   const frame = played.frames[index];
   const source = lab.catalog.sources[build.source];
@@ -385,7 +385,7 @@ export function PartPage() {
   const { catalog, lang, setSelection } = useLab();
   const part = catalog.parts.find((p) => p.id === id);
   useEffect(() => { if (part) setSelection({ kind: "part", id: part.id }); }, [id]);
-  if (!part) return null;
+  if (!part) return <NotFound />;
   const source = catalog.sources[part.source];
   return (
     <article className="page record">
@@ -405,8 +405,11 @@ export function PartPage() {
 export function PinPage() {
   const { physical } = useParams();
   const lab = useLab();
-  useEffect(() => { lab.setSelection({ kind: "pin", physical: Number(physical) }); }, [physical]);
-  return <div className="page"><PinFacts physical={physical} /></div>;
+  const pinNumber = Number(physical);
+  const pin = lab.catalog?.pinout?.pins?.find((row) => row.physical === pinNumber);
+  useEffect(() => { if (pin) lab.setSelection({ kind: "pin", physical: pinNumber }); }, [physical]);
+  if (!Number.isInteger(pinNumber) || !pin) return <NotFound />;
+  return <div className="page"><PinFacts physical={pinNumber} /></div>;
 }
 
 export function InstrumentsPage() {
