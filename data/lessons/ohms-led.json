@@ -17,14 +17,15 @@
   },
   "summary": {
     "en": "A GPIO high is 3.3 V and the pin is only good for a small current. Size the resistor from that, not from a 5 V habit.",
-    "es": "Un GPIO en alto son 3,3 V y el pin solo da una corriente peque\u00f1a. La resistencia sale de ah\u00ed, no de la costumbre de los 5 V."
+    "es": "Un GPIO en alto son 3,3 V y el pin solo da una corriente pequeña. La resistencia sale de ahí, no de la costumbre de los 5 V."
   },
   "sections": [
     {
       "kind": "md",
       "text": {
-        "en": "The GPIO documentation is blunt about two limits. A high output is 3.3 V, and one pin can supply up to 16 mA. All GPIO pins together stop at 50 mA. The same page tells you to put a current-limiting resistor on an LED.\n\nOhm's law, which is not a Raspberry Pi invention, is V = I R. The voltage left for the resistor is the GPIO high minus the LED's forward voltage. The current is the current you choose, and it has to stay inside the 16 mA pin budget.\n\nR = (Vgpio \u2212 Vf) / I\n\nVf is a property of your LED. This lesson does not invent one. Type the value from the LED's own datasheet. If you do not have it, do not guess a \u201ctypical red\u201d and call it a fact.\n\nThe same GPIO page also prints a DC table where, at the maximum 16 mA drive strength, IOL is at least 18 mA when the pin is at 0.4 V, and IOH is at least 17 mA when the pin is at 2.3 V. That table is a voltage-at-a-test-current specification. The 16 mA sentence is the supply guidance this calculator enforces.",
-        "es": "La documentaci\u00f3n GPIO es clara en dos l\u00edmites. Una salida en alto son 3,3 V, y un pin puede dar hasta 16 mA. Todos los GPIO juntos se quedan en 50 mA. La misma p\u00e1gina pide una resistencia limitadora en un LED.\n\nLa ley de Ohm, que no es un invento de Raspberry Pi, es V = I R. La tensi\u00f3n que cae en la resistencia es el alto del GPIO menos la tensi\u00f3n directa del LED. La corriente es la que elijas, y tiene que caber en el presupuesto de 16 mA del pin.\n\nR = (Vgpio \u2212 Vf) / I\n\nVf es del LED que tengas. Esta lecci\u00f3n no inventa una. Escribe el valor de su hoja de datos. Si no la tienes, no adivines un \u00abrojo t\u00edpico\u00bb y lo llames un hecho.\n\nLa misma p\u00e1gina imprime una tabla de continua donde, con la fuerza de 16 mA al m\u00e1ximo, IOL es de al menos 18 mA con el pin a 0,4 V, e IOH de al menos 17 mA con el pin a 2,3 V. Esa tabla es una especificaci\u00f3n de tensi\u00f3n a una corriente de prueba. La frase de 16 mA es el l\u00edmite de suministro que aplica esta calculadora."
+        "en": "The GPIO documentation is blunt about two limits. A high output is 3.3 V, and one pin can supply up to 16 mA. All GPIO pins together stop at 50 mA. The same page tells you to put a current-limiting resistor on an LED.\n\nOhm's law, which is not a Raspberry Pi invention, is V = I R. The voltage left for the resistor is the GPIO high minus the LED's forward voltage. A beginner target is 5–10 mA per LED.\n\nR = (Vgpio − Vf) / I\n\nThat number is ideal. After it, take the next standard E12 value up. 130 Ω becomes 150 Ω. Then recompute the current with that real resistor: I = (Vgpio − Vf) / R. Each LED gets its own resistor on its own pin. Do not share one resistor across several LEDs. The calculator checks N × I against the 50 mA total across all GPIO pins and warns when that sum is too high.\n\nA GPIO output sags below 3.3 V as current rises. The same page's IOH row is at least 17 mA only when the pin is already at 2.3 V, at the maximum 16 mA drive strength. The real current comes out a bit lower than the ideal calculation. Rounding the resistor up is the safe direction.\n\nVf is a property of your LED. This lesson does not invent one. Type the value from the LED's own datasheet.",
+        "es": "La documentación GPIO es clara en dos límites. Una salida en alto son 3,3 V, y un pin puede dar hasta 16 mA. Todos los GPIO juntos se quedan en 50 mA. La misma página pide una resistencia limitadora en un LED.\n\nLa ley de Ohm, que no es un invento de Raspberry Pi, es V = I R. La tensión que cae en la resistencia es el alto del GPIO menos la tensión directa del LED. La corriente es la que elijas, y tiene que caber en el presupuesto de 16 mA del pin.\n\nR = (Vgpio − Vf) / I\n\nVf es del LED que tengas. Esta lección no inventa una. Escribe el valor de su hoja de datos. Si no la tienes, no adivines un «rojo típico» y lo llames un hecho.\n\nLa misma página imprime una tabla de continua donde, con la fuerza de 16 mA al máximo, IOL es de al menos 18 mA con el pin a 0,4 V, e IOH de al menos 17 mA con el pin a 2,3 V. Esa tabla es una especificación de tensión a una corriente de prueba. La frase de 16 mA es el límite de suministro que aplica esta calculadora.",
+        "zh-CN": "GPIO 文档有两条硬限制。高电平是 3.3 V，单脚最多约 16 mA。所有 GPIO 加起来停在 50 mA。同一页要求给 LED 串联限流电阻。\n\n欧姆定律不是树莓派发明的：V = I R。电阻上的电压是 GPIO 高电平减去 LED 正向压降。入门目标是每颗 LED 5–10 mA。\n\nR = (Vgpio − Vf) / I\n\n这是理想值。算完之后取上一档 E12 标准电阻。130 Ω 变成 150 Ω。再用这只真实电阻重算电流：I = (Vgpio − Vf) / R。每颗 LED 用自己的电阻、自己的脚。不要几颗共用一只电阻。计算器用 N × I 去对全部 GPIO 合计 50 mA，超出就警告。\n\n电流变大时，GPIO 高电平会低于 3.3 V。同一页的 IOH 一行是：在最大 16 mA 驱动下，脚电压已经到 2.3 V 时，输出电流至少 17 mA。真实电流会比理想计算略低。把电阻往标准值上取是安全方向。\n\nVf 属于你的 LED。本课不编造。请填它自己数据手册上的数。"
       }
     },
     {
@@ -41,7 +42,7 @@
       "id": "high",
       "prompt": {
         "en": "What voltage does the GPIO documentation assign to a high output?",
-        "es": "\u00bfQu\u00e9 tensi\u00f3n asigna la documentaci\u00f3n GPIO a una salida en alto?"
+        "es": "¿Qué tensión asigna la documentación GPIO a una salida en alto?"
       },
       "choices": [
         {
@@ -54,13 +55,13 @@
         },
         {
           "en": "1.6 V, the minimum input-high",
-          "es": "1,6 V, el m\u00ednimo de entrada en alto"
+          "es": "1,6 V, el mínimo de entrada en alto"
         }
       ],
       "answer": 1,
       "explain": {
         "en": "High outputs are 3.3 V. The 5V pins are power pins, not GPIO logic levels. 1.6 V is the minimum input that still counts as high on the BCM2835-family table.",
-        "es": "Las salidas en alto son 3,3 V. Los pines de 5 V son alimentaci\u00f3n, no niveles l\u00f3gicos. 1,6 V es el m\u00ednimo que a\u00fan cuenta como alto en la tabla de la familia BCM2835."
+        "es": "Las salidas en alto son 3,3 V. Los pines de 5 V son alimentación, no niveles lógicos. 1,6 V es el mínimo que aún cuenta como alto en la tabla de la familia BCM2835."
       },
       "source": "gpio-docs"
     },
@@ -68,7 +69,7 @@
       "id": "budget",
       "prompt": {
         "en": "Which current ceiling does the GPIO page state for a single pin, and for all GPIO pins together?",
-        "es": "\u00bfQu\u00e9 techo de corriente indica la p\u00e1gina GPIO para un pin, y para todos los GPIO juntos?"
+        "es": "¿Qué techo de corriente indica la página GPIO para un pin, y para todos los GPIO juntos?"
       },
       "choices": [
         {
@@ -81,13 +82,13 @@
         },
         {
           "en": "The page does not state a current limit",
-          "es": "La p\u00e1gina no indica un l\u00edmite de corriente"
+          "es": "La página no indica un límite de corriente"
         }
       ],
       "answer": 0,
       "explain": {
         "en": "The page says an individual GPIO can supply up to 16 mA, and all GPIO pins combined can supply 50 mA.",
-        "es": "La p\u00e1gina dice que un GPIO puede dar hasta 16 mA, y que todos juntos pueden dar 50 mA."
+        "es": "La página dice que un GPIO puede dar hasta 16 mA, y que todos juntos pueden dar 50 mA."
       },
       "source": "gpio-docs"
     },
@@ -95,26 +96,27 @@
       "id": "math",
       "prompt": {
         "en": "GPIO high is 3.3 V, the LED forward voltage is 2.0 V, and you want 10 mA. What resistance does V = I R give?",
-        "es": "El alto del GPIO es 3,3 V, la tensi\u00f3n directa del LED es 2,0 V y quieres 10 mA. \u00bfQu\u00e9 resistencia da V = I R?"
+        "es": "El alto del GPIO es 3,3 V, la tensión directa del LED es 2,0 V y quieres 10 mA. ¿Qué resistencia da V = I R?"
       },
       "choices": [
         {
-          "en": "130 \u03a9",
-          "es": "130 \u03a9"
+          "en": "130 Ω",
+          "es": "130 Ω"
         },
         {
-          "en": "330 \u03a9",
-          "es": "330 \u03a9"
+          "en": "330 Ω",
+          "es": "330 Ω"
         },
         {
-          "en": "20 \u03a9",
-          "es": "20 \u03a9"
+          "en": "20 Ω",
+          "es": "20 Ω"
         }
       ],
       "answer": 0,
       "explain": {
-        "en": "(3.3 \u2212 2.0) / 0.010 = 130 \u03a9. Pick a real resistor at or above that if you want the current to stay at or below 10 mA. 20 \u03a9 would be (3.3 \u2212 2.0) / 0.065, far past the pin budget.",
-        "es": "(3,3 \u2212 2,0) / 0,010 = 130 \u03a9. Elige una resistencia real igual o mayor si quieres que la corriente no pase de 10 mA. 20 \u03a9 ser\u00eda (3,3 \u2212 2,0) / 0,065, muy por encima del presupuesto del pin."
+        "en": "(3.3 − 2.0) / 0.010 = 130 Ω. That is the ideal value. The next E12 value up is 150 Ω, and the current at 150 Ω is about 8.7 mA, a bit under the 10 mA target. 20 Ω would be far past the pin budget.",
+        "es": "(3,3 − 2,0) / 0,010 = 130 Ω. Elige una resistencia real igual o mayor si quieres que la corriente no pase de 10 mA. 20 Ω sería (3,3 − 2,0) / 0,065, muy por encima del presupuesto del pin.",
+        "zh-CN": "(3.3 − 2.0) / 0.010 = 130 Ω。这是理想值。上一档 E12 是 150 Ω，150 Ω 时电流大约 8.7 mA，低于 10 mA 的目标。20 Ω 会远远超过单脚预算。"
       },
       "source": "ohms-law"
     }

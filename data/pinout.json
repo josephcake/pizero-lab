@@ -171,10 +171,16 @@
       "name": "GP17",
       "kind": "gpio",
       "typical_functions": [
-        "SPI chip enable CE1"
+        "ALT4 SPI1_CE1_N (SPI1 chip enable 1, active low). This is not SPI0."
       ],
-      "alt_matrix": null,
-      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "alt_matrix": {
+        "ALT1": "SD9",
+        "ALT2": "DPI_D13",
+        "ALT3": "RTS0",
+        "ALT4": "SPI1_CE1_N",
+        "ALT5": "RTS1"
+      },
+      "alt_matrix_note": "Taken from Flux pinout.json for physical pin 11 / GP17. ALT4 is SPI1_CE1_N. ALT0 is absent in that record. Sources: BCM2835 peripherals section 6.2 and the Raspberry Pi DPI ALT2 table.",
       "source": "gpio-docs",
       "xy_mm": null,
       "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."

@@ -32,7 +32,7 @@ function OhmWidget() {
   const t = strings(lang);
   const high = catalog.electrical.limits.gpio_high_v.value;
   const [vf, setVf] = useState("2.0");
-  const [ma, setMa] = useState("10");
+  const [ma, setMa] = useState("8");
   const [volts, setVolts] = useState(String(high));
   const [count, setCount] = useState("1");
   const [result, setResult] = useState(null);
@@ -57,7 +57,9 @@ function OhmWidget() {
     <form className="widget" onSubmit={run}>
       <h3>{t.calc}</h3>
       <label>{t.vf}<input value={vf} onChange={(e) => setVf(e.target.value)} inputMode="decimal" /></label>
-      <label>{t.ma}<input value={ma} onChange={(e) => setMa(e.target.value)} inputMode="decimal" /></label>
+      <label>{t.ma}<input value={ma} onChange={(e) => setMa(e.target.value)} inputMode="decimal" />
+        <span className="note">{lang === "zh-CN" ? "入门目标：每颗 5–10 mA。" : "Beginner target: 5–10 mA per LED."}</span>
+      </label>
       <label>{t.volts}<input value={volts} onChange={(e) => setVolts(e.target.value)} inputMode="decimal" /></label>
       <label>{t.count}<input value={count} onChange={(e) => setCount(e.target.value)} inputMode="numeric" /></label>
       <button type="submit">{t.run}</button>
@@ -65,6 +67,11 @@ function OhmWidget() {
       {result && (
         <div className="result">
           <p>{result.ohms == null ? "—" : `${result.ohms} Ω`}</p>
+          {result.e12_ohms != null && (
+            <p>{result.e12_ohms} Ω E12 · {result.e12_ma} mA {lang === "zh-CN" ? "每颗" : "per LED"}</p>
+          )}
+          {result.per_led && <p>{result.per_led[lang] || result.per_led.en}</p>}
+          {result.sag && <p>{result.sag[lang] || result.sag.en}</p>}
           <p className="formula">{result.formula}</p>
           <ul>
             {(result.warnings || []).map((w) => <li key={w.code}>{w[lang] || w.en}</li>)}
@@ -89,29 +96,29 @@ function LogicWidget() {
     if (pin.kind === "gpio") {
       setHit({
         bad: true,
-        text: lang === "es"
-          ? "La página GPIO dice que 5 V en un GPIO pueden dañar el SoC de forma permanente. Este pin no es de 5 V."
-          : "The GPIO page says 5 V on a GPIO can permanently damage the SoC. This pin is not a 5 V pin.",
+        text: lang === "zh-CN"
+          ? "5 V 高于这只脚所接的 3.3 V 电源，也超出额定范围，可能永久损坏 SoC。引脚 11 / GPIO17 的 ALT4 是 SPI1_CE1_N，不是 SPI0。"
+          : "5 V is above the 3.3 V supply the pin runs from and outside its rated range; it can permanently damage the SoC. Pin 11 / GPIO17 ALT4 is SPI1_CE1_N, not SPI0.",
       });
     } else if (pin.name === "5V") {
       setHit({
         bad: false,
-        text: lang === "es"
-          ? "Los pines 2 y 4 son alimentación de 5 V. No son entradas lógicas."
+        text: lang === "zh-CN"
+          ? "引脚 2 和 4 是 5 V 电源，不是逻辑输入。"
           : "Pins 2 and 4 are 5 V power. They are not logic inputs.",
       });
     } else if (pin.name === "3V3") {
       setHit({
         bad: true,
-        text: lang === "es"
-          ? "Este pin es la salida de 3,3 V. Ponerle 5 V no es un nivel lógico y no está autorizado por la página GPIO."
-          : "This pin is the 3.3 V output. Putting 5 V on it is not a logic level, and the GPIO page does not allow it.",
+        text: lang === "zh-CN"
+          ? "引脚 1 和 17 的 3V3 来自板上的 3.3 V 稳压器。不要用它们给大负载供电，也不要灌入 5 V。"
+          : "Pins 1 and 17 are the board's 3.3 V regulator output. Do not power a big load from them, and do not feed 5 V into them.",
       });
     } else {
       setHit({
         bad: true,
-        text: lang === "es"
-          ? "Masa es 0 V. No es un sitio para 5 V."
+        text: lang === "zh-CN"
+          ? "地是 0 V，不是 5 V 的去处。"
           : "Ground is 0 V. It is not a place for 5 V.",
       });
     }
@@ -120,9 +127,9 @@ function LogicWidget() {
   return (
     <div className="widget">
       <p className="note">
-        {lang === "es"
-          ? "Orden lógico del header, no una posición a escala sobre la PCB. Las coordenadas de los taladros son nulas."
-          : "Logical header order, not a scaled placement on the PCB. Hole coordinates are null."}
+        {lang === "zh-CN"
+          ? "这是排针的逻辑顺序，不是 PCB 上的比例位置。"
+          : "Logical header order, not a scaled placement on the PCB."}
       </p>
       <div className="pin-grid">
         <ol>
@@ -161,6 +168,13 @@ export function PinFacts({ physical }) {
       <h3>Pin {pin.physical} · {pin.name}</h3>
       <p>{pin.bcm == null ? pin.kind : `BCM ${pin.bcm}`}</p>
       <ul>{pin.typical_functions.map((fn) => <li key={fn}>{fn}</li>)}</ul>
+      {pin.alt_matrix && (
+        <ul>
+          {Object.entries(pin.alt_matrix).map(([alt, name]) => (
+            <li key={alt}><b>{alt}</b> {name}</li>
+          ))}
+        </ul>
+      )}
       {pin.typical_functions.length === 0 && <p>{strings(lang).unknown}</p>}
       <p className="note">{pin.alt_matrix_note}</p>
       {source && <a href={source.url}>{source.title}</a>}
@@ -193,7 +207,7 @@ function GpioWidget() {
     const kw = parsed.kwargs || {};
     if (typeof kw.pull_up === "boolean") setPull(kw.pull_up ? "up" : "down");
     if (typeof kw.bounce_time === "number") setDebounce(Math.round(kw.bounce_time * 1000));
-    setNote(lang === "es" ? "Llamada leída. bounce_time de gpiozero pasa al debounce del modelo." : "Call read. gpiozero bounce_time feeds the model debounce.");
+    setNote(lang === "zh-CN" ? "已读出调用。gpiozero 的 bounce_time 填进模型的 debounce。" : "Call read. gpiozero bounce_time feeds the model debounce.");
     await run({
       pull: kw.pull_up === false ? "down" : "up",
       debounce_ms: typeof kw.bounce_time === "number" ? Math.round(kw.bounce_time * 1000) : debounce,

@@ -39,6 +39,21 @@ def send(handler, code, payload):
     handler.wfile.write(body)
 
 
+E12 = (1.0, 1.2, 1.5, 1.8, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.8, 8.2)
+
+
+def next_e12(ohms):
+    """Smallest E12 value at or above ohms. 130 becomes 150."""
+    import math
+    decade = 10 ** math.floor(math.log10(ohms))
+    for scale in (decade / 10, decade, decade * 10, decade * 100):
+        for mant in E12:
+            value = mant * scale
+            if value + 1e-9 >= ohms:
+                return int(round(value)) if value >= 10 else round(value, 2)
+    return None
+
+
 def resistor(body):
     v_default, v_src = limit("gpio_high_v")
     pin_max, pin_src = limit("gpio_pin_max_ma")
@@ -54,44 +69,71 @@ def resistor(body):
     sources = [v_src, pin_src, comb_src, "ohms-law"]
     if i_ma <= 0 or v <= 0 or vf < 0 or count < 1:
         return 400, {"error": "current and voltage must be positive"}
+    if i_ma < 5 or i_ma > 10:
+        warnings.append({
+            "code": "beginner-target",
+            "source": pin_src,
+            "en": "A beginner target is 5–10 mA per LED. Brighter is not required, and it spends the 16 mA pin budget faster.",
+            "zh-CN": "入门目标是每颗 LED 5–10 mA。不必更亮，而且会更快用掉单脚 16 mA 的预算。",
+        })
     if abs(v - v_default) > 1e-9:
         warnings.append({
             "code": "not-gpio-high",
             "source": v_src,
             "en": f"The GPIO high in the documentation is {v_default} V. {v} V is not that figure.",
-            "es": f"El alto de GPIO en la documentación es {v_default} V. {v} V no es esa cifra.",
+            "zh-CN": f"文档里的 GPIO 高电平是 {v_default} V。{v} V 不是这个数字。",
         })
     if i_ma > pin_max:
         warnings.append({
             "code": "over-pin",
             "source": pin_src,
             "en": f"That current is above the documented {pin_max} mA for one GPIO.",
-            "es": f"Esa corriente supera los {pin_max} mA documentados para un GPIO.",
+            "zh-CN": f"这个电流超过了单脚 GPIO 文档中的 {pin_max} mA。",
         })
     if i_ma * count > combined:
         warnings.append({
             "code": "over-combined",
             "source": comb_src,
-            "en": f"{count} pins at that current pass the documented {combined} mA combined GPIO budget.",
-            "es": f"{count} pines a esa corriente superan los {combined} mA combinados.",
+            "en": f"{count} pins at {i_ma} mA each is {i_ma * count} mA, past the documented {combined} mA combined GPIO budget. Each LED still needs its own resistor on its own pin. This does not compute one shared resistor.",
+            "zh-CN": f"{count} 个脚各 {i_ma} mA，合计 {i_ma * count} mA，超过文档中全部 GPIO 合计 {combined} mA。每颗 LED 仍要自己的电阻和自己的脚。这里不算一只共用电阻。",
         })
+    sag = {
+        "en": "A GPIO output sags below 3.3 V as current rises. On the same page, IOH is at least 17 mA only once the pin has already fallen to 2.3 V, at the 16 mA drive setting. The real LED current comes out a bit lower than this ideal figure. Rounding the resistor up is the safe direction.",
+        "zh-CN": "电流变大时，GPIO 高电平会低于 3.3 V。同一页上，IOH 至少 17 mA 的条件是脚电压已经降到 2.3 V（16 mA 驱动档）。真实电流会比这个理想值略低。把电阻往上取到标准值是安全的方向。",
+        "source": pin_src,
+    }
+    per_led = {
+        "en": "Several LEDs means one resistor per LED, each on its own GPIO. The ohm value below is for a single LED. N × I is checked against the 50 mA total. A shared resistor is not calculated.",
+        "zh-CN": "多颗 LED 是每颗一只电阻、各占一个 GPIO。下面的电阻是单颗的。N × I 拿去和 50 mA 总额比较。不算一只共用电阻。",
+    }
     if vf >= v:
         return 200, {
             "ohms": None,
+            "e12_ohms": None,
+            "e12_ma": None,
+            "per_led": per_led,
+            "sag": sag,
             "warnings": warnings + [{
                 "code": "vf-too-high",
                 "source": "ohms-law",
-                "en": "The forward voltage is not below the drive voltage, so there is no positive resistor solution.",
-                "es": "La tensión directa no está por debajo de la tensión de ataque, así que no hay una resistencia positiva.",
+                "en": "The forward voltage is not below the drive voltage, so there is no positive resistor for this LED.",
+                "zh-CN": "正向压降不低于驱动电压，这颗 LED 没有正的电阻解。",
             }],
             "sources": sources,
         }
     ohms = (v - vf) / (i_ma / 1000.0)
+    e12 = next_e12(ohms)
+    e12_ma = (v - vf) / e12 * 1000.0
     return 200, {
         "ohms": round(ohms, 2),
+        "e12_ohms": e12,
+        "e12_ma": round(e12_ma, 2),
+        "count": count,
         "v_gpio": v,
         "vf": vf,
         "i_ma": i_ma,
+        "per_led": per_led,
+        "sag": sag,
         "warnings": warnings,
         "sources": sources,
         "formula": "(Vgpio - Vf) / I",
