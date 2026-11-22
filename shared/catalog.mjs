@@ -1,6 +1,7 @@
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { toSvgFrame } from "./boards.mjs";
+import { adaptFluxBoard, adaptPinout, hatToPart } from "./flux.mjs";
 
 async function readJson(file) {
   return JSON.parse(await readFile(file, "utf8"));
@@ -19,9 +20,35 @@ export async function loadCatalog(root) {
     readJson(path.join(data, "parts.json")),
     readJson(path.join(boardsDir, "_base.json")),
   ]);
+  const fluxPath = path.join(boardsDir, "zero-w.flux.json");
+  const fluxPinsPath = path.join(data, "pinout.flux.json");
+  let fluxBoard = null;
+  let fluxPinout = null;
+  try {
+    fluxBoard = await readJson(fluxPath);
+    fluxPinout = adaptPinout(await readJson(fluxPinsPath));
+  } catch {
+    fluxBoard = null;
+  }
   const models = {};
   for (const entry of base.models || []) {
     if (!entry.sourced || !entry.file) continue;
+    if (entry.id === "zero-w" && fluxBoard && fluxPinout) {
+      const rendered = adaptFluxBoard(fluxBoard, fluxPinout.pins.map((pin) => ({
+        phys: pin.physical,
+        bcm: pin.bcm,
+        name: pin.name,
+        type: pin.type,
+        alts: pin.alt_matrix,
+        default_pull: pin.default_pull,
+        src: pin.src,
+        note: pin.note,
+        alts_src_note: pin.alt_matrix_note,
+      })));
+      rendered.pinout = fluxPinout;
+      models[entry.id] = rendered;
+      continue;
+    }
     const raw = await readJson(path.join(boardsDir, entry.file));
     if (raw.id !== entry.id) {
       throw new Error(`Board file ${entry.file} is ${raw.id}, expected ${entry.id}`);
@@ -34,6 +61,14 @@ export async function loadCatalog(root) {
   if (!models[aliasId]) throw new Error(`board.json alias ${aliasId} has no sourced file`);
   const lessons = await readDirJson(path.join(data, "lessons"));
   const builds = await readDirJson(path.join(data, "builds"));
+  let parts = partsDoc.parts;
+  try {
+    const hats = await readJson(path.join(data, "hats.json"));
+    const ids = new Set(parts.map((part) => part.id));
+    parts = parts.concat(hats.parts.map(hatToPart).filter((part) => !ids.has(part.id)));
+  } catch {
+    /* hats file is optional until Flux publishes it */
+  }
   return {
     sources: sources.sources,
     electrical,
@@ -42,7 +77,7 @@ export async function loadCatalog(root) {
     boards: { base, models },
     board: models[aliasId],
     pinout: models[aliasId].pinout || pinout,
-    parts: partsDoc.parts,
+    parts,
     lessons,
     builds,
   };

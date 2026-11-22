@@ -6,6 +6,7 @@ import { strings } from "./i18n.js";
 import { defaultModel, forgetCredentials, notifyKeyChange, readCredentials, writeCredentials } from "./help.jsx";
 import { tx, useLab } from "./state.jsx";
 import { Workbench, BomList } from "./workbench.jsx";
+import { Explorer } from "./explorer.jsx";
 import { Markdown, PinFacts, Widget } from "./widgets.jsx";
 
 export function BoardPage() {
@@ -19,19 +20,7 @@ export function BoardPage() {
     if (component) lab.setSelection({ kind: "component", id: component.id });
   }, [id]);
 
-  return (
-    <div className="page">
-      <Workbench state={lab.bench} onDispatch={lab.dispatch} />
-      <section className="split">
-        <ComponentIndex />
-        <div>
-          {component ? <ComponentCard component={component} /> : <CompareCard />}
-          <Disagreements />
-        </div>
-      </section>
-      <p className="fine-print">{t.parts}</p>
-    </div>
-  );
+  return <Explorer />;
 }
 
 function ComponentIndex() {

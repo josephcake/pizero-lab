@@ -163,7 +163,7 @@ test("help context cites sources and never grows a key field", async () => {
   assert.equal(blob.includes("apiKey"), false);
   assert.equal(blob.includes("sk-"), false);
   assert.equal(ctx.records.some((r) => r.kind === "pin" && r.record.physical === 3), true);
-  assert.equal(ctx.records.find((r) => r.kind === "pin").record.source_record.url.includes("gpio-on-raspberry-pi"), true);
+  assert.match(ctx.records.find((r) => r.kind === "pin").record.source_record.url, /raspberrypi\.com/);
   assert.match(SYSTEM_PROMPT, /unverified/);
 });
 

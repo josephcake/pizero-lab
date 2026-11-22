@@ -1,0 +1,1585 @@
+{
+  "board": {
+    "id": "raspberry-pi-zero-w",
+    "name": "Raspberry Pi Zero W",
+    "revision_drawn": "1.1",
+    "soc": "BCM2835",
+    "w_mm": 65,
+    "h_mm": 30,
+    "corner_radius_mm": 3.0,
+    "thickness_mm": null,
+    "thickness_note": "Official product literature often quotes an overall height of 5 mm including connectors, but bare-PCB thickness is not dimensioned on RP-008367-DS.",
+    "origin": "bottom-left, top view (component side). GPIO along the top edge; mini-HDMI, CSI and micro-USB along the bottom edge; left = mini-HDMI end; right = microSD/antenna end.",
+    "src": [
+      {
+        "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
+        "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008367-DS-1-raspberry-pi-zero-w-mechanical-drawing.pdf",
+        "doc": "RP-008367-DS",
+        "section": "Raspberry Pi Zero W mechanical drawing (top assembly)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+        "section": "Raspberry Pi Zero W product specification"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/zero.html",
+        "section": "Raspberry Pi Zero W and WH"
+      }
+    ]
+  },
+  "anchors": {
+    "gpio_pin1": {
+      "x": 8.37,
+      "y": 25.23,
+      "note": "X is exact: official 29 mm dimension is from the left mounting-hole centre (x=3.5) to the GPIO-header centre (x=32.5), and pin 1 is 9.5 × 2.54 mm left of that centre (32.5 − 24.13 = 8.37). Y is the inner (lower) row of a 2.54 mm-pitch header whose 5.00 mm outline, measured from RP-008367-DS, is centred on y=26.50 (the top hole centre-line): 26.50 − 1.27 = 25.23. Official docs place pin 1 at the lower-left corner of the header on Zero models.",
+      "src": [
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008367-DS-1-raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "doc": "RP-008367-DS",
+          "section": "Raspberry Pi Zero W mechanical drawing (top assembly)"
+        },
+        {
+          "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+          "section": "40-pin GPIO header; 2.54 mm pitch; pin 1 at the lower-left corner of the header on Zero models"
+        },
+        {
+          "url": "https://github.com/raspberrypi/hats/blob/master/hat-board-mechanical.pdf",
+          "section": "Raspberry Pi HAT board mechanical specification (2014/2018): 65x56 or 65x56.5 mm; holes 2.75 mm ± 0.05 mm; 29 mm to GPIO header centre"
+        },
+        {
+          "url": "https://github.com/raspberrypi/hats/blob/master/uhat-board-mechanical.pdf",
+          "section": "Raspberry Pi Micro-HAT (uHAT) board mechanical specification (2018): 65x30 or 65x30.5 mm; holes drilled 2.75 mm ± 0.05 mm; land min. 6.2 mm; 3 mm corner radius"
+        }
+      ]
+    },
+    "mount_holes": [
+      {
+        "x": 3.5,
+        "y": 3.5,
+        "d": 2.75,
+        "tol_mm": 0.05,
+        "thread": "M2.5"
+      },
+      {
+        "x": 61.5,
+        "y": 3.5,
+        "d": 2.75,
+        "tol_mm": 0.05,
+        "thread": "M2.5"
+      },
+      {
+        "x": 3.5,
+        "y": 26.5,
+        "d": 2.75,
+        "tol_mm": 0.05,
+        "thread": "M2.5"
+      },
+      {
+        "x": 61.5,
+        "y": 26.5,
+        "d": 2.75,
+        "tol_mm": 0.05,
+        "thread": "M2.5"
+      }
+    ],
+    "mount_holes_note": "Centres are 3.5 mm in from each edge (58 mm × 23 mm spacing), as dimensioned on RP-008367-DS. The Zero W drawing labels the holes M2.5; the official HAT/uHAT mechanical specifications (and the original Pi Zero mechanical drawing) state they are drilled to 2.75 mm ± 0.05 mm. Vector rings measured on RP-008367-DS are 2.77 mm, within that tolerance.",
+    "mount_holes_src": [
+      {
+        "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
+        "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008367-DS-1-raspberry-pi-zero-w-mechanical-drawing.pdf",
+        "doc": "RP-008367-DS",
+        "section": "Raspberry Pi Zero W mechanical drawing (top assembly)"
+      },
+      {
+        "url": "https://github.com/raspberrypi/hats/blob/master/hat-board-mechanical.pdf",
+        "section": "Raspberry Pi HAT board mechanical specification (2014/2018): 65x56 or 65x56.5 mm; holes 2.75 mm ± 0.05 mm; 29 mm to GPIO header centre"
+      },
+      {
+        "url": "https://github.com/raspberrypi/hats/blob/master/uhat-board-mechanical.pdf",
+        "section": "Raspberry Pi Micro-HAT (uHAT) board mechanical specification (2018): 65x30 or 65x30.5 mm; holes drilled 2.75 mm ± 0.05 mm; land min. 6.2 mm; 3 mm corner radius"
+      }
+    ],
+    "csi": {
+      "x": null,
+      "y": null,
+      "rot_deg": 270,
+      "note": "22-pin 0.5 mm-pitch right-angle FPC (Molex 54548-2271 per RP-008368-DS). Visible on RP-008367-DS on the bottom edge between mini-HDMI and USB OTG, opening facing −Y (out the bottom). The drawing does not dimension the connector centre, so x and y are null rather than guessed. Mating-face rotation 270 = opening toward −Y.",
+      "src": [
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008367-DS-1-raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "doc": "RP-008367-DS",
+          "section": "Raspberry Pi Zero W mechanical drawing (top assembly)"
+        },
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+          "doc": "RP-008368-DS",
+          "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+        }
+      ]
+    },
+    "usb_otg": {
+      "x": 41.4,
+      "y": 0,
+      "rot_deg": 270,
+      "note": "Official 41.4 mm dimension is the connector centre-line from the left board edge. Y is the board-edge mating face (the footprint overhangs slightly below y=0; body measured x=37.66–45.15, y=−0.59–4.71). This is the micro-USB data/OTG port (left of the two micro-USB connectors). rot_deg 270 = opening toward −Y.",
+      "src": [
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008367-DS-1-raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "doc": "RP-008367-DS",
+          "section": "Raspberry Pi Zero W mechanical drawing (top assembly)"
+        },
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+          "doc": "RP-008368-DS",
+          "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+        },
+        {
+          "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+          "section": "Raspberry Pi Zero W product specification"
+        }
+      ]
+    },
+    "usb_pwr": {
+      "x": 54.0,
+      "y": 0,
+      "rot_deg": 270,
+      "note": "Official 54 mm dimension is the connector centre-line from the left board edge. Y is the board-edge mating face (footprint x=50.26–57.75, y=−0.59–4.71). This is the micro-USB power port (right of the two micro-USB connectors).",
+      "src": [
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008367-DS-1-raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "doc": "RP-008367-DS",
+          "section": "Raspberry Pi Zero W mechanical drawing (top assembly)"
+        },
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+          "doc": "RP-008368-DS",
+          "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+        },
+        {
+          "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+          "section": "Raspberry Pi Zero W product specification"
+        }
+      ]
+    },
+    "mini_hdmi": {
+      "x": 12.4,
+      "y": 0,
+      "rot_deg": 270,
+      "note": "Official 12.4 mm dimension is the connector centre-line from the left board edge. Y is the board-edge mating face (footprint x=6.97–17.82, y=−0.55–6.96). Schematic J6, Würth/EDAC 690-019-298-903, mini-HDMI Type C, 19 pins.",
+      "src": [
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008367-DS-1-raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "doc": "RP-008367-DS",
+          "section": "Raspberry Pi Zero W mechanical drawing (top assembly)"
+        },
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+          "doc": "RP-008368-DS",
+          "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+        },
+        {
+          "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+          "section": "Raspberry Pi Zero W product specification"
+        }
+      ]
+    },
+    "microsd": {
+      "x": 65.0,
+      "y": null,
+      "rot_deg": 0,
+      "note": "microSD push/slot opens on the right short edge (x=65), visible on RP-008367-DS; schematic J5, part 68710814522, 8 contacts. Vertical centre is not dimensioned on the drawing, so y is null. rot_deg 0 = opening toward +X.",
+      "src": [
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008367-DS-1-raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "doc": "RP-008367-DS",
+          "section": "Raspberry Pi Zero W mechanical drawing (top assembly)"
+        },
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+          "doc": "RP-008368-DS",
+          "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+        }
+      ]
+    },
+    "rot_deg_convention": "0 = mating opening toward +X (right), 90 = toward +Y (top), 180 = toward −X (left), 270 = toward −Y (bottom).",
+    "src": [
+      {
+        "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
+        "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008367-DS-1-raspberry-pi-zero-w-mechanical-drawing.pdf",
+        "doc": "RP-008367-DS",
+        "section": "Raspberry Pi Zero W mechanical drawing (top assembly)"
+      }
+    ]
+  },
+  "header": {
+    "pitch_mm": 2.54,
+    "rows": 2,
+    "cols": 20,
+    "populated_on_zero_w": false,
+    "populated_on_zero_wh": true,
+    "pin1_mm": {
+      "x": 8.37,
+      "y": 25.23
+    },
+    "row_y_mm": {
+      "odd_pins_pin1": 25.23,
+      "even_pins_pin2": 27.77
+    },
+    "outline_mm": {
+      "x": 7.11,
+      "y": 24.0,
+      "w": 50.8,
+      "h": 5.0,
+      "confidence": "measured from RP-008367-DS vector outline of the unpopulated 2×20 footprint"
+    },
+    "hole_d_mm": null,
+    "pad_d_mm": null,
+    "note": "Zero W ships with unpopulated through-holes; Zero WH has a pre-soldered 2×20, 2.54 mm pin header. Pad and drill diameters are not dimensioned on RP-008367-DS or the official GPIO documentation, so they are null. Pin 1 (3V3, physical pin 1) is the inner row, left end. Even pins (2, 4, …, 40) are the outer row, closer to the top board edge.",
+    "src": [
+      {
+        "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
+        "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008367-DS-1-raspberry-pi-zero-w-mechanical-drawing.pdf",
+        "doc": "RP-008367-DS",
+        "section": "Raspberry Pi Zero W mechanical drawing (top assembly)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header; 2.54 mm pitch; pin 1 at the lower-left corner of the header on Zero models"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/zero.html",
+        "section": "Raspberry Pi Zero W and WH"
+      },
+      {
+        "url": "https://github.com/raspberrypi/hats/blob/master/hat-board-mechanical.pdf",
+        "section": "Raspberry Pi HAT board mechanical specification (2014/2018): 65x56 or 65x56.5 mm; holes 2.75 mm ± 0.05 mm; 29 mm to GPIO header centre"
+      },
+      {
+        "url": "https://github.com/raspberrypi/hats/blob/master/uhat-board-mechanical.pdf",
+        "section": "Raspberry Pi Micro-HAT (uHAT) board mechanical specification (2018): 65x30 or 65x30.5 mm; holes drilled 2.75 mm ± 0.05 mm; land min. 6.2 mm; 3 mm corner radius"
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "soc",
+      "name": "BCM2835",
+      "side": "top",
+      "x_mm": 19.74,
+      "y_mm": 7.03,
+      "w_mm": 12.01,
+      "h_mm": 11.99,
+      "origin": "bottom-left, top view",
+      "function": "System-on-chip: ARM1176JZF-S (ARMv6) at 1 GHz, VideoCore IV GPU, PoP LPDDR2 SDRAM stacked on top.",
+      "specs": {
+        "part": "Broadcom BCM2835",
+        "cpu": "single-core ARM1176JZF-S, 1 GHz, 32-bit ARMv6",
+        "gpu": "Broadcom VideoCore IV",
+        "ram": "512 MB LPDDR2 in package-on-package (PoP) on the SoC",
+        "package_mm": "12 × 12 outline measured from RP-008367-DS (the PoP stack is the large square left of centre)"
+      },
+      "subparts": [
+        {
+          "id": "soc-arm",
+          "name": "ARM1176JZF-S",
+          "signal": null,
+          "src": [
+            {
+              "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+              "section": "Raspberry Pi Zero W product specification"
+            },
+            {
+              "url": "https://www.raspberrypi.com/documentation/computers/zero.html",
+              "section": "Raspberry Pi Zero W and WH"
+            }
+          ]
+        },
+        {
+          "id": "soc-pop-ram",
+          "name": "512 MB LPDDR2 (PoP)",
+          "signal": null,
+          "src": [
+            {
+              "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+              "section": "Raspberry Pi Zero W product specification"
+            },
+            {
+              "url": "https://www.raspberrypi.com/documentation/computers/zero.html",
+              "section": "Raspberry Pi Zero W and WH"
+            }
+          ]
+        }
+      ],
+      "gotchas": "ARMv6 / 32-bit only. 64-bit Raspberry Pi OS and software built only for ARMv7/AArch64 will not run. Do not confuse with Zero 2 W (RP3A0 / BCM2710A1, quad Cortex-A53).",
+      "confidence": "confirmed",
+      "confidence_method": "Package outline measured from RP-008367-DS; identity and specs from the official product page, Zero documentation, and RP-008368-DS (U1, BCM2835).",
+      "src": [
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008367-DS-1-raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "doc": "RP-008367-DS",
+          "section": "Raspberry Pi Zero W mechanical drawing (top assembly)"
+        },
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+          "doc": "RP-008368-DS",
+          "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+        },
+        {
+          "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+          "section": "Raspberry Pi Zero W product specification"
+        },
+        {
+          "url": "https://www.raspberrypi.com/documentation/computers/zero.html",
+          "section": "Raspberry Pi Zero W and WH"
+        }
+      ]
+    },
+    {
+      "id": "radio",
+      "name": "CYW43438",
+      "side": "top",
+      "x_mm": null,
+      "y_mm": null,
+      "w_mm": null,
+      "h_mm": null,
+      "origin": "bottom-left, top view",
+      "function": "Single-chip 2.4 GHz 802.11 b/g/n Wi-Fi plus Bluetooth / BLE combo, with a shared PCB antenna.",
+      "specs": {
+        "part": "Cypress/Infineon CYW43438 (also marked BCM43438; same silicon after the Broadcom-to-Cypress IoT part-number conversion)",
+        "wifi": "single-band 2.4 GHz IEEE 802.11 b/g/n",
+        "bluetooth": "Bluetooth 4.1 and Bluetooth Low Energy (BLE), as specified on the official product page",
+        "host_interfaces": "Wi-Fi over SDIO; Bluetooth over UART (PL011 is used for Bluetooth on Zero W, so GPIO 14/15 expose the mini-UART unless Bluetooth is disabled)",
+        "antenna": "on-board PCB antenna; official drawing dimensions a 9.64 mm region at the top-right (from the right board edge inward to x=55.36)"
+      },
+      "subparts": [
+        {
+          "id": "radio-wifi",
+          "name": "802.11 b/g/n MAC/baseband/radio",
+          "signal": "SDIO to BCM2835",
+          "src": [
+            {
+              "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+              "section": "Raspberry Pi Zero W product specification"
+            }
+          ]
+        },
+        {
+          "id": "radio-bt",
+          "name": "Bluetooth 4.1 + BLE",
+          "signal": "UART to BCM2835",
+          "src": [
+            {
+              "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+              "section": "Raspberry Pi Zero W product specification"
+            }
+          ]
+        },
+        {
+          "id": "radio-antenna",
+          "name": "2.4 GHz PCB antenna",
+          "signal": "shared WLAN/BT via on-chip T/R switch",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008367-DS-1-raspberry-pi-zero-w-mechanical-drawing.pdf",
+              "doc": "RP-008367-DS",
+              "section": "Raspberry Pi Zero W mechanical drawing (top assembly)"
+            }
+          ]
+        }
+      ],
+      "gotchas": "See radio_rulings for official-doc disagreements on the Bluetooth version and the chip name. The package outline is not dimensioned as a single labelled box on RP-008367-DS, so x/y/w/h are null. The 9.64 mm dimension on the drawing marks the top-right antenna/keepout region (x=55.36 to 65).",
+      "confidence": "confirmed",
+      "confidence_method": "Identity and radio capabilities from the official product page and the 2017 Cypress announcement that Zero W uses CYW43438. Position of the 9.64 mm antenna region measured from RP-008367-DS. Die/package bounding box not labelled on the drawing.",
+      "src": [
+        {
+          "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+          "section": "Raspberry Pi Zero W product specification"
+        },
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008367-DS-1-raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "doc": "RP-008367-DS",
+          "section": "Raspberry Pi Zero W mechanical drawing (top assembly)"
+        },
+        {
+          "url": "https://www.raspberrypi.com/documentation/computers/zero.html",
+          "section": "Raspberry Pi Zero W and WH"
+        },
+        {
+          "url": "https://www.raspberrypi.com/news/raspberry-pi-zero-w-joins-family/",
+          "section": "Launch blog: 'same Cypress CYW43438 wireless chip as Raspberry Pi 3 Model B'"
+        }
+      ]
+    },
+    {
+      "id": "pcb-antenna",
+      "name": "2.4 GHz PCB antenna",
+      "side": "top",
+      "x_mm": 55.36,
+      "y_mm": null,
+      "w_mm": 9.64,
+      "h_mm": null,
+      "origin": "bottom-left, top view",
+      "function": "Printed 2.4 GHz antenna shared by Wi-Fi and Bluetooth.",
+      "specs": {
+        "region_from_right_edge_mm": 9.64,
+        "x_span": "55.36–65.00 (official 9.64 mm dimension on RP-008367-DS, measured from the right edge)"
+      },
+      "subparts": [],
+      "gotchas": "Keep metal and dense ground pours out of this region. Height/vertical extent is not dimensioned, so h_mm and y_mm are null.",
+      "confidence": "confirmed",
+      "confidence_method": "9.64 mm dimension line on RP-008367-DS runs from the right board edge (x=65) to x=55.36 along the top of the board.",
+      "src": [
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008367-DS-1-raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "doc": "RP-008367-DS",
+          "section": "Raspberry Pi Zero W mechanical drawing (top assembly)"
+        }
+      ]
+    },
+    {
+      "id": "mini-hdmi",
+      "name": "Mini HDMI (Type C)",
+      "side": "top",
+      "x_mm": 6.97,
+      "y_mm": -0.55,
+      "w_mm": 10.85,
+      "h_mm": 7.51,
+      "origin": "bottom-left, top view",
+      "function": "Digital video and audio output, 1080p.",
+      "specs": {
+        "refdes": "J6",
+        "part": "690-019-298-903",
+        "type": "mini-HDMI Type C receptacle, 19 + shield pins, 90° SMT",
+        "centerline_x_mm": 12.4
+      },
+      "subparts": [
+        {
+          "id": "mini-hdmi-d2p",
+          "name": "D2+",
+          "signal": "HDMI_T2P",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "mini-hdmi-d2n",
+          "name": "D2−",
+          "signal": "HDMI_T2N",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "mini-hdmi-d1p",
+          "name": "D1+",
+          "signal": "HDMI_T1P",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "mini-hdmi-d1n",
+          "name": "D1−",
+          "signal": "HDMI_T1N",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "mini-hdmi-d0p",
+          "name": "D0+",
+          "signal": "HDMI_T0P",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "mini-hdmi-d0n",
+          "name": "D0−",
+          "signal": "HDMI_T0N",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "mini-hdmi-clkp",
+          "name": "CLK+",
+          "signal": "HDMI_CKP",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "mini-hdmi-clkn",
+          "name": "CLK−",
+          "signal": "HDMI_CKN",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "mini-hdmi-cec",
+          "name": "CEC",
+          "signal": "HDMI_CEC",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "mini-hdmi-scl",
+          "name": "SCL (DDC)",
+          "signal": "HDMI_SCL",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "mini-hdmi-sda",
+          "name": "SDA (DDC)",
+          "signal": "HDMI_SDA",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "mini-hdmi-5v",
+          "name": "+5V",
+          "signal": "+5V",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "mini-hdmi-hpd",
+          "name": "HPD",
+          "signal": "HDMI_HPD",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        }
+      ],
+      "gotchas": "This is mini-HDMI, not micro-HDMI (Pi 4/5) and not full-size HDMI. Needs a mini-HDMI to HDMI cable or adapter.",
+      "confidence": "confirmed",
+      "confidence_method": "Centre-line 12.4 mm dimensioned on RP-008367-DS; footprint measured from that drawing; pinout and part number from RP-008368-DS J6.",
+      "src": [
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008367-DS-1-raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "doc": "RP-008367-DS",
+          "section": "Raspberry Pi Zero W mechanical drawing (top assembly)"
+        },
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+          "doc": "RP-008368-DS",
+          "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+        },
+        {
+          "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+          "section": "Raspberry Pi Zero W product specification"
+        }
+      ]
+    },
+    {
+      "id": "usb-otg",
+      "name": "Micro-USB data (OTG)",
+      "side": "top",
+      "x_mm": 37.66,
+      "y_mm": -0.59,
+      "w_mm": 7.49,
+      "h_mm": 5.3,
+      "origin": "bottom-left, top view",
+      "function": "USB 2.0 On-The-Go data port (host or device).",
+      "specs": {
+        "refdes": "data micro-USB (the left of the two micro-USB connectors)",
+        "centerline_x_mm": 41.4,
+        "standard": "USB 2.0 OTG"
+      },
+      "subparts": [
+        {
+          "id": "usb-otg-vbus",
+          "name": "VBUS",
+          "signal": "USB 5V / OTG VBUS",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            },
+            {
+              "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+              "section": "Raspberry Pi Zero W product specification"
+            }
+          ]
+        },
+        {
+          "id": "usb-otg-dm",
+          "name": "D−",
+          "signal": "USB_DM",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "usb-otg-dp",
+          "name": "D+",
+          "signal": "USB_DP",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "usb-otg-id",
+          "name": "ID / OTG",
+          "signal": "OTG ID",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "usb-otg-gnd",
+          "name": "GND",
+          "signal": "GND",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        }
+      ],
+      "gotchas": "This is the data port, not the power port. A USB-OTG adapter (micro-USB host cable) is required to attach USB devices. Do not confuse with the right-hand micro-USB power connector.",
+      "confidence": "confirmed",
+      "confidence_method": "Centre-line 41.4 mm dimensioned on RP-008367-DS; footprint measured from that drawing; OTG role from the official product page.",
+      "src": [
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008367-DS-1-raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "doc": "RP-008367-DS",
+          "section": "Raspberry Pi Zero W mechanical drawing (top assembly)"
+        },
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+          "doc": "RP-008368-DS",
+          "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+        },
+        {
+          "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+          "section": "Raspberry Pi Zero W product specification"
+        }
+      ]
+    },
+    {
+      "id": "usb-pwr",
+      "name": "Micro-USB power",
+      "side": "top",
+      "x_mm": 50.26,
+      "y_mm": -0.59,
+      "w_mm": 7.49,
+      "h_mm": 5.3,
+      "origin": "bottom-left, top view",
+      "function": "5 V board power input.",
+      "specs": {
+        "centerline_x_mm": 54.0,
+        "nominal_voltage": "5 V"
+      },
+      "subparts": [
+        {
+          "id": "usb-pwr-vbus",
+          "name": "VBUS",
+          "signal": "5V input",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            },
+            {
+              "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+              "section": "Raspberry Pi Zero W product specification"
+            }
+          ]
+        },
+        {
+          "id": "usb-pwr-gnd",
+          "name": "GND",
+          "signal": "GND",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        }
+      ],
+      "gotchas": "Power only — this connector does not carry USB data. Powering from a weak supply will cause brownouts, especially with Wi-Fi and HATs attached. The board can also be back-powered via the 5V GPIO pins if a HAT is designed for it (see HAT design guide safety-diode rules).",
+      "confidence": "confirmed",
+      "confidence_method": "Centre-line 54 mm dimensioned on RP-008367-DS; footprint measured from that drawing; role from the official product page.",
+      "src": [
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008367-DS-1-raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "doc": "RP-008367-DS",
+          "section": "Raspberry Pi Zero W mechanical drawing (top assembly)"
+        },
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+          "doc": "RP-008368-DS",
+          "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+        },
+        {
+          "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+          "section": "Raspberry Pi Zero W product specification"
+        },
+        {
+          "url": "https://github.com/raspberrypi/hats/blob/master/designguide.md",
+          "section": "HAT design guide; mounting-hole and GPIO-header rules"
+        }
+      ]
+    },
+    {
+      "id": "csi",
+      "name": "CSI camera connector (22-pin Zero type)",
+      "side": "top",
+      "x_mm": null,
+      "y_mm": null,
+      "w_mm": null,
+      "h_mm": null,
+      "origin": "bottom-left, top view",
+      "function": "MIPI CSI-2 camera interface, 22-pin 0.5 mm-pitch right-angle FPC, bottom contact.",
+      "specs": {
+        "refdes": "J12",
+        "part": "Molex 54548-2271",
+        "pins": 22,
+        "pitch_mm": 0.5,
+        "style": "right-angle SMT ZIF, bottom contact, 1.20 mm height (Molex datasheet)",
+        "body_length_mm": 16.2
+      },
+      "subparts": [
+        {
+          "id": "csi-cam1-dn0",
+          "name": "CAM1_DN0",
+          "signal": "CAM1_DN0",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "csi-cam1-dp0",
+          "name": "CAM1_DP0",
+          "signal": "CAM1_DP0",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "csi-cam1-dn1",
+          "name": "CAM1_DN1",
+          "signal": "CAM1_DN1",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "csi-cam1-dp1",
+          "name": "CAM1_DP1",
+          "signal": "CAM1_DP1",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "csi-cam1-cn",
+          "name": "CAM1_CN",
+          "signal": "CAM1_CN",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "csi-cam1-cp",
+          "name": "CAM1_CP",
+          "signal": "CAM1_CP",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "csi-cam-gpio0",
+          "name": "CAM_GPIO0",
+          "signal": "CAM_GPIO0",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "csi-cam-gpio1",
+          "name": "CAM_GPIO1",
+          "signal": "CAM_GPIO1",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "csi-scl0",
+          "name": "SCL0",
+          "signal": "SCL0 (camera I2C)",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "csi-sda0",
+          "name": "SDA0",
+          "signal": "SDA0 (camera I2C)",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        }
+      ],
+      "gotchas": "This is not the 15-pin 1.0 mm CSI connector used on A/B-style boards. Official Camera Modules use a 15-pin cable and need a 15-to-22-pin Raspberry Pi Zero camera cable. Standard Pi 4/5 camera cables will not seat. Centre x/y is not dimensioned on RP-008367-DS (the connector sits on the bottom edge between mini-HDMI and USB OTG).",
+      "confidence": "confirmed",
+      "confidence_method": "Part number, pin count and camera nets from RP-008368-DS J12 (Molex 54548-2271). Location (between HDMI and USB OTG, bottom edge) is visible on RP-008367-DS but not dimensioned, so the bounding box is null.",
+      "src": [
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+          "doc": "RP-008368-DS",
+          "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+        },
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008367-DS-1-raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "doc": "RP-008367-DS",
+          "section": "Raspberry Pi Zero W mechanical drawing (top assembly)"
+        },
+        {
+          "url": "https://www.molex.com/en-us/products/part-detail/545482271",
+          "section": "Molex 54548-2271: 0.50 mm pitch, 22 circuits, 1.20 mm height, right-angle SMT, bottom contact, product length 16.2 mm"
+        }
+      ]
+    },
+    {
+      "id": "microsd",
+      "name": "microSD slot",
+      "side": "top",
+      "x_mm": null,
+      "y_mm": null,
+      "w_mm": null,
+      "h_mm": null,
+      "origin": "bottom-left, top view",
+      "function": "Primary boot and storage (microSD card).",
+      "specs": {
+        "refdes": "J5",
+        "part": "68710814522",
+        "contacts": 8
+      },
+      "subparts": [
+        {
+          "id": "sd-clk",
+          "name": "SD_CLK",
+          "signal": "SD_CLK",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "sd-cmd",
+          "name": "SD_CMD",
+          "signal": "SD_CMD",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "sd-dat0",
+          "name": "SD_DAT0",
+          "signal": "SD_DAT0",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "sd-dat1",
+          "name": "SD_DAT1",
+          "signal": "SD_DAT1",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "sd-dat2",
+          "name": "SD_DAT2",
+          "signal": "SD_DAT2",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "sd-dat3",
+          "name": "SD_DAT3",
+          "signal": "SD_DAT3",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        }
+      ],
+      "gotchas": "The official Raspberry Pi Imager must write a 32-bit (ARMv6) Raspberry Pi OS image; 64-bit images will not boot on the original Zero W. Slot opens on the right short edge; exact footprint is not dimensioned on RP-008367-DS.",
+      "confidence": "confirmed",
+      "confidence_method": "Refdes and part from RP-008368-DS J5; right-edge opening visible on RP-008367-DS. Bounding box not dimensioned, so x/y/w/h are null.",
+      "src": [
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+          "doc": "RP-008368-DS",
+          "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+        },
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008367-DS-1-raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "doc": "RP-008367-DS",
+          "section": "Raspberry Pi Zero W mechanical drawing (top assembly)"
+        },
+        {
+          "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+          "section": "Raspberry Pi Zero W product specification"
+        }
+      ]
+    },
+    {
+      "id": "gpio-header",
+      "name": "40-pin GPIO footprint",
+      "side": "top",
+      "x_mm": 7.11,
+      "y_mm": 24.0,
+      "w_mm": 50.8,
+      "h_mm": 5.0,
+      "origin": "bottom-left, top view",
+      "function": "Unpopulated 2×20, 2.54 mm-pitch GPIO header (HAT-compatible). See header and pinout.json.",
+      "specs": {
+        "pitch_mm": 2.54,
+        "pins": 40,
+        "populated_on_zero_w": false,
+        "pin1_mm": {
+          "x": 8.37,
+          "y": 25.23
+        }
+      },
+      "subparts": [],
+      "gotchas": "Zero W has bare holes; a male 2×20 header must be soldered (or pogo pins used) before a conventional female-header HAT will plug in. ID_SD/ID_SC (physical pins 27/28, GP0/GP1) are reserved for a HAT ID EEPROM.",
+      "confidence": "confirmed",
+      "confidence_method": "5.00 × 50.80 mm outline and 32.5 mm header centre measured from RP-008367-DS; 29 mm dimension from the left hole to the header centre; 2.54 mm pitch from official GPIO documentation.",
+      "src": [
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008367-DS-1-raspberry-pi-zero-w-mechanical-drawing.pdf",
+          "doc": "RP-008367-DS",
+          "section": "Raspberry Pi Zero W mechanical drawing (top assembly)"
+        },
+        {
+          "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+          "section": "40-pin GPIO header; 2.54 mm pitch; pin 1 at the lower-left corner of the header on Zero models"
+        },
+        {
+          "url": "https://www.raspberrypi.com/documentation/computers/zero.html",
+          "section": "Raspberry Pi Zero W and WH"
+        }
+      ]
+    },
+    {
+      "id": "act-led",
+      "name": "ACT LED",
+      "side": "top",
+      "x_mm": null,
+      "y_mm": null,
+      "w_mm": null,
+      "h_mm": null,
+      "origin": "bottom-left, top view",
+      "function": "Green activity LED, labelled STATUS_LED / ACT on the schematic.",
+      "specs": {
+        "refdes": "D2",
+        "color": "green",
+        "package": "1611 (from RP-008368-DS)"
+      },
+      "subparts": [],
+      "gotchas": "The exact board location is not dimensioned on RP-008367-DS. On BCM2835-era boards the ACT LED is typically driven as an active-low status indicator (STATUS_LED net).",
+      "confidence": "confirmed",
+      "confidence_method": "Identity, colour and package from RP-008368-DS (D2 GREEN 1611, STATUS_LED / ACT). Board coordinates not labelled, so x/y are null.",
+      "src": [
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+          "doc": "RP-008368-DS",
+          "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+        }
+      ]
+    },
+    {
+      "id": "regulator",
+      "name": "PAM2306AYPKE",
+      "side": "top",
+      "x_mm": null,
+      "y_mm": null,
+      "w_mm": null,
+      "h_mm": null,
+      "origin": "bottom-left, top view",
+      "function": "Dual step-down (buck) regulator generating the 3.3 V and 1.8 V rails from 5 V input.",
+      "specs": {
+        "refdes": "U3",
+        "part": "PAM2306AYPKE",
+        "rails": "3V3 and 1V8 from 5V"
+      },
+      "subparts": [
+        {
+          "id": "reg-3v3",
+          "name": "3.3 V rail",
+          "signal": "3V3",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "reg-1v8",
+          "name": "1.8 V rail",
+          "signal": "1V8",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        }
+      ],
+      "gotchas": "The 3.3 V header pins are supplied from this regulator; overloading them (or the 5 V input) will brown out the SoC and the radio. Package location is not dimensioned on RP-008367-DS.",
+      "confidence": "confirmed",
+      "confidence_method": "Part and rail assignment from RP-008368-DS U3. Bounding box not labelled on the mechanical drawing.",
+      "src": [
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+          "doc": "RP-008368-DS",
+          "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+        }
+      ]
+    },
+    {
+      "id": "xtal",
+      "name": "19.2 MHz crystal",
+      "side": "top",
+      "x_mm": null,
+      "y_mm": null,
+      "w_mm": null,
+      "h_mm": null,
+      "origin": "bottom-left, top view",
+      "function": "BCM2835 reference oscillator.",
+      "specs": {
+        "refdes": "X1",
+        "frequency": "19.2 MHz"
+      },
+      "subparts": [],
+      "gotchas": "Location not dimensioned on RP-008367-DS.",
+      "confidence": "confirmed",
+      "confidence_method": "RP-008368-DS X1 19.2 MHz. Board coordinates not labelled.",
+      "src": [
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+          "doc": "RP-008368-DS",
+          "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+        }
+      ]
+    },
+    {
+      "id": "run-pads",
+      "name": "RUN pads",
+      "side": "top",
+      "x_mm": null,
+      "y_mm": null,
+      "w_mm": null,
+      "h_mm": null,
+      "origin": "bottom-left, top view",
+      "function": "Reset: short RUN to ground to reset the BCM2835 (unpopulated two-pad header on the official product brief).",
+      "specs": {
+        "nets": [
+          "RUN",
+          "GND"
+        ]
+      },
+      "subparts": [
+        {
+          "id": "run-run",
+          "name": "RUN",
+          "signal": "RUN",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            },
+            {
+              "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+              "section": "Raspberry Pi Zero W product specification"
+            }
+          ]
+        },
+        {
+          "id": "run-gnd",
+          "name": "GND",
+          "signal": "GND",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            },
+            {
+              "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+              "section": "Raspberry Pi Zero W product specification"
+            }
+          ]
+        }
+      ],
+      "gotchas": "The official product page lists 'composite video and reset headers' as unpopulated. Exact pad coordinates are not dimensioned on RP-008367-DS (the Zero 2 W test-pad drawing must not be copied: that is a different board).",
+      "confidence": "confirmed",
+      "confidence_method": "Existence and function from the official product specification and RP-008368-DS RUN net. Coordinates not on RP-008367-DS, so they are null.",
+      "src": [
+        {
+          "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+          "section": "Raspberry Pi Zero W product specification"
+        },
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+          "doc": "RP-008368-DS",
+          "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+        }
+      ]
+    },
+    {
+      "id": "tv-pads",
+      "name": "TV / composite video pads",
+      "side": "top",
+      "x_mm": null,
+      "y_mm": null,
+      "w_mm": null,
+      "h_mm": null,
+      "origin": "bottom-left, top view",
+      "function": "Unpopulated composite (TV) video output pads.",
+      "specs": {
+        "nets": [
+          "TV / composite video",
+          "GND"
+        ]
+      },
+      "subparts": [],
+      "gotchas": "Exact pad coordinates are not dimensioned on RP-008367-DS. Do not use Zero 2 W test-pad coordinates. Composite is also available as audio/video over the 3.5 mm jack on larger Pis; on Zero W it is only these pads.",
+      "confidence": "confirmed",
+      "confidence_method": "Official product specification lists 'composite video and reset headers'. Coordinates not on RP-008367-DS.",
+      "src": [
+        {
+          "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+          "section": "Raspberry Pi Zero W product specification"
+        },
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+          "doc": "RP-008368-DS",
+          "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+        }
+      ]
+    },
+    {
+      "id": "test-pads",
+      "name": "Test pads (PP)",
+      "side": "top",
+      "x_mm": null,
+      "y_mm": null,
+      "w_mm": null,
+      "h_mm": null,
+      "origin": "bottom-left, top view",
+      "function": "Factory test pads. The reduced schematic labels PP1, PP5, PP6, PP8 and PP9 in the power area; it does not publish a complete PP-number-to-coordinate map for Zero W.",
+      "specs": {
+        "labelled_on_RP-008368-DS": [
+          "PP1",
+          "PP5",
+          "PP6",
+          "PP8",
+          "PP9"
+        ],
+        "complete_map": null
+      },
+      "subparts": [
+        {
+          "id": "pp1",
+          "name": "PP1",
+          "signal": null,
+          "note": "Shown on RP-008368-DS near the 5 V / USB power input area; the schematic does not state the net name next to the label in a way that can be quoted without guesswork.",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "pp8",
+          "name": "PP8",
+          "signal": null,
+          "note": "Shown on RP-008368-DS in the regulator area (near the 3V3 side of U3). Net name not explicitly printed beside the pad in the reduced schematic extract.",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        },
+        {
+          "id": "pp9",
+          "name": "PP9",
+          "signal": null,
+          "note": "Shown on RP-008368-DS in the regulator area (near the 1V8 side of U3). Net name not explicitly printed beside the pad in the reduced schematic extract.",
+          "src": [
+            {
+              "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+              "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+              "doc": "RP-008368-DS",
+              "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+            }
+          ]
+        }
+      ],
+      "gotchas": "Raspberry Pi published a test-pad coordinate drawing for Zero 2 W only, not for the original Zero W. Community PP maps for other Pi models (B+/Pi 2/3) must not be assumed to apply. Pad coordinates and unverified net names are left null.",
+      "confidence": "confirmed",
+      "confidence_method": "PP1, PP5, PP6, PP8, PP9 appear on RP-008368-DS. No official Zero W test-pad coordinate sheet was found. Coordinates are therefore null.",
+      "src": [
+        {
+          "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+          "alt_url": "https://pip-assets.raspberrypi.com/categories/592-raspberry-pi-zero-w/documents/RP-008368-DS-1-raspberry-pi-zero-w-reduced-schematics.pdf",
+          "doc": "RP-008368-DS",
+          "section": "Raspberry Pi Zero W reduced schematics, RPI-ZERO-W 1.1, drawn by Roger Thornton"
+        }
+      ]
+    }
+  ],
+  "radio_rulings": [
+    {
+      "id": "chip-identity",
+      "claim": "What is the Zero W Wi-Fi/Bluetooth chip called?",
+      "sides": [
+        {
+          "claim": "Cypress CYW43438, the same combo chip as Raspberry Pi 3 Model B.",
+          "sources": [
+            {
+              "url": "https://www.raspberrypi.com/news/raspberry-pi-zero-w-joins-family/",
+              "section": "Launch blog, 28 Feb 2017: 'It uses the same Cypress CYW43438 wireless chip as Raspberry Pi 3 Model B'"
+            },
+            {
+              "url": "https://www.prnewswire.com/news-releases/raspberry-pi-selects-cypress-wireless-connectivity-solution-for-industry-leading-iot-boards-300429869.html",
+              "section": "Cypress (2017) press release announcing CYW43438 on Raspberry Pi Zero W"
+            }
+          ]
+        },
+        {
+          "claim": "BCM43438 and CYW43438 are the same device; only the prefix changed after Cypress acquired Broadcom's IoT line.",
+          "sources": [
+            {
+              "url": "https://www.infineon.com/assets/row/public/documents/30/49/infineon-yw43438-single-chip-ieee-802-11-b-g-n-mac-baseband-radio-with-integrated-bluetooth-5-datasheet-en.pdf",
+              "section": "Cypress/Infineon part-number mapping table: BCM43438 = CYW43438, 'no change in form, fit, or function'"
+            }
+          ]
+        },
+        {
+          "claim": "Some secondary articles call the chip BCM43143.",
+          "sources": [
+            {
+              "url": "https://www.raspberry-pi-geek.de/ausgaben/rpg/2017/06/pi-zero-w-mini-raspi-mit-wlan-und-bluetooth/2/",
+              "section": "Magazine article that equates BCM43143 with CYW43438; this is a misidentification of a different Broadcom part."
+            }
+          ]
+        }
+      ],
+      "ruling": "The chip is Cypress/Infineon CYW43438, also marked BCM43438 on some boards. These two names are the same silicon. BCM43143 is a different part and is not used as the official identity of the Zero W radio.",
+      "prefer": "Official launch blog, official Cypress announcement, and the vendor mapping table, over magazine/secondary part-number mix-ups."
+    },
+    {
+      "id": "bluetooth-version",
+      "claim": "Is the Zero W Bluetooth 4.0, 4.1, or 5.1?",
+      "sides": [
+        {
+          "claim": "Bluetooth 4.1 and Bluetooth Low Energy (BLE).",
+          "sources": [
+            {
+              "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+              "section": "Official product specification: 'Bluetooth 4.1' and 'Bluetooth Low Energy (BLE)'"
+            },
+            {
+              "url": "https://www.prnewswire.com/news-releases/raspberry-pi-selects-cypress-wireless-connectivity-solution-for-industry-leading-iot-boards-300429869.html",
+              "section": "Cypress 2017 PR: CYW43438 enables 'simultaneous Bluetooth 4.1 operations' and BLE on Zero W"
+            }
+          ]
+        },
+        {
+          "claim": "Bluetooth 4.0 and BLE.",
+          "sources": [
+            {
+              "url": "https://www.raspberrypi.com/news/raspberry-pi-zero-w-joins-family/",
+              "section": "Launch blog feature list: 'Bluetooth 4.0'"
+            },
+            {
+              "url": "https://www.raspberrypi.com/documentation/computers/zero.html",
+              "section": "Feature changes from Raspberry Pi Zero: 'Bluetooth 4.0 and Bluetooth Low Energy (BLE)'"
+            }
+          ]
+        },
+        {
+          "claim": "The current CYW43438 silicon family is qualified to Bluetooth 5.1.",
+          "sources": [
+            {
+              "url": "https://www.infineon.com/assets/row/public/documents/30/49/infineon-yw43438-single-chip-ieee-802-11-b-g-n-mac-baseband-radio-with-integrated-bluetooth-5-datasheet-en.pdf",
+              "section": "Current Infineon datasheet: 'Qualified for Bluetooth Core Specification 5.1 compliance'"
+            }
+          ]
+        }
+      ],
+      "ruling": "Treat the Zero W product specification as Bluetooth 4.1 + BLE. That is what the official product page and the contemporary Cypress announcement say. The 'Bluetooth 4.0' wording on the 2017 blog and on the current Zero documentation 'feature changes' section disagrees with the product page and is treated as a documentation inconsistency, not a second SKU. The later Infineon '5.1 compliance' statement describes a subsequent qualification of the chip family; it is not a Raspberry Pi product claim for Zero W firmware or a guarantee of Bluetooth 5.1 features on this board.",
+      "prefer": "Official product specification page and the 2017 Cypress PR over the launch-blog bullet list, the Zero documentation feature-changes paragraph, and later chip-family marketing."
+    },
+    {
+      "id": "wifi-band-and-standard",
+      "claim": "Does Zero W support 802.11ac or 5 GHz Wi-Fi?",
+      "sides": [
+        {
+          "claim": "802.11 b/g/n, single-band 2.4 GHz only.",
+          "sources": [
+            {
+              "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+              "section": "Official product specification: '802.11 b/g/n wireless LAN'"
+            },
+            {
+              "url": "https://www.raspberrypi.com/documentation/computers/zero.html",
+              "section": "Feature changes: 'Single-band (2.4 GHz) 802.11b/g/n Wi-Fi'"
+            },
+            {
+              "url": "https://www.infineon.com/assets/row/public/documents/30/49/infineon-yw43438-single-chip-ieee-802-11-b-g-n-mac-baseband-radio-with-integrated-bluetooth-5-datasheet-en.pdf",
+              "section": "Datasheet body: 'Single-band 2.4 GHz IEEE 802.11b/g/n' and a single shared 2.4 GHz antenna"
+            }
+          ]
+        },
+        {
+          "claim": "Some CYW43438 document titles mention 802.11ac.",
+          "sources": [
+            {
+              "url": "https://www.infineon.com/assets/row/public/documents/30/49/infineon-yw43438-single-chip-ieee-802-11-b-g-n-mac-baseband-radio-with-integrated-bluetooth-5-datasheet-en.pdf",
+              "section": "A datasheet title/filename variant has used '802.11ac' wording, but the body specifies 2.4 GHz 802.11 b/g/n only."
+            }
+          ]
+        }
+      ],
+      "ruling": "Zero W is 2.4 GHz 802.11 b/g/n only. It does not have 5 GHz or 802.11ac. Prefer the official product specification and the datasheet body over any 'ac' wording in a vendor title.",
+      "prefer": "Official product brief and datasheet body."
+    }
+  ],
+  "notes": [
+    "This dataset is for the original Raspberry Pi Zero W (BCM2835, 2017), not Raspberry Pi Zero 2 W (RP3A0).",
+    "All board coordinates use millimetres, origin at the bottom-left corner of the PCB, top view of the component side.",
+    "Where RP-008367-DS does not dimension a part, x/y/w/h are null with a note. Values are never invented.",
+    "Footprint boxes for mini-HDMI and the two micro-USB connectors include the small overhang past the board edge (negative y)."
+  ]
+}

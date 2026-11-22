@@ -1,0 +1,1661 @@
+[
+  {
+    "phys": 1,
+    "bcm": null,
+    "name": "3V3",
+    "type": "power",
+    "alts": {},
+    "default_pull": "none",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      }
+    ]
+  },
+  {
+    "phys": 2,
+    "bcm": null,
+    "name": "5V",
+    "type": "power",
+    "alts": {},
+    "default_pull": "none",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      }
+    ]
+  },
+  {
+    "phys": 3,
+    "bcm": 2,
+    "name": "GP2",
+    "type": "gpio",
+    "alts": {
+      "ALT0": "SDA1",
+      "ALT1": "SA3",
+      "ALT2": "LCD_VSYNC"
+    },
+    "default_pull": "up",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#inputs",
+        "section": "Inputs: GP2 (SDA) and GP3 (SCL) have fixed 1.8 kΩ on-board pull-up resistors to 3.3 V; GPIO pins are 3.3 V logic and are not 5 V tolerant"
+      }
+    ],
+    "note": "Fixed 1.8 kΩ on-board pull-up to 3.3 V (I2C1 SDA). 3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 4,
+    "bcm": null,
+    "name": "5V",
+    "type": "power",
+    "alts": {},
+    "default_pull": "none",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      }
+    ]
+  },
+  {
+    "phys": 5,
+    "bcm": 3,
+    "name": "GP3",
+    "type": "gpio",
+    "alts": {
+      "ALT0": "SCL1",
+      "ALT1": "SA2",
+      "ALT2": "LCD_HSYNC"
+    },
+    "default_pull": "up",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#inputs",
+        "section": "Inputs: GP2 (SDA) and GP3 (SCL) have fixed 1.8 kΩ on-board pull-up resistors to 3.3 V; GPIO pins are 3.3 V logic and are not 5 V tolerant"
+      }
+    ],
+    "note": "Fixed 1.8 kΩ on-board pull-up to 3.3 V (I2C1 SCL). 3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 6,
+    "bcm": null,
+    "name": "GND",
+    "type": "ground",
+    "alts": {},
+    "default_pull": "none",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      }
+    ]
+  },
+  {
+    "phys": 7,
+    "bcm": 4,
+    "name": "GP4",
+    "type": "gpio",
+    "alts": {
+      "ALT0": "GPCLK0",
+      "ALT1": "SA1",
+      "ALT2": "DPI_D0",
+      "ALT5": "ARM_TDI"
+    },
+    "default_pull": "up",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 8,
+    "bcm": 14,
+    "name": "GP14",
+    "type": "gpio",
+    "alts": {
+      "ALT0": "TXD0",
+      "ALT1": "SD6",
+      "ALT2": "DPI_D10",
+      "ALT5": "TXD1"
+    },
+    "default_pull": "down",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 9,
+    "bcm": null,
+    "name": "GND",
+    "type": "ground",
+    "alts": {},
+    "default_pull": "none",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      }
+    ]
+  },
+  {
+    "phys": 10,
+    "bcm": 15,
+    "name": "GP15",
+    "type": "gpio",
+    "alts": {
+      "ALT0": "RXD0",
+      "ALT1": "SD7",
+      "ALT2": "DPI_D11",
+      "ALT5": "RXD1"
+    },
+    "default_pull": "down",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 11,
+    "bcm": 17,
+    "name": "GP17",
+    "type": "gpio",
+    "alts": {
+      "ALT1": "SD9",
+      "ALT2": "DPI_D13",
+      "ALT3": "RTS0",
+      "ALT4": "SPI1_CE1_N",
+      "ALT5": "RTS1"
+    },
+    "default_pull": "down",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 12,
+    "bcm": 18,
+    "name": "GP18",
+    "type": "gpio",
+    "alts": {
+      "ALT0": "PCM_CLK",
+      "ALT1": "SD10",
+      "ALT2": "DPI_D14",
+      "ALT3": "BSCSL SDA / MOSI",
+      "ALT4": "SPI1_CE0_N",
+      "ALT5": "PWM0"
+    },
+    "default_pull": "down",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 13,
+    "bcm": 27,
+    "name": "GP27",
+    "type": "gpio",
+    "alts": {
+      "ALT2": "DPI_D23",
+      "ALT3": "SD1_DAT3",
+      "ALT4": "ARM_TMS"
+    },
+    "default_pull": "down",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 14,
+    "bcm": null,
+    "name": "GND",
+    "type": "ground",
+    "alts": {},
+    "default_pull": "none",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      }
+    ]
+  },
+  {
+    "phys": 15,
+    "bcm": 22,
+    "name": "GP22",
+    "type": "gpio",
+    "alts": {
+      "ALT1": "SD14",
+      "ALT2": "DPI_D18",
+      "ALT3": "SD1_CLK",
+      "ALT4": "ARM_TRST"
+    },
+    "default_pull": "down",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 16,
+    "bcm": 23,
+    "name": "GP23",
+    "type": "gpio",
+    "alts": {
+      "ALT1": "SD15",
+      "ALT2": "DPI_D19",
+      "ALT3": "SD1_CMD",
+      "ALT4": "ARM_RTCK"
+    },
+    "default_pull": "down",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 17,
+    "bcm": null,
+    "name": "3V3",
+    "type": "power",
+    "alts": {},
+    "default_pull": "none",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      }
+    ]
+  },
+  {
+    "phys": 18,
+    "bcm": 24,
+    "name": "GP24",
+    "type": "gpio",
+    "alts": {
+      "ALT1": "SD16",
+      "ALT2": "DPI_D20",
+      "ALT3": "SD1_DAT0",
+      "ALT4": "ARM_TDO"
+    },
+    "default_pull": "down",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 19,
+    "bcm": 10,
+    "name": "GP10",
+    "type": "gpio",
+    "alts": {
+      "ALT0": "SPI0_MOSI",
+      "ALT1": "SD2",
+      "ALT2": "DPI_D6"
+    },
+    "default_pull": "down",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 20,
+    "bcm": null,
+    "name": "GND",
+    "type": "ground",
+    "alts": {},
+    "default_pull": "none",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      }
+    ]
+  },
+  {
+    "phys": 21,
+    "bcm": 9,
+    "name": "GP9",
+    "type": "gpio",
+    "alts": {
+      "ALT0": "SPI0_MISO",
+      "ALT1": "SD1",
+      "ALT2": "DPI_D5"
+    },
+    "default_pull": "down",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 22,
+    "bcm": 25,
+    "name": "GP25",
+    "type": "gpio",
+    "alts": {
+      "ALT1": "SD17",
+      "ALT2": "DPI_D21",
+      "ALT3": "SD1_DAT1",
+      "ALT4": "ARM_TCK"
+    },
+    "default_pull": "down",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 23,
+    "bcm": 11,
+    "name": "GP11",
+    "type": "gpio",
+    "alts": {
+      "ALT0": "SPI0_SCLK",
+      "ALT1": "SD3",
+      "ALT2": "DPI_D7"
+    },
+    "default_pull": "down",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 24,
+    "bcm": 8,
+    "name": "GP8",
+    "type": "gpio",
+    "alts": {
+      "ALT0": "SPI0_CE0_N",
+      "ALT1": "SD0",
+      "ALT2": "DPI_D4"
+    },
+    "default_pull": "up",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 25,
+    "bcm": null,
+    "name": "GND",
+    "type": "ground",
+    "alts": {},
+    "default_pull": "none",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      }
+    ]
+  },
+  {
+    "phys": 26,
+    "bcm": 7,
+    "name": "GP7",
+    "type": "gpio",
+    "alts": {
+      "ALT0": "SPI0_CE1_N",
+      "ALT1": "SWE_N / SRW_N",
+      "ALT2": "DPI_D3"
+    },
+    "default_pull": "up",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 27,
+    "bcm": 0,
+    "name": "GP0",
+    "type": "id_eeprom",
+    "alts": {
+      "ALT0": "SDA0",
+      "ALT1": "SA5",
+      "ALT2": "PCLK"
+    },
+    "default_pull": "up",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      },
+      {
+        "url": "https://github.com/raspberrypi/hats/blob/master/designguide.md",
+        "section": "ID EEPROM / GPIO0 (ID_SD) and GPIO1 (ID_SC) reserved for HAT identification"
+      }
+    ],
+    "note": "Reserved for HAT ID EEPROM (ID_SD / SDA0). Official HAT design guide: the only allowed connections are an ID EEPROM plus 3.9 kΩ pull-ups. Probed as I2C0 at boot. 3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 28,
+    "bcm": 1,
+    "name": "GP1",
+    "type": "id_eeprom",
+    "alts": {
+      "ALT0": "SCL0",
+      "ALT1": "SA4",
+      "ALT2": "DE"
+    },
+    "default_pull": "up",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      },
+      {
+        "url": "https://github.com/raspberrypi/hats/blob/master/designguide.md",
+        "section": "ID EEPROM / GPIO0 (ID_SD) and GPIO1 (ID_SC) reserved for HAT identification"
+      }
+    ],
+    "note": "Reserved for HAT ID EEPROM (ID_SC / SCL0). Official HAT design guide: the only allowed connections are an ID EEPROM plus 3.9 kΩ pull-ups. Probed as I2C0 at boot. 3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 29,
+    "bcm": 5,
+    "name": "GP5",
+    "type": "gpio",
+    "alts": {
+      "ALT0": "GPCLK1",
+      "ALT1": "SA0",
+      "ALT2": "DPI_D1",
+      "ALT5": "ARM_TDO"
+    },
+    "default_pull": "up",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 30,
+    "bcm": null,
+    "name": "GND",
+    "type": "ground",
+    "alts": {},
+    "default_pull": "none",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      }
+    ]
+  },
+  {
+    "phys": 31,
+    "bcm": 6,
+    "name": "GP6",
+    "type": "gpio",
+    "alts": {
+      "ALT0": "GPCLK2",
+      "ALT1": "SOE_N / SE",
+      "ALT2": "DPI_D2",
+      "ALT5": "ARM_RTCK"
+    },
+    "default_pull": "up",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 32,
+    "bcm": 12,
+    "name": "GP12",
+    "type": "gpio",
+    "alts": {
+      "ALT0": "PWM0",
+      "ALT1": "SD4",
+      "ALT2": "DPI_D8",
+      "ALT5": "ARM_TMS"
+    },
+    "default_pull": "down",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 33,
+    "bcm": 13,
+    "name": "GP13",
+    "type": "gpio",
+    "alts": {
+      "ALT0": "PWM1",
+      "ALT1": "SD5",
+      "ALT2": "DPI_D9",
+      "ALT5": "ARM_TCK"
+    },
+    "default_pull": "down",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 34,
+    "bcm": null,
+    "name": "GND",
+    "type": "ground",
+    "alts": {},
+    "default_pull": "none",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      }
+    ]
+  },
+  {
+    "phys": 35,
+    "bcm": 19,
+    "name": "GP19",
+    "type": "gpio",
+    "alts": {
+      "ALT0": "PCM_FS",
+      "ALT1": "SD11",
+      "ALT2": "DPI_D15",
+      "ALT3": "BSCSL SCL / SCLK",
+      "ALT4": "SPI1_MISO",
+      "ALT5": "PWM1"
+    },
+    "default_pull": "down",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 36,
+    "bcm": 16,
+    "name": "GP16",
+    "type": "gpio",
+    "alts": {
+      "ALT1": "SD8",
+      "ALT2": "DPI_D12",
+      "ALT3": "CTS0",
+      "ALT4": "SPI1_CE2_N",
+      "ALT5": "CTS1"
+    },
+    "default_pull": "down",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 37,
+    "bcm": 26,
+    "name": "GP26",
+    "type": "gpio",
+    "alts": {
+      "ALT2": "DPI_D22",
+      "ALT3": "SD1_DAT2",
+      "ALT4": "ARM_TDI"
+    },
+    "default_pull": "down",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 38,
+    "bcm": 20,
+    "name": "GP20",
+    "type": "gpio",
+    "alts": {
+      "ALT0": "PCM_DIN",
+      "ALT1": "SD12",
+      "ALT2": "DPI_D16",
+      "ALT3": "BSCSL / MISO",
+      "ALT4": "SPI1_MOSI",
+      "ALT5": "GPCLK0"
+    },
+    "default_pull": "down",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  },
+  {
+    "phys": 39,
+    "bcm": null,
+    "name": "GND",
+    "type": "ground",
+    "alts": {},
+    "default_pull": "none",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      }
+    ]
+  },
+  {
+    "phys": 40,
+    "bcm": 21,
+    "name": "GP21",
+    "type": "gpio",
+    "alts": {
+      "ALT0": "PCM_DOUT",
+      "ALT1": "SD13",
+      "ALT2": "DPI_D17",
+      "ALT3": "BSCSL / CE_N",
+      "ALT4": "SPI1_SCLK",
+      "ALT5": "GPCLK1"
+    },
+    "default_pull": "down",
+    "src": [
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pin-functions",
+        "section": "40-pin GPIO header / Pin names, types, and typical functions"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio",
+        "section": "40-pin GPIO header (Zero models share the B+ 40-pin header)"
+      },
+      {
+        "url": "https://datasheets.raspberrypi.com/bcm2835/bcm2835-peripherals.pdf",
+        "page": "102-103",
+        "section": "6.2 Alternative Function Assignments (table of Pull, ALT0–ALT5)"
+      },
+      {
+        "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+        "page": "102-103",
+        "section": "BCM2835 ARM Peripherals, 6.2 Alternative Function Assignments"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#gpio-pins",
+        "section": "Display Parallel Interface (DPI): ALT2 on GPIO Bank 0 (GPIO0–27), documented for all 40-pin header Raspberry Pi boards including Zero"
+      },
+      {
+        "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/display-parallel-interface.adoc",
+        "section": "GPIO pins / ALT2 table (GPIO0=PCLK … GPIO27=DPI_D23)"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-on-states",
+        "section": "Power-on states: GPIOs default to inputs; default pulls are those in BCM2835 peripherals §6.2"
+      },
+      {
+        "url": "https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#outputs",
+        "section": "Outputs: an individual GPIO pin can supply up to 16 mA; all GPIO pins combined can supply a maximum total of 50 mA"
+      }
+    ],
+    "note": "3.3 V logic, not 5 V tolerant. Max 16 mA per pin, 50 mA combined across all GPIOs.",
+    "alts_src_note": "ALT2 is listed as <reserved> in BCM2835 ARM Peripherals (2012-02-06) §6.2. Official Raspberry Pi DPI documentation documents ALT2 on GPIO Bank 0 as the Display Parallel Interface for all 40-pin-header Raspberry Pi boards, including Zero. This file uses the official DPI ALT2 names. Official bcm2835 documentation notes that the peripherals specification contains errors."
+  }
+]

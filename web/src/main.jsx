@@ -80,27 +80,27 @@ function Shell() {
   ];
   return (
     <div className="sheet">
-      <div className="crop tl" /><div className="crop tr" /><div className="crop bl" /><div className="crop br" />
       <header className="mast">
         <div>
           <p className="eyebrow">65 × 30</p>
-          <Link to="/" className="wordmark">{t.name}</Link>
+          <Link to="/" className="wordmark">pizero<i>/</i>lab</Link>
           <p className="tag">{t.tag}</p>
         </div>
+        <nav className="index-nav">
+          {links.map(([href, label]) => (
+            <NavLink key={href} to={href} end={href === "/"} className={({ isActive }) => isActive || (href === "/" && location.pathname.startsWith("/board")) ? "on" : ""}>
+              {label}
+            </NavLink>
+          ))}
+        </nav>
         <SearchBox />
         <div className="lang" role="group" aria-label={t.lang}>
           <BoardPicker />
           <button type="button" className={lang === "en" ? "on" : ""} onClick={() => setLang("en")}>EN</button>
           <button type="button" className={lang === "zh-CN" ? "on" : ""} onClick={() => setLang("zh-CN")}>中文</button>
+          <ThemeButton />
         </div>
       </header>
-      <nav className="index-nav">
-        {links.map(([href, label], i) => (
-          <NavLink key={href} to={href} end={href === "/"} className={({ isActive }) => isActive || (href === "/" && location.pathname.startsWith("/board")) ? "on" : ""}>
-            <span>0{i + 1}</span> {label}
-          </NavLink>
-        ))}
-      </nav>
       <div className="spread">
         <main>
           <Routes>
@@ -118,8 +118,24 @@ function Shell() {
         </main>
         <HelpDock />
       </div>
+      <nav className="tabbar">
+        <NavLink to="/" end>Board</NavLink>
+        <NavLink to="/lessons">Learn</NavLink>
+        <NavLink to="/builds">Builds</NavLink>
+        <NavLink to="/settings">Help</NavLink>
+        <NavLink to="/instruments">More</NavLink>
+      </nav>
     </div>
   );
+}
+
+function ThemeButton() {
+  const [theme, setTheme] = useState(() => localStorage.getItem("pz.theme") || "dark");
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem("pz.theme", theme);
+  }, [theme]);
+  return <button type="button" aria-label="Theme" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>{theme === "dark" ? "Day" : "Night"}</button>;
 }
 
 function App() {

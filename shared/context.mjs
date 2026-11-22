@@ -15,10 +15,14 @@ function sourceOf(catalog, id) {
 
 function withSource(catalog, record) {
   if (!record) return null;
+  const listed = Array.isArray(record.src) ? record.src[0] : null;
+  const fromSrc = listed
+    ? { url: listed.url || listed, title: listed.section || listed.title || listed.url || listed }
+    : null;
   const sourceId = record.source || record.source_id || null;
   return {
     ...record,
-    source_record: sourceOf(catalog, sourceId),
+    source_record: fromSrc || sourceOf(catalog, sourceId),
   };
 }
 

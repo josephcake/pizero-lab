@@ -22,6 +22,20 @@ def load():
 
 
 LIMITS, PARTS, BUILDS = load()
+try:
+    HATS = json.loads((DATA / "hats.json").read_text())["parts"]
+except FileNotFoundError:
+    HATS = []
+
+
+def lookup(pid):
+    for part in PARTS:
+        if part["id"] == pid:
+            return part
+    for hat in HATS:
+        if hat["id"] == pid:
+            return hat
+    return None
 
 
 def limit(key):
@@ -274,20 +288,23 @@ def on_board(item, board):
     return board in (item.get("boards") or [])
 
 
+POWER_PINS = {1, 2, 4, 6, 9, 14, 17, 20, 25, 30, 34, 39}
+
+
 def conflicts(body):
     wanted = body.get("part_ids") or []
     board = body.get("board")
     claims = []
     unchecked = []
     for pid in wanted:
-        part = next((p for p in PARTS if p["id"] == pid), None)
+        part = lookup(pid)
         if part and not on_board(part, board):
             unchecked.append({"part_id": pid, "reason": "not for this board"})
             continue
         if not part:
             unchecked.append({"part_id": pid, "reason": "unknown"})
             continue
-        pins = part.get("pins")
+        pins = part.get("pins_phys") or part.get("pins")
         if not pins:
             unchecked.append({
                 "part_id": pid,
@@ -296,10 +313,25 @@ def conflicts(body):
             })
             continue
         claims.append(part)
+    clashes = []
+    for i, left in enumerate(claims):
+        left_pins = set(left.get("pins_phys") or [])
+        left_i2c = set(left.get("i2c_addrs") or [])
+        for right in claims[i + 1:]:
+            shared = {pin for pin in left_pins & set(right.get("pins_phys") or []) if pin not in POWER_PINS}
+            addrs = left_i2c & set(right.get("i2c_addrs") or [])
+            if shared or addrs:
+                clashes.append({
+                    "a": left["id"],
+                    "b": right["id"],
+                    "names": [left.get("name"), right.get("name")],
+                    "pins": sorted(shared),
+                    "i2c": sorted(addrs),
+                })
     return 200, {
-        "conflicts": [],
+        "conflicts": clashes,
         "unchecked": unchecked,
-        "note": "No selected part has a sourced pin map, so there is nothing to collide yet.",
+        "note": "Signal pins and I2C addresses are compared. Shared power and ground pins are not a conflict.",
     }
 
 
