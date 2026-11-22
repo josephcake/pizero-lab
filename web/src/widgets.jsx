@@ -99,12 +99,19 @@ function LogicWidget() {
   function drive() {
     const pin = pins.find((p) => p.physical === selection?.physical);
     if (!pin) return;
-    if (pin.kind === "gpio") {
+    if (pin.physical === 27 || pin.physical === 28) {
       setHit({
         bad: true,
         text: lang === "zh-CN"
-          ? "5 V 高于这只脚所接的 3.3 V 电源，也超出额定范围，可能永久损坏 SoC。引脚 11 / GPIO17 的 ALT4 是 SPI1_CE1_N，不是 SPI0。"
-          : "5 V is above the 3.3 V supply the pin runs from and outside its rated range; it can permanently damage the SoC. Pin 11 / GPIO17 ALT4 is SPI1_CE1_N, not SPI0.",
+          ? "引脚 27 和 28 留给 HAT 的 ID EEPROM（ID_SD / ID_SC）。"
+          : "Pins 27 and 28 are reserved for the HAT ID EEPROM (ID_SD / ID_SC).",
+      });
+    } else if (pin.kind === "gpio") {
+      setHit({
+        bad: true,
+        text: lang === "zh-CN"
+          ? "5 V 高于这只脚所接的 3.3 V 电源，也超出额定范围，可能永久损坏 SoC。"
+          : "5 V is above the 3.3 V supply the pin runs from and outside its rated range; it can permanently damage the SoC.",
       });
     } else if (pin.name === "5V") {
       setHit({
