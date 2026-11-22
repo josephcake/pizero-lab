@@ -113,3 +113,28 @@ Flux's signed-off review, on top of `c6dc269`. `data/pinout.flux.json` was not e
 | #21 Pad size | `ea9df3c` | The legend marks the 1.7 mm pad and 1.0 mm drill as est. |
 | #22 zh-CN | `ed0876e` | Tracks, bill rules, and the builds' difficulty and link labels use zh-CN instead of es. |
 | #23 Underside labels | `d54ede0` `9603fea` | Test pads show PP1, and each J5 pin has one number. |
+
+## Run 14
+
+Lint's live v5 list, on top of `cc3bdd3`. `data/pinout.flux.json` was not edited. L-001, L-003 and L-013 still hold: two Inky boards that share `0x50` conflict, the Inky mounts at the origin with pin 1 at x 8.37, and `parts.json` has no second Inky. The 3D chunk is `board3d-DKWcF-4q.js`, 136.94 KB gzip. The main bundle is `index-CAXH6Nme.js`, 179.41 KB gzip.
+
+| Fix | Commit | What changed |
+| --- | --- | --- |
+| L-002 Build board | `79f77fa` | The build page uses the Explore board map, so the PCB is no longer black and the millimetre labels no longer run together. |
+| L-004 Phone routes | `b3038fb` | More opens a sheet with Parts, Tools, Roadmap and Settings. |
+| L-005 中文 | `01e39f6` | Lessons, tools, settings, pin headings, builds and search types have zh-CN. Leftover es is gone. |
+| L-006 Phone bench | `3818c4c` | The Layers sheet can switch to Bench and fit a tray HAT. |
+| L-007 3D camera | `99955bd` | Resize and a header change keep the orbit. Refit is only the first load and the view buttons. |
+| L-008 HAT bench | `7b58216` | Bare pads unmount a fitted HAT. Each tray row fits that part, and Remove takes it off. |
+| L-009 L-010 L-011 Resistor | `fec75ad` | Fields validate inline, a decimal comma works, a stale result is cleared, and Vf at or above the drive voltage says the LED cannot light. |
+| L-012 Power | `409feee` | A negative or non-numeric USB or HAT current is rejected. |
+| L-014 Search | `0d16be2` | Search matches localized title text. A quote is not a wildcard. |
+| L-015 Lessons | `30a8543` | Back and Next walk every section, including the board, and the bar can fill. |
+| L-016 bounce_time | `4f01ee4` | `1e-3` is 1 ms. Past 80 ms the shown value is the clamp, with a note. |
+| L-017 Zoom dock | `d226110` | At 390 the +/− dock sits at the bottom left, off the CSI. |
+| L-018 Missing pages | `0f6494a` | A bad part, build or pin shows the not-found card. |
+| U-2 Pin page | `7d69d55` | `#/pins/1` reads the same pinout as the inspector. |
+| U-1 Pointer | `9d1bb5c` | `releasePointerCapture` runs only when the element still holds the capture. |
+| L-019 Checkboxes | `fa8b74b` | The box stays 18 px at the left of the label. |
+| L-020 Step wording | `9bbe103` | A failed step uses plain wording. The Inky step places the pHAT. |
+| HAT label | `aa2ceb7` | A long mounted name is ellipsized, with the full title on hover. |
