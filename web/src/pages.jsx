@@ -124,17 +124,12 @@ export function LessonsPage() {
               {lessons.length === 0 && <p className="note">{t.advancedEmpty}</p>}
               {lessons.map((lesson) => {
                 const done = progress.passed?.[lesson.id];
-                const missing = lesson.prereqs.filter((id) => !progress.passed?.[id]);
                 return (
                   <article key={lesson.id} className="card">
                     <h3>{tx(lesson.title, lang)}</h3>
                     <p>{tx(lesson.summary, lang)}</p>
                     <p className="meta">{lesson.est_min} {t.minutes} {done && `· ${t.passed}`}</p>
-                    {missing.length > 0 ? (
-                      <p className="note">{t.locked}. {t.needs} {missing.join(", ")}</p>
-                    ) : (
-                      <Link to={`/lessons/${lesson.id}`}>{t.start}</Link>
-                    )}
+                    <Link to={`/lessons/${lesson.id}`}>{t.start}</Link>
                   </article>
                 );
               })}
@@ -181,10 +176,6 @@ export function LessonPage() {
 
   if (!lesson) return <NotFound />;
   const wrongBoard = mismatch(lesson, lab.catalog.board.id);
-  const missing = lesson.prereqs.filter((pid) => !lab.progress.passed?.[pid]);
-  if (missing.length) {
-    return <p className="page">{t.locked}. {t.needs} {missing.join(", ")}</p>;
-  }
 
   function mark(event) {
     event.preventDefault();
@@ -366,10 +357,10 @@ export function PartPage() {
   return (
     <article className="page record">
       <h1>{tx(part.name, lang)}</h1>
-      <p>{tx(part.summary, lang)}</p>
+      {tx(part.summary, lang) && <p>{tx(part.summary, lang)}</p>}
       {mismatch(part, catalog.board.id) && <SwitchBoard ids={mismatch(part, catalog.board.id)} />}
       <p className="meta">{part.maker || "—"} · {part.zero_w}</p>
-      <p>{tx(part.zero_w_note, lang)}</p>
+      {tx(part.zero_w_note, lang) && tx(part.zero_w_note, lang) !== tx(part.summary, lang) && <p>{tx(part.zero_w_note, lang)}</p>}
       <p>{tx(part.dims_note, lang)}</p>
       <p>{part.price_usd == null ? strings(lang).unpriced : `$${part.price_usd}`}</p>
       {part.product_url && <p><a href={part.product_url}>{part.product_url}</a></p>}

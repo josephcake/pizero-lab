@@ -126,20 +126,37 @@ export function adaptFluxBoard(flux, pinRows) {
   };
 }
 
+function shortBlurb(hat) {
+  const raw = String(hat.compat_note || "")
+    .replace(/^Page:\s*/i, "")
+    .replaceAll('"', "")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (!raw || raw.length > 180) {
+    const header = /header|solder|hammer|pogo/i.test(raw)
+      ? " Needs a soldered or hammered header on the Zero W."
+      : "";
+    return `${hat.name}.${header}`.trim();
+  }
+  const sentence = raw.split(/(?<=\.)\s/)[0] || hat.name;
+  return sentence.length > 140 ? `${sentence.slice(0, 137).trim()}…` : sentence;
+}
+
 export function hatToPart(hat) {
   const dims = hat.dims_mm;
   const p1 = hat.pin1_mm;
   const mountable = !!(dims && dims.w && dims.h && p1 && p1.x != null && p1.y != null);
   const h = mountable ? dims.h : null;
+  const blurb = shortBlurb(hat);
   return {
     id: hat.id,
     name: { en: hat.name, "zh-CN": hat.name },
     maker: hat.maker,
     category: hat.category || "hat",
-    summary: { en: hat.compat_note || hat.name, "zh-CN": hat.compat_note || hat.name },
+    summary: { en: blurb, "zh-CN": blurb },
     boards: ["zero-w"],
     zero_w: hat.zero_w || "unverified",
-    zero_w_note: { en: hat.compat_note || "", "zh-CN": hat.compat_note || "" },
+    zero_w_note: null,
     dims: mountable ? { w_mm: dims.w, h_mm: dims.h } : null,
     dims_note: mountable ? null : { en: "No sourced outline or pin-1 anchor, so this stays in the tray.", "zh-CN": "没有带来源的外形或 1 号针锚点，所以只留在零件盘。" },
     anchors: mountable
