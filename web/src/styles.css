@@ -71,7 +71,8 @@ h1, h2, h3 { font-family: var(--f-display); font-weight: 650; margin: 0 0 8px; }
 .tag { margin: 0; color: var(--ink-3); font-size: 12px; max-width: 36ch; }
 .index-nav { display: flex; gap: 4px; }
 .index-nav a, .lang button, .seg button, .map-tools button { white-space: nowrap; flex: none; }
-:lang(zh) { word-break: keep-all; line-break: strict; }
+:lang(zh) { line-break: strict; }
+:lang(zh) :is(.index-nav a, .tabbar a, button, .seg, .chip, th, dt) { word-break: keep-all; }
 .index-nav a { color: var(--ink-2); text-decoration: none; padding: 6px 10px; border-radius: var(--r-pill); }
 .index-nav a.on { color: var(--ink); border-radius: 0; box-shadow: inset 0 -2px 0 var(--signal); }
 .theme-btn { width: 32px; height: 32px; min-width: 32px; padding: 0; font-size: 18px; line-height: 1; }
