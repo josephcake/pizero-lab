@@ -110,7 +110,7 @@ h1, h2, h3 { font-family: var(--f-display); font-weight: 650; margin: 0 0 8px; }
 .readout { font: var(--t-mono-s); color: var(--ink-2); background: var(--bg-1); padding: 4px 6px; border-radius: 4px; }
 .map-foot { display: flex; justify-content: space-between; align-items: end; padding: 8px 12px 12px; }
 .scale-foot { display: flex; align-items: center; gap: 8px; font: var(--t-mono-s); }
-.scale-foot i { width: 80px; height: 8px; background: var(--ink); display: block; }
+.scale-foot i { height: 8px; background: var(--ink); display: block; flex: none; }
 .minimap { width: 140px; height: 72px; background: var(--bg-1); border-radius: 6px; }
 .minimap rect:first-child { fill: #1b5e3f; }
 .minimap .pz-overlay { fill: none; stroke: var(--signal); stroke-width: 1; }

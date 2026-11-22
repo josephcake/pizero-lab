@@ -142,7 +142,7 @@ export function Explorer() {
         )}
         <div className="map-foot">
           <div>
-            <span className="scale-foot"><i />10 mm</span>
+            <span className="scale-foot"><i style={{ width: `${Math.max(0, 10 * (view?.px || 0))}px` }} />10 mm</span>
             <BomList catalog={lab.catalog} state={lab.bench} lang={lab.lang} t={t} />
           </div>
           <Minimap board={board} view={view} />
