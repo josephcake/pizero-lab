@@ -175,6 +175,8 @@ h1, h2, h3 { font-family: var(--f-display); font-weight: 650; margin: 0 0 8px; }
   .lang { flex: 1 1 100%; flex-wrap: wrap; justify-content: flex-start; }
   .board-picker { flex: 1 1 160px; min-width: 0; }
   .board-picker select { width: 100%; max-width: none; }
+  button, select { min-height: 44px; min-width: 44px; }
+  .map-tools { gap: 8px; }
   .pz-board { min-height: 280px; }
   .map-tools .readout { display: none; }
   .map-foot { flex-wrap: wrap; gap: 8px; }
