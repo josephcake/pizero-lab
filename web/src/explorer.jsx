@@ -151,7 +151,7 @@ export function Explorer() {
       <aside className="inspector">
         <p className="overline">Inspector</p>
         {!selectedPin && !selectedPart && <p className="quiet">Click any part of the board.</p>}
-        {selectedPin && <PinInspector pin={selectedPin} />}
+        {selectedPin && <PinInspector pin={selectedPin} header={board.header} />}
         {selectedPart && <PartInspector part={selectedPart} lang={lab.lang} />}
       </aside>
     </div>
@@ -174,7 +174,7 @@ function countLegend(pins) {
   return rows.map(([id, label, ink, test]) => ({ id, label, ink, count: pins.filter(test).length }));
 }
 
-function PinInspector({ pin }) {
+function PinInspector({ pin, header }) {
   const sources = pin.src || [];
   return (
     <article>
@@ -184,6 +184,9 @@ function PinInspector({ pin }) {
         <div><dt>BCM</dt><dd>{pin.bcm ?? "—"}</dd></div>
         <div><dt>Name</dt><dd>{pin.name}</dd></div>
         <div><dt>Pull</dt><dd>{pin.default_pull || "—"}</dd></div>
+        {header?.padEstimate && (
+          <div><dt>Pad / drill</dt><dd>{header.padD.toFixed(1)} / {header.drillD.toFixed(1)} mm <span className="est">est.</span></dd></div>
+        )}
       </dl>
       {pin.note && <p>{pin.note}</p>}
       <p className="overline">Alternate functions</p>

@@ -120,6 +120,7 @@ h1, h2, h3 { font-family: var(--f-display); font-weight: 650; margin: 0 0 8px; }
 .facts div { display: contents; }
 .facts dt { color: var(--ink-3); }
 .facts dd { margin: 0; }
+.est { font: var(--t-micro); padding: 1px 5px; border: 1px solid var(--line-ui); border-radius: var(--r-pill); color: var(--ink-3); margin-left: 6px; }
 .alts, .sources, .quiz { padding-left: 18px; }
 .quiet { color: var(--ink-3); }
 .warn { color: var(--warn); }
