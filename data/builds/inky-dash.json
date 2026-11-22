@@ -10,7 +10,7 @@
   },
   "difficulty": {
     "en": "Low",
-    "es": "Baja"
+    "zh-CN": "低"
   },
   "zero_w": "unverified",
   "zero_w_note": {
@@ -87,14 +87,14 @@
         {
           "label": {
             "en": "Getting started",
-            "es": "Primeros pasos"
+            "zh-CN": "入门"
           },
           "source": "inky-start"
         },
         {
           "label": {
             "en": "Shop page",
-            "es": "P\u00e1gina de la tienda"
+            "zh-CN": "商店页"
           },
           "source": "inky-shop"
         }

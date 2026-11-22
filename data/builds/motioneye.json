@@ -10,7 +10,7 @@
   },
   "difficulty": {
     "en": "Medium",
-    "es": "Media"
+    "zh-CN": "中"
   },
   "zero_w": "caveat",
   "zero_w_note": {
@@ -55,14 +55,14 @@
         {
           "label": {
             "en": "Zero W product page",
-            "es": "P\u00e1gina del Zero W"
+            "zh-CN": "Zero W 产品页"
           },
           "source": "product-page"
         },
         {
           "label": {
             "en": "Camera cable",
-            "es": "Cable de c\u00e1mara"
+            "zh-CN": "摄像头排线"
           },
           "source": "camera-cable"
         }
@@ -83,7 +83,7 @@
         {
           "label": {
             "en": "motionEye",
-            "es": "motionEye"
+            "zh-CN": "motionEye"
           },
           "source": "motioneye"
         }

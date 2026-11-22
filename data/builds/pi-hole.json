@@ -10,7 +10,7 @@
   },
   "difficulty": {
     "en": "Low, if the installer still runs",
-    "es": "Baja, si el instalador a\u00fan corre"
+    "zh-CN": "低，如果安装程序还能跑"
   },
   "zero_w": "works",
   "zero_w_note": {
@@ -55,14 +55,14 @@
         {
           "label": {
             "en": "Imager steps",
-            "es": "Pasos de Imager"
+            "zh-CN": "Imager 步骤"
           },
           "source": "install-docs"
         },
         {
           "label": {
             "en": "32-bit and 64-bit",
-            "es": "32 y 64 bits"
+            "zh-CN": "32 位和 64 位"
           },
           "source": "os-docs"
         }
@@ -83,14 +83,14 @@
         {
           "label": {
             "en": "Pi-hole",
-            "es": "Pi-hole"
+            "zh-CN": "Pi-hole"
           },
           "source": "pi-hole"
         },
         {
           "label": {
             "en": "Pi-hole docs",
-            "es": "Documentaci\u00f3n de Pi-hole"
+            "zh-CN": "Pi-hole 文档"
           },
           "source": "pi-hole-docs"
         }

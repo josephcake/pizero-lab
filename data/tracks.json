@@ -4,28 +4,28 @@
     {
       "id": "beginner",
       "order": 1,
-      "name": { "en": "Beginner", "es": "Inicial" },
+      "name": { "en": "Beginner", "zh-CN": "入门" },
       "blurb": {
         "en": "Volts, current, and what the header will not forgive.",
-        "es": "Voltios, corriente, y lo que el header no perdona."
+        "zh-CN": "电压、电流，以及排针不会原谅的事。"
       }
     },
     {
       "id": "intermediate",
       "order": 2,
-      "name": { "en": "Intermediate", "es": "Intermedio" },
+      "name": { "en": "Intermediate", "zh-CN": "进阶" },
       "blurb": {
         "en": "Inputs that sit still, and contacts that do not.",
-        "es": "Entradas que se quedan quietas, y contactos que no."
+        "zh-CN": "稳住的输入，和稳不住的触点。"
       }
     },
     {
       "id": "advanced",
       "order": 3,
-      "name": { "en": "Advanced", "es": "Avanzado" },
+      "name": { "en": "Advanced", "zh-CN": "高级" },
       "blurb": {
         "en": "No lessons in this track yet. Later runs add them as data files.",
-        "es": "Todavía no hay lecciones en esta vía. Se añadirán como archivos de datos."
+        "zh-CN": "这条路径还没有课程。以后作为数据文件补上。"
       }
     }
   ]

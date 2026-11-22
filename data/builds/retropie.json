@@ -10,7 +10,7 @@
   },
   "difficulty": {
     "en": "Medium",
-    "es": "Media"
+    "zh-CN": "中"
   },
   "zero_w": "caveat",
   "zero_w_note": {
@@ -68,7 +68,7 @@
         {
           "label": {
             "en": "RetroPie Pi Zero",
-            "es": "RetroPie Pi Zero"
+            "zh-CN": "RetroPie Pi Zero"
           },
           "source": "retropie-zero"
         }

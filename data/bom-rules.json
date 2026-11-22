@@ -7,7 +7,7 @@
       "add_part_id": "gpio-header-2x20",
       "note": {
         "en": "Fitting a header, soldered or hammered, needs a 2×20 pin kit. Bare pads do not.",
-        "es": "Poner un header, soldado o a presión, exige un kit de 2×20 pines. Las almohadillas desnudas no."
+        "zh-CN": "焊接或压接排针需要一套 2×20 针。裸焊盘不需要。"
       }
     },
     {
@@ -16,7 +16,7 @@
       "add_part_id": "camera-cable-standard-mini",
       "note": {
         "en": "A 15-pin Raspberry Pi camera needs the Zero camera cable. The product page says the cable supplied with cameras does not fit the Zero connector.",
-        "es": "Una cámara Raspberry Pi de 15 pines necesita el cable para Zero. La página del producto dice que el cable que viene con las cámaras no entra en el conector del Zero."
+        "zh-CN": "15 针 Raspberry Pi 摄像头需要 Zero 摄像头排线。产品页写明摄像头自带的线插不进 Zero 的接口。"
       }
     }
   ]
