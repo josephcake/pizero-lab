@@ -98,11 +98,11 @@ export function Explorer() {
           <li key={row.id}><i style={{ background: row.ink }} />{t[row.label]}<b>{row.count}</b></li>
         ))}
       </ul>
-      <p className="overline">{t.tray}</p>
+      <p className="overline">{t.tray} <span className="provisional">{t.provisional}</span></p>
       <ul className="tray-list">
         {hats.filter((hat) => hat.dims).slice(0, 8).map((hat) => (
           <li key={hat.id}>
-            <Link to={`/parts/${hat.id}`}>{tx(hat.name, lab.lang)} <em>{t.provisional}</em></Link>
+            <Link to={`/parts/${hat.id}`}>{tx(hat.name, lab.lang)}</Link>
             <button type="button" onClick={() => fitPart(hat)}>{t.fit}</button>
           </li>
         ))}

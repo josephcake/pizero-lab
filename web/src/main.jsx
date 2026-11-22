@@ -4,7 +4,7 @@ import { HashRouter, Link, NavLink, Route, Routes, useLocation } from "react-rou
 import { strings } from "./i18n.js";
 import { searchCatalog } from "./staticCatalog.js";
 import { HelpDock } from "./help.jsx";
-import { BoardPage, BuildPage, BuildsPage, InstrumentsPage, LessonPage, LessonsPage, PartPage, PinPage, RoadmapPage, SettingsPage } from "./pages.jsx";
+import { BoardPage, BuildPage, BuildsPage, InstrumentsPage, LessonPage, LessonsPage, NotFound, PartPage, PinPage, RoadmapPage, SettingsPage } from "./pages.jsx";
 import { LabProvider, useLab } from "./state.jsx";
 import "./styles.css";
 
@@ -121,6 +121,7 @@ function Shell() {
             <Route path="/settings" element={<SettingsPage />} />
             <Route path="/parts/:id" element={<PartPage />} />
             <Route path="/pins/:physical" element={<PinPage />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <HelpDock />
@@ -137,12 +138,13 @@ function Shell() {
 }
 
 function ThemeButton() {
-  const [theme, setTheme] = useState(() => localStorage.getItem("pz.theme") || "dark");
+  const [theme, setTheme] = useState(() => localStorage.getItem("pz.theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     localStorage.setItem("pz.theme", theme);
   }, [theme]);
-  return <button type="button" aria-label="Theme" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>{theme === "dark" ? "Day" : "Night"}</button>;
+  const night = theme === "dark";
+  return <button type="button" className="theme-btn" aria-label={night ? "Day" : "Night"} onClick={() => setTheme(night ? "light" : "dark")}>{night ? "☀" : "☾"}</button>;
 }
 
 function App() {

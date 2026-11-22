@@ -146,6 +146,19 @@ export function LessonsPage() {
   );
 }
 
+export function NotFound() {
+  const { lang } = useLab();
+  const t = strings(lang);
+  return (
+    <div className="page">
+      <article className="card">
+        <h1>{t.missing}</h1>
+        <Link to="/">{t.backBoard}</Link>
+      </article>
+    </div>
+  );
+}
+
 export function LessonPage() {
   const { id } = useParams();
   const lab = useLab();
@@ -166,7 +179,7 @@ export function LessonPage() {
     lab.setStep({ kind: "lesson", lessonId: id, section });
   }, [id, section]);
 
-  if (!lesson) return null;
+  if (!lesson) return <NotFound />;
   const wrongBoard = mismatch(lesson, lab.catalog.board.id);
   const missing = lesson.prereqs.filter((pid) => !lab.progress.passed?.[pid]);
   if (missing.length) {

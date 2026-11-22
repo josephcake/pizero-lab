@@ -114,6 +114,8 @@ export const copy = {
     skip: "Skip to board",
     boardKeys: "Board, arrow keys move between pins",
     focused: "focused",
+    missing: "That page isn't on the bench.",
+    backBoard: "Back to the board",
   },
 
   "zh-CN": {
@@ -197,6 +199,8 @@ export const copy = {
     skip: "跳到板子",
     boardKeys: "板子，方向键在引脚之间移动",
     focused: "焦点",
+    missing: "这一页不在工作台上。",
+    backBoard: "回到板子",
     quizNeed: "请回答每一题。",
     quizPass: "通过。徽章记在这条路径上。",
     quizFail: "还没过。错题下面写了原因。",
