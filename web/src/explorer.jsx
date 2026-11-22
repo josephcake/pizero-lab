@@ -134,6 +134,9 @@ export function Explorer() {
             {legend.map((row) => (
               <li key={row.id}><i style={{ background: row.ink }} />{t[row.label]}<b>{row.count}</b></li>
             ))}
+            {board.header?.padEstimate && (
+              <li>{t.padDrill} {board.header.padD.toFixed(1)} / {board.header.drillD.toFixed(1)} mm <span className="est">{t.est}</span></li>
+            )}
           </ul>
         </>
       )}
