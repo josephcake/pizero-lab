@@ -9,11 +9,11 @@ import { BoardMap, Minimap } from "./boardmap.jsx";
 import { BomList } from "./workbench.jsx";
 
 const LAYERS = [
-  ["components", "Components"],
-  ["pads", "Pads & holes"],
-  ["silk", "Silkscreen"],
-  ["pins", "Pin functions"],
-  ["measurements", "Measurements"],
+  ["components", "layerComponents"],
+  ["pads", "layerPads"],
+  ["silk", "layerSilk"],
+  ["pins", "layerPins"],
+  ["measurements", "layerMeasure"],
 ];
 
 export function Explorer() {
@@ -85,24 +85,24 @@ export function Explorer() {
           </button>
         ))}
       </div>
-      <p className="overline">Layers</p>
-      {LAYERS.map(([id, label]) => (
+      <p className="overline">{t.layers}</p>
+      {LAYERS.map(([id, key]) => (
         <label key={id} className="layer">
           <input type="checkbox" checked={!!layers[id]} onChange={() => toggleLayer(id)} />
-          {label}
+          {t[key]}
         </label>
       ))}
-      <p className="overline">Legend</p>
+      <p className="overline">{t.legend}</p>
       <ul className="legend">
         {legend.map((row) => (
-          <li key={row.id}><i style={{ background: row.ink }} />{row.label}<b>{row.count}</b></li>
+          <li key={row.id}><i style={{ background: row.ink }} />{t[row.label]}<b>{row.count}</b></li>
         ))}
       </ul>
       <p className="overline">{t.tray}</p>
       <ul className="tray-list">
         {hats.filter((hat) => hat.dims).slice(0, 8).map((hat) => (
           <li key={hat.id}>
-            <Link to={`/parts/${hat.id}`}>{tx(hat.name, lab.lang)} <em>provisional</em></Link>
+            <Link to={`/parts/${hat.id}`}>{tx(hat.name, lab.lang)} <em>{t.provisional}</em></Link>
             <button type="button" onClick={() => fitPart(hat)}>{t.fit}</button>
           </li>
         ))}
@@ -134,8 +134,8 @@ export function Explorer() {
         />
         {sheet && (
           <>
-            <button type="button" className="sheet-backdrop" aria-label="Close" onClick={() => setSheet(false)} />
-            <div className="layers-sheet" role="dialog" aria-label="Layers">
+            <button type="button" className="sheet-backdrop" aria-label={t.close} onClick={() => setSheet(false)} />
+            <div className="layers-sheet" role="dialog" aria-label={t.layers}>
               {rail}
             </div>
           </>
@@ -149,8 +149,8 @@ export function Explorer() {
         </div>
       </div>
       <aside className="inspector">
-        <p className="overline">Inspector</p>
-        {!selectedPin && !selectedPart && <p className="quiet">Click any part of the board.</p>}
+        <p className="overline">{t.inspector}</p>
+        {!selectedPin && !selectedPart && <p className="quiet">{t.inspectEmpty}</p>}
         {selectedPin && <PinInspector pin={selectedPin} header={board.header} />}
         {selectedPart && <PartInspector part={selectedPart} lang={lab.lang} />}
       </aside>
@@ -165,36 +165,37 @@ function nameOf(value) {
 
 function countLegend(pins) {
   const rows = [
-    ["5V", "5V power", "var(--ov-5v)", (p) => p.name === "5V"],
-    ["3V3", "3V3 power", "var(--ov-3v3)", (p) => p.name === "3V3"],
-    ["GND", "Ground", "var(--ov-gnd)", (p) => p.name === "GND"],
-    ["GPIO", "GPIO", "var(--ov-gpio)", (p) => (p.type === "gpio" || p.kind === "gpio") && p.physical !== 27 && p.physical !== 28],
-    ["ID", "ID EEPROM", "var(--ov-id)", (p) => p.physical === 27 || p.physical === 28],
+    ["5V", "leg5v", "var(--ov-5v)", (p) => p.name === "5V"],
+    ["3V3", "leg3v3", "var(--ov-3v3)", (p) => p.name === "3V3"],
+    ["GND", "legGnd", "var(--ov-gnd)", (p) => p.name === "GND"],
+    ["GPIO", "legGpio", "var(--ov-gpio)", (p) => (p.type === "gpio" || p.kind === "gpio") && p.physical !== 27 && p.physical !== 28],
+    ["ID", "legId", "var(--ov-id)", (p) => p.physical === 27 || p.physical === 28],
   ];
   return rows.map(([id, label, ink, test]) => ({ id, label, ink, count: pins.filter(test).length }));
 }
 
 function PinInspector({ pin, header }) {
+  const t = strings(useLab().lang);
   const sources = pin.src || [];
   return (
     <article>
       <h2>Pin {pin.physical} · {pin.name}</h2>
       <dl className="facts">
-        <div><dt>Physical</dt><dd>{pin.physical}</dd></div>
-        <div><dt>BCM</dt><dd>{pin.bcm ?? "—"}</dd></div>
-        <div><dt>Name</dt><dd>{pin.name}</dd></div>
-        <div><dt>Pull</dt><dd>{pin.default_pull || "—"}</dd></div>
+        <div><dt>{t.physical}</dt><dd>{pin.physical}</dd></div>
+        <div><dt>{t.bcm}</dt><dd>{pin.bcm ?? "—"}</dd></div>
+        <div><dt>{t.nameLabel}</dt><dd>{pin.name}</dd></div>
+        <div><dt>{t.pullLabel}</dt><dd>{pin.default_pull || "—"}</dd></div>
         {header?.padEstimate && (
-          <div><dt>Pad / drill</dt><dd>{header.padD.toFixed(1)} / {header.drillD.toFixed(1)} mm <span className="est">est.</span></dd></div>
+          <div><dt>{t.padDrill}</dt><dd>{header.padD.toFixed(1)} / {header.drillD.toFixed(1)} mm <span className="est">{t.est}</span></dd></div>
         )}
       </dl>
       {pin.note && <p>{pin.note}</p>}
-      <p className="overline">Alternate functions</p>
+      <p className="overline">{t.alts}</p>
       <ul className="alts">
         {Object.entries(pin.alt_matrix || {}).map(([alt, name]) => <li key={alt}><b>{alt}</b> {name}</li>)}
-        {Object.keys(pin.alt_matrix || {}).length === 0 && <li>none</li>}
+        {Object.keys(pin.alt_matrix || {}).length === 0 && <li>{t.none}</li>}
       </ul>
-      <p className="overline">Sources ({sources.length})</p>
+      <p className="overline">{t.sources} ({sources.length})</p>
       <ul className="sources">
         {sources.map((src) => (
           <li key={src.url}><a href={src.url}>{src.section || src.url}</a></li>

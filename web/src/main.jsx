@@ -55,7 +55,7 @@ function BoardPicker() {
           const live = Boolean(catalog.boards.models[model.id]);
           return (
             <option key={model.id} value={model.id} disabled={!live}>
-              {txName(model, lang)}{live ? "" : lang === "zh-CN" ? " · 即将推出" : " · coming soon"}
+              {txName(model, lang)}{live ? "" : ` · ${t.coming}`}
             </option>
           );
         })}
@@ -72,6 +72,9 @@ function Shell() {
   const { lang, setLang, error, catalog } = useLab();
   const t = strings(lang);
   const location = useLocation();
+  useEffect(() => {
+    document.documentElement.lang = lang === "zh-CN" ? "zh" : "en";
+  }, [lang]);
   if (error) return <p className="page">{t.catalogDown}</p>;
   if (!catalog) return <p className="page">{t.loading}</p>;
   const links = [
@@ -122,11 +125,11 @@ function Shell() {
         <HelpDock />
       </div>
       <nav className="tabbar">
-        <NavLink to="/" end>Board</NavLink>
-        <NavLink to="/lessons">Learn</NavLink>
-        <NavLink to="/builds">Builds</NavLink>
-        <NavLink to="/settings">Help</NavLink>
-        <NavLink to="/roadmap">More</NavLink>
+        <NavLink to="/" end>{t.board}</NavLink>
+        <NavLink to="/lessons">{t.learn}</NavLink>
+        <NavLink to="/builds">{t.builds}</NavLink>
+        <NavLink to="/settings">{t.tabHelp}</NavLink>
+        <NavLink to="/roadmap">{t.more}</NavLink>
       </nav>
     </div>
   );
