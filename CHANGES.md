@@ -83,3 +83,33 @@ The Top view is lit again, and the underside is a list. `zero-w.flux.json` and `
 | Lights | `02fdbcc` | The key light is in the board group, so the Y-up rotation carries the old Z-up aim. A weaker fill shines from below. On the Top view, bare pads read (172, 145, 63) and grey faces read (104, 110, 117). |
 | Test-pad picking | `92325c4` | A bottom disc that has coordinates is pushed to pickables as well as tagged. The click handler is unchanged. |
 | Underside record | `2883487` | Test pads are on the bottom, and every position is still null, so nothing new is drawn. Bottom opens an Underside inspector: PP1 5V, PP5 GND, PP6 GND, PP8 3V3, PP9 1V8, no bottom parts, the derived J5 footprint, and the printed marks. |
+
+## Run 13
+
+Flux's signed-off review, on top of `c6dc269`. `data/pinout.flux.json` was not edited. The 3D chunk is `board3d-s-gajkpP.js`, 136.90 KB gzip. The main bundle is `index-CEKnTXdv.js`, 178.10 KB gzip.
+
+| Fix | Commit | What changed |
+| --- | --- | --- |
+| #1 Pin 1 x | `a82fce7` | Every mountable HAT pin 1 x is 8.37 mm. The Inky mounts at the origin, 65 mm wide, flush with the CSI edge. |
+| #2 Shared buses | `67bc103` | I2C pins 3 and 5 conflict only when addresses collide. SPI 19, 21 and 23 stay shared. The same CE pin and two ID EEPROMs still conflict. |
+| #3 Pin check | `8c4c009` | What you already own renders clash.conflicts. |
+| #4 Resistor warning | `54c4b8b` | A drive voltage above 3.3 V warns that GPIO pins output 3.3 V and are not 5 V tolerant. |
+| #5 PWM colour | `98d3e8b` | Pins 12, 32, 33 and 35 are coloured PWM before SPI1. |
+| #6 Divider | `93c5fb8` | The logic-level divider is 2.2 kΩ and 3.3 kΩ: 3.0 V at 5.0 V, 3.15 V at 5.25 V. |
+| #7 Pi-hole | `22e2ab8` | zero_w is works. The docs list an armv6 pihole-FTL build and a 512 MB minimum. |
+| #8 motionEye | `732ad9a` | zero_w is caveat. ARMv6/ARMv7 32-bit needs extra build deps. Heavy on one core is Opinion. |
+| #9 One Inky | `14b3569` | parts.json inky-phat is gone. The record is hats.json pimoroni-inky-phat, 65×30×8.5 mm. |
+| #10 Inky build | `bf055f2` | The dashboard mounts with host gpio-pin1 and part pin1. Pin 1 is (8.37, 25.23) mm and all 40 pads are drawn. |
+| #11 RetroPie | `7968ea8` | The header outline is measured, x 7.11, y 24.0, 50.8 × 5.0 mm. Only the body height is unpublished. |
+| #12 Drive widget | `902b7b1` | The pin 11 SPI1 sentence is gone. Pins 27 and 28 are reserved for the HAT ID EEPROM. |
+| #13 Radio | `ca0445b` | The live radio function says Wi-Fi 802.11 b/g/n plus Bluetooth 4.1 and BLE. board.json is only the alias. |
+| #14 Antenna | `841b4cd` | An Antenna control opens the inspector. Nothing is drawn. The outline is not dimensioned. |
+| #15 Stale board | `3499771` | data/boards/zero-w.json is deleted. catalog.mjs loads the flux record. |
+| #16 Price | `1e5daa5` | A price shows as $20.00 USD, then the retailer or price source, then the date. |
+| #17 microSD | `ab1bc1b` | The card's product_url is null. |
+| #18 HAT height | `ff2dc35` | HATs that are not 30 or 56.5 mm tall get pin 1 y = height − 4.77, marked estimate. |
+| #19 Power | `b053b89` | The budget has a user-entered + HAT/peripheral mA row. |
+| #20 GPS HAT | `07ac797` | zero_w is caveat. GPIO14/15 need a UART config step. Marked Estimate. |
+| #21 Pad size | `ea9df3c` | The legend marks the 1.7 mm pad and 1.0 mm drill as est. |
+| #22 zh-CN | `ed0876e` | Tracks, bill rules, and the builds' difficulty and link labels use zh-CN instead of es. |
+| #23 Underside labels | `d54ede0` `9603fea` | Test pads show PP1, and each J5 pin has one number. |
