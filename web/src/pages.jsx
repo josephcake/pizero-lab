@@ -454,7 +454,7 @@ export function InstrumentsPage() {
       <form onSubmit={runPower} className="widget">
         <h2>{t.power}</h2>
         <label><input type="checkbox" checked={hdmi} onChange={(e) => setHdmi(e.target.checked)} /> HDMI</label>
-        <label><input type="checkbox" checked={camera} onChange={(e) => setCamera(e.target.checked)} /> Camera</label>
+        <label><input type="checkbox" checked={camera} onChange={(e) => setCamera(e.target.checked)} /> {t.camera}</label>
         <label>{t.usbMa} <input value={usb} onChange={(e) => setUsb(e.target.value)} />{powerFields.usb && <em className="warn">{t.fieldBad}</em>}</label>
         <label>{t.hatMa} <input value={hat} onChange={(e) => setHat(e.target.value)} inputMode="decimal" />{powerFields.hat && <em className="warn">{t.fieldBad}</em>}</label>
         <button type="submit">{t.run}</button>
