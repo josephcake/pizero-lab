@@ -99,6 +99,18 @@ export function reducer(state, action, catalog) {
     if (!HEADER_METHODS.includes(action.method)) {
       return { state, error: { code: "bad-header" } };
     }
+    if (action.method === "bare") {
+      const dropped = state.mounts.filter((mount) => partById(catalog, mount.partId)?.requires_header);
+      if (dropped.length) {
+        const gone = new Set(dropped.map((mount) => mount.partId));
+        const mounts = state.mounts.filter((mount) => !gone.has(mount.partId));
+        const jobPartIds = state.jobPartIds.filter((id) => !gone.has(id) || mounts.some((mount) => mount.partId === id));
+        return {
+          state: withLog({ ...state, header: "bare", mounts, jobPartIds }, action),
+          error: { code: "unmounted-for-bare" },
+        };
+      }
+    }
     return { state: withLog({ ...state, header: action.method }, action), error: null };
   }
 

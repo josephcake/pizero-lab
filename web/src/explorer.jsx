@@ -112,7 +112,12 @@ export function Explorer() {
       <p className="overline">{t.header}</p>
       <div className="seg">
         {[["bare", "bareShort"], ["solder", "solderShort"], ["hammer", "hammerShort"]].map(([method, key]) => (
-          <button key={method} type="button" className={lab.bench.header === method ? "on" : ""} onClick={() => lab.dispatch({ type: "setHeader", method })}>
+          <button key={method} type="button" className={lab.bench.header === method ? "on" : ""} onClick={() => {
+            const result = lab.dispatch({ type: "setHeader", method });
+            setMountNote(result?.error?.code === "unmounted-for-bare"
+              ? (lab.lang === "zh-CN" ? "裸焊盘留不住已装的板，已经卸下。" : "A fitted HAT cannot stay on bare pads, so it was removed.")
+              : "");
+          }}>
             {t[key]}
           </button>
         ))}
@@ -146,14 +151,21 @@ export function Explorer() {
       </p>
       {mode === "bench" && (
         <>
-          <button type="button" onClick={() => { const hat = hats.find((item) => item.dims); if (hat) fitPart(hat); }}>{t.fitHat}</button>
           <ul className="tray-list">
             {hats.filter((hat) => hat.dims).slice(0, 8).map((hat) => (
               <li key={hat.id}>
-                <Link to={`/parts/${hat.id}`}>{tx(hat.name, lab.lang).replaceAll("-", "\u2011")}</Link>
+                <button type="button" onClick={() => fitPart(hat)}>{tx(hat.name, lab.lang).replaceAll("-", "\u2011")}</button>
               </li>
             ))}
           </ul>
+          {lab.bench.mounts.map((mount) => {
+            const part = lab.catalog.parts.find((item) => item.id === mount.partId);
+            return (
+              <button key={mount.id} type="button" onClick={() => { lab.dispatch({ type: "remove", mountId: mount.id }); setMountNote(""); }}>
+                {t.remove} {part ? tx(part.name, lab.lang) : mount.partId}
+              </button>
+            );
+          })}
         </>
       )}
       {mountNote && <p className="warn">{mountNote}</p>}
