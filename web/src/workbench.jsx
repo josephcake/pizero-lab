@@ -122,6 +122,9 @@ export function Workbench({ state, onDispatch, compact = false }) {
   function onPointerUp(event) {
     pointers.current.delete(event.pointerId);
     drag.current = null;
+    if (event.currentTarget?.hasPointerCapture?.(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
   }
 
   const bar = useMemo(() => {

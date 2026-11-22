@@ -83,6 +83,12 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return undefined;
+    const releaseCapture = canvas.releasePointerCapture?.bind(canvas);
+    if (releaseCapture) {
+      canvas.releasePointerCapture = (pointerId) => {
+        if (canvas.hasPointerCapture?.(pointerId)) releaseCapture(pointerId);
+      };
+    }
     let contentGeoms = [];
     let contentMats = [];
     const pickables = [];

@@ -174,8 +174,18 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
           drag.current = { ...drag.current, x: event.clientX, y: event.clientY, view };
           setView({ ...view, x: view.x - dx, y: view.y - dy });
         }}
-        onPointerUp={() => { drag.current = null; }}
-        onPointerCancel={() => { drag.current = null; }}
+        onPointerUp={(event) => {
+          if (drag.current?.captured && event.currentTarget.hasPointerCapture?.(drag.current.id)) {
+            event.currentTarget.releasePointerCapture(drag.current.id);
+          }
+          drag.current = null;
+        }}
+        onPointerCancel={(event) => {
+          if (drag.current?.captured && event.currentTarget.hasPointerCapture?.(drag.current.id)) {
+            event.currentTarget.releasePointerCapture(drag.current.id);
+          }
+          drag.current = null;
+        }}
       >
         <defs>
           <linearGradient id="pz-mask" x1="0" y1="0" x2="1" y2="1">
