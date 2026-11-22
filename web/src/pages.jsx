@@ -340,7 +340,8 @@ export function BuildPage() {
       <h1>{tx(build.title, lab.lang)}</h1>
       {mismatch(build, lab.catalog.board.id) && <SwitchBoard ids={mismatch(build, lab.catalog.board.id)} />}
       <p>{tx(build.summary, lab.lang)}</p>
-      <p className="note">{tx(build.zero_w_note, lab.lang)}</p>
+      {tx(build.zero_w_note, lab.lang) && <p className="note">{tx(build.zero_w_note, lab.lang)}</p>}
+      {build.compat_url && <p><a href={build.compat_url}>{tx(build.compat_label, lab.lang) || build.compat_url}</a></p>}
       {source && <p><a href={source.url}>{source.title}</a></p>}
       <BomList catalog={lab.catalog} state={replaySteps(build, build.steps.length - 1, lab.catalog).state} lang={lab.lang} t={t} approx />
       <Workbench state={played.state} onDispatch={() => {}} compact />
