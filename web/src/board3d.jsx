@@ -111,9 +111,13 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
     controls.touches = { ONE: TOUCH.ROTATE, TWO: TOUCH.DOLLY_PAN };
 
     scene.add(new AmbientLight(0xffffff, 0.72));
+    // Lights ride in boardGroup so Rx(-PI/2) carries the old Z-up key into Y-up.
     const key = new DirectionalLight(0xffffff, 1.15);
     key.position.set(40, -30, 80);
-    scene.add(key);
+    boardGroup.add(key);
+    const fill = new DirectionalLight(0xffffff, 0.9);
+    fill.position.set(40, -30, -80);
+    boardGroup.add(fill);
 
     let frame = 0;
     const requestRender = () => {
