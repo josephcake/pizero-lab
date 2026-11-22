@@ -162,6 +162,7 @@ export function Workbench({ state, onDispatch, compact = false }) {
               selected={selection}
               onSelect={setSelection}
               chrome={false}
+              contain
             />
           </div>
         ) : (

@@ -216,7 +216,7 @@ button.underside-link { min-height: 0; min-width: 0; padding: 0; border: 0; back
 .sheet-backdrop { position: fixed; inset: 0; padding: 0; border: 0; border-radius: 0; background: rgb(0 0 0 / .45); z-index: 20; }
 .layers-sheet { position: fixed; z-index: 21; left: 0; right: 0; bottom: 0; max-height: 60dvh; overflow: auto; background: var(--bg-1); border-radius: 14px 14px 0 0; padding: 12px 14px 20px; animation: sheet-in 220ms var(--ease-out); }
 .bench-caption { color: var(--ink-3); font: var(--t-small); margin: 8px 0; }
-.compact-board { height: 460px; background: var(--bench); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+.compact-board { width: min(100%, 560px); aspect-ratio: 65 / 36; height: auto; margin-inline: auto; background: var(--bench); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
 .compact-board .map-wrap, .compact-board .pz-board { height: 100%; }
 .bench-mat { fill: var(--bench); }
 .pcb { fill: #1b5e3f; }

@@ -33,7 +33,7 @@ function roundRect(x, y, w, h, r) {
   return `M ${x + rr} ${y} H ${x + w - rr} A ${rr} ${rr} 0 0 1 ${x + w} ${y + rr} V ${y + h - rr} A ${rr} ${rr} 0 0 1 ${x + w - rr} ${y + h} H ${x + rr} A ${rr} ${rr} 0 0 1 ${x} ${y + h - rr} V ${y + rr} A ${rr} ${rr} 0 0 1 ${x + rr} ${y} Z`;
 }
 
-export function BoardMap({ board, pinout, header, mounts, parts, layers, selected, onSelect, onView, onOpenLayers, mode = "explore", onMode, onMeasure, viewToggle = null, chrome = true }) {
+export function BoardMap({ board, pinout, header, mounts, parts, layers, selected, onSelect, onView, onOpenLayers, mode = "explore", onMode, onMeasure, viewToggle = null, chrome = true, contain = false }) {
   const t = strings(useLab().lang);
   const svgRef = useRef(null);
   const [view, setView] = useState(null);
@@ -51,10 +51,21 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
     if (!el) return;
     const rect = el.getBoundingClientRect();
     if (!rect.width) return;
-    const margin = 1;
-    const w = W + margin * 2;
-    const h = w * (rect.height / rect.width);
-    setView({ x: -margin, y: (H - h) / 2, w, h });
+    const margin = contain ? 3 : 1;
+    const boxAspect = rect.width / rect.height;
+    const contentW = W + margin * 2;
+    const contentH = H + margin * 2;
+    let w = contentW;
+    let h = w / boxAspect;
+    if (contain && h < contentH) {
+      h = contentH;
+      w = h * boxAspect;
+    }
+    if (!contain) {
+      w = contentW;
+      h = w * (rect.height / rect.width);
+    }
+    setView({ x: (W - w) / 2, y: (H - h) / 2, w, h });
   }
 
   useEffect(() => {
