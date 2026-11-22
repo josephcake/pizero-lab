@@ -177,24 +177,30 @@ function LogicWidget() {
 
 export function PinFacts({ physical }) {
   const { catalog, lang } = useLab();
+  const t = strings(lang);
   const pin = catalog.pinout.pins.find((p) => p.physical === Number(physical));
   if (!pin) return null;
-  const source = catalog.sources[pin.source];
+  const sources = pin.src || [];
   return (
     <article className="record">
       <h3>Pin {pin.physical} · {pin.name}</h3>
-      <p>{pin.bcm == null ? pin.kind : `BCM ${pin.bcm}`}</p>
-      <ul>{pin.typical_functions.map((fn) => <li key={fn}>{fn}</li>)}</ul>
-      {pin.alt_matrix && (
-        <ul>
-          {Object.entries(pin.alt_matrix).map(([alt, name]) => (
-            <li key={alt}><b>{alt}</b> {name}</li>
-          ))}
-        </ul>
-      )}
-      {pin.typical_functions.length === 0 && <p>{strings(lang).unknown}</p>}
-      <p className="note">{pin.alt_matrix_note}</p>
-      {source && <a href={source.url}>{source.title}</a>}
+      <dl className="facts">
+        <div><dt>{t.physical}</dt><dd>{pin.physical}</dd></div>
+        <div><dt>{t.bcm}</dt><dd>{pin.bcm ?? "—"}</dd></div>
+        <div><dt>{t.nameLabel}</dt><dd>{pin.name}</dd></div>
+        <div><dt>{t.pullLabel}</dt><dd>{pin.default_pull || "—"}</dd></div>
+      </dl>
+      {pin.note && <p>{pin.note}</p>}
+      <p className="overline">{t.alts}</p>
+      <ul>
+        {Object.entries(pin.alt_matrix || {}).map(([alt, name]) => (
+          <li key={alt}><b>{alt}</b> {name}</li>
+        ))}
+        {Object.keys(pin.alt_matrix || {}).length === 0 && <li>{t.none}</li>}
+      </ul>
+      <ul className="sources">
+        {sources.map((src) => <li key={src.url}><a href={src.url}>{src.section || src.url}</a></li>)}
+      </ul>
     </article>
   );
 }
