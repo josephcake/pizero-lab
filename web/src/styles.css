@@ -34,8 +34,8 @@
   --ov-5v:#ff6b6b; --ov-3v3:#ffa24a; --ov-gnd:#9aa5b4; --ov-gpio:#62c6ff;
   --ov-i2c:#b79cff; --ov-spi:#ff8fd0; --ov-uart:#5fe0b4; --ov-pwm:#ffd166; --ov-id:#8fb3d9;
   --ov-halo:#0b0e13; --ov-select:#62c6ff; --ov-ghost:#ffb44a; --ov-bad:#ff7a6b;
-  --f-display:"Familjen Grotesk",ui-sans-serif,system-ui,sans-serif;
-  --f-text:"Hanken Grotesk",ui-sans-serif,system-ui,sans-serif;
+  --f-display:"Familjen Grotesk","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",ui-sans-serif,system-ui,sans-serif;
+  --f-text:"Hanken Grotesk","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC","Source Han Sans SC",ui-sans-serif,system-ui,sans-serif;
   --f-mono:"JetBrains Mono",ui-monospace,monospace;
   --t-display:700 40px/44px var(--f-display);
   --t-h1:650 28px/34px var(--f-display); --t-h2:600 20px/26px var(--f-display); --t-h3:600 16px/22px var(--f-text);
