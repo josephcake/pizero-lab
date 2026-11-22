@@ -206,6 +206,10 @@ export function Explorer() {
           <>
             <button type="button" className="sheet-backdrop" aria-label={t.close} onClick={() => setSheet(false)} />
             <div className="layers-sheet" role="dialog" aria-label={t.layers}>
+              <div className="seg">
+                <button type="button" className={mode === "explore" ? "on" : ""} onClick={() => setMode("explore")}>{t.explore}</button>
+                <button type="button" className={mode === "bench" ? "on" : ""} onClick={() => setMode("bench")}>{t.bench}</button>
+              </div>
               {rail}
             </div>
           </>
