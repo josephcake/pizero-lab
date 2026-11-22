@@ -1,0 +1,91 @@
+{
+  "schema": "field65.electrical/1",
+  "limits": {
+    "gpio_high_v": {
+      "value": 3.3,
+      "unit": "V",
+      "source": "gpio-docs",
+      "note": "GPIO high outputs are 3.3 V. Inputs are 3.3 V tolerant."
+    },
+    "gpio_pin_max_ma": {
+      "value": 16,
+      "unit": "mA",
+      "source": "gpio-docs",
+      "note": "Prose limit: an individual GPIO can supply up to 16 mA. The same page's DC table lists IOL minimum 18 mA at VO = 0.4 V and IOH minimum 17 mA at VO = 2.3 V, both footnoted as maximum drive strength (16 mA). Those are different measurements, not a second supply budget."
+    },
+    "gpio_combined_max_ma": {
+      "value": 50,
+      "unit": "mA",
+      "source": "gpio-docs",
+      "note": "All GPIO pins combined."
+    },
+    "not_5v_tolerant": {
+      "value": true,
+      "source": "gpio-docs",
+      "note": "Applying 5 V to a GPIO can permanently damage the SoC."
+    },
+    "vil_max_v": {
+      "value": 0.9,
+      "unit": "V",
+      "source": "gpio-docs",
+      "note": "BCM2835, BCM2836, BCM2837, and RP3A0 table. The page names Raspberry Pi Zero as an example."
+    },
+    "vih_min_v": {
+      "value": 1.6,
+      "unit": "V",
+      "source": "gpio-docs",
+      "note": "Hysteresis enabled. Same BCM2835-family table."
+    },
+    "pull_min_kohm": {
+      "value": 50,
+      "unit": "kΩ",
+      "source": "gpio-docs"
+    },
+    "pull_max_kohm": {
+      "value": 65,
+      "unit": "kΩ",
+      "source": "gpio-docs"
+    },
+    "i2c_fixed_pullup_ohm": {
+      "value": 1800,
+      "unit": "Ω",
+      "source": "gpio-docs",
+      "note": "GP2 (SDA) and GP3 (SCL) only. Other pulls are software controlled."
+    },
+    "zero_w_typical_active_ma": {
+      "value": 150,
+      "unit": "mA",
+      "source": "power-docs",
+      "note": "Typical bare-board active current for Zero W. Not a maximum."
+    },
+    "zero_w_psu_a": {
+      "value": 1.2,
+      "unit": "A",
+      "source": "power-docs",
+      "note": "Recommended PSU current capacity."
+    },
+    "supply_v": {
+      "value": 5.1,
+      "unit": "V",
+      "source": "power-docs",
+      "note": "The power page says all models require a 5.1 V supply."
+    },
+    "hdmi_typical_ma": {
+      "value": 50,
+      "unit": "mA",
+      "source": "power-docs",
+      "note": "Row in the general interface table, not a Zero W measurement."
+    },
+    "camera_typical_ma": {
+      "value": 250,
+      "unit": "mA",
+      "source": "power-docs",
+      "note": "Camera Module row in the general interface table."
+    },
+    "zero_has_undervoltage_detect": {
+      "value": false,
+      "source": "power-docs",
+      "note": "Low-voltage detection exists on models since the B+ except the Zero range. The threshold quoted for other models is 4.63 V ±5%."
+    }
+  }
+}

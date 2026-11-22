@@ -1,0 +1,107 @@
+{
+  "id": "inky-dash",
+  "title": {
+    "en": "Inky pHAT dashboard",
+    "es": "Panel con Inky pHAT"
+  },
+  "summary": {
+    "en": "Pimoroni's getting-started article for the Inky pHAT. Pins and the board outline are not in this dataset, so the pHAT cannot be drawn.",
+    "es": "El art\u00edculo de inicio de Pimoroni para el Inky pHAT. Los pines y el contorno no est\u00e1n en este conjunto, as\u00ed que el pHAT no se puede dibujar."
+  },
+  "difficulty": {
+    "en": "Low",
+    "es": "Baja"
+  },
+  "zero_w": "unverified",
+  "zero_w_note": {
+    "en": "The article and the shop page both responded. A stored sentence that says \u201cworks on Zero W\u201d was not copied, so the flag stays unverified.",
+    "es": "El art\u00edculo y la tienda respondieron. No se copi\u00f3 una frase guardada que diga \u00abfunciona en el Zero W\u00bb, as\u00ed que la marca sigue sin verificar."
+  },
+  "source": "inky-start",
+  "also": [
+    "inky-shop"
+  ],
+  "part_ids": [
+    "microsd-card",
+    "micro-usb-psu",
+    "inky-phat"
+  ],
+  "steps": [
+    {
+      "id": "parts",
+      "title": {
+        "en": "Parts on the bill",
+        "es": "Piezas en la cuenta"
+      },
+      "text": {
+        "en": "The card, the supply and the Inky pHAT are on the bill. The pHAT has no sourced dimensions, so the reducer will refuse to draw it.",
+        "es": "La tarjeta, la fuente y el Inky pHAT est\u00e1n en la cuenta. El pHAT no tiene medidas con fuente, as\u00ed que el reductor se negar\u00e1 a dibujarlo."
+      },
+      "action": null
+    },
+    {
+      "id": "header",
+      "title": {
+        "en": "Solder the header",
+        "es": "Suelda el header"
+      },
+      "text": {
+        "en": "A pHAT needs pins. This step records the header as soldered. The bill then adds the 2\u00d720 kit. The pads on the drawing stay bare, because their coordinates are null.",
+        "es": "Un pHAT necesita pines. Este paso anota el header como soldado. La cuenta a\u00f1ade entonces el kit 2\u00d720. Las almohadillas del plano siguen desnudas, porque sus coordenadas son nulas."
+      },
+      "action": {
+        "type": "setHeader",
+        "method": "solder"
+      }
+    },
+    {
+      "id": "fit",
+      "title": {
+        "en": "Try to fit the pHAT",
+        "es": "Intenta encajar el pHAT"
+      },
+      "text": {
+        "en": "The mount action runs through the same rule as a drag from the tray. With no outline and no anchor, it does not stick. When a later dataset fills dims and anchors, this step is the one that places the board.",
+        "es": "La acci\u00f3n de montaje pasa por la misma regla que un arrastre desde la bandeja. Sin contorno y sin ancla, no se pega. Cuando un conjunto posterior rellene dims y anclas, este paso ser\u00e1 el que coloque la placa."
+      },
+      "action": {
+        "type": "mount",
+        "partId": "inky-phat",
+        "hostRef": "board",
+        "hostAnchorId": "gpio-footprint",
+        "partAnchorId": "gpio-pins"
+      }
+    },
+    {
+      "id": "guide",
+      "title": {
+        "en": "Install from Pimoroni",
+        "es": "Instala desde Pimoroni"
+      },
+      "text": {
+        "en": "Follow the getting-started article for the install and the first image. Do not invent a pinout from memory if the article's table is the one you need.",
+        "es": "Sigue el art\u00edculo de inicio para la instalaci\u00f3n y la primera imagen. No inventes un pinout de memoria si la tabla del art\u00edculo es la que necesitas."
+      },
+      "action": null,
+      "links": [
+        {
+          "label": {
+            "en": "Getting started",
+            "es": "Primeros pasos"
+          },
+          "source": "inky-start"
+        },
+        {
+          "label": {
+            "en": "Shop page",
+            "es": "P\u00e1gina de la tienda"
+          },
+          "source": "inky-shop"
+        }
+      ]
+    }
+  ],
+  "boards": [
+    "zero-w"
+  ]
+}

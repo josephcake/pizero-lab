@@ -1,0 +1,9 @@
+{
+  "name": "field-notes-65",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node scripts/start.mjs",
+    "test": "node --test shared/bench.test.mjs shared/boards.test.mjs shared/provider.test.mjs"
+  }
+}

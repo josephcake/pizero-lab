@@ -1,0 +1,8 @@
+{
+  "name": "field-notes-65-server",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "id": "motioneye",
+  "title": {
+    "en": "motionEye camera",
+    "es": "C\u00e1mara motionEye"
+  },
+  "summary": {
+    "en": "motionEye is a web front end for the motion daemon. The repository is real. Whether the current release is happy on 512 MB and ARMv6 was not established here.",
+    "es": "motionEye es un frontal web para el demonio motion. El repositorio es real. Si la versi\u00f3n actual va bien con 512 MB y ARMv6 no se comprob\u00f3 aqu\u00ed."
+  },
+  "difficulty": {
+    "en": "Medium",
+    "es": "Media"
+  },
+  "zero_w": "unverified",
+  "zero_w_note": {
+    "en": "The README describes motionEye as a front end for motion. It does not, in the excerpt read here, certify the Zero W.",
+    "es": "El README describe motionEye como frontal de motion. En el extracto le\u00eddo aqu\u00ed no certifica el Zero W."
+  },
+  "source": "motioneye",
+  "also": [
+    "product-page",
+    "camera-cable"
+  ],
+  "part_ids": [
+    "microsd-card",
+    "micro-usb-psu",
+    "rpi-camera"
+  ],
+  "steps": [
+    {
+      "id": "parts",
+      "title": {
+        "en": "Parts on the bill",
+        "es": "Piezas en la cuenta"
+      },
+      "text": {
+        "en": "The camera is flagged as needing the Zero cable. The bill adds that cable even though nobody typed it into the parts list. The camera body is not drawn.",
+        "es": "La c\u00e1mara est\u00e1 marcada como que necesita el cable del Zero. La cuenta a\u00f1ade ese cable aunque nadie lo escribi\u00f3 en la lista. El cuerpo de la c\u00e1mara no se dibuja."
+      },
+      "action": null
+    },
+    {
+      "id": "cable",
+      "title": {
+        "en": "The connector is the small one",
+        "es": "El conector es el peque\u00f1o"
+      },
+      "text": {
+        "en": "The Zero W CSI port is 22 pins at 0.5 mm pitch and 11.5 mm wide. The product page says the cable in the camera box does not fit. Use the Standard\u2013Mini cable.",
+        "es": "El puerto CSI del Zero W es de 22 pines, paso 0,5 mm y 11,5 mm de ancho. La p\u00e1gina del producto dice que el cable de la caja de la c\u00e1mara no entra. Usa el cable Standard\u2013Mini."
+      },
+      "action": null,
+      "links": [
+        {
+          "label": {
+            "en": "Zero W product page",
+            "es": "P\u00e1gina del Zero W"
+          },
+          "source": "product-page"
+        },
+        {
+          "label": {
+            "en": "Camera cable",
+            "es": "Cable de c\u00e1mara"
+          },
+          "source": "camera-cable"
+        }
+      ]
+    },
+    {
+      "id": "software",
+      "title": {
+        "en": "Read motionEye before you flash",
+        "es": "Lee motionEye antes de grabar"
+      },
+      "text": {
+        "en": "Start from the project README and the install notes it links. If those notes require a newer architecture, stop. A 64-bit image will not boot on this board.",
+        "es": "Empieza por el README del proyecto y las notas de instalaci\u00f3n que enlace. Si esas notas piden una arquitectura m\u00e1s nueva, para. Una imagen de 64 bits no arranca en esta placa."
+      },
+      "action": null,
+      "links": [
+        {
+          "label": {
+            "en": "motionEye",
+            "es": "motionEye"
+          },
+          "source": "motioneye"
+        }
+      ]
+    }
+  ],
+  "boards": [
+    "zero-w"
+  ]
+}

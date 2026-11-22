@@ -1,0 +1,354 @@
+{
+  "schema": "field65.parts/1",
+  "parts": [
+    {
+      "id": "microsd-card",
+      "name": {
+        "en": "microSD card",
+        "es": "Tarjeta microSD"
+      },
+      "maker": null,
+      "category": "storage",
+      "summary": {
+        "en": "Holds Raspberry Pi OS. The Zero W boots from this slot.",
+        "es": "Lleva Raspberry Pi OS. El Zero W arranca desde esta ranura."
+      },
+      "zero_w": "works",
+      "zero_w_note": {
+        "en": "The computers documentation lists a microSD slot on every Zero.",
+        "es": "La documentaci\u00f3n lista una ranura microSD en todos los Zero."
+      },
+      "dims": null,
+      "dims_note": {
+        "en": "A card outline is not in the Zero W mechanical drawing.",
+        "es": "El plano del Zero W no acota la tarjeta."
+      },
+      "anchors": null,
+      "pins": null,
+      "power_ma": null,
+      "requires_header": false,
+      "needs_zero_camera_cable": false,
+      "price_usd": null,
+      "price_src": null,
+      "price_date": null,
+      "retailer": null,
+      "product_url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+      "source": "zero-models",
+      "boards": [
+        "zero-w"
+      ]
+    },
+    {
+      "id": "micro-usb-psu",
+      "name": {
+        "en": "5.1 V micro-USB supply",
+        "es": "Fuente micro-USB de 5,1 V"
+      },
+      "maker": null,
+      "category": "power",
+      "summary": {
+        "en": "The power page says every model wants 5.1 V, and the Zero W row recommends a supply that can provide 1.2 A.",
+        "es": "La p\u00e1gina de alimentaci\u00f3n pide 5,1 V en todos los modelos, y la fila del Zero W recomienda una fuente de 1,2 A."
+      },
+      "zero_w": "works",
+      "zero_w_note": {
+        "en": "Power input is the micro-USB power port, not USB-C.",
+        "es": "La alimentaci\u00f3n entra por el micro-USB de power, no por USB-C."
+      },
+      "dims": null,
+      "dims_note": {
+        "en": "No supply body dimensions were taken from the mechanical drawing.",
+        "es": "No se tomaron medidas del cuerpo de la fuente en el plano."
+      },
+      "anchors": null,
+      "pins": null,
+      "power_ma": {
+        "value": null,
+        "source": "power-docs",
+        "note": "1.2 A is the recommended capacity, not the board's draw."
+      },
+      "requires_header": false,
+      "needs_zero_camera_cable": false,
+      "price_usd": null,
+      "price_src": null,
+      "price_date": null,
+      "retailer": null,
+      "product_url": "https://www.raspberrypi.com/products/micro-usb-power-supply/",
+      "source": "power-docs",
+      "boards": [
+        "zero-w"
+      ]
+    },
+    {
+      "id": "gpio-header-2x20",
+      "name": {
+        "en": "2\u00d720 pin header",
+        "es": "Header de pines 2\u00d720"
+      },
+      "maker": null,
+      "category": "header",
+      "summary": {
+        "en": "A 2.54 mm, 2\u00d720 header for the unpopulated holes. Solder it, or press a hammer header. The plastic body is not dimensioned here, so the part is not drawn.",
+        "es": "Header de 2,54 mm y 2\u00d720 para los taladros vac\u00edos. Se suelda o se prensa. El cuerpo de pl\u00e1stico no est\u00e1 acotado, as\u00ed que no se dibuja."
+      },
+      "zero_w": "works",
+      "zero_w_note": {
+        "en": "Zero W ships with holes and no pins. Zero WH is the pre-soldered variant.",
+        "es": "El Zero W sale con taladros y sin pines. El Zero WH trae el header soldado."
+      },
+      "dims": null,
+      "dims_note": {
+        "en": "Pitch 2.54 mm and 2\u00d720 are documented. The shroud outline is not on the drawing reviewed here.",
+        "es": "El paso de 2,54 mm y el 2\u00d720 est\u00e1n documentados. El contorno del pl\u00e1stico no est\u00e1 en el plano revisado."
+      },
+      "anchors": null,
+      "pins": null,
+      "power_ma": null,
+      "requires_header": false,
+      "needs_zero_camera_cable": false,
+      "price_usd": null,
+      "price_src": null,
+      "price_date": null,
+      "retailer": null,
+      "product_url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+      "source": "zero-models",
+      "boards": [
+        "zero-w"
+      ]
+    },
+    {
+      "id": "camera-cable-standard-mini",
+      "name": {
+        "en": "Zero camera cable",
+        "es": "Cable de c\u00e1mara para Zero"
+      },
+      "maker": "Raspberry Pi",
+      "category": "camera",
+      "summary": {
+        "en": "Adapter cable from the 15-way camera connector to the Zero's 22-way, 0.5 mm CSI port. Sold in 200 mm, 300 mm and 500 mm lengths. Width is not stated on the cable page used here, so the cable is not drawn.",
+        "es": "Cable adaptador del conector de 15 v\u00edas de la c\u00e1mara al CSI de 22 v\u00edas y 0,5 mm del Zero. Se vende en 200, 300 y 500 mm. La anchura no est\u00e1 en la p\u00e1gina usada aqu\u00ed, as\u00ed que no se dibuja."
+      },
+      "zero_w": "works",
+      "zero_w_note": {
+        "en": "The cable page says it fits the 22-way FPC on all Raspberry Pi Zero models.",
+        "es": "La p\u00e1gina del cable dice que entra en el FPC de 22 v\u00edas de todos los Zero."
+      },
+      "dims": null,
+      "dims_note": {
+        "en": "Lengths 200, 300 and 500 mm are published. A drawing width was not, so dims stay null.",
+        "es": "Las longitudes 200, 300 y 500 mm est\u00e1n publicadas. La anchura de dibujo no, as\u00ed que dims queda nulo."
+      },
+      "anchors": null,
+      "pins": null,
+      "power_ma": null,
+      "requires_header": false,
+      "needs_zero_camera_cable": false,
+      "length_mm_options": {
+        "value": [
+          200,
+          300,
+          500
+        ],
+        "source": "camera-cable"
+      },
+      "price_usd": null,
+      "price_src": null,
+      "price_date": null,
+      "retailer": null,
+      "product_url": "https://www.raspberrypi.com/products/camera-cable/",
+      "source": "camera-cable",
+      "boards": [
+        "zero-w"
+      ]
+    },
+    {
+      "id": "rpi-camera",
+      "name": {
+        "en": "Raspberry Pi camera (15-pin)",
+        "es": "C\u00e1mara Raspberry Pi (15 pines)"
+      },
+      "maker": "Raspberry Pi",
+      "category": "camera",
+      "summary": {
+        "en": "A standard CSI camera module. On a Zero W it needs the separate Zero cable. Module outline is not copied into this file.",
+        "es": "M\u00f3dulo CSI est\u00e1ndar. En un Zero W necesita el cable aparte. El contorno del m\u00f3dulo no se copia en este archivo."
+      },
+      "zero_w": "caveat",
+      "zero_w_note": {
+        "en": "The Zero W product page says the cable supplied with cameras does not fit the smaller connector. The camera works electrically only with the adapter cable.",
+        "es": "La p\u00e1gina del Zero W dice que el cable que trae la c\u00e1mara no entra en el conector peque\u00f1o. Hace falta el cable adaptador."
+      },
+      "dims": null,
+      "dims_note": {
+        "en": "No module drawing was measured for this file.",
+        "es": "No se midi\u00f3 un plano del m\u00f3dulo para este archivo."
+      },
+      "anchors": null,
+      "pins": null,
+      "power_ma": {
+        "value": 250,
+        "source": "power-docs",
+        "note": "Typical Camera Module row in the general table, not a Zero W lab measurement."
+      },
+      "requires_header": false,
+      "needs_zero_camera_cable": true,
+      "price_usd": null,
+      "price_src": null,
+      "price_date": null,
+      "retailer": null,
+      "product_url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+      "source": "product-page",
+      "boards": [
+        "zero-w"
+      ]
+    },
+    {
+      "id": "inky-phat",
+      "name": {
+        "en": "Inky pHAT",
+        "es": "Inky pHAT"
+      },
+      "maker": "Pimoroni",
+      "category": "display",
+      "summary": {
+        "en": "E-paper pHAT. The getting-started article was reachable. Pin map, current and outline were not transcribed, so they are null and the board is not drawn.",
+        "es": "pHAT de papel electr\u00f3nico. El art\u00edculo de inicio respondi\u00f3. El mapa de pines, la corriente y el contorno no se transcribieron, as\u00ed que quedan nulos y no se dibuja."
+      },
+      "zero_w": "unverified",
+      "zero_w_note": {
+        "en": "The shop and guide exist. This file does not store a sentence that names Zero W, so compatibility stays unverified.",
+        "es": "La tienda y la gu\u00eda existen. Este archivo no guarda una frase que nombre el Zero W, as\u00ed que la compatibilidad queda sin verificar."
+      },
+      "dims": null,
+      "dims_note": {
+        "en": "Not measured from a Pimoroni drawing in this run.",
+        "es": "No se midi\u00f3 un plano de Pimoroni en esta pasada."
+      },
+      "anchors": null,
+      "pins": null,
+      "power_ma": null,
+      "requires_header": true,
+      "needs_zero_camera_cable": false,
+      "price_usd": null,
+      "price_src": null,
+      "price_date": null,
+      "retailer": null,
+      "product_url": "https://shop.pimoroni.com/products/inky-phat",
+      "source": "inky-shop",
+      "boards": [
+        "zero-w"
+      ]
+    },
+    {
+      "id": "led",
+      "name": {
+        "en": "LED",
+        "es": "LED"
+      },
+      "maker": null,
+      "category": "passives",
+      "summary": {
+        "en": "Any LED you already have. Forward voltage is something you measure or read from its own datasheet. This file does not invent one.",
+        "es": "Cualquier LED que ya tengas. La tensi\u00f3n directa se mide o se lee en su hoja. Este archivo no inventa una."
+      },
+      "zero_w": "caveat",
+      "zero_w_note": {
+        "en": "The GPIO page says to use a current-limiting resistor. A bare LED across a GPIO is not a complete circuit.",
+        "es": "La p\u00e1gina GPIO pide una resistencia limitadora. Un LED pelado en un GPIO no es un circuito completo."
+      },
+      "dims": null,
+      "dims_note": {
+        "en": "No LED package was measured.",
+        "es": "No se midi\u00f3 ning\u00fan encapsulado de LED."
+      },
+      "anchors": null,
+      "pins": null,
+      "power_ma": null,
+      "requires_header": true,
+      "needs_zero_camera_cable": false,
+      "price_usd": null,
+      "price_src": null,
+      "price_date": null,
+      "retailer": null,
+      "product_url": null,
+      "source": "gpio-docs",
+      "boards": [
+        "zero-w"
+      ]
+    },
+    {
+      "id": "resistor",
+      "name": {
+        "en": "Current-limiting resistor",
+        "es": "Resistencia limitadora"
+      },
+      "maker": null,
+      "category": "passives",
+      "summary": {
+        "en": "The series resistor for an LED. Its value comes from the calculator, not from a fixed Raspberry Pi part number.",
+        "es": "La resistencia en serie del LED. Su valor sale de la calculadora, no de un n\u00famero de pieza de Raspberry Pi."
+      },
+      "zero_w": "works",
+      "zero_w_note": {
+        "en": "Required by the GPIO guidance for LEDs.",
+        "es": "La gu\u00eda GPIO la pide para los LED."
+      },
+      "dims": null,
+      "dims_note": {
+        "en": "Resistor body size is not a Zero W board fact.",
+        "es": "El tama\u00f1o del cuerpo no es un dato de la placa Zero W."
+      },
+      "anchors": null,
+      "pins": null,
+      "power_ma": null,
+      "requires_header": false,
+      "needs_zero_camera_cable": false,
+      "price_usd": null,
+      "price_src": null,
+      "price_date": null,
+      "retailer": null,
+      "product_url": null,
+      "source": "gpio-docs",
+      "boards": [
+        "zero-w"
+      ]
+    },
+    {
+      "id": "button",
+      "name": {
+        "en": "Momentary button",
+        "es": "Pulsador"
+      },
+      "maker": null,
+      "category": "input",
+      "summary": {
+        "en": "A switch to ground, used with a pull-up, or to 3.3 V with a pull-down. Not to 5 V.",
+        "es": "Un interruptor a masa, con pull-up, o a 3,3 V con pull-down. No a 5 V."
+      },
+      "zero_w": "caveat",
+      "zero_w_note": {
+        "en": "Safe only if the other side of the switch is GND or 3.3 V, never 5 V.",
+        "es": "Solo es seguro si el otro lado es GND o 3,3 V, nunca 5 V."
+      },
+      "dims": null,
+      "dims_note": {
+        "en": "No switch body was measured.",
+        "es": "No se midi\u00f3 el cuerpo del pulsador."
+      },
+      "anchors": null,
+      "pins": null,
+      "power_ma": null,
+      "requires_header": true,
+      "needs_zero_camera_cable": false,
+      "price_usd": null,
+      "price_src": null,
+      "price_date": null,
+      "retailer": null,
+      "product_url": null,
+      "source": "gpio-docs",
+      "boards": [
+        "zero-w"
+      ]
+    }
+  ]
+}

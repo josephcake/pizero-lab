@@ -1,0 +1,81 @@
+{
+  "id": "retropie",
+  "title": {
+    "en": "RetroPie on a Pi Zero",
+    "es": "RetroPie en un Pi Zero"
+  },
+  "summary": {
+    "en": "RetroPie publishes a Pi Zero page. It was reached, but a bot check hid the article body from this run, so the steps point at the page instead of paraphrasing it.",
+    "es": "RetroPie publica una p\u00e1gina del Pi Zero. Se alcanz\u00f3, pero una comprobaci\u00f3n anti-bot ocult\u00f3 el cuerpo del art\u00edculo, as\u00ed que los pasos apuntan a la p\u00e1gina en vez de parafrasearla."
+  },
+  "difficulty": {
+    "en": "Medium",
+    "es": "Media"
+  },
+  "zero_w": "caveat",
+  "zero_w_note": {
+    "en": "The linked page is RetroPie's Pi Zero guide. Zero W is the same BCM2835 generation. The page body was not re-read past a browser check.",
+    "es": "La p\u00e1gina enlazada es la gu\u00eda de RetroPie para el Pi Zero. El Zero W es la misma generaci\u00f3n BCM2835. El cuerpo no se reley\u00f3 m\u00e1s all\u00e1 de la comprobaci\u00f3n del navegador."
+  },
+  "source": "retropie-zero",
+  "also": [
+    "install-docs"
+  ],
+  "part_ids": [
+    "microsd-card",
+    "micro-usb-psu"
+  ],
+  "steps": [
+    {
+      "id": "parts",
+      "title": {
+        "en": "Parts on the bill",
+        "es": "Piezas en la cuenta"
+      },
+      "text": {
+        "en": "A card and a supply. A handheld display or buttons are not on this bill: no sourced part for them was added in this run.",
+        "es": "Una tarjeta y una fuente. Una pantalla de consola o los botones no est\u00e1n en esta cuenta: en esta pasada no se a\u00f1adi\u00f3 una pieza con fuente."
+      },
+      "action": null
+    },
+    {
+      "id": "header",
+      "title": {
+        "en": "Decide on the header",
+        "es": "Decide el header"
+      },
+      "text": {
+        "en": "Leave the pads bare if you only need power, HDMI and the card. Mark the header soldered if a later control board needs the pins. The pin body is not drawn, because its outline is not in the mechanical file.",
+        "es": "Deja las almohadillas desnudas si solo necesitas alimentaci\u00f3n, HDMI y la tarjeta. Marca el header como soldado si una placa de mandos posterior necesita los pines. El cuerpo del header no se dibuja, porque su contorno no est\u00e1 en el plano."
+      },
+      "action": {
+        "type": "setHeader",
+        "method": "bare"
+      }
+    },
+    {
+      "id": "guide",
+      "title": {
+        "en": "Follow RetroPie",
+        "es": "Sigue RetroPie"
+      },
+      "text": {
+        "en": "Use the Pi Zero page for the image and the first boot. Do not flash a Pi 4 or Pi 5 image and expect the ARM11 to run it.",
+        "es": "Usa la p\u00e1gina del Pi Zero para la imagen y el primer arranque. No grabes una imagen de Pi 4 o Pi 5 y esperes que el ARM11 la ejecute."
+      },
+      "action": null,
+      "links": [
+        {
+          "label": {
+            "en": "RetroPie Pi Zero",
+            "es": "RetroPie Pi Zero"
+          },
+          "source": "retropie-zero"
+        }
+      ]
+    }
+  ],
+  "boards": [
+    "zero-w"
+  ]
+}

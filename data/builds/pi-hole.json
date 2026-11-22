@@ -1,0 +1,103 @@
+{
+  "id": "pi-hole",
+  "title": {
+    "en": "Pi-hole",
+    "es": "Pi-hole"
+  },
+  "summary": {
+    "en": "A DNS sinkhole for the whole network. The project is real. This file does not claim the current installer still supports ARMv6.",
+    "es": "Un sumidero DNS para toda la red. El proyecto es real. Este archivo no afirma que el instalador actual siga soportando ARMv6."
+  },
+  "difficulty": {
+    "en": "Low, if the installer still runs",
+    "es": "Baja, si el instalador a\u00fan corre"
+  },
+  "zero_w": "unverified",
+  "zero_w_note": {
+    "en": "Pi-hole's site and docs answered on 2026-11-22. A line that promises Zero W support was not stored.",
+    "es": "El sitio y la documentaci\u00f3n de Pi-hole respondieron el 2026-11-22. No se guard\u00f3 una frase que prometa soporte del Zero W."
+  },
+  "source": "pi-hole",
+  "also": [
+    "pi-hole-docs",
+    "install-docs",
+    "os-docs"
+  ],
+  "part_ids": [
+    "microsd-card",
+    "micro-usb-psu"
+  ],
+  "steps": [
+    {
+      "id": "parts",
+      "title": {
+        "en": "Parts on the bill",
+        "es": "Piezas en la cuenta"
+      },
+      "text": {
+        "en": "The card and the 5.1 V supply are on the bill. Neither has a sourced outline, so they stay in the tray and the board remains the 65 mm \u00d7 30 mm PCB.",
+        "es": "La tarjeta y la fuente de 5,1 V est\u00e1n en la cuenta. Ninguna tiene contorno con fuente, as\u00ed que se quedan en la bandeja y la placa sigue siendo la PCB de 65 mm \u00d7 30 mm."
+      },
+      "action": null
+    },
+    {
+      "id": "flash",
+      "title": {
+        "en": "Flash a 32-bit image",
+        "es": "Graba una imagen de 32 bits"
+      },
+      "text": {
+        "en": "Use Raspberry Pi Imager. Pick the Zero W as the device, then a 32-bit Raspberry Pi OS. A 64-bit image is for the Zero 2 W's Cortex-A53, not this ARM11. In Customisation, set the hostname, the country (that sets the 2.4 GHz regulatory domain), a user, the Wi-Fi name, and SSH. The radio is 2.4 GHz only.",
+        "es": "Usa Raspberry Pi Imager. Elige el Zero W como dispositivo y luego un Raspberry Pi OS de 32 bits. Una imagen de 64 bits es para el Cortex-A53 del Zero 2 W, no para este ARM11. En Customisation pon el nombre, el pa\u00eds (eso fija el dominio de 2,4 GHz), un usuario, el Wi-Fi y SSH. La radio es solo de 2,4 GHz."
+      },
+      "action": null,
+      "links": [
+        {
+          "label": {
+            "en": "Imager steps",
+            "es": "Pasos de Imager"
+          },
+          "source": "install-docs"
+        },
+        {
+          "label": {
+            "en": "32-bit and 64-bit",
+            "es": "32 y 64 bits"
+          },
+          "source": "os-docs"
+        }
+      ]
+    },
+    {
+      "id": "install",
+      "title": {
+        "en": "Install Pi-hole",
+        "es": "Instala Pi-hole"
+      },
+      "text": {
+        "en": "Follow the current Pi-hole install document. Before you rely on it, read whether that release still builds for ARMv6. If it does not, the Zero W is the wrong board and the Zero 2 W is the one that can run a 64-bit image.",
+        "es": "Sigue el documento de instalaci\u00f3n vigente de Pi-hole. Antes de fiarte, mira si esa versi\u00f3n a\u00fan compila para ARMv6. Si no, el Zero W es la placa equivocada y el Zero 2 W es el que puede correr una imagen de 64 bits."
+      },
+      "action": null,
+      "links": [
+        {
+          "label": {
+            "en": "Pi-hole",
+            "es": "Pi-hole"
+          },
+          "source": "pi-hole"
+        },
+        {
+          "label": {
+            "en": "Pi-hole docs",
+            "es": "Documentaci\u00f3n de Pi-hole"
+          },
+          "source": "pi-hole-docs"
+        }
+      ]
+    }
+  ],
+  "boards": [
+    "zero-w"
+  ]
+}

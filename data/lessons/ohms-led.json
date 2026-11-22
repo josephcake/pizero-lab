@@ -1,0 +1,130 @@
+{
+  "id": "ohms-led",
+  "order": 1,
+  "track": "beginner",
+  "prereqs": [],
+  "est_min": 15,
+  "badge": {
+    "id": "badge-ohm",
+    "name": {
+      "en": "Series resistor",
+      "es": "Resistencia en serie"
+    }
+  },
+  "title": {
+    "en": "Ohm's law and the LED resistor",
+    "es": "La ley de Ohm y la resistencia del LED"
+  },
+  "summary": {
+    "en": "A GPIO high is 3.3 V and the pin is only good for a small current. Size the resistor from that, not from a 5 V habit.",
+    "es": "Un GPIO en alto son 3,3 V y el pin solo da una corriente peque\u00f1a. La resistencia sale de ah\u00ed, no de la costumbre de los 5 V."
+  },
+  "sections": [
+    {
+      "kind": "md",
+      "text": {
+        "en": "The GPIO documentation is blunt about two limits. A high output is 3.3 V, and one pin can supply up to 16 mA. All GPIO pins together stop at 50 mA. The same page tells you to put a current-limiting resistor on an LED.\n\nOhm's law, which is not a Raspberry Pi invention, is V = I R. The voltage left for the resistor is the GPIO high minus the LED's forward voltage. The current is the current you choose, and it has to stay inside the 16 mA pin budget.\n\nR = (Vgpio \u2212 Vf) / I\n\nVf is a property of your LED. This lesson does not invent one. Type the value from the LED's own datasheet. If you do not have it, do not guess a \u201ctypical red\u201d and call it a fact.\n\nThe same GPIO page also prints a DC table where, at the maximum 16 mA drive strength, IOL is at least 18 mA when the pin is at 0.4 V, and IOH is at least 17 mA when the pin is at 2.3 V. That table is a voltage-at-a-test-current specification. The 16 mA sentence is the supply guidance this calculator enforces.",
+        "es": "La documentaci\u00f3n GPIO es clara en dos l\u00edmites. Una salida en alto son 3,3 V, y un pin puede dar hasta 16 mA. Todos los GPIO juntos se quedan en 50 mA. La misma p\u00e1gina pide una resistencia limitadora en un LED.\n\nLa ley de Ohm, que no es un invento de Raspberry Pi, es V = I R. La tensi\u00f3n que cae en la resistencia es el alto del GPIO menos la tensi\u00f3n directa del LED. La corriente es la que elijas, y tiene que caber en el presupuesto de 16 mA del pin.\n\nR = (Vgpio \u2212 Vf) / I\n\nVf es del LED que tengas. Esta lecci\u00f3n no inventa una. Escribe el valor de su hoja de datos. Si no la tienes, no adivines un \u00abrojo t\u00edpico\u00bb y lo llames un hecho.\n\nLa misma p\u00e1gina imprime una tabla de continua donde, con la fuerza de 16 mA al m\u00e1ximo, IOL es de al menos 18 mA con el pin a 0,4 V, e IOH de al menos 17 mA con el pin a 2,3 V. Esa tabla es una especificaci\u00f3n de tensi\u00f3n a una corriente de prueba. La frase de 16 mA es el l\u00edmite de suministro que aplica esta calculadora."
+      }
+    },
+    {
+      "kind": "widget",
+      "id": "ohm-calculator"
+    },
+    {
+      "kind": "widget",
+      "id": "board"
+    }
+  ],
+  "quiz": [
+    {
+      "id": "high",
+      "prompt": {
+        "en": "What voltage does the GPIO documentation assign to a high output?",
+        "es": "\u00bfQu\u00e9 tensi\u00f3n asigna la documentaci\u00f3n GPIO a una salida en alto?"
+      },
+      "choices": [
+        {
+          "en": "5.0 V, the same as the 5V header pins",
+          "es": "5,0 V, igual que los pines de 5 V"
+        },
+        {
+          "en": "3.3 V",
+          "es": "3,3 V"
+        },
+        {
+          "en": "1.6 V, the minimum input-high",
+          "es": "1,6 V, el m\u00ednimo de entrada en alto"
+        }
+      ],
+      "answer": 1,
+      "explain": {
+        "en": "High outputs are 3.3 V. The 5V pins are power pins, not GPIO logic levels. 1.6 V is the minimum input that still counts as high on the BCM2835-family table.",
+        "es": "Las salidas en alto son 3,3 V. Los pines de 5 V son alimentaci\u00f3n, no niveles l\u00f3gicos. 1,6 V es el m\u00ednimo que a\u00fan cuenta como alto en la tabla de la familia BCM2835."
+      },
+      "source": "gpio-docs"
+    },
+    {
+      "id": "budget",
+      "prompt": {
+        "en": "Which current ceiling does the GPIO page state for a single pin, and for all GPIO pins together?",
+        "es": "\u00bfQu\u00e9 techo de corriente indica la p\u00e1gina GPIO para un pin, y para todos los GPIO juntos?"
+      },
+      "choices": [
+        {
+          "en": "16 mA on one pin, 50 mA combined",
+          "es": "16 mA en un pin, 50 mA en total"
+        },
+        {
+          "en": "50 mA on one pin, 16 mA combined",
+          "es": "50 mA en un pin, 16 mA en total"
+        },
+        {
+          "en": "The page does not state a current limit",
+          "es": "La p\u00e1gina no indica un l\u00edmite de corriente"
+        }
+      ],
+      "answer": 0,
+      "explain": {
+        "en": "The page says an individual GPIO can supply up to 16 mA, and all GPIO pins combined can supply 50 mA.",
+        "es": "La p\u00e1gina dice que un GPIO puede dar hasta 16 mA, y que todos juntos pueden dar 50 mA."
+      },
+      "source": "gpio-docs"
+    },
+    {
+      "id": "math",
+      "prompt": {
+        "en": "GPIO high is 3.3 V, the LED forward voltage is 2.0 V, and you want 10 mA. What resistance does V = I R give?",
+        "es": "El alto del GPIO es 3,3 V, la tensi\u00f3n directa del LED es 2,0 V y quieres 10 mA. \u00bfQu\u00e9 resistencia da V = I R?"
+      },
+      "choices": [
+        {
+          "en": "130 \u03a9",
+          "es": "130 \u03a9"
+        },
+        {
+          "en": "330 \u03a9",
+          "es": "330 \u03a9"
+        },
+        {
+          "en": "20 \u03a9",
+          "es": "20 \u03a9"
+        }
+      ],
+      "answer": 0,
+      "explain": {
+        "en": "(3.3 \u2212 2.0) / 0.010 = 130 \u03a9. Pick a real resistor at or above that if you want the current to stay at or below 10 mA. 20 \u03a9 would be (3.3 \u2212 2.0) / 0.065, far past the pin budget.",
+        "es": "(3,3 \u2212 2,0) / 0,010 = 130 \u03a9. Elige una resistencia real igual o mayor si quieres que la corriente no pase de 10 mA. 20 \u03a9 ser\u00eda (3,3 \u2212 2,0) / 0,065, muy por encima del presupuesto del pin."
+      },
+      "source": "ohms-law"
+    }
+  ],
+  "sources": [
+    "gpio-docs",
+    "ohms-law",
+    "power-docs"
+  ],
+  "boards": [
+    "zero-w"
+  ]
+}

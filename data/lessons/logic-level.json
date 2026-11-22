@@ -1,0 +1,131 @@
+{
+  "id": "logic-level",
+  "order": 2,
+  "track": "beginner",
+  "prereqs": [
+    "ohms-led"
+  ],
+  "est_min": 12,
+  "badge": {
+    "id": "badge-logic",
+    "name": {
+      "en": "3.3 V only",
+      "es": "Solo 3,3 V"
+    }
+  },
+  "title": {
+    "en": "3.3 V logic, and why 5 V on a GPIO breaks the Zero W",
+    "es": "L\u00f3gica de 3,3 V, y por qu\u00e9 5 V en un GPIO rompe el Zero W"
+  },
+  "summary": {
+    "en": "The 5V pins are allowed to be 5 V. A GPIO pin is not. The documentation says that can destroy the SoC.",
+    "es": "Los pines de 5 V pueden estar a 5 V. Un pin GPIO no. La documentaci\u00f3n dice que eso puede destruir el SoC."
+  },
+  "sections": [
+    {
+      "kind": "md",
+      "text": {
+        "en": "Two voltages live on the same 40-pin header, and they are not interchangeable.\n\nPins 2 and 4 are 5 V power. Pins 1 and 17 are 3.3 V power. The other signal pins are GPIO at 3.3 V logic. The GPIO page says they are not 5 V tolerant, and that applying 5 V directly to a GPIO can permanently damage the SoC.\n\nOn the BCM2835-family table (the page names the Zero as an example), an input has to be at or below 0.9 V to count as low, and at or above 1.6 V to count as high. 5 V is not a legal high. It is above the 3.3 V rail the pin was built for.\n\nA level shifter is the usual way to talk to a 5 V sensor. The GPIO page does not publish a Zero W shifter schematic or a required part number. Any specific board you add is unverified by that page. What the page does require is simple: do not drive a GPIO to 5 V.\n\nThe Zero 2 W uses a different processor and can run 64-bit code. It does not change this header rule. The same GPIO chapter covers both.",
+        "es": "En el mismo header de 40 pines conviven dos tensiones, y no se intercambian.\n\nLos pines 2 y 4 son alimentaci\u00f3n de 5 V. Los pines 1 y 17 son alimentaci\u00f3n de 3,3 V. El resto de se\u00f1ales son GPIO a 3,3 V. La p\u00e1gina GPIO dice que no toleran 5 V, y que aplicar 5 V directamente a un GPIO puede da\u00f1ar el SoC para siempre.\n\nEn la tabla de la familia BCM2835 (la p\u00e1gina pone el Zero como ejemplo), una entrada tiene que estar a 0,9 V o menos para contar como baja, y a 1,6 V o m\u00e1s para contar como alta. 5 V no es un alto legal. Est\u00e1 por encima del carril de 3,3 V para el que se hizo el pin.\n\nUn desplazador de nivel es la forma habitual de hablar con un sensor de 5 V. La p\u00e1gina GPIO no publica un esquema de desplazador para el Zero W ni una referencia obligatoria. Cualquier placa concreta que a\u00f1adas queda sin verificar por esa p\u00e1gina. Lo que s\u00ed exige es simple: no lleves un GPIO a 5 V.\n\nEl Zero 2 W usa otro procesador y puede ejecutar c\u00f3digo de 64 bits. No cambia esta regla del header. El mismo cap\u00edtulo GPIO cubre los dos."
+      }
+    },
+    {
+      "kind": "widget",
+      "id": "logic-level"
+    },
+    {
+      "kind": "widget",
+      "id": "board"
+    }
+  ],
+  "quiz": [
+    {
+      "id": "damage",
+      "prompt": {
+        "en": "What does the GPIO documentation say happens if you apply 5 V directly to a GPIO pin?",
+        "es": "\u00bfQu\u00e9 dice la documentaci\u00f3n GPIO si aplicas 5 V directamente a un pin GPIO?"
+      },
+      "choices": [
+        {
+          "en": "Nothing, the pin is 5 V tolerant",
+          "es": "Nada, el pin tolera 5 V"
+        },
+        {
+          "en": "It can permanently damage the SoC",
+          "es": "Puede da\u00f1ar el SoC de forma permanente"
+        },
+        {
+          "en": "The pin automatically switches to the 5 V rail",
+          "es": "El pin pasa solo al carril de 5 V"
+        }
+      ],
+      "answer": 1,
+      "explain": {
+        "en": "The page says the pins are not 5 V tolerant and that 5 V applied directly to a GPIO can cause permanent damage.",
+        "es": "La p\u00e1gina dice que los pines no toleran 5 V y que 5 V aplicados directamente a un GPIO pueden causar un da\u00f1o permanente."
+      },
+      "source": "gpio-docs"
+    },
+    {
+      "id": "which-pins",
+      "prompt": {
+        "en": "Which header pins are the ones meant to carry 5 V?",
+        "es": "\u00bfQu\u00e9 pines del header son los que deben llevar 5 V?"
+      },
+      "choices": [
+        {
+          "en": "Physical pins 2 and 4",
+          "es": "Los pines f\u00edsicos 2 y 4"
+        },
+        {
+          "en": "Physical pins 1 and 17",
+          "es": "Los pines f\u00edsicos 1 y 17"
+        },
+        {
+          "en": "GPIO 14 and GPIO 15, the UART",
+          "es": "GPIO 14 y GPIO 15, la UART"
+        }
+      ],
+      "answer": 0,
+      "explain": {
+        "en": "Pins 2 and 4 are 5 V power. Pins 1 and 17 are 3.3 V power. GPIO 14 and 15 are 3.3 V UART signals.",
+        "es": "Los pines 2 y 4 son alimentaci\u00f3n de 5 V. Los pines 1 y 17 son alimentaci\u00f3n de 3,3 V. GPIO 14 y 15 son se\u00f1ales UART de 3,3 V."
+      },
+      "source": "gpio-docs"
+    },
+    {
+      "id": "vih",
+      "prompt": {
+        "en": "On the BCM2835-family table, what is the minimum voltage that counts as a high input?",
+        "es": "En la tabla de la familia BCM2835, \u00bfcu\u00e1l es la tensi\u00f3n m\u00ednima que cuenta como entrada en alto?"
+      },
+      "choices": [
+        {
+          "en": "0.9 V",
+          "es": "0,9 V"
+        },
+        {
+          "en": "1.6 V",
+          "es": "1,6 V"
+        },
+        {
+          "en": "5.0 V",
+          "es": "5,0 V"
+        }
+      ],
+      "answer": 1,
+      "explain": {
+        "en": "VIH minimum is 1.6 V with hysteresis enabled. 0.9 V is the maximum that still counts as low. 5 V is not an input level on this table.",
+        "es": "El m\u00ednimo de VIH es 1,6 V con hist\u00e9resis. 0,9 V es el m\u00e1ximo que a\u00fan cuenta como bajo. 5 V no es un nivel de entrada en esa tabla."
+      },
+      "source": "gpio-docs"
+    }
+  ],
+  "sources": [
+    "gpio-docs",
+    "zero-models"
+  ],
+  "boards": [
+    "zero-w"
+  ]
+}

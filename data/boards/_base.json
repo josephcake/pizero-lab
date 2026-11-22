@@ -1,0 +1,74 @@
+{
+  "schema": "pizero.boards/1",
+  "defaultModel": "zero-w",
+  "coordinateFrame": {
+    "unit": "mm",
+    "origin": "bottom-left of the PCB outline",
+    "x": "right",
+    "y": "up",
+    "note": "Shared frame only. No model geometry lives here. A model file's y-up values are converted once when that file is loaded."
+  },
+  "models": [
+    {
+      "id": "zero-v1.2",
+      "name": {
+        "en": "Raspberry Pi Zero v1.2",
+        "zh-CN": "Raspberry Pi Zero v1.2"
+      },
+      "sourced": false,
+      "file": null,
+      "headerDefault": null
+    },
+    {
+      "id": "zero-v1.3",
+      "name": {
+        "en": "Raspberry Pi Zero v1.3",
+        "zh-CN": "Raspberry Pi Zero v1.3"
+      },
+      "sourced": false,
+      "file": null,
+      "headerDefault": null
+    },
+    {
+      "id": "zero-w",
+      "name": {
+        "en": "Raspberry Pi Zero W",
+        "zh-CN": "Raspberry Pi Zero W"
+      },
+      "sourced": true,
+      "file": "zero-w.json",
+      "headerDefault": "bare"
+    },
+    {
+      "id": "zero-wh",
+      "name": {
+        "en": "Raspberry Pi Zero WH",
+        "zh-CN": "Raspberry Pi Zero WH"
+      },
+      "sourced": false,
+      "file": null,
+      "headerDefault": "solder"
+    },
+    {
+      "id": "zero-2-w",
+      "name": {
+        "en": "Raspberry Pi Zero 2 W",
+        "zh-CN": "Raspberry Pi Zero 2 W"
+      },
+      "sourced": false,
+      "file": null,
+      "headerDefault": null
+    },
+    {
+      "id": "zero-2-wh",
+      "name": {
+        "en": "Raspberry Pi Zero 2 WH",
+        "zh-CN": "Raspberry Pi Zero 2 WH"
+      },
+      "sourced": false,
+      "file": null,
+      "headerDefault": "solder"
+    }
+  ],
+  "note": "headerDefault on an unsourced row is the official product distinction (WH boards ship with a header). It does not make that model selectable, and it does not copy Zero W geometry."
+}

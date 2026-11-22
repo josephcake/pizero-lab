@@ -1,0 +1,23 @@
+{
+  "schema": "field65.bom-rules/1",
+  "rules": [
+    {
+      "id": "header-kit",
+      "when": { "header": ["solder", "hammer"] },
+      "add_part_id": "gpio-header-2x20",
+      "note": {
+        "en": "Fitting a header, soldered or hammered, needs a 2×20 pin kit. Bare pads do not.",
+        "es": "Poner un header, soldado o a presión, exige un kit de 2×20 pines. Las almohadillas desnudas no."
+      }
+    },
+    {
+      "id": "zero-camera-cable",
+      "when": { "part_flag": "needs_zero_camera_cable" },
+      "add_part_id": "camera-cable-standard-mini",
+      "note": {
+        "en": "A 15-pin Raspberry Pi camera needs the Zero camera cable. The product page says the cable supplied with cameras does not fit the Zero connector.",
+        "es": "Una cámara Raspberry Pi de 15 pines necesita el cable para Zero. La página del producto dice que el cable que viene con las cámaras no entra en el conector del Zero."
+      }
+    }
+  ]
+}

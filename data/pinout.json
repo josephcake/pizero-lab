@@ -1,0 +1,575 @@
+{
+  "schema": "field65.pinout/1",
+  "header": {
+    "rows": 2,
+    "pins": 40,
+    "pitch_mm": {
+      "value": 2.54,
+      "source": "zero-models",
+      "note": "Zero W documentation: 2 \u00d7 20, 2.54 mm pin header."
+    },
+    "pin1": {
+      "name": "3V3",
+      "source": "gpio-docs"
+    },
+    "logic_v": {
+      "value": 3.3,
+      "source": "gpio-docs"
+    },
+    "not_5v_tolerant": {
+      "value": true,
+      "source": "gpio-docs",
+      "quote": "Never apply 5 V directly to a GPIO pin because this can cause permanent damage to your Raspberry Pi's SoC."
+    }
+  },
+  "pins": [
+    {
+      "physical": 1,
+      "bcm": null,
+      "name": "3V3",
+      "kind": "power",
+      "typical_functions": [
+        "Power, 3.3 V output"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 2,
+      "bcm": null,
+      "name": "5V",
+      "kind": "power",
+      "typical_functions": [
+        "Power, 5 V"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 3,
+      "bcm": 2,
+      "name": "GP2",
+      "kind": "gpio",
+      "typical_functions": [
+        "I2C SDA1",
+        "Fixed 1.8 k\u03a9 pull-up to 3.3 V"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 4,
+      "bcm": null,
+      "name": "5V",
+      "kind": "power",
+      "typical_functions": [
+        "Power, 5 V"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 5,
+      "bcm": 3,
+      "name": "GP3",
+      "kind": "gpio",
+      "typical_functions": [
+        "I2C SCL1",
+        "Fixed 1.8 k\u03a9 pull-up to 3.3 V"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 6,
+      "bcm": null,
+      "name": "GND",
+      "kind": "ground",
+      "typical_functions": [
+        "Ground"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 7,
+      "bcm": 4,
+      "name": "GP4",
+      "kind": "gpio",
+      "typical_functions": [
+        "GPCLK0 clock output"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 8,
+      "bcm": 14,
+      "name": "GP14",
+      "kind": "gpio",
+      "typical_functions": [
+        "UART TXD"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 9,
+      "bcm": null,
+      "name": "GND",
+      "kind": "ground",
+      "typical_functions": [
+        "Ground"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 10,
+      "bcm": 15,
+      "name": "GP15",
+      "kind": "gpio",
+      "typical_functions": [
+        "UART RXD"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 11,
+      "bcm": 17,
+      "name": "GP17",
+      "kind": "gpio",
+      "typical_functions": [
+        "SPI chip enable CE1"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 12,
+      "bcm": 18,
+      "name": "GP18",
+      "kind": "gpio",
+      "typical_functions": [
+        "PCM clock",
+        "SPI chip enable CE0"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 13,
+      "bcm": 27,
+      "name": "GP27",
+      "kind": "gpio",
+      "typical_functions": [],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 14,
+      "bcm": null,
+      "name": "GND",
+      "kind": "ground",
+      "typical_functions": [
+        "Ground"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 15,
+      "bcm": 22,
+      "name": "GP22",
+      "kind": "gpio",
+      "typical_functions": [],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 16,
+      "bcm": 23,
+      "name": "GP23",
+      "kind": "gpio",
+      "typical_functions": [],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 17,
+      "bcm": null,
+      "name": "3V3",
+      "kind": "power",
+      "typical_functions": [
+        "Power, 3.3 V output"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 18,
+      "bcm": 24,
+      "name": "GP24",
+      "kind": "gpio",
+      "typical_functions": [],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 19,
+      "bcm": 10,
+      "name": "GP10",
+      "kind": "gpio",
+      "typical_functions": [
+        "SPI MOSI"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 20,
+      "bcm": null,
+      "name": "GND",
+      "kind": "ground",
+      "typical_functions": [
+        "Ground"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 21,
+      "bcm": 9,
+      "name": "GP9",
+      "kind": "gpio",
+      "typical_functions": [
+        "SPI MISO"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 22,
+      "bcm": 25,
+      "name": "GP25",
+      "kind": "gpio",
+      "typical_functions": [],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 23,
+      "bcm": 11,
+      "name": "GP11",
+      "kind": "gpio",
+      "typical_functions": [
+        "SPI SCLK"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 24,
+      "bcm": 8,
+      "name": "GP8",
+      "kind": "gpio",
+      "typical_functions": [
+        "SPI chip enable CE0"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 25,
+      "bcm": null,
+      "name": "GND",
+      "kind": "ground",
+      "typical_functions": [
+        "Ground"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 26,
+      "bcm": 7,
+      "name": "GP7",
+      "kind": "gpio",
+      "typical_functions": [
+        "SPI chip enable CE1"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 27,
+      "bcm": 0,
+      "name": "GP0",
+      "kind": "gpio",
+      "typical_functions": [
+        "I2C ID_SD, HAT EEPROM"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 28,
+      "bcm": 1,
+      "name": "GP1",
+      "kind": "gpio",
+      "typical_functions": [
+        "I2C ID_SC, HAT EEPROM"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 29,
+      "bcm": 5,
+      "name": "GP5",
+      "kind": "gpio",
+      "typical_functions": [],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 30,
+      "bcm": null,
+      "name": "GND",
+      "kind": "ground",
+      "typical_functions": [
+        "Ground"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 31,
+      "bcm": 6,
+      "name": "GP6",
+      "kind": "gpio",
+      "typical_functions": [],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 32,
+      "bcm": 12,
+      "name": "GP12",
+      "kind": "gpio",
+      "typical_functions": [
+        "PWM0"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 33,
+      "bcm": 13,
+      "name": "GP13",
+      "kind": "gpio",
+      "typical_functions": [
+        "PWM1"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 34,
+      "bcm": null,
+      "name": "GND",
+      "kind": "ground",
+      "typical_functions": [
+        "Ground"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 35,
+      "bcm": 19,
+      "name": "GP19",
+      "kind": "gpio",
+      "typical_functions": [
+        "PCM frame sync",
+        "SPI MISO"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 36,
+      "bcm": 16,
+      "name": "GP16",
+      "kind": "gpio",
+      "typical_functions": [
+        "SPI chip enable CE2"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 37,
+      "bcm": 26,
+      "name": "GP26",
+      "kind": "gpio",
+      "typical_functions": [],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 38,
+      "bcm": 20,
+      "name": "GP20",
+      "kind": "gpio",
+      "typical_functions": [
+        "PCM data in"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 39,
+      "bcm": null,
+      "name": "GND",
+      "kind": "ground",
+      "typical_functions": [
+        "Ground"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    },
+    {
+      "physical": 40,
+      "bcm": 21,
+      "name": "GP21",
+      "kind": "gpio",
+      "typical_functions": [
+        "PCM data out"
+      ],
+      "alt_matrix": null,
+      "alt_matrix_note": "The full ALT0\u2013ALT5 map is in the BCM2835 peripherals datasheet (RP-008249-DS). It was not transcribed pin by pin into this file.",
+      "source": "gpio-docs",
+      "xy_mm": null,
+      "xy_note": "Hole coordinates are not labelled on the mechanical drawing text layer, and the vector extract did not produce a reliable 2.54 mm grid."
+    }
+  ]
+}

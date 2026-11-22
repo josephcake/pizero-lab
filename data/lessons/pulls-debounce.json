@@ -1,0 +1,128 @@
+{
+  "id": "pulls-debounce",
+  "order": 3,
+  "track": "intermediate",
+  "prereqs": [
+    "logic-level"
+  ],
+  "est_min": 18,
+  "badge": {
+    "id": "badge-debounce",
+    "name": {
+      "en": "Quiet input",
+      "es": "Entrada quieta"
+    }
+  },
+  "title": {
+    "en": "Pull-ups, pull-downs, and a button that bounces",
+    "es": "Pull-ups, pull-downs, y un pulsador que rebota"
+  },
+  "summary": {
+    "en": "An open input is not a voltage. The pulls in the SoC give it one. Debounce is software on top of that, not a second electrical fact.",
+    "es": "Una entrada al aire no es una tensi\u00f3n. Las resistencias del SoC se la dan. El debounce es software encima de eso, no un segundo hecho el\u00e9ctrico."
+  },
+  "sections": [
+    {
+      "kind": "md",
+      "text": {
+        "en": "A GPIO input reads high when the pin is at 3.3 V and low when it is at 0 V. Leave the pin floating and the reading is not a decision. The pad has an internal pull-up and an internal pull-down. On the BCM2835-family table each is between 50 k\u03a9 and 65 k\u03a9.\n\nGP2 and GP3 are the exception. They have fixed 1.8 k\u03a9 resistors up to 3.3 V, because they are the I2C pins. You do not turn those off in software. Every other GPIO pull is under software control. After reset the pins come up as inputs, and the default pull for each one is in the BCM2835 peripherals datasheet, which this lesson does not transcribe.\n\nWire a button between a GPIO and ground, and enable the pull-up. Released, the pull holds the pin high. Pressed, the pin is shorted to 0 V and reads low. That is the wiring gpiozero's Button uses when pull_up is true. The other legal wiring is a button to the 3.3 V pin with the pull-down enabled: pressed reads high. A button to the 5 V pin is the damage case from the previous lesson.\n\nContacts bounce. For a few milliseconds the metal chatters and the pin rings between high and low. The SoC does not publish a debounce setting for that. gpiozero's Button takes bounce_time in seconds and ignores edges inside that window. That is a software filter. The trace below is a model of the same idea: raw chatter, then a reading that waits until the line has been stable.",
+        "es": "Una entrada GPIO lee alto cuando el pin est\u00e1 a 3,3 V y bajo cuando est\u00e1 a 0 V. Si dejas el pin al aire, la lectura no es una decisi\u00f3n. El pad tiene pull-up y pull-down internos. En la tabla de la familia BCM2835 cada uno est\u00e1 entre 50 k\u03a9 y 65 k\u03a9.\n\nGP2 y GP3 son la excepci\u00f3n. Llevan resistencias fijas de 1,8 k\u03a9 a 3,3 V, porque son los pines I2C. No se desconectan por software. El resto de pulls se controla por software. Tras el reset los pines arrancan como entradas, y el pull por defecto de cada uno est\u00e1 en el datasheet de perif\u00e9ricos del BCM2835, que esta lecci\u00f3n no transcribe.\n\nConecta un pulsador entre un GPIO y masa, y activa el pull-up. En reposo, el pull sujeta el pin en alto. Pulsado, el pin queda a 0 V y lee bajo. Ese es el cableado que usa Button de gpiozero cuando pull_up es verdadero. El otro cableado legal es un pulsador al pin de 3,3 V con el pull-down activo: pulsado lee alto. Un pulsador al pin de 5 V es el da\u00f1o de la lecci\u00f3n anterior.\n\nLos contactos rebotan. Durante unos milisegundos el metal casta\u00f1etea y el pin salta entre alto y bajo. El SoC no publica un ajuste de debounce para eso. Button de gpiozero acepta bounce_time en segundos e ignora flancos dentro de esa ventana. Es un filtro de software. La traza de abajo es un modelo de la misma idea: el casta\u00f1eteo crudo, y una lectura que espera a que la l\u00ednea se quede quieta."
+      }
+    },
+    {
+      "kind": "widget",
+      "id": "gpio-sim"
+    }
+  ],
+  "quiz": [
+    {
+      "id": "released",
+      "prompt": {
+        "en": "A button sits between a GPIO and ground, and the pull-up is on. What does the pin read when the button is released?",
+        "es": "Un pulsador est\u00e1 entre un GPIO y masa, y el pull-up est\u00e1 activo. \u00bfQu\u00e9 lee el pin con el pulsador suelto?"
+      },
+      "choices": [
+        {
+          "en": "Low, because the pull-up drains the pin",
+          "es": "Bajo, porque el pull-up vac\u00eda el pin"
+        },
+        {
+          "en": "High, because the pull-up holds it at 3.3 V",
+          "es": "Alto, porque el pull-up lo sujeta a 3,3 V"
+        },
+        {
+          "en": "5 V, from the neighbouring power pin",
+          "es": "5 V, del pin de alimentaci\u00f3n vecino"
+        }
+      ],
+      "answer": 1,
+      "explain": {
+        "en": "With the switch open, the pull-up is the only thing connected. It holds the input at 3.3 V, which reads as high. Pressing the button ties the pin to ground.",
+        "es": "Con el interruptor abierto, el pull-up es lo \u00fanico conectado. Sujeta la entrada a 3,3 V, que se lee como alto. Al pulsar, el pin queda a masa."
+      },
+      "source": "gpio-docs"
+    },
+    {
+      "id": "fixed",
+      "prompt": {
+        "en": "Which pins have a fixed 1.8 k\u03a9 pull-up that software does not remove?",
+        "es": "\u00bfQu\u00e9 pines tienen un pull-up fijo de 1,8 k\u03a9 que el software no quita?"
+      },
+      "choices": [
+        {
+          "en": "Every GPIO",
+          "es": "Todos los GPIO"
+        },
+        {
+          "en": "GP2 and GP3",
+          "es": "GP2 y GP3"
+        },
+        {
+          "en": "GP14 and GP15",
+          "es": "GP14 y GP15"
+        }
+      ],
+      "answer": 1,
+      "explain": {
+        "en": "The GPIO page says GP2 (SDA) and GP3 (SCL) have fixed 1.8 k\u03a9 resistors. Other pins can have their pulls changed in software. The on-chip pull itself, when enabled, is in the 50 k\u03a9 to 65 k\u03a9 range.",
+        "es": "La p\u00e1gina GPIO dice que GP2 (SDA) y GP3 (SCL) tienen resistencias fijas de 1,8 k\u03a9. En los dem\u00e1s pines el pull se cambia por software. El pull interno, cuando est\u00e1 activo, est\u00e1 entre 50 k\u03a9 y 65 k\u03a9."
+      },
+      "source": "gpio-docs"
+    },
+    {
+      "id": "bounce",
+      "prompt": {
+        "en": "Where does bounce_time live?",
+        "es": "\u00bfD\u00f3nde vive bounce_time?"
+      },
+      "choices": [
+        {
+          "en": "It is a hardware register in the BCM2835, documented on the GPIO page",
+          "es": "Es un registro de hardware del BCM2835, documentado en la p\u00e1gina GPIO"
+        },
+        {
+          "en": "It is a software argument on gpiozero's Button",
+          "es": "Es un argumento de software de Button en gpiozero"
+        },
+        {
+          "en": "It is the 1.8 k\u03a9 resistor on GP2",
+          "es": "Es la resistencia de 1,8 k\u03a9 de GP2"
+        }
+      ],
+      "answer": 1,
+      "explain": {
+        "en": "gpiozero documents bounce_time on Button, in seconds. The GPIO page documents pulls and thresholds. It does not document a debounce register.",
+        "es": "gpiozero documenta bounce_time en Button, en segundos. La p\u00e1gina GPIO documenta pulls y umbrales. No documenta un registro de debounce."
+      },
+      "source": "gpiozero-button"
+    }
+  ],
+  "sources": [
+    "gpio-docs",
+    "gpiozero-button",
+    "bcm2835-peripherals"
+  ],
+  "boards": [
+    "zero-w"
+  ]
+}

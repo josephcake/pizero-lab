@@ -1,0 +1,32 @@
+{
+  "schema": "field65.tracks/1",
+  "tracks": [
+    {
+      "id": "beginner",
+      "order": 1,
+      "name": { "en": "Beginner", "es": "Inicial" },
+      "blurb": {
+        "en": "Volts, current, and what the header will not forgive.",
+        "es": "Voltios, corriente, y lo que el header no perdona."
+      }
+    },
+    {
+      "id": "intermediate",
+      "order": 2,
+      "name": { "en": "Intermediate", "es": "Intermedio" },
+      "blurb": {
+        "en": "Inputs that sit still, and contacts that do not.",
+        "es": "Entradas que se quedan quietas, y contactos que no."
+      }
+    },
+    {
+      "id": "advanced",
+      "order": 3,
+      "name": { "en": "Advanced", "es": "Avanzado" },
+      "blurb": {
+        "en": "No lessons in this track yet. Later runs add them as data files.",
+        "es": "Todavía no hay lecciones en esta vía. Se añadirán como archivos de datos."
+      }
+    }
+  ]
+}

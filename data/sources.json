@@ -1,0 +1,139 @@
+{
+  "schema": "field65.sources/1",
+  "sources": {
+    "gpio-docs": {
+      "title": "Raspberry Pi documentation — GPIO",
+      "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/gpio-on-raspberry-pi.adoc",
+      "publisher": "Raspberry Pi Ltd",
+      "accessed": "2026-11-22"
+    },
+    "power-docs": {
+      "title": "Raspberry Pi documentation — Power supply",
+      "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/raspberry-pi/power-supplies.adoc",
+      "publisher": "Raspberry Pi Ltd",
+      "accessed": "2026-11-22"
+    },
+    "zero-intro": {
+      "title": "Raspberry Pi documentation — Zero models, introduction",
+      "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/zero/zero-intro.adoc",
+      "publisher": "Raspberry Pi Ltd",
+      "accessed": "2026-11-22"
+    },
+    "zero-models": {
+      "title": "Raspberry Pi documentation — Zero models",
+      "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/zero/zero-models.adoc",
+      "publisher": "Raspberry Pi Ltd",
+      "accessed": "2026-11-22"
+    },
+    "bcm2835-doc": {
+      "title": "Raspberry Pi documentation — BCM2835",
+      "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/processors/bcm2835.adoc",
+      "publisher": "Raspberry Pi Ltd",
+      "accessed": "2026-11-22"
+    },
+    "rp3a0-doc": {
+      "title": "Raspberry Pi documentation — RP3A0",
+      "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/processors/rp3a0.adoc",
+      "publisher": "Raspberry Pi Ltd",
+      "accessed": "2026-11-22"
+    },
+    "product-page": {
+      "title": "Raspberry Pi Zero W product page",
+      "url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+      "publisher": "Raspberry Pi Ltd",
+      "accessed": "2026-11-22"
+    },
+    "mechanical": {
+      "title": "Raspberry Pi Zero W mechanical drawing RP-008367-DS",
+      "url": "https://pip.raspberrypi.com/documents/RP-008367-DS",
+      "publisher": "Raspberry Pi Ltd",
+      "accessed": "2026-11-22"
+    },
+    "schematic": {
+      "title": "Raspberry Pi Zero W schematic RP-008368-DS, rev 1.1",
+      "url": "https://pip.raspberrypi.com/documents/RP-008368-DS",
+      "publisher": "Raspberry Pi Ltd",
+      "accessed": "2026-11-22"
+    },
+    "bcm2835-peripherals": {
+      "title": "BCM2835 ARM Peripherals RP-008249-DS",
+      "url": "https://pip.raspberrypi.com/documents/RP-008249-DS",
+      "publisher": "Raspberry Pi Ltd",
+      "accessed": "2026-11-22"
+    },
+    "arm1176": {
+      "title": "ARM1176JZF-S Technical Reference Manual",
+      "url": "https://developer.arm.com/documentation/ddi0301/latest/",
+      "publisher": "Arm",
+      "accessed": "2026-11-22",
+      "note": "Linked from the Raspberry Pi BCM2835 documentation page."
+    },
+    "ohms-law": {
+      "title": "Ohm's law",
+      "url": "https://en.wikipedia.org/wiki/Ohm%27s_law",
+      "publisher": "Wikipedia",
+      "accessed": "2026-11-22",
+      "note": "Used only for the relation V = IR. It is not a Raspberry Pi document."
+    },
+    "gpiozero-button": {
+      "title": "gpiozero Button",
+      "url": "https://gpiozero.readthedocs.io/en/stable/api_input.html",
+      "publisher": "gpiozero",
+      "accessed": "2026-11-22"
+    },
+    "install-docs": {
+      "title": "Raspberry Pi documentation — Install using Imager",
+      "url": "https://github.com/raspberrypi/documentation/blob/master/documentation/asciidoc/computers/getting-started/install.adoc",
+      "publisher": "Raspberry Pi Ltd",
+      "accessed": "2026-11-22"
+    },
+    "os-docs": {
+      "title": "Raspberry Pi OS",
+      "url": "https://www.raspberrypi.com/documentation/computers/os.html",
+      "publisher": "Raspberry Pi Ltd",
+      "accessed": "2026-11-22"
+    },
+    "pi-hole": {
+      "title": "Pi-hole",
+      "url": "https://pi-hole.net/",
+      "publisher": "Pi-hole",
+      "accessed": "2026-11-22"
+    },
+    "pi-hole-docs": {
+      "title": "Pi-hole documentation",
+      "url": "https://docs.pi-hole.net/",
+      "publisher": "Pi-hole",
+      "accessed": "2026-11-22"
+    },
+    "retropie-zero": {
+      "title": "RetroPie — Pi Zero",
+      "url": "https://retropie.org.uk/docs/Pi-Zero/",
+      "publisher": "RetroPie",
+      "accessed": "2026-11-22"
+    },
+    "inky-start": {
+      "title": "Getting Started with Inky pHAT",
+      "url": "https://learn.pimoroni.com/article/getting-started-with-inky-phat",
+      "publisher": "Pimoroni",
+      "accessed": "2026-11-22"
+    },
+    "inky-shop": {
+      "title": "Inky pHAT",
+      "url": "https://shop.pimoroni.com/products/inky-phat",
+      "publisher": "Pimoroni",
+      "accessed": "2026-11-22"
+    },
+    "motioneye": {
+      "title": "motionEye",
+      "url": "https://github.com/motioneye-project/motioneye",
+      "publisher": "motioneye-project",
+      "accessed": "2026-11-22"
+    },
+    "camera-cable": {
+      "title": "Raspberry Pi Camera Cable",
+      "url": "https://www.raspberrypi.com/products/camera-cable/",
+      "publisher": "Raspberry Pi Ltd",
+      "accessed": "2026-11-22"
+    }
+  }
+}
