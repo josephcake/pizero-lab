@@ -98,6 +98,7 @@ export const copy = {
     loaded: "Loaded. The bench has this bill.",
     step: "Step",
     refused: "The reducer refused this action",
+    refusedPlain: "That step could not place the part. Check the header and the part record.",
     power: "Power budget",
     hatMa: "+ HAT/peripheral mA",
     recommend: "What you already own",

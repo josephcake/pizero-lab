@@ -357,7 +357,7 @@ export function BuildPage() {
             const src = lab.catalog.sources[link.source];
             return src ? <p key={link.source}><a href={src.url}>{tx(link.label, lab.lang)}</a></p> : null;
           })}
-          {frame.error && <p className="warn">{t.refused}: {frame.error.code}</p>}
+          {frame.error && <p className="warn">{t.refusedPlain}</p>}
         </section>
       )}
       <button type="button" className="load" onClick={load}>{t.load}</button>
