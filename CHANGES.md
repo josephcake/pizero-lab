@@ -60,4 +60,16 @@ Flux heights replace the placeholders where Flux published a number. `zero-w.flu
 | Fix | Commit | What changed |
 | --- | --- | --- |
 | Sourced heights | `e1665bb` | CSI is 1.20 mm confirmed. Header body is 2.54 mm derived, the post above it is 5.84 mm confirmed, and the tail below the board is 2.54 mm derived. The hammer header is 12.0 mm overall, confirmed, with no body/pin split. PCB, SoC, microSD, mini-HDMI, and both micro-USBs stay estimates, source “no published height (Flux)”. The pHAT gap is 8.0 mm, spec minimum, from the HAT spec. No RF shield is drawn. |
-| Labels and camera fit | `40753b1` | The note is “Grey-outlined parts: estimated heights.” Hover or select on an estimated part shows “est. height”. The pHAT shows “8 mm gap: spec minimum”. Reset, Top, Front, and Side fit the board to both the vertical and horizontal field of view, with about 8% margin, including on a 390×844 portrait screen. | |
+| Labels and camera fit | `40753b1` | The note is “Grey-outlined parts: estimated heights.” Hover or select on an estimated part shows “est. height”. The pHAT shows “8 mm gap: spec minimum”. Reset, Top, Front, and Side fit the board to both the vertical and horizontal field of view, with about 8% margin, including on a 390×844 portrait screen. |
+
+## Run 10
+
+The 3D camera can look at the back of the board. `zero-w.flux.json` and `pinout.flux.json` were not edited. The 3D chunk is `board3d-DLDYesZI.js`, 136.85 KB gzip. The main bundle is `index-D5xsF7Zq.js`, 175.75 KB gzip.
+
+| Fix | Commit | What changed |
+| --- | --- | --- |
+| Full orbit | `141ce90` | Polar angle runs from 0 to π, so the camera can sit directly under the board. Pan and zoom clamps stay. Crossing a pole can flip the picture; the range is still 0 to π. |
+| Bottom button | `141ce90` | Bottom uses the same fit as the other views, from underneath, with X mirrored. zh-CN uses 底. |
+| Underside | `141ce90` | The PCB bottom is the same colour, with the four mounting holes. Bare shows the plated holes. Soldered adds a low-poly joint on each pin and the 2.54 mm tail. Hammered has no solder; a short stub is marked est. and no tail length is claimed. |
+| Test pads | `141ce90` | A pad is drawn only when a subpart has x, y, and side bottom. Zero W has no such coordinates, so Bottom says “Test pad positions for the Zero W aren't published.” |
+| Hammer wording | `111088e` | 12.0 mm is the overall height of Adafruit 3662, not the height above the PCB, because part of each pin presses into the board. The mesh is unchanged. | |
