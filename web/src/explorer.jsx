@@ -6,14 +6,13 @@ import { strings } from "./i18n.js";
 import { labCall } from "./lab.js";
 import { tx, useLab } from "./state.jsx";
 import { BoardMap, Minimap } from "./boardmap.jsx";
-import { BomList } from "./workbench.jsx";
 
 const LAYERS = [
-  ["components", "layerComponents"],
-  ["pads", "layerPads"],
-  ["silk", "layerSilk"],
-  ["pins", "layerPins"],
-  ["measurements", "layerMeasure"],
+  ["components", "layerComponents", "var(--ov-gpio)"],
+  ["pads", "layerPads", "var(--ov-3v3)"],
+  ["silk", "layerSilk", "#f2efe4"],
+  ["pins", "layerPins", "var(--ov-i2c)"],
+  ["measurements", "layerMeasure", "var(--ov-ghost)"],
 ];
 
 export function Explorer() {
@@ -25,6 +24,7 @@ export function Explorer() {
   const [mountNote, setMountNote] = useState("");
   const [conflicts, setConflicts] = useState(null);
   const [sheet, setSheet] = useState(false);
+  const [mode, setMode] = useState("explore");
   const hats = lab.catalog.parts.filter((part) => fitsBoard(part, board.id) && part.product_url);
   const mountedIds = lab.bench.jobPartIds.filter((id) => hats.some((hat) => hat.id === id));
 
@@ -79,34 +79,47 @@ export function Explorer() {
     <>
       <p className="overline">{t.header}</p>
       <div className="seg">
-        {["bare", "solder", "hammer"].map((method) => (
+        {[["bare", "bareShort"], ["solder", "solderShort"], ["hammer", "hammerShort"]].map(([method, key]) => (
           <button key={method} type="button" className={lab.bench.header === method ? "on" : ""} onClick={() => lab.dispatch({ type: "setHeader", method })}>
-            {t[method]}
+            {t[key]}
           </button>
         ))}
       </div>
-      <p className="overline">{t.layers}</p>
-      {LAYERS.map(([id, key]) => (
-        <label key={id} className="layer">
-          <input type="checkbox" checked={!!layers[id]} onChange={() => toggleLayer(id)} />
-          {t[key]}
-        </label>
-      ))}
-      <p className="overline">{t.legend}</p>
-      <ul className="legend">
-        {legend.map((row) => (
-          <li key={row.id}><i style={{ background: row.ink }} />{t[row.label]}<b>{row.count}</b></li>
-        ))}
-      </ul>
-      <p className="overline">{t.tray} <span className="provisional">{t.provisional}</span></p>
-      <ul className="tray-list">
-        {hats.filter((hat) => hat.dims).slice(0, 8).map((hat) => (
-          <li key={hat.id}>
-            <Link to={`/parts/${hat.id}`}>{tx(hat.name, lab.lang).replaceAll("-", "\u2011")}</Link>
-            <button type="button" onClick={() => fitPart(hat)}>{t.fit}</button>
-          </li>
-        ))}
-      </ul>
+      {mode === "explore" && (
+        <>
+          <p className="overline">{t.layers}</p>
+          {LAYERS.map(([id, key, ink]) => (
+            <div key={id} className="layer">
+              <button type="button" className="eye" aria-pressed={!!layers[id]} onClick={() => toggleLayer(id)}>{layers[id] ? "◉" : "○"}</button>
+              <i className="swatch" style={{ background: ink }} />
+              <span>{t[key]}</span>
+              <b>{id === "pads" || id === "pins" ? lab.catalog.pinout.pins.length : id === "measurements" ? 2 : board.draw.length}</b>
+            </div>
+          ))}
+          <p className="overline">{t.legend}</p>
+          <ul className="legend">
+            {legend.map((row) => (
+              <li key={row.id}><i style={{ background: row.ink }} />{t[row.label]}<b>{row.count}</b></li>
+            ))}
+          </ul>
+        </>
+      )}
+      <p className="bench-caption">
+        {lab.bench.mounts.length ? t.benchMounted : lab.bench.header === "bare" ? t.benchBare : lab.bench.header === "hammer" ? t.benchHammer : t.benchSolder}
+        {" "}<span className="provisional">{t.provisional}</span>
+      </p>
+      {mode === "bench" && (
+        <>
+          <button type="button" onClick={() => { const hat = hats.find((item) => item.dims); if (hat) fitPart(hat); }}>{t.fitHat}</button>
+          <ul className="tray-list">
+            {hats.filter((hat) => hat.dims).slice(0, 8).map((hat) => (
+              <li key={hat.id}>
+                <Link to={`/parts/${hat.id}`}>{tx(hat.name, lab.lang).replaceAll("-", "\u2011")}</Link>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
       {mountNote && <p className="warn">{mountNote}</p>}
     </>
   );
@@ -131,6 +144,9 @@ export function Explorer() {
           onSelect={lab.setSelection}
           onView={setView}
           onOpenLayers={() => setSheet(true)}
+          mode={mode}
+          onMode={setMode}
+          onMeasure={() => toggleLayer("measurements")}
         />
         {sheet && (
           <>
@@ -141,11 +157,8 @@ export function Explorer() {
           </>
         )}
         <div className="map-foot">
-          <div>
-            <span className="scale-foot"><i style={{ width: `${Math.max(0, 10 * (view?.px || 0))}px` }} />10 mm</span>
-            <BomList catalog={lab.catalog} state={lab.bench} lang={lab.lang} t={t} />
-          </div>
-          <Minimap board={board} view={view} />
+          <span className="scale-foot"><i style={{ width: `${Math.max(0, 10 * (view?.px || 0))}px` }} />10 mm <span className="readout">{(view?.px || 0).toFixed(1)} px/mm</span></span>
+          <Minimap board={board} view={view} mounts={lab.bench.mounts} parts={lab.catalog.parts} />
         </div>
       </div>
       <aside className="inspector">

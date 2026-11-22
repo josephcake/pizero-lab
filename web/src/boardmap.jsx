@@ -32,7 +32,7 @@ function roundRect(x, y, w, h, r) {
   return `M ${x + rr} ${y} H ${x + w - rr} A ${rr} ${rr} 0 0 1 ${x + w} ${y + rr} V ${y + h - rr} A ${rr} ${rr} 0 0 1 ${x + w - rr} ${y + h} H ${x + rr} A ${rr} ${rr} 0 0 1 ${x} ${y + h - rr} V ${y + rr} A ${rr} ${rr} 0 0 1 ${x + rr} ${y} Z`;
 }
 
-export function BoardMap({ board, pinout, header, mounts, parts, layers, selected, onSelect, onView, onOpenLayers }) {
+export function BoardMap({ board, pinout, header, mounts, parts, layers, selected, onSelect, onView, onOpenLayers, mode = "explore", onMode, onMeasure }) {
   const t = strings(useLab().lang);
   const svgRef = useRef(null);
   const [view, setView] = useState(null);
@@ -313,11 +313,18 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
       {focusChip && <span className="focus-chip" style={{ left: focusChip.left, top: focusChip.top }}>{t.focused}</span>}
       <div className="map-tools">
         {onOpenLayers && <button type="button" className="layers-toggle" onClick={onOpenLayers}>{t.layers}</button>}
-        <button type="button" aria-label={t.zoomOut} onClick={() => zoomAt(1 / 1.25, centerOf(svgRef).x, centerOf(svgRef).y)}>−</button>
-        <button type="button" aria-label={t.zoomIn} onClick={() => zoomAt(1.25, centerOf(svgRef).x, centerOf(svgRef).y)}>+</button>
+        <button type="button" className={mode === "explore" ? "on" : ""} onClick={() => onMode?.("explore")}>{t.explore}</button>
+        <button type="button" className={mode === "bench" ? "on" : ""} onClick={() => onMode?.("bench")}>{t.bench}</button>
+        <button type="button" className="on">{t.top}</button>
+        <button type="button" disabled>{t.bottom}</button>
+        <button type="button" disabled>{t.side}</button>
         <button type="button" onClick={fit}>{t.fit}</button>
-        <span className="readout">{px.toFixed(1)} px/mm</span>
-        {cursor && <span className="readout">x {cursor.x.toFixed(2)} · y {cursor.y.toFixed(2)} mm · origin bottom-left, y up</span>}
+        <button type="button" disabled>{t.oneToOne}</button>
+        <button type="button" className={layers.measurements ? "on" : ""} onClick={onMeasure}>{t.measure}</button>
+      </div>
+      <div className="zoom-dock">
+        <button type="button" aria-label={t.zoomIn} onClick={() => zoomAt(1.25, centerOf(svgRef).x, centerOf(svgRef).y)}>+</button>
+        <button type="button" aria-label={t.zoomOut} onClick={() => zoomAt(1 / 1.25, centerOf(svgRef).x, centerOf(svgRef).y)}>−</button>
       </div>
     </div>
   );
@@ -330,13 +337,18 @@ function centerOf(svgRef) {
   return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
 }
 
-export function Minimap({ board, view }) {
+export function Minimap({ board, view, mounts = [], parts = [] }) {
   if (!board) return null;
   const W = board.outline.w_mm.value;
   const H = board.outline.h_mm.value;
   return (
-    <svg className="minimap" viewBox={`-4 -4 ${W + 8} ${H + 8}`}>
-      <rect x="0" y="0" width={W} height={H} rx="3" />
+    <svg className="minimap" viewBox={`-2 -2 ${W + 4} ${H + 4}`}>
+      <rect className="board-sil" x="0" y="0" width={W} height={H} rx="2" />
+      {mounts.map((mount) => {
+        const part = parts.find((item) => item.id === mount.partId);
+        if (!part?.dims) return null;
+        return <rect key={mount.id} x={mount.x_mm} y={mount.y_mm} width={part.dims.w_mm} height={part.dims.h_mm} fill="#143526" fillOpacity="0.4" />;
+      })}
       {view && <rect className="pz-overlay" fill="none" x={view.x} y={view.y} width={view.w} height={view.h} />}
     </svg>
   );
