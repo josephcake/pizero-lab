@@ -1,4 +1,4 @@
 {
   "aliasOf": "zero-w",
-  "note": "Compatibility alias. The canonical Zero W record is boards/zero-w.json."
+  "note": "Compatibility alias. The canonical Zero W record is boards/zero-w.flux.json."
 }

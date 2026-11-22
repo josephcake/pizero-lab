@@ -37,7 +37,7 @@ npm test
 Hardware lives in `data/`, not in components.
 
 - `data/boards/_base.json` — model registry and the shared y-up frame. No geometry.
-- `data/boards/zero-w.json` — the sourced Zero W record
+- `data/boards/zero-w.flux.json` — the sourced Zero W record
 - `data/board.json` — alias of `zero-w`
 - `data/pinout.json` — the 40-pin header and the typical functions from the GPIO chapter
 - `data/electrical.json` — the currents and voltages the calculators are allowed to use
