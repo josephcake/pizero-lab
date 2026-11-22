@@ -20,6 +20,7 @@ function pinInk(pin) {
   if (pin.name === "GND") return TYPE_INK.GND;
   const alts = Object.values(pin.alt_matrix || {}).join(" ");
   if (/SDA|SCL|I2C/.test(alts) && pin.physical <= 5) return TYPE_INK.i2c;
+  if (/PWM/.test(alts) && (/SPI1/.test(alts) || [12, 32, 33, 35].includes(pin.physical))) return TYPE_INK.pwm;
   if (/SPI/.test(alts)) return TYPE_INK.spi;
   if (/TXD|RXD|UART/.test(alts)) return TYPE_INK.uart;
   if (/PWM/.test(alts)) return TYPE_INK.pwm;
