@@ -2,6 +2,7 @@ import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { toSvgFrame } from "./boards.mjs";
 import { adaptFluxBoard, adaptPinout, hatToPart } from "./flux.mjs";
+import { applyUnderside } from "./underside.mjs";
 
 async function readJson(file) {
   return JSON.parse(await readFile(file, "utf8"));
@@ -46,6 +47,7 @@ export async function loadCatalog(root) {
         alts_src_note: pin.alt_matrix_note,
       })));
       rendered.pinout = fluxPinout;
+      applyUnderside(rendered, await readJson(path.join(boardsDir, "zero-w.underside.json")));
       models[entry.id] = rendered;
       continue;
     }

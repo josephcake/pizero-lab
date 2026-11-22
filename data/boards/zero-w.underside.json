@@ -1,0 +1,153 @@
+{
+  "testPads": {
+    "id": "test-pads",
+    "side": "bottom",
+    "x_mm": null,
+    "y_mm": null,
+    "subparts": [
+      {
+        "id": "pp1",
+        "name": "PP1",
+        "net": "5V",
+        "side": "bottom",
+        "x_mm": null,
+        "y_mm": null,
+        "src": [
+          {
+            "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+            "doc": "RP-008368-DS",
+            "section": "Raspberry Pi Zero W reduced schematics"
+          }
+        ]
+      },
+      {
+        "id": "pp5",
+        "name": "PP5",
+        "net": "GND",
+        "side": "bottom",
+        "x_mm": null,
+        "y_mm": null,
+        "src": [
+          {
+            "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+            "doc": "RP-008368-DS",
+            "section": "Raspberry Pi Zero W reduced schematics"
+          }
+        ]
+      },
+      {
+        "id": "pp6",
+        "name": "PP6",
+        "net": "GND",
+        "side": "bottom",
+        "x_mm": null,
+        "y_mm": null,
+        "src": [
+          {
+            "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+            "doc": "RP-008368-DS",
+            "section": "Raspberry Pi Zero W reduced schematics"
+          }
+        ]
+      },
+      {
+        "id": "pp8",
+        "name": "PP8",
+        "net": "3V3",
+        "side": "bottom",
+        "x_mm": null,
+        "y_mm": null,
+        "src": [
+          {
+            "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+            "doc": "RP-008368-DS",
+            "section": "Raspberry Pi Zero W reduced schematics"
+          }
+        ]
+      },
+      {
+        "id": "pp9",
+        "name": "PP9",
+        "net": "1V8",
+        "side": "bottom",
+        "x_mm": null,
+        "y_mm": null,
+        "src": [
+          {
+            "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+            "doc": "RP-008368-DS",
+            "section": "Raspberry Pi Zero W reduced schematics"
+          }
+        ]
+      }
+    ],
+    "src": [
+      {
+        "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+        "doc": "RP-008368-DS",
+        "section": "Raspberry Pi Zero W reduced schematics"
+      }
+    ]
+  },
+  "parts": {
+    "status": "confirmed",
+    "text": "Parts on the bottom: none.",
+    "src": [
+      {
+        "url": "https://fccid.io/2ABCB-RPI0W/External-Photos/External-Photos-3296375",
+        "doc": "FCC",
+        "section": "External photos"
+      }
+    ]
+  },
+  "footprint": {
+    "status": "derived",
+    "text": "Unpopulated 8-pad FPC footprint, likely J5 (VideoCore JTAG). Position not published.",
+    "pins": [
+      { "pin": 1, "net": "RUN" },
+      { "pin": 2, "net": "VC_TRST_N" },
+      { "pin": 3, "net": "VC_TDI" },
+      { "pin": 4, "net": "GND" },
+      { "pin": 5, "net": "VC_TDO" },
+      { "pin": 6, "net": "VC_TMS" },
+      { "pin": 7, "net": "GND" },
+      { "pin": 8, "net": "VC_TCK" }
+    ],
+    "src": [
+      {
+        "url": "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-reduced-schematics.pdf",
+        "doc": "RP-008368-DS",
+        "section": "Raspberry Pi Zero W reduced schematics"
+      }
+    ]
+  },
+  "print": {
+    "lines": [
+      "Raspberry Pi Zero W V1.1",
+      "FCC ID: 2ABCB-RPI0W",
+      "IC: 20953-RPI0W",
+      "FC, CE and WEEE marks",
+      "Raspberry Pi logo",
+      "HDMI",
+      "Uses antenna technology licensed from Proant AB"
+    ],
+    "versions": "Two print versions exist: © Raspberry Pi 2016 (early boards) and © Raspberry Pi 2017, which adds ANATEL: 04906-17-10629.",
+    "src": [
+      {
+        "url": "https://fccid.io/2ABCB-RPI0W",
+        "doc": "FCC",
+        "section": "FCC grant"
+      },
+      {
+        "url": "https://pip-assets.raspberrypi.com/categories/594-approvals/documents/RP-000418-CF-1-Canada.pdf",
+        "doc": "ISED",
+        "section": "RP-000418-CF"
+      },
+      {
+        "url": "https://commons.wikimedia.org/wiki/File:Raspberry_Pi_Zero_W_vs_Zero_(backside).jpeg",
+        "doc": "Wikimedia",
+        "section": "Backside photo"
+      }
+    ]
+  }
+}

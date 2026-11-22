@@ -549,7 +549,12 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
       </label>
       {chip && <p className="height-badge">{chip}</p>}
       <p className="estimate-note">{labels.heightLegend}</p>
-      {showBackNote && <p className="back-note">{labels.testPadsMissing}</p>}
+      {showBackNote && (
+        <p className="back-note">
+          <span>{labels.testPadsMissing}</span>
+          <button type="button" className="underside-link" onClick={() => onSelect({ kind: "underside" })}>{labels.underside}</button>
+        </p>
+      )}
     </div>
   );
 }

@@ -91,6 +91,11 @@ export function Explorer() {
     : lab.selection?.kind === "part"
       ? lab.catalog.parts.find((item) => item.id === lab.selection.id)
       : null;
+  const showUnderside = lab.selection?.kind === "underside";
+
+  useEffect(() => {
+    if (showUnderside) setSnap("full");
+  }, [showUnderside]);
 
   const rail = (
     <>
@@ -211,9 +216,10 @@ export function Explorer() {
       <aside className={`inspector snap-${snap}`}>
         <button type="button" className="snap-handle" onClick={() => setSnap((value) => value === "peek" ? "half" : value === "half" ? "full" : "peek")} />
         <p className="overline">{t.inspector}</p>
-        {!selectedPin && !selectedPart && <p className="quiet">{t.inspectEmpty}</p>}
+        {!selectedPin && !selectedPart && !showUnderside && <p className="quiet">{t.inspectEmpty}</p>}
         {selectedPin && <PinInspector pin={selectedPin} header={board.header} />}
         {selectedPart && <PartInspector part={selectedPart} lang={lab.lang} />}
+        {showUnderside && <UndersideInspector board={board} lang={lab.lang} />}
       </aside>
     </div>
   );
@@ -271,6 +277,64 @@ function PinInspector({ pin, header }) {
           <li key={src.url}><a href={src.url}>{src.section || src.url}</a></li>
         ))}
       </ul>
+    </article>
+  );
+}
+
+function textOf(lang, translated, recorded) {
+  return lang === "zh-CN" ? translated : recorded;
+}
+
+function SourceList({ sources }) {
+  if (!sources?.length) return null;
+  return (
+    <ul className="sources">
+      {sources.map((src) => (
+        <li key={src.url}><a href={src.url}>{src.doc ? `${src.doc} — ${src.section}` : src.section || src.url}</a></li>
+      ))}
+    </ul>
+  );
+}
+
+function UndersideInspector({ board, lang }) {
+  const t = strings(lang);
+  const pads = (board.components || []).find((item) => item.id === "test-pads");
+  const doc = board.underside || {};
+  const rows = pads?.subparts || [];
+  return (
+    <article className="underside">
+      <h2>{t.underside}</h2>
+      <p className="overline">{t.testPads}</p>
+      <ul className="pad-list">
+        {rows.map((row) => {
+          const src = row.src?.[0];
+          return (
+            <li key={row.id}>
+              <b>{row.id}</b>
+              <span>{row.net}</span>
+              {src && <a href={src.url}>{src.doc || src.section}</a>}
+            </li>
+          );
+        })}
+      </ul>
+      <p>{textOf(lang, t.undersideParts, doc.parts?.text)}</p>
+      <SourceList sources={doc.parts?.src} />
+      <p>
+        {textOf(lang, t.undersideJ5, doc.footprint?.text)}{" "}
+        <span className="est">{t.derived}</span>
+      </p>
+      <ol className="pin-nets">
+        {(doc.footprint?.pins || []).map((pin) => (
+          <li key={pin.pin}><b>{pin.pin}</b> {pin.net}</li>
+        ))}
+      </ol>
+      <SourceList sources={doc.footprint?.src} />
+      <p className="overline">{t.undersidePrint}</p>
+      <ul className="print-list">
+        {(doc.print?.lines || []).map((line) => <li key={line}>{line}</li>)}
+      </ul>
+      <p>{textOf(lang, t.undersideVersions, doc.print?.versions)}</p>
+      <SourceList sources={doc.print?.src} />
     </article>
   );
 }

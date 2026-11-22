@@ -1,5 +1,7 @@
 import { adaptFluxBoard, adaptPinout, hatToPart } from "../../shared/flux.mjs";
+import { applyUnderside } from "../../shared/underside.mjs";
 import fluxBoard from "../../data/boards/zero-w.flux.json";
+import underside from "../../data/boards/zero-w.underside.json";
 import fluxPins from "../../data/pinout.flux.json";
 import partsDoc from "../../data/parts.json";
 import hatsDoc from "../../data/hats.json";
@@ -15,6 +17,7 @@ const buildMods = import.meta.glob("../../data/builds/*.json", { eager: true, im
 export function getCatalog() {
   const pinout = adaptPinout(fluxPins);
   const board = adaptFluxBoard(fluxBoard, fluxPins);
+  applyUnderside(board, underside);
   board.pinout = pinout;
   const ids = new Set(partsDoc.parts.map((part) => part.id));
   const parts = partsDoc.parts.concat(hatsDoc.parts.map(hatToPart).filter((part) => !ids.has(part.id)));
