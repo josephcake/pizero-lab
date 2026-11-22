@@ -4,7 +4,7 @@ import { HashRouter, Link, NavLink, Route, Routes, useLocation } from "react-rou
 import { strings } from "./i18n.js";
 import { searchCatalog } from "./staticCatalog.js";
 import { HelpDock } from "./help.jsx";
-import { BoardPage, BuildPage, BuildsPage, InstrumentsPage, LessonPage, LessonsPage, NotFound, PartPage, PinPage, RoadmapPage, SettingsPage } from "./pages.jsx";
+import { BoardPage, BuildPage, BuildsPage, InstrumentsPage, LessonPage, LessonsPage, NotFound, PartPage, PartsPage, PinPage, RoadmapPage, SettingsPage } from "./pages.jsx";
 import { LabProvider, useLab } from "./state.jsx";
 import "./styles.css";
 
@@ -82,30 +82,30 @@ function Shell() {
   if (error) return <p className="page">{t.catalogDown}</p>;
   if (!catalog) return <p className="page">{t.loading}</p>;
   const links = [
-    ["/", t.board],
-    ["/lessons", t.lessons],
-    ["/builds", t.builds],
-    ["/instruments", t.instruments],
-    ["/settings", t.settings],
+    ["/", t.navBoard, ""],
+    ["/lessons", t.navLearn, ""],
+    ["/builds", t.navBuilds, ""],
+    ["/parts", t.navParts, "wide"],
+    ["/instruments", t.navTools, "wide"],
   ];
   return (
     <div className="sheet">
       <button type="button" className="skip" onClick={() => document.getElementById("board")?.focus()}>{t.skip}</button>
       <header className="mast">
-        <div>
+        <div className="brand">
           <Link to="/" className="wordmark">pizero<i>/</i>lab</Link>
-          <p className="tag">{t.tag}</p>
+          <BoardPicker />
         </div>
         <nav className="index-nav">
-          {links.map(([href, label]) => (
-            <NavLink key={href} to={href} end={href === "/"} className={({ isActive }) => isActive || (href === "/" && location.pathname.startsWith("/board")) ? "on" : ""}>
+          {links.map(([href, label, extra]) => (
+            <NavLink key={href} to={href} end={href === "/"} className={({ isActive }) => `${extra} ${isActive || (href === "/" && location.pathname.startsWith("/board")) ? "on" : ""}`}>
               {label}
             </NavLink>
           ))}
+          <NavLink to="/instruments" className="more-link">{t.more}</NavLink>
         </nav>
         <SearchBox />
         <div className="lang" role="group" aria-label={t.lang}>
-          <BoardPicker />
           <button type="button" className="lang-one" onClick={() => setLang(lang === "en" ? "zh-CN" : "en")}>{lang === "en" ? "中文" : "EN"}</button>
           <button type="button" className={lang === "en" ? "on lang-pair" : "lang-pair"} onClick={() => setLang("en")}>EN</button>
           <button type="button" className={lang === "zh-CN" ? "on lang-pair" : "lang-pair"} onClick={() => setLang("zh-CN")}>中文</button>
@@ -124,6 +124,7 @@ function Shell() {
             <Route path="/builds/:id" element={<BuildPage />} />
             <Route path="/instruments" element={<InstrumentsPage />} />
             <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/parts" element={<PartsPage />} />
             <Route path="/parts/:id" element={<PartPage />} />
             <Route path="/pins/:physical" element={<PinPage />} />
             <Route path="*" element={<NotFound />} />
@@ -132,9 +133,9 @@ function Shell() {
         <HelpDock />
       </div>
       <nav className="tabbar">
-        <NavLink to="/" end><span aria-hidden="true">▦</span>{t.board}</NavLink>
-        <NavLink to="/lessons"><span aria-hidden="true">◎</span>{t.learn}</NavLink>
-        <NavLink to="/builds"><span aria-hidden="true">▣</span>{t.builds}</NavLink>
+        <NavLink to="/" end><span aria-hidden="true">▦</span>{t.navBoard}</NavLink>
+        <NavLink to="/lessons"><span aria-hidden="true">◎</span>{t.navLearn}</NavLink>
+        <NavLink to="/builds"><span aria-hidden="true">▣</span>{t.navBuilds}</NavLink>
         <NavLink to="/settings"><span aria-hidden="true">?</span>{t.tabHelp}</NavLink>
         <NavLink to="/roadmap"><span aria-hidden="true">…</span>{t.more}</NavLink>
       </nav>

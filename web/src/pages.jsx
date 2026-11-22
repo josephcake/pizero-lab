@@ -367,6 +367,20 @@ export function BuildPage() {
   );
 }
 
+export function PartsPage() {
+  const { catalog, lang } = useLab();
+  const t = strings(lang);
+  const parts = catalog.parts.filter((part) => fitsBoard(part, catalog.board.id) && part.product_url);
+  return (
+    <div className="page">
+      <h1>{t.navParts}</h1>
+      <ul className="parts-index">
+        {parts.map((part) => <li key={part.id}><Link to={`/parts/${part.id}`}>{tx(part.name, lang)}</Link></li>)}
+      </ul>
+    </div>
+  );
+}
+
 export function PartPage() {
   const { id } = useParams();
   const { catalog, lang, setSelection } = useLab();
