@@ -217,6 +217,15 @@ export function deriveBom(state, catalog) {
   };
 }
 
+export function formatPrice(row) {
+  if (row?.price_usd == null) return null;
+  const bits = [`$${Number(row.price_usd).toFixed(2)} USD`];
+  const who = row.retailer || row.price_src;
+  if (who) bits.push(who);
+  if (row.price_date) bits.push(row.price_date);
+  return bits.join(" · ");
+}
+
 export function formatBom(bom) {
   const money = `$${bom.priced_usd.toFixed(2)}`;
   if (bom.unpriced_count > 0) return `${money} + ${bom.unpriced_count} items unpriced`;

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { fitsBoard } from "../../shared/boards.mjs";
-import { deriveBom, formatBom } from "../../shared/bench.mjs";
+import { deriveBom, formatBom, formatPrice } from "../../shared/bench.mjs";
 import { tx, useLab } from "./state.jsx";
 import { strings } from "./i18n.js";
 
@@ -270,7 +270,7 @@ export function BomList({ catalog, state, lang, t, approx = false }) {
         {bom.lines.map((line) => (
           <li key={line.partId}>
             <span>{tx(line.name, lang)}{line.qty > 1 ? ` × ${line.qty}` : ""}</span>
-            <span>{line.price_usd == null ? t.unpriced : `$${line.price_usd.toFixed(2)}`}</span>
+            <span>{line.price_usd == null ? t.unpriced : formatPrice(line)}</span>
           </li>
         ))}
       </ul>

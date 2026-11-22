@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { replaySteps } from "../../shared/bench.mjs";
+import { formatPrice, replaySteps } from "../../shared/bench.mjs";
 import { fitsBoard, mismatch } from "../../shared/boards.mjs";
 import { strings } from "./i18n.js";
 import { labCall } from "./lab.js";
@@ -396,7 +396,7 @@ export function PartPage() {
       <p className="meta">{part.maker || "—"} · {part.zero_w}</p>
       {tx(part.zero_w_note, lang) && tx(part.zero_w_note, lang) !== tx(part.summary, lang) && <p>{tx(part.zero_w_note, lang)}</p>}
       <p>{tx(part.dims_note, lang)}</p>
-      <p>{part.price_usd == null ? strings(lang).unpriced : `$${part.price_usd}`}</p>
+      <p>{part.price_usd == null ? strings(lang).unpriced : formatPrice(part)}</p>
       {part.product_url && <p><a href={part.product_url}>{part.product_url}</a></p>}
       {source && <p><a href={source.url}>{source.title}</a></p>}
     </article>
