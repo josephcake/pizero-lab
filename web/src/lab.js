@@ -32,6 +32,7 @@ function resistor(body) {
   const count = Number(body.count || 1);
   const warnings = [];
   if (!(i > 0) || !(v > 0) || vf < 0) throw new Error("bad input");
+  if (v > 3.3) warnings.push({ code: "gpio-3v3", en: "GPIO pins output 3.3 V and are not 5 V tolerant.", "zh-CN": "GPIO 输出 3.3 V，不耐 5 V。" });
   if (i < 5 || i > 10) warnings.push({ code: "beginner-target", en: "A beginner target is 5–10 mA per LED.", "zh-CN": "入门目标是每颗 LED 5–10 mA。" });
   if (i > limits.gpio_pin_max_ma.value) warnings.push({ code: "over-pin", en: `Above ${limits.gpio_pin_max_ma.value} mA on one pin.`, "zh-CN": `超过单脚 ${limits.gpio_pin_max_ma.value} mA。` });
   if (i * count > limits.gpio_combined_max_ma.value) warnings.push({ code: "over-combined", en: `${count} × ${i} mA exceeds the ${limits.gpio_combined_max_ma.value} mA GPIO total. Each LED keeps its own resistor.`, "zh-CN": `${count} × ${i} mA 超过全部 GPIO 合计 ${limits.gpio_combined_max_ma.value} mA。每颗 LED 仍用自己的电阻。` });
