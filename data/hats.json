@@ -4087,7 +4087,8 @@
         "https://pinout.xyz/pinout/ultimate_gps_hat",
         "https://github.com/pinout-xyz/Pinout.xyz/blob/master/src/en/overlay/adafruit-gps-hat.md",
         "https://datasheets.raspberrypi.com/rpizero/raspberry-pi-zero-w-mechanical-drawing.pdf",
-        "https://datasheets.raspberrypi.com/hat/hat-plus-specification.pdf"
+        "https://datasheets.raspberrypi.com/hat/hat-plus-specification.pdf",
+        "https://www.raspberrypi.com/documentation/computers/configuration.html"
       ],
       "form": "hat",
       "dims_mm": {
@@ -4120,7 +4121,7 @@
         "gpio",
         "uart"
       ],
-      "zero_w": "works",
+      "zero_w": "caveat",
       "compat_note": "Adafruit: for Pi 3, Pi Zero, A+, B+, Pi 2/3/4/5. Uses the UART (pins 8/10); on Zero W the PL011 UART is used by Bluetooth by default, so a dtoverlay change (e.g. disable-bt/miniuart-bt) is typically needed [Opinion, standard RPi config]. Original Zero W ships without GPIO header: needs Zero WH, a soldered header, a hammer header or pogo pins.",
       "price_usd": 29.95,
       "price_src": "https://www.adafruit.com/product/2324",
@@ -4128,7 +4129,8 @@
       "retailer": "Adafruit",
       "boards": [
         "zero-w"
-      ]
+      ],
+      "zero_w_note": "On the Zero W the PL011 UART serves Bluetooth by default, so GPIO14/15 get the mini-UART and a UART config step is needed (https://www.raspberrypi.com/documentation/computers/configuration.html). [Estimate]"
     },
     {
       "id": "adafruit-lora-bonnet-rfm95w-915",

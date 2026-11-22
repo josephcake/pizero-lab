@@ -156,7 +156,7 @@ export function hatToPart(hat) {
     summary: { en: blurb, "zh-CN": blurb },
     boards: ["zero-w"],
     zero_w: hat.zero_w || "unverified",
-    zero_w_note: null,
+    zero_w_note: hat.zero_w_note ? { en: hat.zero_w_note, "zh-CN": hat.zero_w_note } : null,
     dims: mountable ? { w_mm: dims.w, h_mm: dims.h } : null,
     dims_note: mountable ? null : { en: "No sourced outline or pin-1 anchor, so this stays in the tray.", "zh-CN": "没有带来源的外形或 1 号针锚点，所以只留在零件盘。" },
     anchors: mountable
