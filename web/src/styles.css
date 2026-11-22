@@ -48,6 +48,10 @@
 @media (prefers-reduced-motion: reduce) { :root { --d-1:0ms; } }
 
 * { box-sizing: border-box; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.skip { position: absolute; left: 8px; top: 8px; z-index: 40; transform: translateY(-160%); }
+.skip:focus { transform: none; }
+.focus-chip { position: absolute; transform: translate(-50%, calc(-100% - 8px)); background: var(--bg-1); color: var(--ov-select); border: 1px solid var(--ov-select); border-radius: var(--r-pill); font: var(--t-micro); padding: 1px 6px; pointer-events: none; white-space: nowrap; }
 html, body, #root { height: 100%; }
 body { margin: 0; background: var(--bg-0); color: var(--ink); font: var(--t-ui); font-family: var(--f-text); }
 button, input, select, textarea { font: inherit; color: inherit; }

@@ -111,6 +111,9 @@ export const copy = {
     alts: "Alternate functions",
     none: "none",
     coming: "coming soon",
+    skip: "Skip to board",
+    boardKeys: "Board, arrow keys move between pins",
+    focused: "focused",
   },
 
   "zh-CN": {
@@ -191,6 +194,9 @@ export const copy = {
     alts: "复用功能",
     none: "无",
     coming: "即将推出",
+    skip: "跳到板子",
+    boardKeys: "板子，方向键在引脚之间移动",
+    focused: "焦点",
     quizNeed: "请回答每一题。",
     quizPass: "通过。徽章记在这条路径上。",
     quizFail: "还没过。错题下面写了原因。",

@@ -38,6 +38,8 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
   const [view, setView] = useState(null);
   const [px, setPx] = useState(8);
   const [cursor, setCursor] = useState(null);
+  const [focusPin, setFocusPin] = useState(1);
+  const [kbd, setKbd] = useState(false);
   const drag = useRef(null);
   const W = board.outline.w_mm.value;
   const H = board.outline.h_mm.value;
@@ -103,14 +105,50 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
   const showPads = px >= 4;
   const showNumbers = px >= 10 && layers.pins;
   const authoredY = (svgY) => H - svgY;
+  let focusChip = null;
+  if (kbd && view && svgRef.current) {
+    const pin = board.header.pins.find((row) => row.physical === focusPin);
+    const rect = svgRef.current.getBoundingClientRect();
+    const host = svgRef.current.parentElement.getBoundingClientRect();
+    if (pin && rect.width) {
+      focusChip = {
+        left: rect.left - host.left + ((pin.x - view.x) / view.w) * rect.width,
+        top: rect.top - host.top + ((pin.y - view.y) / view.h) * rect.height,
+      };
+    }
+  }
 
   return (
     <div className="map-wrap">
       <svg
+        id="board"
         ref={svgRef}
         className="pz-board"
+        tabIndex={0}
+        role="application"
+        aria-label={t.boardKeys}
         data-zoom={px < 6 ? "far" : "near"}
         viewBox={view ? `${view.x} ${view.y} ${view.w} ${view.h}` : `0 0 ${W} ${H}`}
+        onFocus={() => setKbd(true)}
+        onBlur={() => setKbd(false)}
+        onKeyDown={(event) => {
+          if (event.key === "ArrowLeft") {
+            event.preventDefault();
+            setFocusPin((pin) => Math.max(1, pin - 2));
+          } else if (event.key === "ArrowRight") {
+            event.preventDefault();
+            setFocusPin((pin) => (pin + 2 <= 40 ? pin + 2 : pin));
+          } else if (event.key === "ArrowUp") {
+            event.preventDefault();
+            setFocusPin((pin) => (pin % 2 === 1 ? pin + 1 : pin));
+          } else if (event.key === "ArrowDown") {
+            event.preventDefault();
+            setFocusPin((pin) => (pin % 2 === 0 ? pin - 1 : pin));
+          } else if (event.key === "Enter") {
+            event.preventDefault();
+            onSelect({ kind: "pin", physical: focusPin });
+          }
+        }}
         onPointerDown={(event) => {
           drag.current = { x: event.clientX, y: event.clientY, ox: event.clientX, oy: event.clientY, view, id: event.pointerId, captured: false };
         }}
@@ -255,10 +293,16 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
             <circle cx={pin.x} cy={pin.y} r={board.header.padD / 2 + 0.12} stroke="var(--ov-select)" />
           </g>
         ))}
+        {kbd && board.header.pins.filter((pin) => pin.physical === focusPin).map((pin) => (
+          <g key="focus" className="pz-overlay">
+            <circle cx={pin.x} cy={pin.y} r={board.header.padD / 2 + 0.28} stroke="var(--focus)" />
+          </g>
+        ))}
         {showNumbers && board.header.pins.map((pin) => (
           <text key={`n-${pin.physical}`} x={pin.x} y={pin.y - 1.15} textAnchor="middle" className="pin-num">{pin.physical}</text>
         ))}
       </svg>
+      {focusChip && <span className="focus-chip" style={{ left: focusChip.left, top: focusChip.top }}>{t.focused}</span>}
       <div className="map-tools">
         {onOpenLayers && <button type="button" className="layers-toggle" onClick={onOpenLayers}>{t.layers}</button>}
         <button type="button" aria-label={t.zoomOut} onClick={() => zoomAt(1 / 1.25, centerOf(svgRef).x, centerOf(svgRef).y)}>−</button>

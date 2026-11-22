@@ -86,6 +86,7 @@ function Shell() {
   ];
   return (
     <div className="sheet">
+      <button type="button" className="skip" onClick={() => document.getElementById("board")?.focus()}>{t.skip}</button>
       <header className="mast">
         <div>
           <Link to="/" className="wordmark">pizero<i>/</i>lab</Link>
