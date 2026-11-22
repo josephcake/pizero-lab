@@ -95,6 +95,7 @@ export const copy = {
     step: "Step",
     refused: "The reducer refused this action",
     power: "Power budget",
+    hatMa: "+ HAT/peripheral mA",
     recommend: "What you already own",
     conflict: "Pin check",
     noConflict: "No pin conflict.",
@@ -292,6 +293,7 @@ export const copy = {
     quizPass: "通过。徽章记在这条路径上。",
     quizFail: "还没过。错题下面写了原因。",
     noConflict: "没有引脚冲突。",
+    hatMa: "+ HAT/外设 mA",
   },
 };
 

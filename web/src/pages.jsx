@@ -417,13 +417,14 @@ export function InstrumentsPage() {
   const [hdmi, setHdmi] = useState(false);
   const [camera, setCamera] = useState(false);
   const [usb, setUsb] = useState("0");
+  const [hat, setHat] = useState("0");
   const [owned, setOwned] = useState([]);
   const [recs, setRecs] = useState(null);
   const [clash, setClash] = useState(null);
 
   async function runPower(event) {
     event.preventDefault();
-    setPower(labCall("power", { hdmi, camera, usb_ma: Number(usb), board: catalog.board.id }, catalog));
+    setPower(labCall("power", { hdmi, camera, usb_ma: Number(usb), hat_ma: Number(hat), board: catalog.board.id }, catalog));
   }
 
   function toggle(id) {
@@ -444,6 +445,7 @@ export function InstrumentsPage() {
         <label><input type="checkbox" checked={hdmi} onChange={(e) => setHdmi(e.target.checked)} /> HDMI</label>
         <label><input type="checkbox" checked={camera} onChange={(e) => setCamera(e.target.checked)} /> Camera</label>
         <label>USB mA <input value={usb} onChange={(e) => setUsb(e.target.value)} /></label>
+        <label>{t.hatMa} <input value={hat} onChange={(e) => setHat(e.target.value)} inputMode="numeric" /></label>
         <button type="submit">{t.run}</button>
         {power && !power.error && (
           <div>
