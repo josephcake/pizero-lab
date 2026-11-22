@@ -14,6 +14,7 @@ function SearchBox() {
   const t = strings(lang);
   const [q, setQ] = useState("");
   const [hits, setHits] = useState([]);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (!q.trim()) {
@@ -27,7 +28,9 @@ function SearchBox() {
   }, [q, boardId]);
 
   return (
-    <div className="search">
+    <>
+    <button type="button" className="search-toggle" aria-label={t.search} onClick={() => setOpen((value) => !value)}>⌕</button>
+    <div className={open ? "search open" : "search"}>
       <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={t.search} aria-label={t.search} />
       {q && (
         <ul>
@@ -40,6 +43,7 @@ function SearchBox() {
         </ul>
       )}
     </div>
+    </>
   );
 }
 
@@ -102,8 +106,9 @@ function Shell() {
         <SearchBox />
         <div className="lang" role="group" aria-label={t.lang}>
           <BoardPicker />
-          <button type="button" className={lang === "en" ? "on" : ""} onClick={() => setLang("en")}>EN</button>
-          <button type="button" className={lang === "zh-CN" ? "on" : ""} onClick={() => setLang("zh-CN")}>中文</button>
+          <button type="button" className="lang-one" onClick={() => setLang(lang === "en" ? "zh-CN" : "en")}>{lang === "en" ? "中文" : "EN"}</button>
+          <button type="button" className={lang === "en" ? "on lang-pair" : "lang-pair"} onClick={() => setLang("en")}>EN</button>
+          <button type="button" className={lang === "zh-CN" ? "on lang-pair" : "lang-pair"} onClick={() => setLang("zh-CN")}>中文</button>
           <ThemeButton />
         </div>
       </header>
@@ -127,11 +132,11 @@ function Shell() {
         <HelpDock />
       </div>
       <nav className="tabbar">
-        <NavLink to="/" end>{t.board}</NavLink>
-        <NavLink to="/lessons">{t.learn}</NavLink>
-        <NavLink to="/builds">{t.builds}</NavLink>
-        <NavLink to="/settings">{t.tabHelp}</NavLink>
-        <NavLink to="/roadmap">{t.more}</NavLink>
+        <NavLink to="/" end><span aria-hidden="true">▦</span>{t.board}</NavLink>
+        <NavLink to="/lessons"><span aria-hidden="true">◎</span>{t.learn}</NavLink>
+        <NavLink to="/builds"><span aria-hidden="true">▣</span>{t.builds}</NavLink>
+        <NavLink to="/settings"><span aria-hidden="true">?</span>{t.tabHelp}</NavLink>
+        <NavLink to="/roadmap"><span aria-hidden="true">…</span>{t.more}</NavLink>
       </nav>
     </div>
   );

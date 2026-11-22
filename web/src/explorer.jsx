@@ -25,6 +25,7 @@ export function Explorer() {
   const [conflicts, setConflicts] = useState(null);
   const [sheet, setSheet] = useState(false);
   const [mode, setMode] = useState("explore");
+  const [snap, setSnap] = useState("peek");
   const hats = lab.catalog.parts.filter((part) => fitsBoard(part, board.id) && part.product_url);
   const mountedIds = lab.bench.jobPartIds.filter((id) => hats.some((hat) => hat.id === id));
 
@@ -77,6 +78,15 @@ export function Explorer() {
 
   const rail = (
     <>
+      <label className="sheet-picker">
+        {t.picker}
+        <select aria-label={t.picker} value={lab.catalog.modelId} onChange={(event) => lab.pickBoard(event.target.value)}>
+          {lab.catalog.boards.base.models.map((model) => {
+            const live = Boolean(lab.catalog.boards.models[model.id]);
+            return <option key={model.id} value={model.id} disabled={!live}>{model.name?.[lab.lang] || model.name?.en || model.id}{live ? "" : ` · ${t.coming}`}</option>;
+          })}
+        </select>
+      </label>
       <p className="overline">{t.header}</p>
       <div className="seg">
         {[["bare", "bareShort"], ["solder", "solderShort"], ["hammer", "hammerShort"]].map(([method, key]) => (
@@ -161,7 +171,8 @@ export function Explorer() {
           <Minimap board={board} view={view} mounts={lab.bench.mounts} parts={lab.catalog.parts} />
         </div>
       </div>
-      <aside className="inspector">
+      <aside className={`inspector snap-${snap}`}>
+        <button type="button" className="snap-handle" onClick={() => setSnap((value) => value === "peek" ? "half" : value === "half" ? "full" : "peek")} />
         <p className="overline">{t.inspector}</p>
         {!selectedPin && !selectedPart && <p className="quiet">{t.inspectEmpty}</p>}
         {selectedPin && <PinInspector pin={selectedPin} header={board.header} />}

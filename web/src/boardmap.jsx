@@ -315,7 +315,7 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
         {onOpenLayers && <button type="button" className="layers-toggle" onClick={onOpenLayers}>{t.layers}</button>}
         <button type="button" className={mode === "explore" ? "on" : ""} onClick={() => onMode?.("explore")}>{t.explore}</button>
         <button type="button" className={mode === "bench" ? "on" : ""} onClick={() => onMode?.("bench")}>{t.bench}</button>
-        <button type="button" className="on">{t.top}</button>
+        <button type="button">{t.top}</button>
         <button type="button" disabled>{t.bottom}</button>
         <button type="button" disabled>{t.side}</button>
         <button type="button" onClick={fit}>{t.fit}</button>
