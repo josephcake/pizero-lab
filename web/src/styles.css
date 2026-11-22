@@ -237,7 +237,8 @@ h1, h2, h3 { font-family: var(--f-display); font-weight: 650; margin: 0 0 8px; }
   .inspector.snap-full { max-height: calc(100dvh - 48px - var(--tabbar-h)); }
   .inspector.snap-peek .facts, .inspector.snap-peek .alts, .inspector.snap-peek .sources, .inspector.snap-peek .quiet { display: none; }
   .snap-handle { display: block; width: 36px; height: 4px; margin: 6px auto 8px; padding: 0; border: 0; border-radius: 99px; background: var(--line-ui); min-height: 4px; min-width: 36px; }
-  .map-tools { left: 50%; transform: translateX(-50%); max-width: calc(100% - 72px); }
+  .map-tools { left: 50%; transform: translateX(-50%); max-width: calc(100% - 72px); flex-wrap: nowrap; }
+  .map-tools button { min-width: 0; width: auto; padding: 6px 10px; }
   .map-tools button { display: none; }
   .map-tools .layers-toggle, .map-tools button:nth-child(2), .map-tools button:nth-child(3) { display: inline-flex; }
   .snap-handle { display: block; }
