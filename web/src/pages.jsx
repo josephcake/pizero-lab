@@ -474,6 +474,12 @@ export function InstrumentsPage() {
           <div>
             <h3>{t.conflict}</h3>
             <p>{clash.note}</p>
+            <ul>
+              {(clash.conflicts || []).map((row) => (
+                <li key={`${row.a}-${row.b}`}>{nameText(row.names[0])} ∩ {nameText(row.names[1])}: pins {row.pins.join(", ")}{row.i2c?.length ? ` · I2C ${row.i2c.join(", ")}` : ""}</li>
+              ))}
+              {(clash.conflicts || []).length === 0 && <li>{t.noConflict}</li>}
+            </ul>
             <ul>{(clash.unchecked || []).map((row) => <li key={row.part_id}>{row.part_id}: {row.reason}</li>)}</ul>
           </div>
         )}
@@ -536,6 +542,11 @@ export function SettingsPage() {
       {note && <p className="ok">{note}</p>}
     </form>
   );
+}
+
+function nameText(value) {
+  if (!value) return "";
+  return typeof value === "string" ? value : value.en || "";
 }
 
 export function SwitchBoard({ ids }) {

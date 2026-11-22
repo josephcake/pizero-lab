@@ -97,6 +97,7 @@ export const copy = {
     power: "Power budget",
     recommend: "What you already own",
     conflict: "Pin check",
+    noConflict: "No pin conflict.",
     run: "Run",
     owned: "I have this",
     provider: "Provider",
@@ -288,6 +289,7 @@ export const copy = {
     quizNeed: "请回答每一题。",
     quizPass: "通过。徽章记在这条路径上。",
     quizFail: "还没过。错题下面写了原因。",
+    noConflict: "没有引脚冲突。",
   },
 };
 
