@@ -272,7 +272,10 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
               <rect x={mount.x_mm} y={mount.y_mm} width={part.dims.w_mm} height={part.dims.h_mm} rx={0.4} fill="#143526" />
               <path fill="#2a7a52" fillRule="evenodd" d={`${roundRect(mount.x_mm, mount.y_mm, part.dims.w_mm, part.dims.h_mm, 0.4)} ${roundRect(mount.x_mm + 0.4, mount.y_mm + 0.4, part.dims.w_mm - 0.8, part.dims.h_mm - 0.8, 0.2)}`} />
               {layers.silk && (
-                <text x={mount.x_mm + 2} y={mount.y_mm + Math.min(4, part.dims.h_mm - 1)} className="silk-label">{part.name.en}</text>
+                <text x={mount.x_mm + part.dims.w_mm / 2} y={mount.y_mm + part.dims.h_mm * 0.62} textAnchor="middle" className="silk-label">
+                  <title>{part.name.en}</title>
+                  {part.name.en.length > 22 ? `${part.name.en.slice(0, 21)}…` : part.name.en}
+                </text>
               )}
             </g>
           );
