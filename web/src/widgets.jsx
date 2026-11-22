@@ -44,18 +44,22 @@ export function OhmWidget() {
   const [count, setCount] = useState("1");
   const [result, setResult] = useState(null);
   const [error, setError] = useState("");
+  const [fields, setFields] = useState({});
 
   async function run(event) {
     event.preventDefault();
     setError("");
+    setResult(null);
+    setFields({});
     try {
-      setResult(await postLab("resistor", {
-        vf: Number(vf),
-        i_ma: Number(ma),
-        v_gpio: Number(volts),
-        count: Number(count),
-      }));
+      const next = await postLab("resistor", { vf, i_ma: ma, v_gpio: volts, count });
+      if (next?.ok === false) {
+        setFields(next.fields || {});
+        return;
+      }
+      setResult(next);
     } catch (err) {
+      setResult(null);
       setError(String(err.message || err));
     }
   }
@@ -63,11 +67,11 @@ export function OhmWidget() {
   return (
     <form className="widget" onSubmit={run}>
       <h3>{t.calc}</h3>
-      <label>{t.vf}<input value={vf} onChange={(e) => setVf(e.target.value)} inputMode="decimal" /></label>
-      <label>{t.ma}<input value={ma} onChange={(e) => setMa(e.target.value)} inputMode="decimal" /></label>
+      <label>{t.vf}<input value={vf} onChange={(e) => setVf(e.target.value)} inputMode="decimal" />{fields.vf && <em className="warn">{t.fieldBad}</em>}</label>
+      <label>{t.ma}<input value={ma} onChange={(e) => setMa(e.target.value)} inputMode="decimal" />{fields.ma && <em className="warn">{t.fieldBad}</em>}</label>
       <p className="note">{lang === "zh-CN" ? "入门目标：每颗 5–10 mA。" : "Beginner target: 5–10 mA per LED."}</p>
-      <label>{t.volts}<input value={volts} onChange={(e) => setVolts(e.target.value)} inputMode="decimal" /></label>
-      <label>{t.count}<input value={count} onChange={(e) => setCount(e.target.value)} inputMode="numeric" /></label>
+      <label>{t.volts}<input value={volts} onChange={(e) => setVolts(e.target.value)} inputMode="decimal" />{fields.volts && <em className="warn">{t.fieldBad}</em>}</label>
+      <label>{t.count}<input value={count} onChange={(e) => setCount(e.target.value)} inputMode="numeric" />{fields.count && <em className="warn">{t.fieldBad}</em>}</label>
       <button type="submit">{t.run}</button>
       {error && <p className="warn">{error}</p>}
       {result && (

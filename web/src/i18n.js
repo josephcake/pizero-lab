@@ -112,6 +112,7 @@ export const copy = {
     forgotten: "The key is gone from session and local storage.",
     noProxy: "Calls go from this browser straight to the provider. This server never sees the key.",
     calc: "Resistor",
+    fieldBad: "Enter a valid number.",
     vf: "LED forward voltage (V)",
     ma: "Target current (mA)",
     volts: "Drive voltage (V)",
