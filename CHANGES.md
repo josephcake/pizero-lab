@@ -138,3 +138,26 @@ Lint's live v5 list, on top of `cc3bdd3`. `data/pinout.flux.json` was not edited
 | L-019 Checkboxes | `fa8b74b` | The box stays 18 px at the left of the label. |
 | L-020 Step wording | `9bbe103` | A failed step uses plain wording. The Inky step places the pHAT. |
 | HAT label | `aa2ceb7` | A long mounted name is ellipsized, with the full title on hover. |
+
+## Run 15
+
+v6 polish on `ae5c11c`. `data/pinout.flux.json` was not edited. No current was invented for a HAT. The main bundle is `index-Bmy9hw1g.js`, 178,290 bytes gzip (178.29 KB). The 3D chunk is `board3d-D3-hQjJH.js`, 136,093 bytes gzip (136.09 KB).
+
+| Item | Commit | What changed |
+| --- | --- | --- |
+| B1 Build board | `32f40b2` | The build-page board is at most 560 px wide, the frame matches 65×36, and the holes stay inside. |
+| B2 Inky build | `c55e830` | The flag is works, with the Pinout.xyz sentence and link. The fit step says pin 1 sits on pin 1. |
+| B3 Pi-hole | `59b1d3f` | One sentence, a labelled source, and "2 items, unpriced" when nothing has a price. |
+| B4 中文 parts | `61426a4` `975efc8` | Camera, the generic tool parts, and the power-result camera are translated. `es` is gone. |
+| B5 Power | `61b83e1` | A mounted HAT with no sourced current is labelled and left out of the total. |
+| P1 Inspector | `b6ea799` | A pin or part opens the phone sheet to half. The handle is 44 px and named. |
+| P2 Tap targets | `0cbe00b` | Layers segments are 44 px tall. 2D and 3D are at least 44 px wide. |
+| P3 中文 breaks | `923b7fc` | Body text can break. Nav, buttons, chips and table labels stay whole. |
+| P4 Tool labels | `b1c33d8` | Map tool labels are centred in the buttons. |
+| P5 Phone forms | `2bb2471` | Inputs are 44 px tall at 16 px. Checkbox and quiz rows match. |
+| P6 Bench names | `26140db` | Tray names wrap inside the rail. Silk prints the short name. |
+| P7 Mode chip | `fdad64c` | The phone toolbar shows Explore or Bench, whichever is current. |
+| P8 中文 controls | `ec6f404` | 电路板, 裸焊盘, 焊接, 压接, 顶视, 底视, 侧视. |
+| P9 Learn cards | `347537b` | The card is the tap target. Advanced says the rest are on the way, once. |
+| P10 CJK fonts | `08fb1db` | PingFang SC, Hiragino Sans GB, Microsoft YaHei, Noto Sans CJK SC and Source Han Sans SC sit ahead of ui-sans-serif. |
+| P-minor | `f26e0ab` | The resistor calculator is an h2, like the other tool headings. Desktop Top is disabled. |
