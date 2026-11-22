@@ -333,6 +333,7 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
         pad.userData.partId = row.id;
         pad.userData.built = true;
         tagged.push(pad);
+        pickables.push(pad);
         boardGroup.add(pad);
       }
     }
