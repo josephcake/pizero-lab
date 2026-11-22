@@ -291,6 +291,8 @@ button.text-btn { min-height: 32px; min-width: 0; padding: 4px 0; border: 0; bac
   .zoom-dock button { width: 44px; height: 44px; min-width: 44px; }
   .theme-btn { width: 44px; height: 44px; min-width: 44px; }
   button, select { min-height: 44px; min-width: 44px; }
+  input, select, textarea { min-height: 44px; font-size: 16px; }
+  .widget label:has(input[type="checkbox"]), .quiz label { min-height: 44px; align-items: center; }
   .pz-board { min-height: 0; }
   .facts { grid-template-columns: max-content 1fr; }
   .instruments { grid-template-columns: 1fr; }
