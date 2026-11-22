@@ -1,37 +1,24 @@
 # Changes
 
-Each fix is its own commit on `main`. Screenshots are of the static build served at `/pizero-lab/`.
+Run 6 is a chrome pass on v2. `data/*.flux.json` is unchanged. One commit per delta.
 
-## Prism
-
-| Fix | Commit | What changed |
+| Delta | Commit | What changed |
 | --- | --- | --- |
-| Pin and part clicks | `a3b6c31` | Pointer capture starts only after the pointer moves more than 4 px, so a mouse click still reaches the pad. |
-| Overlay rings | `eea7bc0` | `.pz-overlay, .pz-overlay *` uses a non-scaling 1.5 px stroke. Rings sit at 0.97 mm. Far zoom drops to 1 px. |
-| Help panel and board size | `6057edc` | The margin note stays hidden until a key exists. A 32 px Ask tab remains. The explorer fills the viewport, about 11 px/mm at 1280. |
-| Phone layers | `1d08431` | Below 820 px, Layers opens a bottom sheet with the header toggle, layers, legend, and tray. |
-| Scale bar | `c83c6c6` | The bar width is 10 × px/mm, so the label is a true 10 mm. |
-| `est.` badge | `b77a840` | The pin inspector shows 1.7 / 1.0 mm with an `est.` badge. The board art is not labelled. |
-| zh-CN chrome | `7232ae9` | Nav links do not wrap one character per line. Explorer labels, the inspector, and the 390 px tabs use the zh-CN strings. |
-| Keyboard | `4423378` | `:focus-visible` uses the focus token. Arrow keys move between pins, Enter inspects, and Skip to board focuses the map. |
+| 1. Explorer shell at 1440 | `016b8c0` | Grid is 280 / map / 360. The rail is eye rows, a legend, and a bench caption. The bill is off the map. A floating toolbar and a 168×84 minimap are in. |
+| 2. Explorer at 390 | `0272c26` | The mast is 48 px. The map is full-bleed. The inspector is a snap sheet. The tab bar uses icons. The bill and minimap are hidden. |
+| Phone toolbar stays one row | `90d0add` | Explore, Bench, and Layers no longer wrap over the board. |
+| 3. Lab step | `1338a17` | A lesson is outline 240 / step 72ch / live bench 440. The title uses the 28/34 face. Check is the one primary action. |
+| 4. Board overlays | `3400f6d` | The selected pin gets a callout. Measurements draw the 65 mm and 30 mm ticks. Only that pin and its neighbours are numbered. Function rings fade above 16 px/mm. |
+| 5. App bar | `2785a32` | Tabs read Board, Learn, Builds, Parts, Tools. Search no longer says “ledger”. The board picker sits under the wordmark. |
+| Scale bar steps with zoom | `c96117c` | The bar uses 1, 2, 5, 10, or 20 mm so it stays between 60 and 140 px. |
+| Focus ring on the pin | `2785a32` | `svg.pz-board` no longer draws a focus box. The ring and the name chip stay on the pin. Same stylesheet commit as the app bar. |
+| Theme button 44 px on a phone | `2785a32` | At 390 the sun/moon control is 44 px. Same stylesheet commit as the app bar. |
 
-Also, while those were in:
+## Skipped
 
-| | Commit | |
-| --- | --- | --- |
-| 44 px targets | `ef0b164` | Phone buttons and the board picker are at least 44 px. |
-| Empty routes | `a92b267` | Unknown pages say they are not on the bench. Provisional is one tray caption. The theme control is a sun or moon and follows the system scheme. |
-| Lesson step | `8db6afb` | The lesson header shows the track, the step, and a time pill. |
-
-## Live QA
-
-| Fix | Commit | What changed |
-| --- | --- | --- |
-| Lesson board | `1b01ffb` | A zero-width fit no longer writes a NaN viewBox. The lesson board widget is the real board map. |
-| Hammered header | `c7dd731` | Hammered is a thin rail and short press-fit posts. Soldered keeps the full shroud. |
-| Colliding labels | `327f86d` | Resistor, power, and gpio-sim fields each sit on their own row. |
-| Tray wrapping | `327f86d` | Tray names wrap on spaces, not on a hyphen inside a word. |
-| Inky blurb | `0779f51` | A long scraped note becomes one short line, shown once. |
-| Lesson lock | `0779f51` | Lessons 2 and 3 open from the list and from a direct link. |
-| Favicon | `d87b9b5` | `index.html` links `./favicon.svg`, so the browser does not request `/favicon.ico`. |
-| zh-CN labels and tabs | `7232ae9` | Already covered by Prism item 7. |
+| Delta | Why |
+| --- | --- |
+| 6. Inspector chips and source lines | Stopped after the scoped five, plus the three leftovers. The fact grid and sources are unchanged. |
+| 7. Legend click-to-highlight | The eye row landed in delta 1. Pulsing a pin type did not. |
+| 8. Remaining type tokens on every heading | The lesson title uses `--t-h1`. Other pages still inherit the old heading rule. |
+| 10. Bottom view and solder close-up | Out of this run with the iron sequence. Bottom and Side stay disabled in the toolbar. |
