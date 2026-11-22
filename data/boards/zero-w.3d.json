@@ -1,0 +1,17 @@
+{
+  "note": "Placeholders only. zero-w.flux.json has no PCB thickness and no part heights. Every value is an estimate until Flux replaces it. Do not show these numbers as measured facts.",
+  "pcb_thickness_mm": { "value_mm": 1.2, "status": "estimate", "source": "pending Flux" },
+  "header_body_mm": { "value_mm": 2.4, "status": "estimate", "source": "pending Flux" },
+  "header_pin_length_mm": { "value_mm": 8.5, "status": "estimate", "source": "pending Flux" },
+  "hammer_pin_length_mm": { "value_mm": 2.2, "status": "estimate", "source": "pending Flux" },
+  "phat_standoff_mm": { "value_mm": 10, "status": "estimate", "source": "pending Flux" },
+  "phat_thickness_mm": { "value_mm": 1.6, "status": "estimate", "source": "pending Flux" },
+  "parts": {
+    "soc": { "value_mm": 1.3, "status": "estimate", "source": "pending Flux" },
+    "mini-hdmi": { "value_mm": 3.0, "status": "estimate", "source": "pending Flux" },
+    "usb-otg": { "value_mm": 2.5, "status": "estimate", "source": "pending Flux" },
+    "usb-pwr": { "value_mm": 2.5, "status": "estimate", "source": "pending Flux" },
+    "microsd": { "value_mm": 1.3, "status": "estimate", "source": "pending Flux" },
+    "csi": { "value_mm": 1.5, "status": "estimate", "source": "pending Flux" }
+  }
+}
