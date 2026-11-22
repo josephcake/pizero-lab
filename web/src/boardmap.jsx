@@ -108,8 +108,7 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
         className="pz-board"
         viewBox={view ? `${view.x} ${view.y} ${view.w} ${view.h}` : `0 0 ${W} ${H}`}
         onPointerDown={(event) => {
-          drag.current = { x: event.clientX, y: event.clientY, view };
-          event.currentTarget.setPointerCapture(event.pointerId);
+          drag.current = { x: event.clientX, y: event.clientY, ox: event.clientX, oy: event.clientY, view, id: event.pointerId, captured: false };
         }}
         onPointerMove={(event) => {
           if (view) {
@@ -117,13 +116,20 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
             setCursor({ x: world.x, y: authoredY(world.y) });
           }
           if (!drag.current || !view) return;
+          if (!drag.current.captured) {
+            const moved = Math.hypot(event.clientX - drag.current.ox, event.clientY - drag.current.oy);
+            if (moved <= 4) return;
+            drag.current.captured = true;
+            event.currentTarget.setPointerCapture(drag.current.id);
+          }
           const rect = svgRef.current.getBoundingClientRect();
           const dx = ((event.clientX - drag.current.x) / rect.width) * view.w;
           const dy = ((event.clientY - drag.current.y) / rect.height) * view.h;
-          drag.current = { x: event.clientX, y: event.clientY, view };
+          drag.current = { ...drag.current, x: event.clientX, y: event.clientY, view };
           setView({ ...view, x: view.x - dx, y: view.y - dy });
         }}
         onPointerUp={() => { drag.current = null; }}
+        onPointerCancel={() => { drag.current = null; }}
       >
         <defs>
           <linearGradient id="pz-mask" x1="0" y1="0" x2="1" y2="1">
