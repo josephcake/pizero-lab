@@ -285,7 +285,7 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
               {layers.silk && (
                 <text x={mount.x_mm + part.dims.w_mm / 2} y={mount.y_mm + part.dims.h_mm * 0.62} textAnchor="middle" className="silk-label">
                   <title>{part.name.en}</title>
-                  {part.name.en.length > 22 ? `${part.name.en.slice(0, 21)}…` : part.name.en}
+                  {part.short ?? part.name.en.replace(/\s*\(.*\)$/, "")}
                 </text>
               )}
             </g>
