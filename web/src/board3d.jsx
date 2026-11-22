@@ -338,7 +338,6 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
       }
     }
       paint();
-      api.current.refit?.();
     }
 
     function paint() {
@@ -458,6 +457,7 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
       rebuild,
       refit: () => fit(viewDir, viewUp),
     };
+    let fitted = false;
     rebuild();
 
     function resize() {
@@ -468,7 +468,12 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
       renderer.setSize(width, height, false);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
-      api.current.refit?.();
+      if (!fitted) {
+        api.current.refit?.();
+        fitted = true;
+      } else {
+        requestRender();
+      }
     }
     const observer = new ResizeObserver(resize);
     observer.observe(canvas.parentElement || canvas);
