@@ -167,7 +167,7 @@ export function Explorer() {
           </>
         )}
         <div className="map-foot">
-          <span className="scale-foot"><i style={{ width: `${Math.max(0, 10 * (view?.px || 0))}px` }} />10 mm <span className="readout">{(view?.px || 0).toFixed(1)} px/mm</span></span>
+          <span className="scale-foot"><i style={{ width: `${Math.max(0, (([1, 2, 5, 10, 20].find((step) => step * (view?.px || 0) >= 60) ?? 20) * (view?.px || 0)))}px` }} />{[1, 2, 5, 10, 20].find((step) => step * (view?.px || 0) >= 60) ?? 20} mm <span className="readout">{(view?.px || 0).toFixed(1)} px/mm</span></span>
           <Minimap board={board} view={view} mounts={lab.bench.mounts} parts={lab.catalog.parts} />
         </div>
       </div>
