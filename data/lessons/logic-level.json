@@ -10,23 +10,22 @@
     "id": "badge-logic",
     "name": {
       "en": "3.3 V only",
-      "es": "Solo 3,3 V"
+      "zh-CN": "仅 3.3 V"
     }
   },
   "title": {
     "en": "3.3 V logic, and why 5 V on a GPIO breaks the Zero W",
-    "es": "Lógica de 3,3 V, y por qué 5 V en un GPIO rompe el Zero W"
+    "zh-CN": "3.3 V 逻辑，以及为什么 5 V 接到 GPIO 会损坏 Zero W"
   },
   "summary": {
     "en": "The 5V pins are allowed to be 5 V. A GPIO pin is not. The documentation says that can destroy the SoC.",
-    "es": "Los pines de 5 V pueden estar a 5 V. Un pin GPIO no. La documentación dice que eso puede destruir el SoC."
+    "zh-CN": "5V 脚可以是 5 V。GPIO 脚不行。文档写明这可能毁掉 SoC。"
   },
   "sections": [
     {
       "kind": "md",
       "text": {
         "en": "Two voltages live on the same 40-pin header, and they are not interchangeable.\n\nPins 2 and 4 are 5 V power. Pins 1 and 17 are 3.3 V power, taken from the board's 3.3 V regulator. Do not hang a big load on them. The other signal pins are GPIO at 3.3 V logic. The GPIO page says they are not 5 V tolerant, and that applying 5 V directly to a GPIO can permanently damage the SoC.\n\nOn the BCM2835-family table (the page names the Zero as an example), an input has to be at or below 0.9 V to count as low, and at or above 1.6 V to count as high. 5 V is above the 3.3 V supply the pin runs from and outside its rated range; it can permanently damage the SoC.\n\nPin 11 is GPIO17. In Flux's pinout its ALT4 function is SPI1_CE1_N, the active-low chip enable for SPI1. That is not SPI0. The other alts on that pin are ALT1 SD9, ALT2 DPI_D13, ALT3 RTS0 and ALT5 RTS1. ALT0 is not listed for it.\n\nTwo practical fixes when a 5 V part must talk to a GPIO input: use a level shifter, or a resistor divider, 2.2 kΩ from the 5 V output to the GPIO and 3.3 kΩ from the GPIO to ground: 3.0 V at 5.0 V and 3.15 V at 5.25 V. A 5 V device that already reads 3.3 V as a high may need no shifter on its inputs. The GPIO page does not publish one required shifter part, so a specific board is unverified here.\n\nThe Zero 2 W uses a different processor and can run 64-bit code. It does not change this header rule. The same GPIO chapter covers both.",
-        "es": "En el mismo header de 40 pines conviven dos tensiones, y no se intercambian.\n\nLos pines 2 y 4 son alimentación de 5 V. Los pines 1 y 17 son alimentación de 3,3 V. El resto de señales son GPIO a 3,3 V. La página GPIO dice que no toleran 5 V, y que aplicar 5 V directamente a un GPIO puede dañar el SoC para siempre.\n\nEn la tabla de la familia BCM2835 (la página pone el Zero como ejemplo), una entrada tiene que estar a 0,9 V o menos para contar como baja, y a 1,6 V o más para contar como alta. 5 V no es un alto legal. Está por encima del carril de 3,3 V para el que se hizo el pin.\n\nUn desplazador de nivel es la forma habitual de hablar con un sensor de 5 V. La página GPIO no publica un esquema de desplazador para el Zero W ni una referencia obligatoria. Cualquier placa concreta que añadas queda sin verificar por esa página. Lo que sí exige es simple: no lleves un GPIO a 5 V.\n\nEl Zero 2 W usa otro procesador y puede ejecutar código de 64 bits. No cambia esta regla del header. El mismo capítulo GPIO cubre los dos.",
         "zh-CN": "同一个 40 针排针上有两种电压，不能混用。\n\n引脚 2 和 4 是 5 V 电源。引脚 1 和 17 是 3.3 V 电源，来自板上的 3.3 V 稳压器。不要用它们带动大负载。其余信号脚是 3.3 V 逻辑的 GPIO。GPIO 文档写明它们不耐 5 V，把 5 V 直接加到 GPIO 上可能永久损坏 SoC。\n\nBCM2835 系列的表（文档用 Zero 举例）里，输入不高于 0.9 V 才算低，不低于 1.6 V 才算高。5 V 高于这只脚所接的 3.3 V 电源，也超出额定范围；它可能永久损坏 SoC。\n\n引脚 11 是 GPIO17。Flux 的 pinout 里它的 ALT4 是 SPI1_CE1_N，也就是 SPI1 的低有效片选。那不是 SPI0。同一脚上还有 ALT1 SD9、ALT2 DPI_D13、ALT3 RTS0 和 ALT5 RTS1。这条记录没有 ALT0。\n\n5 V 器件要送进 GPIO 输入时，有两种实用办法：用电平转换，或者电阻分压（5 V 输出经 2.2 kΩ 到 GPIO，GPIO 再经 3.3 kΩ 到地：5.0 V 时为 3.0 V，5.25 V 时为 3.15 V）。如果那个 5 V 器件把 3.3 V 读成高电平，它的输入侧可能不需要转换。GPIO 页面没有指定必须用哪一款转换芯片，所以具体板子在这里仍是未核实。\n\nZero 2 W 用的是另一颗处理器，可以跑 64 位代码。这不改变排针上的这条规则。同一章 GPIO 文档覆盖两者。"
       }
     },
@@ -44,26 +43,26 @@
       "id": "damage",
       "prompt": {
         "en": "What does the GPIO documentation say happens if you apply 5 V directly to a GPIO pin?",
-        "es": "¿Qué dice la documentación GPIO si aplicas 5 V directamente a un pin GPIO?"
+        "zh-CN": "GPIO 文档说，把 5 V 直接加到 GPIO 脚上会怎样？"
       },
       "choices": [
         {
           "en": "Nothing, the pin is 5 V tolerant",
-          "es": "Nada, el pin tolera 5 V"
+          "zh-CN": "没事，这只脚耐 5 V"
         },
         {
           "en": "It can permanently damage the SoC",
-          "es": "Puede dañar el SoC de forma permanente"
+          "zh-CN": "可能永久损坏 SoC"
         },
         {
           "en": "The pin automatically switches to the 5 V rail",
-          "es": "El pin pasa solo al carril de 5 V"
+          "zh-CN": "这只脚会自动切到 5 V 电源"
         }
       ],
       "answer": 1,
       "explain": {
         "en": "The page says the pins are not 5 V tolerant and that 5 V applied directly to a GPIO can cause permanent damage.",
-        "es": "La página dice que los pines no toleran 5 V y que 5 V aplicados directamente a un GPIO pueden causar un daño permanente."
+        "zh-CN": "页面写明这些脚不耐 5 V，5 V 直接加到 GPIO 上可能造成永久损坏。"
       },
       "source": "gpio-docs"
     },
@@ -71,26 +70,26 @@
       "id": "which-pins",
       "prompt": {
         "en": "Which header pins are the ones meant to carry 5 V?",
-        "es": "¿Qué pines del header son los que deben llevar 5 V?"
+        "zh-CN": "排针上哪几只脚是用来送 5 V 的？"
       },
       "choices": [
         {
           "en": "Physical pins 2 and 4",
-          "es": "Los pines físicos 2 y 4"
+          "zh-CN": "物理引脚 2 和 4"
         },
         {
           "en": "Physical pins 1 and 17",
-          "es": "Los pines físicos 1 y 17"
+          "zh-CN": "物理引脚 1 和 17"
         },
         {
           "en": "GPIO 14 and GPIO 15, the UART",
-          "es": "GPIO 14 y GPIO 15, la UART"
+          "zh-CN": "GPIO 14 和 GPIO 15，也就是 UART"
         }
       ],
       "answer": 0,
       "explain": {
         "en": "Pins 2 and 4 are 5 V power. Pins 1 and 17 are 3.3 V power. GPIO 14 and 15 are 3.3 V UART signals.",
-        "es": "Los pines 2 y 4 son alimentación de 5 V. Los pines 1 y 17 son alimentación de 3,3 V. GPIO 14 y 15 son señales UART de 3,3 V."
+        "zh-CN": "引脚 2 和 4 是 5 V 电源。引脚 1 和 17 是 3.3 V 电源。GPIO 14 和 15 是 3.3 V 的 UART 信号。"
       },
       "source": "gpio-docs"
     },
@@ -98,26 +97,25 @@
       "id": "vih",
       "prompt": {
         "en": "On the BCM2835-family table, what is the minimum voltage that counts as a high input?",
-        "es": "En la tabla de la familia BCM2835, ¿cuál es la tensión mínima que cuenta como entrada en alto?"
+        "zh-CN": "在 BCM2835 系列表里，算作高电平输入的最低电压是多少？"
       },
       "choices": [
         {
           "en": "0.9 V",
-          "es": "0,9 V"
+          "zh-CN": "0.9 V"
         },
         {
           "en": "1.6 V",
-          "es": "1,6 V"
+          "zh-CN": "1.6 V"
         },
         {
           "en": "5.0 V",
-          "es": "5,0 V"
+          "zh-CN": "5.0 V"
         }
       ],
       "answer": 1,
       "explain": {
         "en": "VIH minimum is 1.6 V with hysteresis enabled. 0.9 V is the maximum that still counts as low. 5 V is above the 3.3 V supply the pin runs from and outside its rated range.",
-        "es": "El mínimo de VIH es 1,6 V con histéresis. 0,9 V es el máximo que aún cuenta como bajo. 5 V no es un nivel de entrada en esa tabla.",
         "zh-CN": "开启滞回时 VIH 最小是 1.6 V。0.9 V 是仍算低电平的最大值。5 V 高于这只脚所接的 3.3 V 电源，也超出额定范围。"
       },
       "source": "gpio-docs"

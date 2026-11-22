@@ -339,7 +339,7 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
       {focusChip && <span className="focus-chip" style={{ left: focusChip.left, top: focusChip.top }}>{board.header.pins.find((row) => row.physical === focusPin)?.name}</span>}
       {calloutAt && selectedPad && (
         <span className="callout" style={{ left: calloutAt.left, top: calloutAt.top }}>
-          {`Pin ${selectedPad.physical} · ${selectedPad.name}${calloutAlt ? ` · ${calloutAlt}` : ""}`}
+          {`${t.pinWord} ${selectedPad.physical} · ${selectedPad.name}${calloutAlt ? ` · ${calloutAlt}` : ""}`}
         </span>
       )}
       {layers.measurements && view && (

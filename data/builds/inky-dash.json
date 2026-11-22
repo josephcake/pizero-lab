@@ -2,11 +2,11 @@
   "id": "inky-dash",
   "title": {
     "en": "Inky pHAT dashboard",
-    "es": "Panel con Inky pHAT"
+    "zh-CN": "Inky pHAT 仪表"
   },
   "summary": {
     "en": "Pimoroni's getting-started article for the Inky pHAT. The pHAT mounts on the soldered header.",
-    "es": "El art\u00edculo de inicio de Pimoroni para el Inky pHAT. Los pines y el contorno no est\u00e1n en este conjunto, as\u00ed que el pHAT no se puede dibujar."
+    "zh-CN": "Pimoroni 的 Inky pHAT 入门文章。这块 pHAT 装在焊好的排针上。"
   },
   "difficulty": {
     "en": "Low",
@@ -14,8 +14,8 @@
   },
   "zero_w": "unverified",
   "zero_w_note": {
-    "en": "The article and the shop page both responded. A stored sentence that says \u201cworks on Zero W\u201d was not copied, so the flag stays unverified.",
-    "es": "El art\u00edculo y la tienda respondieron. No se copi\u00f3 una frase guardada que diga \u00abfunciona en el Zero W\u00bb, as\u00ed que la marca sigue sin verificar."
+    "en": "The article and the shop page both responded. A stored sentence that says “works on Zero W” was not copied, so the flag stays unverified.",
+    "zh-CN": "文章和商店页面都能打开。记录里的句子是：适用于包括 Zero W 在内的任何 40 针树莓派。"
   },
   "source": "inky-start",
   "also": [
@@ -31,11 +31,11 @@
       "id": "parts",
       "title": {
         "en": "Parts on the bill",
-        "es": "Piezas en la cuenta"
+        "zh-CN": "账单上的零件"
       },
       "text": {
         "en": "The card, the supply and the Inky pHAT are on the bill. The pHAT is the pimoroni-inky-phat record.",
-        "es": "La tarjeta, la fuente y el Inky pHAT est\u00e1n en la cuenta. El pHAT no tiene medidas con fuente, as\u00ed que el reductor se negar\u00e1 a dibujarlo."
+        "zh-CN": "卡、电源和 Inky pHAT 在账单上。用的是 pimoroni-inky-phat 这条记录。"
       },
       "action": null
     },
@@ -43,11 +43,11 @@
       "id": "header",
       "title": {
         "en": "Solder the header",
-        "es": "Suelda el header"
+        "zh-CN": "焊上排针"
       },
       "text": {
         "en": "A pHAT needs pins. This step records the header as soldered. Pin 1 is at (8.37, 25.23) mm and all 40 pads are drawn.",
-        "es": "Un pHAT necesita pines. Este paso anota el header como soldado. La cuenta a\u00f1ade entonces el kit 2\u00d720. Las almohadillas del plano siguen desnudas, porque sus coordenadas son nulas."
+        "zh-CN": "pHAT 需要针。这一步把排针记为已焊接。1 号针在 (8.37, 25.23) mm，40 个焊盘都画出来了。"
       },
       "action": {
         "type": "setHeader",
@@ -58,11 +58,11 @@
       "id": "fit",
       "title": {
         "en": "Try to fit the pHAT",
-        "es": "Intenta encajar el pHAT"
+        "zh-CN": "装上 pHAT"
       },
       "text": {
         "en": "The mount uses the board anchor gpio-pin1 and the part anchor pin1.",
-        "es": "La acci\u00f3n de montaje pasa por la misma regla que un arrastre desde la bandeja. Sin contorno y sin ancla, no se pega. Cuando un conjunto posterior rellene dims y anclas, este paso ser\u00e1 el que coloque la placa."
+        "zh-CN": "安装用板上的锚点 gpio-pin1 和零件上的锚点 pin1。"
       },
       "action": {
         "type": "mount",
@@ -76,11 +76,11 @@
       "id": "guide",
       "title": {
         "en": "Install from Pimoroni",
-        "es": "Instala desde Pimoroni"
+        "zh-CN": "按 Pimoroni 的说明安装"
       },
       "text": {
         "en": "Follow the getting-started article for the install and the first image. Do not invent a pinout from memory if the article's table is the one you need.",
-        "es": "Sigue el art\u00edculo de inicio para la instalaci\u00f3n y la primera imagen. No inventes un pinout de memoria si la tabla del art\u00edculo es la que necesitas."
+        "zh-CN": "安装和第一张图按入门文章来。需要文章里的表时，不要凭记忆编一份引脚图。"
       },
       "action": null,
       "links": [

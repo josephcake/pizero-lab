@@ -2,7 +2,7 @@
   "id": "motioneye",
   "title": {
     "en": "motionEye camera",
-    "es": "C\u00e1mara motionEye"
+    "zh-CN": "motionEye 相机"
   },
   "summary": {
     "en": "motionEye is a web front end for the motion daemon. ARMv6 and ARMv7 32-bit are install targets and need extra build dependencies. Heavy on one core is an opinion.",
@@ -15,7 +15,7 @@
   "zero_w": "caveat",
   "zero_w_note": {
     "en": "The README lists ARMv6/ARMv7 32-bit as an install target that needs extra build deps (python3-dev, gcc, libjpeg, libcurl, libssl, libffi). https://github.com/motioneye-project/motioneye . Heavy on one core [Opinion].",
-    "zh-CN": "README 把 ARMv6/ARMv7 32 位列为安装目标，需要额外的编译依赖（python3-dev、gcc、libjpeg、libcurl、libssl、libffi）。https://github.com/motioneye-project/motioneye 。吃满一个核 [看法]。"
+    "zh-CN": "README 把 ARMv6/ARMv7 32 位列为安装目标，需要额外的编译依赖（python3-dev、gcc、libjpeg、libcurl、libssl、libffi）。吃满一个核是看法。"
   },
   "source": "motioneye",
   "also": [
@@ -32,11 +32,11 @@
       "id": "parts",
       "title": {
         "en": "Parts on the bill",
-        "es": "Piezas en la cuenta"
+        "zh-CN": "账单上的零件"
       },
       "text": {
         "en": "The camera is flagged as needing the Zero cable. The bill adds that cable even though nobody typed it into the parts list. The camera body is not drawn.",
-        "es": "La c\u00e1mara est\u00e1 marcada como que necesita el cable del Zero. La cuenta a\u00f1ade ese cable aunque nadie lo escribi\u00f3 en la lista. El cuerpo de la c\u00e1mara no se dibuja."
+        "zh-CN": "相机被标成需要 Zero 排线。账单会加上这根线，即使零件清单里没人写它。相机本体不绘制。"
       },
       "action": null
     },
@@ -44,11 +44,11 @@
       "id": "cable",
       "title": {
         "en": "The connector is the small one",
-        "es": "El conector es el peque\u00f1o"
+        "zh-CN": "接口是小的那个"
       },
       "text": {
-        "en": "The Zero W CSI port is 22 pins at 0.5 mm pitch and 11.5 mm wide. The product page says the cable in the camera box does not fit. Use the Standard\u2013Mini cable.",
-        "es": "El puerto CSI del Zero W es de 22 pines, paso 0,5 mm y 11,5 mm de ancho. La p\u00e1gina del producto dice que el cable de la caja de la c\u00e1mara no entra. Usa el cable Standard\u2013Mini."
+        "en": "The Zero W CSI port is 22 pins at 0.5 mm pitch and 11.5 mm wide. The product page says the cable in the camera box does not fit. Use the Standard–Mini cable.",
+        "zh-CN": "Zero W 的 CSI 是 22 针、0.5 mm 间距、宽 11.5 mm。产品页写明相机盒子里的线插不进去。用 Standard–Mini 排线。"
       },
       "action": null,
       "links": [
@@ -72,11 +72,11 @@
       "id": "software",
       "title": {
         "en": "Read motionEye before you flash",
-        "es": "Lee motionEye antes de grabar"
+        "zh-CN": "烧录之前先读 motionEye"
       },
       "text": {
         "en": "Start from the project README and the install notes it links. If those notes require a newer architecture, stop. A 64-bit image will not boot on this board.",
-        "es": "Empieza por el README del proyecto y las notas de instalaci\u00f3n que enlace. Si esas notas piden una arquitectura m\u00e1s nueva, para. Una imagen de 64 bits no arranca en esta placa."
+        "zh-CN": "从项目 README 和它链接的安装说明开始。如果那些说明要求更新的架构，就停。64 位镜像在这块板上起不来。"
       },
       "action": null,
       "links": [

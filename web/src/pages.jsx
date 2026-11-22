@@ -454,15 +454,15 @@ export function InstrumentsPage() {
         <h2>{t.power}</h2>
         <label><input type="checkbox" checked={hdmi} onChange={(e) => setHdmi(e.target.checked)} /> HDMI</label>
         <label><input type="checkbox" checked={camera} onChange={(e) => setCamera(e.target.checked)} /> Camera</label>
-        <label>USB mA <input value={usb} onChange={(e) => setUsb(e.target.value)} />{powerFields.usb && <em className="warn">{t.fieldBad}</em>}</label>
+        <label>{t.usbMa} <input value={usb} onChange={(e) => setUsb(e.target.value)} />{powerFields.usb && <em className="warn">{t.fieldBad}</em>}</label>
         <label>{t.hatMa} <input value={hat} onChange={(e) => setHat(e.target.value)} inputMode="decimal" />{powerFields.hat && <em className="warn">{t.fieldBad}</em>}</label>
         <button type="submit">{t.run}</button>
         {power && !power.error && (
           <div>
             <p>{power.total_ma} mA / {power.psu_ma} mA · {power.supply_v} V</p>
-            <p>{power.over ? "over the recommended supply" : `${power.headroom_ma} mA headroom`}</p>
+            <p>{power.over ? t.overSupply : `${power.headroom_ma} ${t.headroom}`}</p>
             <ul>{power.rows.map((row) => <li key={row.id}>{row.id}: {row.ma} mA — {row.note}</li>)}</ul>
-            {!power.undervoltage_detect && <p className="note">Zero range: no undervoltage detector.</p>}
+            {!power.undervoltage_detect && <p className="note">{t.noUv}</p>}
           </div>
         )}
       </form>
@@ -485,7 +485,7 @@ export function InstrumentsPage() {
         {clash && (
           <div>
             <h3>{t.conflict}</h3>
-            <p>{clash.note}</p>
+            <p>{t.conflictNote}</p>
             <ul>
               {(clash.conflicts || []).map((row) => (
                 <li key={`${row.a}-${row.b}`}>{nameText(row.names[0])} ∩ {nameText(row.names[1])}: pins {row.pins.join(", ")}{row.i2c?.length ? ` · I2C ${row.i2c.join(", ")}` : ""}</li>

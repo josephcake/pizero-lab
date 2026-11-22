@@ -2,11 +2,11 @@
   "id": "retropie",
   "title": {
     "en": "RetroPie on a Pi Zero",
-    "es": "RetroPie en un Pi Zero"
+    "zh-CN": "Pi Zero 上的 RetroPie"
   },
   "summary": {
     "en": "RetroPie publishes a Pi Zero page. It was reached, but a bot check hid the article body from this run, so the steps point at the page instead of paraphrasing it.",
-    "es": "RetroPie publica una p\u00e1gina del Pi Zero. Se alcanz\u00f3, pero una comprobaci\u00f3n anti-bot ocult\u00f3 el cuerpo del art\u00edculo, as\u00ed que los pasos apuntan a la p\u00e1gina en vez de parafrasearla."
+    "zh-CN": "RetroPie 有一页 Pi Zero 说明。页面能打开，但一次浏览器检查挡住了正文，所以步骤指向那一页，而不是改写它。"
   },
   "difficulty": {
     "en": "Medium",
@@ -15,7 +15,7 @@
   "zero_w": "caveat",
   "zero_w_note": {
     "en": "The linked page is RetroPie's Pi Zero guide. Zero W is the same BCM2835 generation. The page body was not re-read past a browser check.",
-    "es": "La p\u00e1gina enlazada es la gu\u00eda de RetroPie para el Pi Zero. El Zero W es la misma generaci\u00f3n BCM2835. El cuerpo no se reley\u00f3 m\u00e1s all\u00e1 de la comprobaci\u00f3n del navegador."
+    "zh-CN": "链接的页面是 RetroPie 的 Pi Zero 指南。Zero W 是同一代 BCM2835。正文没有越过浏览器检查再读一遍。"
   },
   "source": "retropie-zero",
   "also": [
@@ -30,11 +30,11 @@
       "id": "parts",
       "title": {
         "en": "Parts on the bill",
-        "es": "Piezas en la cuenta"
+        "zh-CN": "账单上的零件"
       },
       "text": {
         "en": "A card and a supply. A handheld display or buttons are not on this bill: no sourced part for them was added in this run.",
-        "es": "Una tarjeta y una fuente. Una pantalla de consola o los botones no est\u00e1n en esta cuenta: en esta pasada no se a\u00f1adi\u00f3 una pieza con fuente."
+        "zh-CN": "一张卡和一只电源。掌机屏幕或按钮不在这张账单上：这一轮没有带来源的对应零件。"
       },
       "action": null
     },
@@ -42,11 +42,11 @@
       "id": "header",
       "title": {
         "en": "Decide on the header",
-        "es": "Decide el header"
+        "zh-CN": "决定排针"
       },
       "text": {
         "en": "Leave the pads bare if you only need power, HDMI and the card. Mark the header soldered if a later control board needs the pins. The header outline is measured (x 7.11, y 24.0, 50.8 × 5.0 mm). Only the body height is unpublished.",
-        "es": "Deja las almohadillas desnudas si solo necesitas alimentaci\u00f3n, HDMI y la tarjeta. Marca el header como soldado si una placa de mandos posterior necesita los pines. El cuerpo del header no se dibuja, porque su contorno no est\u00e1 en el plano."
+        "zh-CN": "如果只要电源、HDMI 和卡，就留着裸焊盘。后面的控制板需要针时，把排针标成已焊接。排针外形已测量（x 7.11，y 24.0，50.8 × 5.0 mm）。只有塑壳高度没有公布。"
       },
       "action": {
         "type": "setHeader",
@@ -57,11 +57,11 @@
       "id": "guide",
       "title": {
         "en": "Follow RetroPie",
-        "es": "Sigue RetroPie"
+        "zh-CN": "按 RetroPie 来"
       },
       "text": {
         "en": "Use the Pi Zero page for the image and the first boot. Do not flash a Pi 4 or Pi 5 image and expect the ARM11 to run it.",
-        "es": "Usa la p\u00e1gina del Pi Zero para la imagen y el primer arranque. No grabes una imagen de Pi 4 o Pi 5 y esperes que el ARM11 la ejecute."
+        "zh-CN": "镜像和第一次启动用 Pi Zero 那一页。不要烧 Pi 4 或 Pi 5 的镜像，指望这块 ARM11 能跑。"
       },
       "action": null,
       "links": [

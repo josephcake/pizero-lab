@@ -175,6 +175,17 @@ function LogicWidget() {
   );
 }
 
+function noteText(note, t) {
+  if (!note || t.pinWord === "Pin") return note;
+  const shared = "3.3 V 逻辑，不耐 5 V。单脚最多 16 mA，全部 GPIO 合计 50 mA。";
+  if (note.startsWith("Fixed 1.8") && note.includes("SDA")) return `板上固定 1.8 kΩ 上拉到 3.3 V（I2C1 SDA）。${shared}`;
+  if (note.startsWith("Fixed 1.8") && note.includes("SCL")) return `板上固定 1.8 kΩ 上拉到 3.3 V（I2C1 SCL）。${shared}`;
+  if (note.startsWith("Reserved for HAT ID EEPROM (ID_SD")) return `留给 HAT 的 ID EEPROM（ID_SD / SDA0）。HAT 设计指南只允许接 ID EEPROM 和 3.9 kΩ 上拉。启动时按 I2C0 探测。${shared}`;
+  if (note.startsWith("Reserved for HAT ID EEPROM (ID_SC")) return `留给 HAT 的 ID EEPROM（ID_SC / SCL0）。HAT 设计指南只允许接 ID EEPROM 和 3.9 kΩ 上拉。启动时按 I2C0 探测。${shared}`;
+  if (note.startsWith("3.3 V logic")) return shared;
+  return note;
+}
+
 export function PinFacts({ physical }) {
   const { catalog, lang } = useLab();
   const t = strings(lang);
@@ -183,14 +194,14 @@ export function PinFacts({ physical }) {
   const sources = pin.src || [];
   return (
     <article className="record">
-      <h3>Pin {pin.physical} · {pin.name}</h3>
+      <h3>{t.pinWord} {pin.physical} · {pin.name}</h3>
       <dl className="facts">
         <div><dt>{t.physical}</dt><dd>{pin.physical}</dd></div>
         <div><dt>{t.bcm}</dt><dd>{pin.bcm ?? "—"}</dd></div>
         <div><dt>{t.nameLabel}</dt><dd>{pin.name}</dd></div>
-        <div><dt>{t.pullLabel}</dt><dd>{pin.default_pull || "—"}</dd></div>
+        <div><dt>{t.pullLabel}</dt><dd>{pin.default_pull === "up" ? t.pullUp : pin.default_pull === "down" ? t.pullDown : (pin.default_pull || "—")}</dd></div>
       </dl>
-      {pin.note && <p>{pin.note}</p>}
+      {pin.note && <p>{noteText(pin.note, t)}</p>}
       <p className="overline">{t.alts}</p>
       <ul>
         {Object.entries(pin.alt_matrix || {}).map(([alt, name]) => (

@@ -2,7 +2,7 @@
   "id": "pi-hole",
   "title": {
     "en": "Pi-hole",
-    "es": "Pi-hole"
+    "zh-CN": "Pi-hole"
   },
   "summary": {
     "en": "A DNS sinkhole for the whole network. The docs list an armv6 pihole-FTL build and a 512 MB minimum.",
@@ -15,7 +15,7 @@
   "zero_w": "works",
   "zero_w_note": {
     "en": "The docs list an armv6 pihole-FTL build and a 512 MB minimum. https://docs.pi-hole.net/main/prerequisites/",
-    "zh-CN": "文档列出了 armv6 的 pihole-FTL 构建，最低内存 512 MB。https://docs.pi-hole.net/main/prerequisites/"
+    "zh-CN": "文档列出了 armv6 的 pihole-FTL 构建，最低内存 512 MB。"
   },
   "source": "pi-hole",
   "also": [
@@ -32,11 +32,11 @@
       "id": "parts",
       "title": {
         "en": "Parts on the bill",
-        "es": "Piezas en la cuenta"
+        "zh-CN": "账单上的零件"
       },
       "text": {
-        "en": "The card and the 5.1 V supply are on the bill. Neither has a sourced outline, so they stay in the tray and the board remains the 65 mm \u00d7 30 mm PCB.",
-        "es": "La tarjeta y la fuente de 5,1 V est\u00e1n en la cuenta. Ninguna tiene contorno con fuente, as\u00ed que se quedan en la bandeja y la placa sigue siendo la PCB de 65 mm \u00d7 30 mm."
+        "en": "The card and the 5.1 V supply are on the bill. Neither has a sourced outline, so they stay in the tray and the board remains the 65 mm × 30 mm PCB.",
+        "zh-CN": "卡和 5.1 V 电源在账单上。两者都没有带来源的外形，所以留在零件盘里，板上仍是 65 mm × 30 mm 的 PCB。"
       },
       "action": null
     },
@@ -44,11 +44,11 @@
       "id": "flash",
       "title": {
         "en": "Flash a 32-bit image",
-        "es": "Graba una imagen de 32 bits"
+        "zh-CN": "烧录 32 位镜像"
       },
       "text": {
         "en": "Use Raspberry Pi Imager. Pick the Zero W as the device, then a 32-bit Raspberry Pi OS. A 64-bit image is for the Zero 2 W's Cortex-A53, not this ARM11. In Customisation, set the hostname, the country (that sets the 2.4 GHz regulatory domain), a user, the Wi-Fi name, and SSH. The radio is 2.4 GHz only.",
-        "es": "Usa Raspberry Pi Imager. Elige el Zero W como dispositivo y luego un Raspberry Pi OS de 32 bits. Una imagen de 64 bits es para el Cortex-A53 del Zero 2 W, no para este ARM11. En Customisation pon el nombre, el pa\u00eds (eso fija el dominio de 2,4 GHz), un usuario, el Wi-Fi y SSH. La radio es solo de 2,4 GHz."
+        "zh-CN": "用 Raspberry Pi Imager。设备选 Zero W，然后选 32 位 Raspberry Pi OS。64 位镜像是给 Zero 2 W 的 Cortex-A53 的，不是这块 ARM11。在自定义里填名字、国家（这决定 2.4 GHz 的频域）、用户、Wi-Fi 和 SSH。无线只有 2.4 GHz。"
       },
       "action": null,
       "links": [
@@ -72,11 +72,11 @@
       "id": "install",
       "title": {
         "en": "Install Pi-hole",
-        "es": "Instala Pi-hole"
+        "zh-CN": "安装 Pi-hole"
       },
       "text": {
         "en": "Follow the current Pi-hole install document. Before you rely on it, read whether that release still builds for ARMv6. If it does not, the Zero W is the wrong board and the Zero 2 W is the one that can run a 64-bit image.",
-        "es": "Sigue el documento de instalaci\u00f3n vigente de Pi-hole. Antes de fiarte, mira si esa versi\u00f3n a\u00fan compila para ARMv6. Si no, el Zero W es la placa equivocada y el Zero 2 W es el que puede correr una imagen de 64 bits."
+        "zh-CN": "按 Pi-hole 当前的安装文档来。在依赖它之前，先看这一版是否仍为 ARMv6 构建。如果不是，Zero W 就不是这块板，能跑 64 位镜像的是 Zero 2 W。"
       },
       "action": null,
       "links": [
