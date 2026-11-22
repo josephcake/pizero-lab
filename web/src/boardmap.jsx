@@ -363,7 +363,10 @@ export function Minimap({ board, view, mounts = [], parts = [] }) {
   const H = board.outline.h_mm.value;
   return (
     <svg className="minimap" viewBox={`-2 -2 ${W + 4} ${H + 4}`}>
-      <rect className="board-sil" x="0" y="0" width={W} height={H} rx="2" />
+      <rect className="board-sil" x="0" y="0" width={W} height={H} rx="1.6" />
+      {(board.draw || []).map((part) => (
+        <rect key={part.id} className="mini-part" x={part.x} y={part.y} width={part.w} height={part.h} rx="0.3" />
+      ))}
       {mounts.map((mount) => {
         const part = parts.find((item) => item.id === mount.partId);
         if (!part?.dims) return null;

@@ -137,9 +137,10 @@ h1, h2, h3 { font-family: var(--f-display); font-weight: 650; margin: 0 0 8px; }
 .map-foot { display: flex; justify-content: space-between; align-items: end; padding: 8px 12px 12px; }
 .scale-foot { display: flex; align-items: center; gap: 8px; font: var(--t-mono-s); }
 .scale-foot i { height: 8px; background: var(--ink); display: block; flex: none; }
-.minimap { width: 168px; height: 84px; background: var(--bg-1); border-radius: var(--r-sm); }
-.minimap .board-sil { fill: #1b5e3f; fill-opacity: 0.4; }
-.minimap .pz-overlay { fill: none; stroke: var(--signal); stroke-width: 1; }
+.minimap { width: 168px; height: 84px; background: var(--bg-0); border: 1px solid var(--line); border-radius: var(--r-sm); }
+.minimap .board-sil { fill: #1f6a47; stroke: #9dceb4; stroke-width: 0.35; }
+.minimap .mini-part { fill: #143526; }
+.minimap .pz-overlay { fill: rgb(98 198 255 / .18); stroke: var(--signal); stroke-width: 1.5px; }
 .conflict { margin: 8px 12px 0; padding: 8px 10px; color: var(--bad); background: var(--bg-1); border: 1px solid var(--bad); border-radius: 8px; font: var(--t-small); }
 .bill-line { margin: 4px 0 0; font-family: var(--f-mono); }
 .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
