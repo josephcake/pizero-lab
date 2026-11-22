@@ -23,7 +23,8 @@
   "hammer_header_mm": {
     "value_mm": 12.0,
     "status": "confirmed",
-    "source": "https://www.adafruit.com/product/3662"
+    "source": "https://www.adafruit.com/product/3662",
+    "note": "12.0 mm is the overall part height of Adafruit 3662, not the height above the PCB, because part of each pin presses into the board."
   },
   "phat_gap_mm": {
     "value_mm": 8.0,
