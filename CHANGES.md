@@ -22,3 +22,13 @@ Run 6 is a chrome pass on v2. `data/*.flux.json` is unchanged. One commit per de
 | 7. Legend click-to-highlight | The eye row landed in delta 1. Pulsing a pin type did not. |
 | 8. Remaining type tokens on every heading | The lesson title uses `--t-h1`. Other pages still inherit the old heading rule. |
 | 10. Bottom view and solder close-up | Out of this run with the iron sequence. Bottom and Side stay disabled in the toolbar. |
+
+## Run 7
+
+Checked live after run 6. Three contrast and layout fixes. `data/*.flux.json` is unchanged.
+
+| Fix | Commit | What changed |
+| --- | --- | --- |
+| Active toolbar text | `ac4feca` | Explore uses the signal fill and the on-signal ink in both themes, on the explorer and the lesson bench. Contrast is 9.96:1 in the dark theme and 5.85:1 in the light theme. |
+| Minimap | `1463a53` | The box draws the board outline, the parts, and the viewport rectangle. |
+| Board picker | `2901f0b` | The closed label is Zero W, so the select no longer cuts the name. |
