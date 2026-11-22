@@ -24,6 +24,7 @@ export function Explorer() {
   const [view, setView] = useState(null);
   const [mountNote, setMountNote] = useState("");
   const [conflicts, setConflicts] = useState(null);
+  const [sheet, setSheet] = useState(false);
   const hats = lab.catalog.parts.filter((part) => fitsBoard(part, board.id) && part.product_url);
   const mountedIds = lab.bench.jobPartIds.filter((id) => hats.some((hat) => hat.id === id));
 
@@ -74,41 +75,45 @@ export function Explorer() {
       ? lab.catalog.parts.find((item) => item.id === lab.selection.id)
       : null;
 
+  const rail = (
+    <>
+      <p className="overline">{t.header}</p>
+      <div className="seg">
+        {["bare", "solder", "hammer"].map((method) => (
+          <button key={method} type="button" className={lab.bench.header === method ? "on" : ""} onClick={() => lab.dispatch({ type: "setHeader", method })}>
+            {t[method]}
+          </button>
+        ))}
+      </div>
+      <p className="overline">Layers</p>
+      {LAYERS.map(([id, label]) => (
+        <label key={id} className="layer">
+          <input type="checkbox" checked={!!layers[id]} onChange={() => toggleLayer(id)} />
+          {label}
+        </label>
+      ))}
+      <p className="overline">Legend</p>
+      <ul className="legend">
+        {legend.map((row) => (
+          <li key={row.id}><i style={{ background: row.ink }} />{row.label}<b>{row.count}</b></li>
+        ))}
+      </ul>
+      <p className="overline">{t.tray}</p>
+      <ul className="tray-list">
+        {hats.filter((hat) => hat.dims).slice(0, 8).map((hat) => (
+          <li key={hat.id}>
+            <Link to={`/parts/${hat.id}`}>{tx(hat.name, lab.lang)} <em>provisional</em></Link>
+            <button type="button" onClick={() => fitPart(hat)}>{t.fit}</button>
+          </li>
+        ))}
+      </ul>
+      {mountNote && <p className="warn">{mountNote}</p>}
+    </>
+  );
+
   return (
     <div className="explorer">
-      <aside className="rail">
-        <p className="overline">Layers</p>
-        {LAYERS.map(([id, label]) => (
-          <label key={id} className="layer">
-            <input type="checkbox" checked={!!layers[id]} onChange={() => toggleLayer(id)} />
-            {label}
-          </label>
-        ))}
-        <p className="overline">Legend</p>
-        <ul className="legend">
-          {legend.map((row) => (
-            <li key={row.id}><i style={{ background: row.ink }} />{row.label}<b>{row.count}</b></li>
-          ))}
-        </ul>
-        <p className="overline">{t.header}</p>
-        <div className="seg">
-          {["bare", "solder", "hammer"].map((method) => (
-            <button key={method} type="button" className={lab.bench.header === method ? "on" : ""} onClick={() => lab.dispatch({ type: "setHeader", method })}>
-              {t[method]}
-            </button>
-          ))}
-        </div>
-        <p className="overline">{t.tray}</p>
-        <ul className="tray-list">
-          {hats.filter((hat) => hat.dims).slice(0, 8).map((hat) => (
-            <li key={hat.id}>
-              <Link to={`/parts/${hat.id}`}>{tx(hat.name, lab.lang)} <em>provisional</em></Link>
-              <button type="button" onClick={() => fitPart(hat)}>{t.fit}</button>
-            </li>
-          ))}
-        </ul>
-        {mountNote && <p className="warn">{mountNote}</p>}
-      </aside>
+      <aside className="rail">{rail}</aside>
       <div className="map-column">
         {conflicts?.conflicts?.length > 0 && (
           <p className="conflict" role="alert">
@@ -125,7 +130,16 @@ export function Explorer() {
           selected={lab.selection}
           onSelect={lab.setSelection}
           onView={setView}
+          onOpenLayers={() => setSheet(true)}
         />
+        {sheet && (
+          <>
+            <button type="button" className="sheet-backdrop" aria-label="Close" onClick={() => setSheet(false)} />
+            <div className="layers-sheet" role="dialog" aria-label="Layers">
+              {rail}
+            </div>
+          </>
+        )}
         <div className="map-foot">
           <div>
             <span className="scale-foot"><i />10 mm</span>

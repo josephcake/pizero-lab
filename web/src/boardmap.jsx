@@ -30,7 +30,7 @@ function roundRect(x, y, w, h, r) {
   return `M ${x + rr} ${y} H ${x + w - rr} A ${rr} ${rr} 0 0 1 ${x + w} ${y + rr} V ${y + h - rr} A ${rr} ${rr} 0 0 1 ${x + w - rr} ${y + h} H ${x + rr} A ${rr} ${rr} 0 0 1 ${x} ${y + h - rr} V ${y + rr} A ${rr} ${rr} 0 0 1 ${x + rr} ${y} Z`;
 }
 
-export function BoardMap({ board, pinout, header, mounts, parts, layers, selected, onSelect, onView }) {
+export function BoardMap({ board, pinout, header, mounts, parts, layers, selected, onSelect, onView, onOpenLayers }) {
   const svgRef = useRef(null);
   const [view, setView] = useState(null);
   const [px, setPx] = useState(8);
@@ -257,6 +257,7 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
         ))}
       </svg>
       <div className="map-tools">
+        {onOpenLayers && <button type="button" className="layers-toggle" onClick={onOpenLayers}>Layers</button>}
         <button type="button" onClick={() => zoomAt(1 / 1.25, centerOf(svgRef).x, centerOf(svgRef).y)}>−</button>
         <button type="button" onClick={() => zoomAt(1.25, centerOf(svgRef).x, centerOf(svgRef).y)}>+</button>
         <button type="button" onClick={fit}>Fit</button>
