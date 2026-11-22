@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { tx, useLab } from "./state.jsx";
 import { strings } from "./i18n.js";
-import { Workbench } from "./workbench.jsx";
+import { BoardMap } from "./boardmap.jsx";
 import { labCall } from "./lab.js";
 
 export function Widget({ id }) {
@@ -13,8 +13,21 @@ export function Widget({ id }) {
 }
 
 function BoardWidget() {
-  const { bench, dispatch } = useLab();
-  return <Workbench state={bench} onDispatch={dispatch} compact />;
+  const lab = useLab();
+  return (
+    <div className="lesson-board">
+      <BoardMap
+        board={lab.catalog.board}
+        pinout={lab.catalog.pinout}
+        header={lab.bench.header}
+        mounts={lab.bench.mounts}
+        parts={lab.catalog.parts}
+        layers={{ components: true, pads: true, silk: true, pins: true, measurements: false }}
+        selected={lab.selection}
+        onSelect={lab.setSelection}
+      />
+    </div>
+  );
 }
 
 async function postLab(tool, body) {
@@ -51,9 +64,8 @@ export function OhmWidget() {
     <form className="widget" onSubmit={run}>
       <h3>{t.calc}</h3>
       <label>{t.vf}<input value={vf} onChange={(e) => setVf(e.target.value)} inputMode="decimal" /></label>
-      <label>{t.ma}<input value={ma} onChange={(e) => setMa(e.target.value)} inputMode="decimal" />
-        <span className="note">{lang === "zh-CN" ? "入门目标：每颗 5–10 mA。" : "Beginner target: 5–10 mA per LED."}</span>
-      </label>
+      <label>{t.ma}<input value={ma} onChange={(e) => setMa(e.target.value)} inputMode="decimal" /></label>
+      <p className="note">{lang === "zh-CN" ? "入门目标：每颗 5–10 mA。" : "Beginner target: 5–10 mA per LED."}</p>
       <label>{t.volts}<input value={volts} onChange={(e) => setVolts(e.target.value)} inputMode="decimal" /></label>
       <label>{t.count}<input value={count} onChange={(e) => setCount(e.target.value)} inputMode="numeric" /></label>
       <button type="submit">{t.run}</button>

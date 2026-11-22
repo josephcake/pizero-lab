@@ -44,7 +44,9 @@ export function Workbench({ state, onDispatch, compact = false }) {
       setView((current) => {
         if (!current || !svgRef.current) return current;
         const rect = svgRef.current.getBoundingClientRect();
+        if (!rect.width || !rect.height) return current;
         const h = current.w * (rect.height / rect.width);
+        if (!Number.isFinite(h)) return current;
         return { ...current, h };
       });
     });
@@ -60,6 +62,7 @@ export function Workbench({ state, onDispatch, compact = false }) {
     const el = svgRef.current;
     if (!el || !view) return;
     const rect = el.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
     const mx = view.x + ((clientX - rect.left) / rect.width) * view.w;
     const my = view.y + ((clientY - rect.top) / rect.height) * view.h;
     const minW = rect.width / MAX_PX;
