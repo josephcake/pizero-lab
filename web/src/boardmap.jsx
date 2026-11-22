@@ -276,11 +276,19 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
             )}
           </g>
         ))}
-        {header !== "bare" && (
+        {header === "solder" && (
           <g className="pz-part" filter="url(#pz-lift)">
             <rect x={board.header.x} y={board.header.y} width={board.header.w} height={board.header.h} rx={0.3} fill="url(#pz-pa)" />
             {board.header.pins.map((pin) => (
               <rect key={`post-${pin.physical}`} x={pin.x - 0.32} y={pin.y - 0.32} width={0.64} height={0.64} fill="url(#pz-pin)" />
+            ))}
+          </g>
+        )}
+        {header === "hammer" && (
+          <g className="pz-part">
+            <rect x={board.header.x} y={board.header.y + board.header.h / 2 - 0.55} width={board.header.w} height={1.1} rx={0.15} fill="#4a5160" />
+            {board.header.pins.map((pin) => (
+              <rect key={`peg-${pin.physical}`} x={pin.x - 0.16} y={pin.y - 0.62} width={0.32} height={0.26} fill="url(#pz-pin)" />
             ))}
           </g>
         )}
