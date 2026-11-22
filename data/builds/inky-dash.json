@@ -5,7 +5,7 @@
     "es": "Panel con Inky pHAT"
   },
   "summary": {
-    "en": "Pimoroni's getting-started article for the Inky pHAT. Pins and the board outline are not in this dataset, so the pHAT cannot be drawn.",
+    "en": "Pimoroni's getting-started article for the Inky pHAT. The pHAT mounts on the soldered header.",
     "es": "El art\u00edculo de inicio de Pimoroni para el Inky pHAT. Los pines y el contorno no est\u00e1n en este conjunto, as\u00ed que el pHAT no se puede dibujar."
   },
   "difficulty": {
@@ -24,7 +24,7 @@
   "part_ids": [
     "microsd-card",
     "micro-usb-psu",
-    "inky-phat"
+    "pimoroni-inky-phat"
   ],
   "steps": [
     {
@@ -34,7 +34,7 @@
         "es": "Piezas en la cuenta"
       },
       "text": {
-        "en": "The card, the supply and the Inky pHAT are on the bill. The pHAT has no sourced dimensions, so the reducer will refuse to draw it.",
+        "en": "The card, the supply and the Inky pHAT are on the bill. The pHAT is the pimoroni-inky-phat record.",
         "es": "La tarjeta, la fuente y el Inky pHAT est\u00e1n en la cuenta. El pHAT no tiene medidas con fuente, as\u00ed que el reductor se negar\u00e1 a dibujarlo."
       },
       "action": null
@@ -46,7 +46,7 @@
         "es": "Suelda el header"
       },
       "text": {
-        "en": "A pHAT needs pins. This step records the header as soldered. The bill then adds the 2\u00d720 kit. The pads on the drawing stay bare, because their coordinates are null.",
+        "en": "A pHAT needs pins. This step records the header as soldered. Pin 1 is at (8.37, 25.23) mm and all 40 pads are drawn.",
         "es": "Un pHAT necesita pines. Este paso anota el header como soldado. La cuenta a\u00f1ade entonces el kit 2\u00d720. Las almohadillas del plano siguen desnudas, porque sus coordenadas son nulas."
       },
       "action": {
@@ -61,15 +61,15 @@
         "es": "Intenta encajar el pHAT"
       },
       "text": {
-        "en": "The mount action runs through the same rule as a drag from the tray. With no outline and no anchor, it does not stick. When a later dataset fills dims and anchors, this step is the one that places the board.",
+        "en": "The mount uses the board anchor gpio-pin1 and the part anchor pin1.",
         "es": "La acci\u00f3n de montaje pasa por la misma regla que un arrastre desde la bandeja. Sin contorno y sin ancla, no se pega. Cuando un conjunto posterior rellene dims y anclas, este paso ser\u00e1 el que coloque la placa."
       },
       "action": {
         "type": "mount",
-        "partId": "inky-phat",
+        "partId": "pimoroni-inky-phat",
         "hostRef": "board",
-        "hostAnchorId": "gpio-footprint",
-        "partAnchorId": "gpio-pins"
+        "hostAnchorId": "gpio-pin1",
+        "partAnchorId": "pin1"
       }
     },
     {

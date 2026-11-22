@@ -187,13 +187,16 @@ test("seed lessons use only registered widgets and real sources", async () => {
   assert.equal(advanced.length, 0);
 });
 
-test("real catalog refuses to draw the Inky and still bills the camera cable", async () => {
+test("the Inky build mounts on gpio-pin1 and the camera build still bills the cable", async () => {
   const catalog = await loadCatalog(root);
   const inky = catalog.builds.find((b) => b.id === "inky-dash");
   const played = replaySteps(inky, inky.steps.length - 1, catalog);
   assert.equal(played.state.header, "solder");
-  assert.equal(played.state.mounts.length, 0);
-  assert.equal(played.errors.some((e) => e.error.code === "unknown-part"), true);
+  assert.equal(played.errors.length, 0);
+  assert.equal(played.state.mounts.length, 1);
+  assert.equal(played.state.mounts[0].partId, "pimoroni-inky-phat");
+  assert.equal(played.state.mounts[0].x_mm, 0);
+  assert.equal(played.state.mounts[0].y_mm, 0);
   const bom = deriveBom(played.state, catalog);
   assert.equal(formatBom(bom).endsWith("items unpriced"), true);
   assert.equal(bom.lines.some((l) => l.partId === "gpio-header-2x20"), true);
