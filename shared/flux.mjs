@@ -104,7 +104,7 @@ export function adaptFluxBoard(flux, pinRows) {
       ram_note: meta.soc + ". Zero 2 W is a different package.",
     },
     disagreements: [],
-    components: (flux.components || []).filter((c) => c.id !== "pcb-antenna"),
+    components: flux.components || [],
     anchors: [
       {
         id: "gpio-pin1",

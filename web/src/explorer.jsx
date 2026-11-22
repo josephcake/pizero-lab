@@ -129,6 +129,7 @@ export function Explorer() {
             </div>
           ))}
           <p className="overline">{t.legend}</p>
+          <button type="button" className="text-btn" onClick={() => lab.setSelection({ kind: "component", id: "pcb-antenna" })}>{t.antenna}</button>
           <ul className="legend">
             {legend.map((row) => (
               <li key={row.id}><i style={{ background: row.ink }} />{t[row.label]}<b>{row.count}</b></li>

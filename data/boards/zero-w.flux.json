@@ -458,7 +458,7 @@
       "w_mm": null,
       "h_mm": null,
       "origin": "bottom-left, top view",
-      "function": "Printed 2.4 GHz antenna shared by Wi-Fi and Bluetooth.",
+      "function": "Proant Niche PCB cavity antenna between mini-HDMI and USB OTG; outline not dimensioned.",
       "specs": {
         "type": "Proant Niche resonant PCB-cavity antenna (official MagPi description)",
         "location_described": "Between the mini-HDMI port and the USB OTG port, along the bottom board edge",
