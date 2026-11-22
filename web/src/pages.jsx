@@ -121,7 +121,6 @@ export function LessonsPage() {
             <section key={track.id} className="track">
               <h2>{tx(track.name, lang)}</h2>
               <p>{tx(track.blurb, lang)}</p>
-              {lessons.length === 0 && <p className="note">{t.advancedEmpty}</p>}
               {lessons.map((lesson) => {
                 const done = progress.passed?.[lesson.id];
                 return (
