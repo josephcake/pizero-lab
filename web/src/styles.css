@@ -253,9 +253,12 @@ button.text-btn { min-height: 32px; min-width: 0; padding: 4px 0; border: 0; bac
   .sheet-picker { display: block; margin-bottom: 8px; }
   .layers-sheet { bottom: var(--tabbar-h); }
   .tabbar { display: flex; position: sticky; bottom: 0; background: var(--bg-1); border-top: 1px solid var(--line); height: var(--tabbar-h); z-index: 22; }
-  .tabbar a { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; text-decoration: none; color: var(--ink-2); font: var(--t-micro); padding: 0; }
-  .tabbar a span { font-size: 10px; line-height: 1; }
-  .tabbar a.on { color: var(--signal); }
+  .tabbar a, .tabbar button { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; text-decoration: none; color: var(--ink-2); font: var(--t-micro); padding: 0; background: transparent; border: 0; border-radius: 0; min-height: 0; }
+  .tabbar a span, .tabbar button span { font-size: 10px; line-height: 1; }
+  .tabbar a.on, .tabbar button.on { color: var(--signal); }
+  .more-sheet { position: fixed; z-index: 23; left: 12px; right: 12px; bottom: calc(var(--tabbar-h) + 8px); display: grid; gap: 4px; padding: 8px; background: var(--bg-1); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--e-3); }
+  .more-sheet a { display: flex; align-items: center; min-height: 44px; padding: 0 12px; text-decoration: none; color: var(--ink); border-radius: 8px; }
+  .more-sheet a:hover { background: var(--bg-3); }
   .mast { min-height: 48px; height: 48px; flex-wrap: nowrap; gap: 8px; padding: 0 12px; }
   .tag { display: none; }
   .lang { flex: none; margin-left: auto; }

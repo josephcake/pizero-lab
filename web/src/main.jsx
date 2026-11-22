@@ -85,6 +85,7 @@ function Shell() {
   const { lang, setLang, error, catalog } = useLab();
   const t = strings(lang);
   const location = useLocation();
+  const [moreOpen, setMoreOpen] = useState(false);
   useEffect(() => {
     document.documentElement.lang = lang === "zh-CN" ? "zh" : "en";
   }, [lang]);
@@ -146,8 +147,19 @@ function Shell() {
         <NavLink to="/lessons"><span aria-hidden="true">◎</span>{t.navLearn}</NavLink>
         <NavLink to="/builds"><span aria-hidden="true">▣</span>{t.navBuilds}</NavLink>
         <NavLink to="/settings"><span aria-hidden="true">?</span>{t.tabHelp}</NavLink>
-        <NavLink to="/roadmap"><span aria-hidden="true">…</span>{t.more}</NavLink>
+        <button type="button" className={moreOpen ? "on" : ""} onClick={() => setMoreOpen((value) => !value)}><span aria-hidden="true">…</span>{t.more}</button>
       </nav>
+      {moreOpen && (
+        <>
+          <button type="button" className="sheet-backdrop" aria-label={t.close} onClick={() => setMoreOpen(false)} />
+          <nav className="more-sheet" aria-label={t.more}>
+            <Link to="/parts" onClick={() => setMoreOpen(false)}>{t.navParts}</Link>
+            <Link to="/instruments" onClick={() => setMoreOpen(false)}>{t.navTools}</Link>
+            <Link to="/roadmap" onClick={() => setMoreOpen(false)}>{t.roadmap}</Link>
+            <Link to="/settings" onClick={() => setMoreOpen(false)}>{t.settings}</Link>
+          </nav>
+        </>
+      )}
     </div>
   );
 }
