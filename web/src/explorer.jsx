@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { canMount } from "../../shared/bench.mjs";
 import { fitsBoard } from "../../shared/boards.mjs";
 import { strings } from "./i18n.js";
@@ -26,6 +26,20 @@ export function Explorer() {
   const [sheet, setSheet] = useState(false);
   const [mode, setMode] = useState("explore");
   const [snap, setSnap] = useState("peek");
+  const [params, setParams] = useSearchParams();
+  const is3d = params.get("view") === "3d";
+  function setProjection(next) {
+    const query = new URLSearchParams(params);
+    if (next === "3d") query.set("view", "3d");
+    else query.delete("view");
+    setParams(query, { replace: true });
+  }
+  const viewToggle = (
+    <div className="seg view-toggle" role="group" aria-label={t.view}>
+      <button type="button" className={is3d ? "" : "on"} onClick={() => setProjection("2d")}>{t.view2d}</button>
+      <button type="button" className={is3d ? "on" : ""} onClick={() => setProjection("3d")}>{t.view3d}</button>
+    </div>
+  );
   const hats = lab.catalog.parts.filter((part) => fitsBoard(part, board.id) && part.product_url);
   const mountedIds = lab.bench.jobPartIds.filter((id) => hats.some((hat) => hat.id === id));
 
@@ -144,21 +158,29 @@ export function Explorer() {
             {conflicts.conflicts.map((row) => `${nameOf(row.names[0])} ∩ ${nameOf(row.names[1])}: pins ${row.pins.join(", ")}`).join(" · ")}
           </p>
         )}
-        <BoardMap
-          board={board}
-          pinout={lab.catalog.pinout}
-          header={lab.bench.header}
-          mounts={lab.bench.mounts}
-          parts={lab.catalog.parts}
-          layers={layers}
-          selected={lab.selection}
-          onSelect={lab.setSelection}
-          onView={setView}
-          onOpenLayers={() => setSheet(true)}
-          mode={mode}
-          onMode={setMode}
-          onMeasure={() => toggleLayer("measurements")}
-        />
+        {is3d ? (
+          <div className="map-wrap board-3d-stage">
+            {viewToggle}
+            <p className="estimate-note">{t.heightsNote}</p>
+          </div>
+        ) : (
+          <BoardMap
+            board={board}
+            pinout={lab.catalog.pinout}
+            header={lab.bench.header}
+            mounts={lab.bench.mounts}
+            parts={lab.catalog.parts}
+            layers={layers}
+            selected={lab.selection}
+            onSelect={lab.setSelection}
+            onView={setView}
+            onOpenLayers={() => setSheet(true)}
+            mode={mode}
+            onMode={setMode}
+            onMeasure={() => toggleLayer("measurements")}
+            viewToggle={viewToggle}
+          />
+        )}
         {sheet && (
           <>
             <button type="button" className="sheet-backdrop" aria-label={t.close} onClick={() => setSheet(false)} />
@@ -167,10 +189,12 @@ export function Explorer() {
             </div>
           </>
         )}
-        <div className="map-foot">
-          <span className="scale-foot"><i style={{ width: `${Math.max(0, (([1, 2, 5, 10, 20].find((step) => step * (view?.px || 0) >= 60) ?? 20) * (view?.px || 0)))}px` }} />{[1, 2, 5, 10, 20].find((step) => step * (view?.px || 0) >= 60) ?? 20} mm <span className="readout">{(view?.px || 0).toFixed(1)} px/mm</span></span>
-          <Minimap board={board} view={view} mounts={lab.bench.mounts} parts={lab.catalog.parts} />
-        </div>
+        {!is3d && (
+          <div className="map-foot">
+            <span className="scale-foot"><i style={{ width: `${Math.max(0, (([1, 2, 5, 10, 20].find((step) => step * (view?.px || 0) >= 60) ?? 20) * (view?.px || 0)))}px` }} />{[1, 2, 5, 10, 20].find((step) => step * (view?.px || 0) >= 60) ?? 20} mm <span className="readout">{(view?.px || 0).toFixed(1)} px/mm</span></span>
+            <Minimap board={board} view={view} mounts={lab.bench.mounts} parts={lab.catalog.parts} />
+          </div>
+        )}
       </div>
       <aside className={`inspector snap-${snap}`}>
         <button type="button" className="snap-handle" onClick={() => setSnap((value) => value === "peek" ? "half" : value === "half" ? "full" : "peek")} />

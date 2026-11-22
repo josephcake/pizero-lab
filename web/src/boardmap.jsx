@@ -32,7 +32,7 @@ function roundRect(x, y, w, h, r) {
   return `M ${x + rr} ${y} H ${x + w - rr} A ${rr} ${rr} 0 0 1 ${x + w} ${y + rr} V ${y + h - rr} A ${rr} ${rr} 0 0 1 ${x + w - rr} ${y + h} H ${x + rr} A ${rr} ${rr} 0 0 1 ${x} ${y + h - rr} V ${y + rr} A ${rr} ${rr} 0 0 1 ${x + rr} ${y} Z`;
 }
 
-export function BoardMap({ board, pinout, header, mounts, parts, layers, selected, onSelect, onView, onOpenLayers, mode = "explore", onMode, onMeasure }) {
+export function BoardMap({ board, pinout, header, mounts, parts, layers, selected, onSelect, onView, onOpenLayers, mode = "explore", onMode, onMeasure, viewToggle = null }) {
   const t = strings(useLab().lang);
   const svgRef = useRef(null);
   const [view, setView] = useState(null);
@@ -332,6 +332,7 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
         <span className="callout dim" style={{ left: "50%", top: "auto", bottom: 36 }}>{`${W.toFixed(2)} mm`}</span>
       )}
       <div className="map-tools">
+        {viewToggle}
         {onOpenLayers && <button type="button" className="layers-toggle" onClick={onOpenLayers}>{t.layers}</button>}
         <button type="button" className={mode === "explore" ? "on" : ""} onClick={() => onMode?.("explore")}>{t.explore}</button>
         <button type="button" className={mode === "bench" ? "on" : ""} onClick={() => onMode?.("bench")}>{t.bench}</button>
