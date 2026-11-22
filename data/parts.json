@@ -32,7 +32,7 @@
       "price_src": null,
       "price_date": null,
       "retailer": null,
-      "product_url": "https://www.raspberrypi.com/products/raspberry-pi-zero-w/",
+      "product_url": null,
       "source": "zero-models",
       "boards": [
         "zero-w"
