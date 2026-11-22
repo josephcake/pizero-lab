@@ -193,7 +193,7 @@ test("real catalog refuses to draw the Inky and still bills the camera cable", a
   const played = replaySteps(inky, inky.steps.length - 1, catalog);
   assert.equal(played.state.header, "solder");
   assert.equal(played.state.mounts.length, 0);
-  assert.equal(played.errors.some((e) => e.error.code === "undimensioned"), true);
+  assert.equal(played.errors.some((e) => e.error.code === "unknown-part"), true);
   const bom = deriveBom(played.state, catalog);
   assert.equal(formatBom(bom).endsWith("items unpriced"), true);
   assert.equal(bom.lines.some((l) => l.partId === "gpio-header-2x20"), true);

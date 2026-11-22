@@ -1,8 +1,8 @@
 import electrical from "../../data/electrical.json";
+import { pinConflicts } from "../../shared/conflicts.mjs";
 
 const limits = electrical.limits;
 const E12 = [1, 1.2, 1.5, 1.8, 2.2, 2.7, 3.3, 3.9, 4.7, 5.6, 6.8, 8.2];
-const POWER = new Set([1, 2, 4, 6, 9, 14, 17, 20, 25, 30, 34, 39]);
 
 function nextE12(ohms) {
   const decade = 10 ** Math.floor(Math.log10(ohms));
@@ -17,7 +17,7 @@ function nextE12(ohms) {
 
 export function labCall(tool, body, catalog) {
   if (tool === "resistor") return resistor(body);
-  if (tool === "conflicts") return conflicts(body, catalog);
+  if (tool === "conflicts") return pinConflicts(body, catalog);
   if (tool === "power") return power(body);
   if (tool === "recommend") return recommend(body, catalog);
   if (tool === "gpio") return gpio(body);
@@ -41,31 +41,6 @@ function resistor(body) {
   const ohms = (v - vf) / (i / 1000);
   const e12 = nextE12(ohms);
   return { ohms: Math.round(ohms * 100) / 100, e12_ohms: e12, e12_ma: Math.round(((v - vf) / e12) * 100000) / 100, warnings, sag, per_led, formula: "(Vgpio - Vf) / I" };
-}
-
-function lookup(catalog, id) {
-  return catalog.parts.find((part) => part.id === id) || null;
-}
-
-function conflicts(body, catalog) {
-  const claims = [];
-  const unchecked = [];
-  for (const id of body.part_ids || []) {
-    const part = lookup(catalog, id);
-    if (!part) { unchecked.push({ part_id: id, reason: "unknown" }); continue; }
-    const pins = part.pins_phys || part.pins;
-    if (!pins) { unchecked.push({ part_id: id, reason: "pin map is null" }); continue; }
-    claims.push(part);
-  }
-  const clashes = [];
-  for (let i = 0; i < claims.length; i++) {
-    for (let j = i + 1; j < claims.length; j++) {
-      const a = new Set(claims[i].pins_phys || []);
-      const shared = [...a].filter((pin) => (claims[j].pins_phys || []).includes(pin) && !POWER.has(pin));
-      if (shared.length) clashes.push({ a: claims[i].id, b: claims[j].id, names: [claims[i].name, claims[j].name], pins: shared, i2c: [] });
-    }
-  }
-  return { conflicts: clashes, unchecked, note: "Signal pins are compared. Shared power and ground are not a conflict." };
 }
 
 function power(body) {
