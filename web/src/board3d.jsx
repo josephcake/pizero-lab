@@ -4,10 +4,12 @@ import {
   Box3,
   BoxGeometry,
   Color,
+  ConeGeometry,
   CylinderGeometry,
   DirectionalLight,
   EdgesGeometry,
   ExtrudeGeometry,
+  Group,
   LineBasicMaterial,
   LineSegments,
   Mesh,
@@ -72,6 +74,7 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
   const propsRef = useRef({});
   const labelsRef = useRef(labels);
   const [chip, setChip] = useState("");
+  const [showBackNote, setShowBackNote] = useState(false);
   selectedRef.current = selected;
   onSelectRef.current = onSelect;
   propsRef.current = { board, header, mounts, parts };
@@ -84,8 +87,8 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
     let contentMats = [];
     const pickables = [];
     const tagged = [];
-    const viewDir = new Vector3(0.62, -0.78, 0.55);
-    const viewUp = new Vector3(0, 0, 1);
+    const viewDir = new Vector3(0.72, 0.62, 0.55);
+    const viewUp = new Vector3(0, 1, 0);
     const thickness = mm(heights.pcb_thickness_mm);
     let hoverPhysical = null;
     const signal = new Color(token("--signal", "#62c6ff"));
@@ -93,12 +96,16 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
     const renderer = new WebGLRenderer({ canvas, antialias: true, alpha: false });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     const scene = new Scene();
+    const boardGroup = new Group();
+    boardGroup.rotation.x = -Math.PI / 2;
+    scene.add(boardGroup);
     const camera = new PerspectiveCamera(35, 1, 0.1, 800);
     const controls = new OrbitControls(camera, canvas);
     controls.enableDamping = false;
     controls.minDistance = 22;
     controls.maxDistance = 220;
-    controls.maxPolarAngle = Math.PI * 0.92;
+    controls.minPolarAngle = 0;
+    controls.maxPolarAngle = Math.PI;
     controls.target.set(0, 0, thickness / 2);
     controls.mouseButtons = { LEFT: MOUSE.ROTATE, MIDDLE: MOUSE.DOLLY, RIGHT: MOUSE.PAN };
     controls.touches = { ONE: TOUCH.ROTATE, TWO: TOUCH.DOLLY_PAN };
@@ -130,10 +137,10 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
     }
 
     function clearContent() {
-      for (const mesh of [...pickables, ...tagged]) scene.remove(mesh);
+      for (const mesh of [...pickables, ...tagged]) boardGroup.remove(mesh);
       pickables.length = 0;
       tagged.length = 0;
-      scene.children.filter((child) => child.userData.built).forEach((child) => scene.remove(child));
+      boardGroup.children.filter((child) => child.userData.built).forEach((child) => boardGroup.remove(child));
       for (const geometry of contentGeoms) geometry.dispose();
       for (const material of contentMats) material.dispose();
       contentGeoms = [];
@@ -164,7 +171,7 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
         line.rotation.copy(mesh.rotation);
         line.userData.built = true;
         contentGeoms.push(edges);
-        scene.add(line);
+        boardGroup.add(line);
       }
       function tag(mesh, badge) {
         mesh.userData.badge = badge;
@@ -186,7 +193,7 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
     const pcb = track(pcbGeom, pcbMat);
     pcb.userData.built = true;
     tag(pcb, "est");
-    scene.add(pcb);
+    boardGroup.add(pcb);
 
     for (const part of liveBoard.draw || []) {
       const record = heights.parts[part.kind];
@@ -197,7 +204,7 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
       mesh.position.set(center.x, center.y, thickness + height / 2);
       mesh.userData.built = true;
       if (estimated.has(part.kind)) tag(mesh, "est");
-      scene.add(mesh);
+      boardGroup.add(mesh);
     }
 
     const pinRadius = liveHeader === "hammer" ? 0.22 : 0.32;
@@ -212,7 +219,7 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
       const shroud = track(new BoxGeometry(body.w, body.h, bodyH), headerMat);
       shroud.position.set(center.x, center.y, thickness + bodyH / 2);
       shroud.userData.built = true;
-      scene.add(shroud);
+      boardGroup.add(shroud);
       pinLen = above + bodyH + below;
       pinCenter = thickness - below + pinLen / 2;
     } else if (liveHeader === "hammer") {
@@ -232,7 +239,21 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
         mesh.userData.physical = pin.physical;
         mesh.userData.built = true;
         pickables.push(mesh);
-        scene.add(mesh);
+        boardGroup.add(mesh);
+      }
+      const backGeom = new CylinderGeometry(0.55, 0.55, 0.12, 8);
+      backGeom.rotateX(Math.PI / 2);
+      contentGeoms.push(backGeom);
+      for (const pin of liveBoard.header.pins) {
+        const p = toBoard(pin.x, H - pin.y, W, H);
+        const material = pinMat.clone();
+        contentMats.push(material);
+        const back = new Mesh(backGeom, material);
+        back.position.set(p.x, p.y, -0.06);
+        back.userData.physical = pin.physical;
+        back.userData.built = true;
+        pickables.push(back);
+        boardGroup.add(back);
       }
     } else {
       const pinGeom = new CylinderGeometry(pinRadius, pinRadius, pinLen, 6);
@@ -247,7 +268,34 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
         mesh.userData.physical = pin.physical;
         mesh.userData.built = true;
         pickables.push(mesh);
-        scene.add(mesh);
+        boardGroup.add(mesh);
+      }
+      if (liveHeader === "solder") {
+        const cone = new ConeGeometry(0.85, 0.7, 7);
+        cone.rotateX(-Math.PI / 2);
+        contentGeoms.push(cone);
+        for (const pin of liveBoard.header.pins) {
+          const p = toBoard(pin.x, H - pin.y, W, H);
+          const joint = new Mesh(cone, steelMat);
+          joint.position.set(p.x, p.y, -0.35);
+          joint.userData.built = true;
+          boardGroup.add(joint);
+        }
+      } else if (liveHeader === "hammer") {
+        const stubGeom = new CylinderGeometry(0.18, 0.18, 0.3, 6);
+        stubGeom.rotateX(Math.PI / 2);
+        contentGeoms.push(stubGeom);
+        for (const pin of liveBoard.header.pins) {
+          const p = toBoard(pin.x, H - pin.y, W, H);
+          const material = pinMat.clone();
+          contentMats.push(material);
+          const stub = new Mesh(stubGeom, material);
+          stub.position.set(p.x, p.y, -0.15);
+          stub.userData.badge = "est";
+          stub.userData.built = true;
+          tagged.push(stub);
+          boardGroup.add(stub);
+        }
       }
     }
 
@@ -264,7 +312,25 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
       mesh.position.set(center.x, center.y, thickness + standoff + hatT / 2);
       mesh.userData.built = true;
       tag(mesh, "gap");
-      scene.add(mesh);
+      boardGroup.add(mesh);
+    }
+    const disc = new CylinderGeometry(0.55, 0.55, 0.08, 10);
+    disc.rotateX(Math.PI / 2);
+    contentGeoms.push(disc);
+    for (const item of liveBoard.components || []) {
+      const rows = [item, ...(item.subparts || [])];
+      for (const row of rows) {
+        if (row.x_mm == null || row.y_mm == null || row.side !== "bottom") continue;
+        const p = toBoard(row.x_mm, row.y_mm, W, H);
+        const material = pinMat.clone();
+        contentMats.push(material);
+        const pad = new Mesh(disc, material);
+        pad.position.set(p.x, p.y, -0.04);
+        pad.userData.partId = row.id;
+        pad.userData.built = true;
+        tagged.push(pad);
+        boardGroup.add(pad);
+      }
     }
       paint();
       api.current.refit?.();
@@ -305,6 +371,7 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
       if (moved > 4) return;
       const hit = pick(event);
       if (hit?.object.userData.physical) onSelectRef.current({ kind: "pin", physical: hit.object.userData.physical });
+      else if (hit?.object.userData.partId) onSelectRef.current({ kind: "component", id: hit.object.userData.partId });
       showBadge(hit?.object);
     };
     const onMove = (event) => {
@@ -338,6 +405,7 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
           any = true;
         }
       });
+      boardGroup.updateMatrixWorld(true);
       if (!any || !camera.aspect) return;
       const center = box.getCenter(new Vector3());
       const size = box.getSize(new Vector3());
@@ -366,14 +434,21 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
       controls.target.copy(center);
       controls.maxDistance = Math.max(dist * 4, 80);
       controls.update();
+      const below = camera.position.y < controls.target.y - 0.5;
+      const placed = (propsRef.current.board.components || []).some((item) => {
+        const rows = [item, ...(item.subparts || [])];
+        return rows.some((row) => row.x_mm != null && row.y_mm != null && row.side === "bottom");
+      });
+      setShowBackNote(below && !placed);
       requestRender();
     }
-    const upZ = new Vector3(0, 0, 1);
+    const upY = new Vector3(0, 1, 0);
     api.current = {
-      reset: () => fit(new Vector3(0.62, -0.78, 0.55), upZ),
-      top: () => fit(new Vector3(0, 0.001, 1), new Vector3(0, 1, 0)),
-      front: () => fit(new Vector3(0, -1, 0.22), upZ),
-      side: () => fit(new Vector3(1, 0, 0.22), upZ),
+      reset: () => fit(new Vector3(0.72, 0.62, 0.55), upY),
+      top: () => fit(new Vector3(0, 1, 0.001), new Vector3(0, 0, -1)),
+      bottom: () => fit(new Vector3(0, -1, 0.001), new Vector3(0, 0, -1)),
+      front: () => fit(new Vector3(0, 0.28, 1), upY),
+      side: () => fit(new Vector3(1, 0.28, 0), upY),
       paint,
       rebuild,
       refit: () => fit(viewDir, viewUp),
@@ -402,13 +477,22 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
     applyTheme();
     const themeWatch = new MutationObserver(applyTheme);
     themeWatch.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-    controls.addEventListener("change", requestRender);
+    const onControl = () => {
+      const below = camera.position.y < controls.target.y - 0.5;
+      const placed = (propsRef.current.board.components || []).some((item) => {
+        const rows = [item, ...(item.subparts || [])];
+        return rows.some((row) => row.x_mm != null && row.y_mm != null && row.side === "bottom");
+      });
+      setShowBackNote(below && !placed);
+      requestRender();
+    };
+    controls.addEventListener("change", onControl);
 
     return () => {
       if (frame) cancelAnimationFrame(frame);
       themeWatch.disconnect();
       observer.disconnect();
-      controls.removeEventListener("change", requestRender);
+      controls.removeEventListener("change", onControl);
       controls.dispose();
       canvas.removeEventListener("pointerdown", onDown);
       canvas.removeEventListener("pointerup", onUp);
@@ -438,6 +522,7 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
       <div className="cam-dock">
         <button type="button" onClick={() => api.current.reset?.()}>{labels.resetView}</button>
         <button type="button" onClick={() => api.current.top?.()}>{labels.top}</button>
+        <button type="button" onClick={() => api.current.bottom?.()}>{labels.bottom}</button>
         <button type="button" onClick={() => api.current.front?.()}>{labels.front}</button>
         <button type="button" onClick={() => api.current.side?.()}>{labels.side}</button>
       </div>
@@ -459,6 +544,7 @@ export default function Board3D({ board, pinout, header, mounts, parts, selected
       </label>
       {chip && <p className="height-badge">{chip}</p>}
       <p className="estimate-note">{labels.heightLegend}</p>
+      {showBackNote && <p className="back-note">{labels.testPadsMissing}</p>}
     </div>
   );
 }

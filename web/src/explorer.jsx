@@ -87,7 +87,7 @@ export function Explorer() {
     ? lab.catalog.pinout.pins.find((pin) => pin.physical === lab.selection.physical)
     : null;
   const selectedPart = lab.selection?.kind === "component"
-    ? board.components.find((item) => item.id === lab.selection.id)
+    ? findRecord(board.components, lab.selection.id)
     : lab.selection?.kind === "part"
       ? lab.catalog.parts.find((item) => item.id === lab.selection.id)
       : null;
@@ -219,6 +219,15 @@ export function Explorer() {
   );
 }
 
+function findRecord(components, id) {
+  for (const item of components || []) {
+    if (item.id === id) return item;
+    const sub = (item.subparts || []).find((row) => row.id === id);
+    if (sub) return sub;
+  }
+  return null;
+}
+
 function nameOf(value) {
   if (!value) return "";
   return typeof value === "string" ? value : value.en || "";
@@ -272,6 +281,7 @@ function PartInspector({ part, lang }) {
     <article>
       <h2>{typeof part.name === "string" ? part.name : tx(part.name, lang)}</h2>
       {part.function && <p>{part.function}</p>}
+      {part.note && <p>{part.note}</p>}
       {part.summary && <p>{tx(part.summary, lang)}</p>}
       {part.gotchas && <p className="warn">{part.gotchas}</p>}
       {part.x_mm == null && part.dims == null && <p className="quiet">Not drawn. Position or size is null.</p>}
