@@ -81,6 +81,10 @@ export function HelpDock() {
     }
   }
 
+  if (!creds.apiKey) {
+    return <Link className="ask-tab" to="/settings">{t.helpSend}</Link>;
+  }
+
   return (
     <aside className="help">
       <h2>{t.help}</h2>

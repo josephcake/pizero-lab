@@ -45,7 +45,7 @@ export function BoardMap({ board, pinout, header, mounts, parts, layers, selecte
     if (!el) return;
     const rect = el.getBoundingClientRect();
     if (!rect.width) return;
-    const margin = 8;
+    const margin = 1;
     const w = W + margin * 2;
     const h = w * (rect.height / rect.width);
     setView({ x: -margin, y: (H - h) / 2, w, h });
