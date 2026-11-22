@@ -203,9 +203,17 @@ export function LessonPage() {
     setMarked({ ok, need: false, rows, score });
   }
 
+  const trackName = tx(lab.catalog.tracks.find((tr) => tr.id === lesson.track)?.name, lab.lang);
   return (
     <article className="page lesson">
-      <p className="meta">{tx(lab.catalog.tracks.find((tr) => tr.id === lesson.track)?.name, lab.lang)} · {lesson.est_min} {t.minutes}</p>
+      <header className="step-head">
+        <p className="meta">{trackName} · {t.step} {section + 1} / {lesson.sections.length}</p>
+        <span className="time-pill">{lesson.est_min} {t.minutes}</span>
+      </header>
+      <div className="seg">
+        <button type="button" disabled={section === 0} onClick={() => setSection((n) => Math.max(0, n - 1))}>{t.back}</button>
+        <button type="button" disabled={section >= lesson.sections.length - 1} onClick={() => setSection((n) => Math.min(lesson.sections.length - 1, n + 1))}>{t.next}</button>
+      </div>
       <h1>{tx(lesson.title, lab.lang)}</h1>
       {wrongBoard && <SwitchBoard ids={wrongBoard} />}
       {lesson.sections.map((sectionRow, index) => (

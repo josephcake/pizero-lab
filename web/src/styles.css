@@ -145,6 +145,8 @@ h1, h2, h3 { font-family: var(--f-display); font-weight: 650; margin: 0 0 8px; }
 .trace path { fill: none; stroke: var(--beacon); stroke-width: 1.6; }
 .trace path.deb { stroke: var(--ok); }
 .note, .meta, .unpriced-names { color: var(--ink-3); font-size: 12.5px; }
+.step-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.time-pill { font: var(--t-micro); border: 1px solid var(--line-ui); border-radius: var(--r-pill); padding: 4px 8px; color: var(--ink-2); white-space: nowrap; }
 .bom li { display: flex; justify-content: space-between; gap: 8px; font: var(--t-small); border-bottom: 1px solid var(--line); padding: 4px 0; }
 .bom ul { list-style: none; padding: 0; }
 .tabbar { display: none; }
