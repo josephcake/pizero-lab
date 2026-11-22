@@ -51,4 +51,13 @@ Bundle sizes from the production build: main `index-B7UlxkJ6.js` 175.54 KB gzip,
 | Theme and idle | `bc5331e` | Both themes colour the bench. Flat shading, pixel ratio capped at 2, render only when something changes, dispose on unmount. |
 | Keyboard | `bc5331e` | The canvas has an aria-label. Pins can be chosen from the pin list or by switching back to 2D. The inspector does not show the estimate heights. The view says “Heights are estimates.” |
 
-Steps 3–10 share `bc5331e` because they are one viewer module. Shipping them separately would have left a blank canvas on main. |
+Steps 3–10 share `bc5331e` because they are one viewer module. Shipping them separately would have left a blank canvas on main.
+
+## Run 9
+
+Flux heights replace the placeholders where Flux published a number. `zero-w.flux.json` and `pinout.flux.json` were not edited. The 3D chunk is `board3d-BEXQ988W.js`, 136.32 KB gzip. The main bundle is `index-B766vEIQ.js`, 175.62 KB gzip.
+
+| Fix | Commit | What changed |
+| --- | --- | --- |
+| Sourced heights | `e1665bb` | CSI is 1.20 mm confirmed. Header body is 2.54 mm derived, the post above it is 5.84 mm confirmed, and the tail below the board is 2.54 mm derived. The hammer header is 12.0 mm overall, confirmed, with no body/pin split. PCB, SoC, microSD, mini-HDMI, and both micro-USBs stay estimates, source “no published height (Flux)”. The pHAT gap is 8.0 mm, spec minimum, from the HAT spec. No RF shield is drawn. |
+| Labels and camera fit | `40753b1` | The note is “Grey-outlined parts: estimated heights.” Hover or select on an estimated part shows “est. height”. The pHAT shows “8 mm gap: spec minimum”. Reset, Top, Front, and Side fit the board to both the vertical and horizontal field of view, with about 8% margin, including on a 390×844 portrait screen. | |
