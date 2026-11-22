@@ -269,7 +269,10 @@ button.text-btn { min-height: 32px; min-width: 0; padding: 4px 0; border: 0; bac
   .inspector.snap-half { max-height: 50dvh; }
   .inspector.snap-full { max-height: calc(100dvh - 48px - var(--tabbar-h)); }
   .inspector.snap-peek .facts, .inspector.snap-peek .alts, .inspector.snap-peek .sources, .inspector.snap-peek .quiet { display: none; }
-  .snap-handle { display: block; width: 36px; height: 4px; margin: 6px auto 8px; padding: 0; border: 0; border-radius: 99px; background: var(--line-ui); min-height: 4px; min-width: 36px; }
+  .snap-handle { display: block; position: relative; width: 100%; height: 44px; min-height: 44px; margin: 0; padding: 0; border: 0; background: none; }
+  .snap-handle::before { content: ""; position: absolute; left: 50%; top: 20px; width: 36px; height: 4px; margin-left: -18px; border-radius: 99px; background: var(--line-ui); }
+  .inspector-bar { display: flex; flex-direction: column; cursor: pointer; }
+  .inspector-title { margin: 0 16px 8px; font: var(--t-ui); }
   .map-tools { left: 50%; transform: translateX(-50%); max-width: calc(100% - 72px); flex-wrap: nowrap; }
   .map-tools button { min-width: 0; width: auto; padding: 6px 10px; }
   .map-tools button { display: none; }

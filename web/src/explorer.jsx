@@ -97,6 +97,10 @@ export function Explorer() {
     if (showUnderside) setSnap("full");
   }, [showUnderside]);
 
+  useEffect(() => {
+    if (selectedPin || selectedPart || showUnderside) setSnap((value) => value === "peek" ? "half" : value);
+  }, [selectedPin, selectedPart, showUnderside]);
+
   const rail = (
     <>
       <label className="sheet-picker">
@@ -234,8 +238,20 @@ export function Explorer() {
         )}
       </div>
       <aside className={`inspector snap-${snap}`}>
-        <button type="button" className="snap-handle" onClick={() => setSnap((value) => value === "peek" ? "half" : value === "half" ? "full" : "peek")} />
-        <p className="overline">{t.inspector}</p>
+        <header className="inspector-bar" onClick={() => setSnap((value) => value === "peek" ? "half" : "peek")}>
+          <button
+            type="button"
+            className="snap-handle"
+            aria-label={snap === "peek" ? t.showDetails : t.hideDetails}
+            aria-expanded={snap !== "peek"}
+            onClick={(event) => { event.stopPropagation(); setSnap((value) => value === "peek" ? "half" : "peek"); }}
+          />
+          <div>
+            <p className="overline">{t.inspector}</p>
+            {selectedPin && <p className="inspector-title">{t.pinWord} {selectedPin.physical} · {selectedPin.name}</p>}
+            {selectedPart && <p className="inspector-title">{typeof selectedPart.name === "string" ? selectedPart.name : tx(selectedPart.name, lab.lang)}</p>}
+          </div>
+        </header>
         {!selectedPin && !selectedPart && !showUnderside && <p className="quiet">{t.inspectEmpty}</p>}
         {selectedPin && <PinInspector pin={selectedPin} header={board.header} />}
         {selectedPart && <PartInspector part={selectedPart} lang={lab.lang} />}
