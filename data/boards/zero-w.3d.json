@@ -1,17 +1,52 @@
 {
-  "note": "Placeholders only. zero-w.flux.json has no PCB thickness and no part heights. Every value is an estimate until Flux replaces it. Do not show these numbers as measured facts.",
-  "pcb_thickness_mm": { "value_mm": 1.2, "status": "estimate", "source": "pending Flux" },
-  "header_body_mm": { "value_mm": 2.4, "status": "estimate", "source": "pending Flux" },
-  "header_pin_length_mm": { "value_mm": 8.5, "status": "estimate", "source": "pending Flux" },
-  "hammer_pin_length_mm": { "value_mm": 2.2, "status": "estimate", "source": "pending Flux" },
-  "phat_standoff_mm": { "value_mm": 10, "status": "estimate", "source": "pending Flux" },
-  "phat_thickness_mm": { "value_mm": 1.6, "status": "estimate", "source": "pending Flux" },
+  "note": "Sourced rows use Flux's value and confidence. Null Flux rows keep a placeholder height, marked estimate, because no published height was found. There is no RF shield on the Zero W.",
+  "pcb_thickness_mm": {
+    "value_mm": 1.2,
+    "status": "estimate",
+    "source": "no published height (Flux)"
+  },
+  "header_body_mm": {
+    "value_mm": 2.54,
+    "status": "derived",
+    "source": "https://suddendocs.samtec.com/catalog_english/tsw_th.pdf"
+  },
+  "header_pin_above_body_mm": {
+    "value_mm": 5.84,
+    "status": "confirmed",
+    "source": "https://www.samtec.com/products/tsw-120-07-g-d"
+  },
+  "header_pin_below_board_mm": {
+    "value_mm": 2.54,
+    "status": "derived",
+    "source": "https://www.samtec.com/products/tsw-120-07-g-d"
+  },
+  "hammer_header_mm": {
+    "value_mm": 12.0,
+    "status": "confirmed",
+    "source": "https://www.adafruit.com/product/3662"
+  },
+  "phat_gap_mm": {
+    "value_mm": 8.0,
+    "status": "spec_minimum",
+    "source": "https://github.com/raspberrypi/hats/blob/master/README.md"
+  },
+  "phat_thickness_mm": {
+    "value_mm": 1.6,
+    "status": "estimate",
+    "source": "no published height (Flux)"
+  },
+  "shield_mm": {
+    "value_mm": null,
+    "status": "confirmed",
+    "source": "https://magazine.raspberrypi.com/articles/pi-zero-w-wireless-antenna-design",
+    "note": "Zero W has no metal RF shield. Nothing is drawn."
+  },
   "parts": {
-    "soc": { "value_mm": 1.3, "status": "estimate", "source": "pending Flux" },
-    "mini-hdmi": { "value_mm": 3.0, "status": "estimate", "source": "pending Flux" },
-    "usb-otg": { "value_mm": 2.5, "status": "estimate", "source": "pending Flux" },
-    "usb-pwr": { "value_mm": 2.5, "status": "estimate", "source": "pending Flux" },
-    "microsd": { "value_mm": 1.3, "status": "estimate", "source": "pending Flux" },
-    "csi": { "value_mm": 1.5, "status": "estimate", "source": "pending Flux" }
+    "soc": { "value_mm": 1.3, "status": "estimate", "source": "no published height (Flux)" },
+    "mini-hdmi": { "value_mm": 3.0, "status": "estimate", "source": "no published height (Flux)" },
+    "usb-otg": { "value_mm": 2.5, "status": "estimate", "source": "no published height (Flux)" },
+    "usb-pwr": { "value_mm": 2.5, "status": "estimate", "source": "no published height (Flux)" },
+    "microsd": { "value_mm": 1.3, "status": "estimate", "source": "no published height (Flux)" },
+    "csi": { "value_mm": 1.2, "status": "confirmed", "source": "https://www.molex.com/en-us/products/part-detail/545482271" }
   }
 }
